@@ -52,6 +52,7 @@ A Minecraft mod that brings back the Copper Golem from the Minecraft Live 2021 m
 ![button2](./.github/media/button-press2.gif)
 ![button1](./.github/media/button-press1.gif)
 - Golems now intelligently search for and press nearby copper buttons with animation.
+- This feature can be turned off in the configuration menu or via the server configuration.
 
 ## Installation
 
