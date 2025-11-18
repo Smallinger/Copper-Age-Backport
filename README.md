@@ -49,8 +49,8 @@ A Minecraft mod that brings back the Copper Golem from the Minecraft Live 2021 m
 - Place a carved pumpkin on a copper block
 
 ## Golem Button press
-![button1](./.github/media/button-press1.gif)
 ![button2](./.github/media/button-press2.gif)
+![button1](./.github/media/button-press1.gif)
 - Golems now intelligently search for and press nearby copper buttons with animation.
 
 ## Installation
