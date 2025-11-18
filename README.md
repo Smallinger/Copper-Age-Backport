@@ -25,6 +25,11 @@ A Minecraft mod that brings back the Copper Golem from the Minecraft Live 2021 m
 - **Copper-specific sounds**: Each oxidation level has unique opening and closing sounds
 - **Waxing support**: Preserve your chest's oxidation level with honeycomb
 
+### Copper Buttons
+- **8 variants**: (4 oxidation stages + waxed versions) with 1.5s activation time
+- **Button Interactions**: Scrape with axe, wax with honeycomb, oxidized buttons won't work (unless waxed)
+- **Golem Button AI**: Golems now intelligently search for and press nearby copper buttons
+
 ### Copper Statue
 - **Four poses**: Standing, running, sitting, and star pose
 - **Interactive**: Right-click with an empty hand to cycle through poses
@@ -36,9 +41,17 @@ A Minecraft mod that brings back the Copper Golem from the Minecraft Live 2021 m
 - **Oxidation-specific audio**: Different sounds for each weathering stage
 - **Item interaction feedback**: Audio cues when golems pick up, drop, or interact with items
 
+### Configurable
+- **Enable/disable**: Golem button pressing in config file
+
 ## Spawn
 ![spawn](./.github/media/spawn.gif)
 - Place a carved pumpkin on a copper block
+
+## Golem Button press
+![button1](./.github/media/button-press1.gif)
+![button2](./.github/media/button-press2.gif)
+- Golems now intelligently search for and press nearby copper buttons with animation.
 
 ## Installation
 
