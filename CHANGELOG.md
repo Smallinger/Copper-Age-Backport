@@ -2,6 +2,14 @@
 
 All notable changes to the Copper Golem Legacy mod will be documented in this file.
 
+## [0.0.2] - 2025-01-18
+
+### Fixed
+- **Item Sorting Bug**: Fixed Copper Golems skipping slots when placing items in chests
+  - Removed duplicate slot increment causing grid pattern (slot filled, slot skipped, slot filled, etc.)
+  - Fixed incorrect stack size calculation when stacking items (`spaceLeft` vs `toAdd`)
+  - Items now fill chest slots consecutively without gaps
+
 ## [0.0.1] - 2025-01-18
 
 ### Added

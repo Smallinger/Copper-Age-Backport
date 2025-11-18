@@ -579,14 +579,12 @@ public class TransportItemsBetweenContainers extends Behavior<PathfinderMob> {
                 int spaceLeft = containerItem.getMaxStackSize() - containerItem.getCount();
                 int toAdd = Math.min(spaceLeft, handItem.getCount());
                 containerItem.setCount(containerItem.getCount() + toAdd);
-                handItem.setCount(handItem.getCount() - spaceLeft);
+                handItem.setCount(handItem.getCount() - toAdd);
                 container.setItem(slot, containerItem);
                 if (handItem.isEmpty()) {
                     return ItemStack.EMPTY;
                 }
             }
-
-            slot++;
         }
 
         return handItem;
