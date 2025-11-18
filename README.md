@@ -103,4 +103,4 @@ If you encounter any issues or have questions, please open an issue on the [GitH
 
 If you enjoy this mod and would like to support further development, consider buying me a coffee! Your support helps keep the project alive and encourages new features and updates.
 
-[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/smallpox)
+[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/smallinger)
