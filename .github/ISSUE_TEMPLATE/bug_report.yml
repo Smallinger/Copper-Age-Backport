@@ -29,11 +29,11 @@ body:
       required: true
 
   - type: input
-    id: minecraft_version
+    id: loader_version_number
     attributes:
-      label: Minecraft Version
-      description: Which Minecraft version are you playing on?
-      placeholder: "e.g., 1.21.1"
+      label: Mod Loader Version
+      description: Which version of the mod loader are you using?
+      placeholder: "e.g., 21.1.215 for NeoForge or 47.3.0 for Forge"
     validations:
       required: true
 
