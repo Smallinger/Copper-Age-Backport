@@ -96,6 +96,9 @@ public class PressRandomCopperButton extends Behavior<CopperGolemEntity> {
     @Override
     protected void start(ServerLevel level, CopperGolemEntity golem, long gameTime) {
         if (this.targetButton != null) {
+            // Set flag to prevent other behaviors from interrupting
+            golem.getBrain().setMemory(ModMemoryTypes.IS_PRESSING_BUTTON.get(), true);
+            
             // Set walk target to the button - must be at distance 0 (right next to it)
             golem.getBrain().setMemory(MemoryModuleType.WALK_TARGET, new WalkTarget(this.targetButton, this.speedModifier, 0));
             golem.getBrain().setMemory(MemoryModuleType.LOOK_TARGET, new BlockPosTracker(this.targetButton));
@@ -154,6 +157,9 @@ public class PressRandomCopperButton extends Behavior<CopperGolemEntity> {
     
     @Override
     protected void stop(ServerLevel level, CopperGolemEntity golem, long gameTime) {
+        // Clear flag to allow other behaviors
+        golem.getBrain().eraseMemory(ModMemoryTypes.IS_PRESSING_BUTTON.get());
+        
         // Clear memory
         golem.getBrain().eraseMemory(MemoryModuleType.WALK_TARGET);
         golem.getBrain().eraseMemory(MemoryModuleType.LOOK_TARGET);

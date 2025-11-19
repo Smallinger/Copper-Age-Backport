@@ -1,6 +1,5 @@
 package com.github.smallinger.coppergolemlegacy.block;
 
-import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.sounds.SoundEvent;
@@ -44,13 +43,7 @@ public class CopperChestBlock extends ChestBlock {
         this.closeSound = ModSounds.COPPER_CHEST_CLOSE.get();
     }
 
-    @Override
-    public MapCodec<? extends ChestBlock> codec() {
-        // For 1.21.1 we use a simplified codec
-        return null;
-    }
-
-    public WeatheringCopper.WeatherState getState() {
+        public WeatheringCopper.WeatherState getState() {
         return this.weatherState;
     }
 

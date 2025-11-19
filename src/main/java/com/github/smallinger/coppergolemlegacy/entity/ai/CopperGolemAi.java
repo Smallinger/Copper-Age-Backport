@@ -61,7 +61,8 @@ public class CopperGolemAi {
         ModMemoryTypes.GAZE_COOLDOWN_TICKS.get(),
         ModMemoryTypes.TRANSPORT_ITEMS_COOLDOWN_TICKS.get(),
         ModMemoryTypes.VISITED_BLOCK_POSITIONS.get(),
-        ModMemoryTypes.UNREACHABLE_TRANSPORT_BLOCK_POSITIONS.get()
+        ModMemoryTypes.UNREACHABLE_TRANSPORT_BLOCK_POSITIONS.get(),
+        ModMemoryTypes.IS_PRESSING_BUTTON.get()
         // MemoryModuleType.DOORS_TO_CLOSE - requires InteractWithDoor from 1.21.10+
     );
     
@@ -93,7 +94,7 @@ public class CopperGolemAi {
             Activity.CORE,
             0,
             ImmutableList.<BehaviorControl<? super CopperGolemEntity>>of(
-                new AnimalPanic<>(1.5F),  // Panik-Verhalten wenn beschädigt
+                new AnimalPanic(1.5F),  // Panik-Verhalten wenn beschädigt (nicht generisch in 1.20.1)
                 new LookAtTargetSink(45, 90),  // Schaut zum Look-Target
                 new MoveToTargetSink(),  // Bewegt sich zum Walk-Target
                 InteractWithDoor.create(),  // Türen öffnen und schließen
@@ -106,7 +107,7 @@ public class CopperGolemAi {
     /**
      * Idle Activity - Behaviors wenn Golem nichts Spezielles tut
      * Priority 0: Item Transport (höchste Priorität)
-     * Priority 1: Press Random Copper Button (wenn Config aktiviert)
+     * Priority 1: Press Random Copper Button (wenn Config aktiviert, darf nach Start nicht unterbrochen werden)
      * Priority 2: Schaue manchmal Spieler an
      * Priority 3: Herumlaufen oder Stillstehen (wenn Cooldown aktiv)
      */

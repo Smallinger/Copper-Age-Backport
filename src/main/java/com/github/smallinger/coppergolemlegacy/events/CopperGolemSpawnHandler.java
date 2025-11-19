@@ -1,6 +1,7 @@
 package com.github.smallinger.coppergolemlegacy.events;
 
 import com.github.smallinger.coppergolemlegacy.CopperGolemLegacy;
+import com.github.smallinger.coppergolemlegacy.ModMemoryTypes;
 import com.github.smallinger.coppergolemlegacy.ModTags;
 import com.github.smallinger.coppergolemlegacy.block.CopperChestBlock;
 import com.github.smallinger.coppergolemlegacy.entity.CopperGolemEntity;
@@ -14,9 +15,9 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.WeatheringCopper;
 import net.minecraft.world.level.block.state.BlockState;
-import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.neoforge.event.level.BlockEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
+import net.minecraftforge.event.level.BlockEvent;
 
 @EventBusSubscriber(modid = CopperGolemLegacy.MODID)
 public class CopperGolemSpawnHandler {
@@ -84,6 +85,11 @@ public class CopperGolemSpawnHandler {
                 // Set the oxidation state based on the copper block type
                 WeatheringCopper.WeatherState weatherState = getWeatherStateFromBlock(copperState.getBlock());
                 copperGolem.setWeatherState(weatherState);
+                
+                // Set initial transport cooldown (140 ticks = 7 seconds)
+                // This prevents the golem from immediately trying to interact with the spawn chest
+                // and allows the idle walk animation to trigger naturally
+                copperGolem.getBrain().setMemory(ModMemoryTypes.TRANSPORT_ITEMS_COOLDOWN_TICKS.get(), 140);
                 
                 // Add to world
                 level.addFreshEntity(copperGolem);

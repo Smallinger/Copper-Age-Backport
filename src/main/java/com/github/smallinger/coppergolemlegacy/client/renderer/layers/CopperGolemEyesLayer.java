@@ -38,7 +38,7 @@ public class CopperGolemEyesLayer extends RenderLayer<CopperGolemEntity, CopperG
         
         // Use the parent's model which already has all the correct transformations and animations
         this.getParentModel().renderToBuffer(poseStack, vertexConsumer, 15728880, 
-                                             OverlayTexture.NO_OVERLAY, -1);
+                                             OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
     }
 }
 

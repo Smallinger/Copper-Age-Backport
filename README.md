@@ -1,8 +1,8 @@
 # Copper Golem Legacy
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Minecraft](https://img.shields.io/badge/Minecraft-1.21.1-green.svg)](https://www.minecraft.net/)
-[![NeoForge](https://img.shields.io/badge/NeoForge-21.1.215-blue.svg)](https://neoforged.net/)
+[![Minecraft](https://img.shields.io/badge/Minecraft-1.20.1-green.svg)](https://www.minecraft.net/)
+[![Forge](https://img.shields.io/badge/Forge-47.3.0-blue.svg)](https://files.minecraftforge.net/)
 
 ![Demo](./src/main/resources/logo.png)
 
@@ -16,7 +16,8 @@ A Minecraft mod that brings back the Copper Golem from the Minecraft Live 2021 m
 - **Natural spawning**: Place a carved pumpkin on a copper block to summon your golem
 - **Oxidation system**: Copper golems age through four stages (normal, exposed, weathered, oxidized)
 - **Item interactions**: Give items to your golem - they'll store them in their chest and show them off
-- **Button pressing**: Golems randomly press copper buttons, acting as natural randomizers
+- **Item transport**: Golems automatically transport items from copper chests to regular chests within a 65×17×65 block area
+- **Button pressing**: Golems randomly press copper buttons with 20% chance, acting as natural randomizers
 - **Player-oriented spawning**: Golems and their chests face toward you when spawned
 
 ### Copper Chest
@@ -57,7 +58,7 @@ A Minecraft mod that brings back the Copper Golem from the Minecraft Live 2021 m
 ## Installation
 
 1. Download the latest release from the [Releases](https://github.com/Smallinger/Copper-Golem-Legacy/releases) page
-2. Install [NeoForge](https://neoforged.net/) for Minecraft 1.21.1
+2. Install [Forge](https://files.minecraftforge.net/) 47.3.0 or higher for Minecraft 1.20.1
 3. Place the downloaded `.jar` file in your `mods` folder
 4. Launch Minecraft and enjoy!
 
@@ -77,9 +78,9 @@ cd Copper-Golem-Legacy
 ## Development
 
 ### Requirements
-- Java 21 or higher
-- Gradle (included via wrapper)
-- NeoForge 21.1.215 for Minecraft 1.21.1
+- Java 17
+- Gradle 8.7 (included via wrapper)
+- Forge 47.3.0 for Minecraft 1.20.1
 
 ### Setup
 ```bash
@@ -107,7 +108,7 @@ Copyright (c) 2025 Marc Schirrmann
 
 - **Author**: Marc Schirrmann (Smallinger)
 - **Inspired by**: The Copper Golem from Minecraft Live 2021 mob vote
-- **Built with**: [NeoForge](https://neoforged.net/)
+- **Built with**: [Forge](https://files.minecraftforge.net/)
 
 ## Links
 

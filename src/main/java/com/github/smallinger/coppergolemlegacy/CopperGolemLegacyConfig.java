@@ -1,15 +1,16 @@
 package com.github.smallinger.coppergolemlegacy;
 
-import net.neoforged.neoforge.common.ModConfigSpec;
+import net.minecraft.client.gui.screens.Screen;
+import net.minecraftforge.common.ForgeConfigSpec;
 
 /**
  * Configuration for Copper Golem Legacy mod
  */
 public class CopperGolemLegacyConfig {
-    public static final ModConfigSpec.Builder BUILDER = new ModConfigSpec.Builder();
-    public static final ModConfigSpec SPEC;
+    public static final ForgeConfigSpec.Builder BUILDER = new ForgeConfigSpec.Builder();
+    public static final ForgeConfigSpec SPEC;
 
-    public static final ModConfigSpec.BooleanValue GOLEM_PRESSES_BUTTONS;
+    public static final ForgeConfigSpec.BooleanValue GOLEM_PRESSES_BUTTONS;
 
     static {
         BUILDER.push("coppergolemai");
@@ -20,5 +21,11 @@ public class CopperGolemLegacyConfig {
 
         BUILDER.pop();
         SPEC = BUILDER.build();
+    }
+    
+    public static Screen createConfigScreen(Screen parent) {
+        // For now, return null - you can implement a proper config screen later
+        // or use a library like Configured/Cloth Config
+        return null;
     }
 }

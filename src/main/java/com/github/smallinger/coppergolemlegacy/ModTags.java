@@ -11,7 +11,7 @@ public class ModTags {
         public static final TagKey<Block> COPPER_CHESTS = tag("copper_chests");
 
         private static TagKey<Block> tag(String name) {
-            return TagKey.create(Registries.BLOCK, ResourceLocation.fromNamespaceAndPath(CopperGolemLegacy.MODID, name));
+            return TagKey.create(Registries.BLOCK, new ResourceLocation(CopperGolemLegacy.MODID, name));
         }
     }
 }

@@ -71,7 +71,7 @@ public class CopperGolemStatueRenderer implements BlockEntityRenderer<CopperGole
             bufferSource.getBuffer(renderType),
             packedLight,
             packedOverlay,
-            -1 // White color
+            1.0F, 1.0F, 1.0F, 1.0F // RGBA color in 1.20.1
         );
         
         poseStack.popPose();

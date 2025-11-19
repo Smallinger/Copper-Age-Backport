@@ -5,8 +5,6 @@ import com.github.smallinger.coppergolemlegacy.block.CopperGolemStatueBlock;
 import com.github.smallinger.coppergolemlegacy.entity.CopperGolemEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
-import net.minecraft.core.component.DataComponentMap;
-import net.minecraft.core.component.DataComponents;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
@@ -51,19 +49,24 @@ public class CopperGolemStatueBlockEntity extends BlockEntity {
     }
 
     @Override
-    protected void saveAdditional(CompoundTag tag, HolderLookup.Provider registries) {
-        super.saveAdditional(tag, registries);
+    protected void saveAdditional(CompoundTag tag) {
+        super.saveAdditional(tag);
         if (this.customName != null) {
-            tag.putString("CustomName", Component.Serializer.toJson(this.customName, registries));
+            tag.putString("CustomName", Component.Serializer.toJson(this.customName));
         }
     }
 
     @Override
-    protected void loadAdditional(CompoundTag tag, HolderLookup.Provider registries) {
-        super.loadAdditional(tag, registries);
+    public void load(CompoundTag tag) {
+        super.load(tag);
         if (tag.contains("CustomName")) {
-            this.customName = Component.Serializer.fromJson(tag.getString("CustomName"), registries);
+            this.customName = Component.Serializer.fromJson(tag.getString("CustomName"));
         }
+    }
+
+    @Override
+    public CompoundTag getUpdateTag() {
+        return this.saveWithoutMetadata();
     }
 
     @Override
@@ -71,24 +74,6 @@ public class CopperGolemStatueBlockEntity extends BlockEntity {
         return ClientboundBlockEntityDataPacket.create(this);
     }
 
-    @Override
-    public CompoundTag getUpdateTag(HolderLookup.Provider registries) {
-        return this.saveWithoutMetadata(registries);
-    }
-
-    @Override
-    protected void applyImplicitComponents(DataComponentInput componentInput) {
-        super.applyImplicitComponents(componentInput);
-        this.customName = componentInput.get(DataComponents.CUSTOM_NAME);
-    }
-
-    @Override
-    protected void collectImplicitComponents(DataComponentMap.Builder components) {
-        super.collectImplicitComponents(components);
-        components.set(DataComponents.CUSTOM_NAME, this.customName);
-    }
-
-    @Override
     public void removeComponentsFromTag(CompoundTag tag) {
         tag.remove("CustomName");
     }

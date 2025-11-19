@@ -18,17 +18,17 @@ import net.minecraft.world.entity.HumanoidArm;
 
 public class CopperGolemModel extends HierarchicalModel<CopperGolemEntity> implements ArmedModel {
     public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(
-        ResourceLocation.fromNamespaceAndPath(CopperGolemLegacy.MODID, "copper_golem"), "main");
+        new ResourceLocation(CopperGolemLegacy.MODID, "copper_golem"), "main");
     
     // Statue pose model layers
     public static final ModelLayerLocation STATUE_STANDING = new ModelLayerLocation(
-        ResourceLocation.fromNamespaceAndPath(CopperGolemLegacy.MODID, "copper_golem_statue_standing"), "main");
+        new ResourceLocation(CopperGolemLegacy.MODID, "copper_golem_statue_standing"), "main");
     public static final ModelLayerLocation STATUE_RUNNING = new ModelLayerLocation(
-        ResourceLocation.fromNamespaceAndPath(CopperGolemLegacy.MODID, "copper_golem_statue_running"), "main");
+        new ResourceLocation(CopperGolemLegacy.MODID, "copper_golem_statue_running"), "main");
     public static final ModelLayerLocation STATUE_SITTING = new ModelLayerLocation(
-        ResourceLocation.fromNamespaceAndPath(CopperGolemLegacy.MODID, "copper_golem_statue_sitting"), "main");
+        new ResourceLocation(CopperGolemLegacy.MODID, "copper_golem_statue_sitting"), "main");
     public static final ModelLayerLocation STATUE_STAR = new ModelLayerLocation(
-        ResourceLocation.fromNamespaceAndPath(CopperGolemLegacy.MODID, "copper_golem_statue_star"), "main");
+        new ResourceLocation(CopperGolemLegacy.MODID, "copper_golem_statue_star"), "main");
     
     private final ModelPart root;
     private final ModelPart head;

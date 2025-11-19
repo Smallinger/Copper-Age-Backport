@@ -8,7 +8,6 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.ItemStack;
@@ -30,7 +29,7 @@ public class CopperButtonBlock extends ButtonBlock implements WeatheringCopper {
     private Supplier<WaxedCopperButtonBlock> waxedButton;
 
     public CopperButtonBlock(WeatheringCopper.WeatherState weatherState, Properties properties) {
-        super(BlockSetType.COPPER, 15, properties); // 15 ticks = 1.5 seconds activation time
+        super(properties, BlockSetType.IRON, 15, true); // Properties first in 1.20.1
         this.weatherState = weatherState;
     }
 
@@ -44,7 +43,8 @@ public class CopperButtonBlock extends ButtonBlock implements WeatheringCopper {
     }
 
     @Override
-    protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
+    public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
+        ItemStack stack = player.getItemInHand(hand);
         // Check if player is using honeycomb to wax the button
         if (stack.is(Items.HONEYCOMB) && waxedButton != null) {
             level.playSound(player, pos, SoundEvents.HONEYCOMB_WAX_ON, SoundSource.BLOCKS, 1.0F, 1.0F);
@@ -59,11 +59,11 @@ public class CopperButtonBlock extends ButtonBlock implements WeatheringCopper {
                 level.setBlock(pos, waxedState, 11);
                 
                 if (player != null && !player.isCreative()) {
-                    stack.consume(1, player);
+                    stack.shrink(1);
                 }
             }
             
-            return ItemInteractionResult.sidedSuccess(level.isClientSide);
+            return level.isClientSide ? InteractionResult.SUCCESS : InteractionResult.CONSUME;
         }
         
         // Check if player is using an axe to scrape oxidation
@@ -92,31 +92,20 @@ public class CopperButtonBlock extends ButtonBlock implements WeatheringCopper {
                     level.setBlock(pos, newState, 11);
                     
                     if (player != null && !player.isCreative()) {
-                        stack.hurtAndBreak(1, player, player.getEquipmentSlotForItem(stack));
+                        stack.hurtAndBreak(1, player, (p) -> p.broadcastBreakEvent(hand));
                     }
                 }
                 
-                return ItemInteractionResult.sidedSuccess(level.isClientSide);
+                return level.isClientSide ? InteractionResult.SUCCESS : InteractionResult.CONSUME;
             }
         }
         
-        return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
-    }
-
-    @Override
-    protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult) {
-        // Oxidized buttons cannot be pressed
-        if (this.weatherState == WeatherState.OXIDIZED) {
-            // Play hit sound when trying to use oxidized button
-            level.playSound(player, pos, SoundEvents.COPPER_HIT, SoundSource.BLOCKS, 1.0F, 1.0F);
-            return InteractionResult.PASS;
-        }
-        return super.useWithoutItem(state, level, pos, player, hitResult);
+        return InteractionResult.PASS;
     }
 
     @Override
     public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
-        this.changeOverTime(state, level, pos, random);
+        this.onRandomTick(state, level, pos, random);
     }
 
     @Override

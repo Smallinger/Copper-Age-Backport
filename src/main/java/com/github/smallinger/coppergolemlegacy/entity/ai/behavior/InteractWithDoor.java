@@ -25,9 +25,9 @@ import java.util.Optional;
 import java.util.Set;
 
 /**
- * Behavior für Tür-Interaktionen - Portiert von Minecraft 1.21.10
- * Öffnet Türen automatisch wenn der Mob durch sie hindurch geht
- * und schließt sie wieder nach dem Durchgang.
+ * Behavior fÃ¼r TÃ¼r-Interaktionen - Portiert von Minecraft 1.21.10
+ * Ã–ffnet TÃ¼ren automatisch wenn der Mob durch sie hindurch geht
+ * und schlieÃŸt sie wieder nach dem Durchgang.
  */
 public class InteractWithDoor {
     private static final int COOLDOWN_BEFORE_RERUNNING_IN_SAME_NODE = 20;
@@ -51,7 +51,7 @@ public class InteractWithDoor {
                         Optional<Set<GlobalPos>> doorsToClose = instance.tryGet(doorsToCloseMemory);
                         
                         if (!path.notStarted() && !path.isDone()) {
-                            // Cooldown um nicht ständig dieselbe Tür zu checken
+                            // Cooldown um nicht stÃ¤ndig dieselbe TÃ¼r zu checken
                             if (Objects.equals(lastPathNode.getValue(), path.getNextNode())) {
                                 cooldown.setValue(COOLDOWN_BEFORE_RERUNNING_IN_SAME_NODE);
                             } else if (cooldown.decrementAndGet() > 0) {
@@ -62,7 +62,7 @@ public class InteractWithDoor {
                             Node previousNode = path.getPreviousNode();
                             Node nextNode = path.getNextNode();
                             
-                            // Prüfe vorherigen Node auf Tür
+                            // PrÃ¼fe vorherigen Node auf TÃ¼r
                             BlockPos previousPos = previousNode.asBlockPos();
                             BlockState previousState = level.getBlockState(previousPos);
                             if (previousState.is(BlockTags.WOODEN_DOORS) && previousState.getBlock() instanceof DoorBlock) {
@@ -73,7 +73,7 @@ public class InteractWithDoor {
                                 doorsToClose = rememberDoorToClose(doorsToCloseMemory, doorsToClose, level, previousPos);
                             }
 
-                            // Prüfe nächsten Node auf Tür
+                            // PrÃ¼fe nÃ¤chsten Node auf TÃ¼r
                             BlockPos nextPos = nextNode.asBlockPos();
                             BlockState nextState = level.getBlockState(nextPos);
                             if (nextState.is(BlockTags.WOODEN_DOORS) && nextState.getBlock() instanceof DoorBlock) {
@@ -84,7 +84,7 @@ public class InteractWithDoor {
                                 }
                             }
 
-                            // Schließe Türen die bereits durchquert wurden
+                            // SchlieÃŸe TÃ¼ren die bereits durchquert wurden
                             doorsToClose.ifPresent(
                                 doors -> closeDoorsThatIHaveOpenedOrPassedThrough(
                                     level, entity, previousNode, nextNode, doors, instance.tryGet(nearestEntitiesMemory)
@@ -112,7 +112,7 @@ public class InteractWithDoor {
             GlobalPos doorPos = iterator.next();
             BlockPos blockPos = doorPos.pos();
             
-            // Nicht schließen wenn wir gerade an dieser Tür sind
+            // Nicht schlieÃŸen wenn wir gerade an dieser TÃ¼r sind
             if ((previous == null || !previous.asBlockPos().equals(blockPos)) 
                 && (next == null || !next.asBlockPos().equals(blockPos))) {
                 
@@ -127,10 +127,10 @@ public class InteractWithDoor {
                         if (!door.isOpen(blockState)) {
                             iterator.remove();
                         } else if (areOtherMobsComingThroughDoor(entity, blockPos, nearestLivingEntities)) {
-                            // Tür offen lassen wenn andere Mobs durchkommen
+                            // TÃ¼r offen lassen wenn andere Mobs durchkommen
                             iterator.remove();
                         } else {
-                            // Tür schließen
+                            // TÃ¼r schlieÃŸen
                             door.setOpen(entity, level, blockState, blockPos, false);
                             iterator.remove();
                         }

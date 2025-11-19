@@ -1,5 +1,6 @@
 package com.github.smallinger.coppergolemlegacy.entity.ai.behavior;
 
+import com.github.smallinger.coppergolemlegacy.CopperGolemLegacy;
 import com.github.smallinger.coppergolemlegacy.ModMemoryTypes;
 import com.google.common.collect.ImmutableMap;
 import net.minecraft.core.BlockPos;
@@ -30,8 +31,6 @@ import net.minecraft.world.level.pathfinder.Path;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
-import org.apache.commons.lang3.function.TriConsumer;
-
 import javax.annotation.Nullable;
 import java.util.*;
 import java.util.function.BiConsumer;
@@ -40,7 +39,7 @@ import java.util.function.Predicate;
 import java.util.stream.Stream;
 
 /**
- * Behavior für Transport von Items zwischen Containern
+ * Behavior fÃƒÂ¼r Transport von Items zwischen Containern
  * Portiert von Minecraft 1.21.10 nach NeoForge 1.21.1
  */
 public class TransportItemsBetweenContainers extends Behavior<PathfinderMob> {
@@ -53,7 +52,7 @@ public class TransportItemsBetweenContainers extends Behavior<PathfinderMob> {
     private static final int IDLE_COOLDOWN = 140;
     private static final double CLOSE_ENOUGH_TO_START_QUEUING_DISTANCE = 3.0;
     private static final double CLOSE_ENOUGH_TO_START_INTERACTING_WITH_TARGET_DISTANCE = 0.5;
-    private static final double CLOSE_ENOUGH_TO_START_INTERACTING_WITH_TARGET_PATH_END_DISTANCE = 1.0;
+    private static final double CLOSE_ENOUGH_TO_START_INTERACTING_WITH_TARGET_PATH_END_DISTANCE = 1.1;
     private static final double CLOSE_ENOUGH_TO_CONTINUE_INTERACTING_WITH_TARGET = 2.0;
     
     private final float speedModifier;
@@ -91,6 +90,8 @@ public class TransportItemsBetweenContainers extends Behavior<PathfinderMob> {
                 ModMemoryTypes.TRANSPORT_ITEMS_COOLDOWN_TICKS.get(),
                 MemoryStatus.VALUE_ABSENT,
                 MemoryModuleType.IS_PANICKING,
+                MemoryStatus.VALUE_ABSENT,
+                ModMemoryTypes.IS_PRESSING_BUTTON.get(),
                 MemoryStatus.VALUE_ABSENT
             )
         );
@@ -119,7 +120,7 @@ public class TransportItemsBetweenContainers extends Behavior<PathfinderMob> {
     @Override
     protected boolean canStillUse(ServerLevel level, PathfinderMob mob, long gameTime) {
         return mob.getBrain().getMemory(ModMemoryTypes.TRANSPORT_ITEMS_COOLDOWN_TICKS.get()).isEmpty() 
-            && !mob.isPanicking() 
+            && mob.getBrain().hasMemoryValue(MemoryModuleType.AVOID_TARGET) == false 
             && !mob.isLeashed();
     }
 
@@ -173,10 +174,12 @@ public class TransportItemsBetweenContainers extends Behavior<PathfinderMob> {
     }
 
     protected void onTravelToTarget(TransportItemTarget target, Level level, PathfinderMob mob) {
+        double interactionRange = getInteractionRange(mob);
+        
         if (this.isWithinTargetDistance(CLOSE_ENOUGH_TO_START_QUEUING_DISTANCE, target, level, mob, this.getCenterPos(mob))
             && this.isAnotherMobInteractingWithTarget(target, level)) {
             this.startQueuing(mob);
-        } else if (this.isWithinTargetDistance(getInteractionRange(mob), target, level, mob, this.getCenterPos(mob))) {
+        } else if (this.isWithinTargetDistance(interactionRange, target, level, mob, this.getCenterPos(mob))) {
             this.startOnReachedTargetInteraction(target, mob);
         } else {
             this.walkTowardsTarget(mob);
@@ -288,19 +291,27 @@ public class TransportItemsBetweenContainers extends Behavior<PathfinderMob> {
         AABB aabb = this.getTargetSearchArea(mob);
         Set<GlobalPos> visited = getVisitedPositions(mob);
         Set<GlobalPos> unreachable = getUnreachablePositions(mob);
-        List<ChunkPos> chunks = ChunkPos.rangeClosed(
-            new ChunkPos(mob.blockPosition()), 
-            Math.floorDiv(this.getHorizontalSearchDistance(mob), 16) + 1
-        ).toList();
+        
+        // Manual chunk range calculation for 1.20.1
+        ChunkPos centerChunk = new ChunkPos(mob.blockPosition());
+        int chunkRadius = Math.floorDiv(this.getHorizontalSearchDistance(mob), 16) + 1;
+        List<ChunkPos> chunks = new ArrayList<>();
+        for (int x = centerChunk.x - chunkRadius; x <= centerChunk.x + chunkRadius; x++) {
+            for (int z = centerChunk.z - chunkRadius; z <= centerChunk.z + chunkRadius; z++) {
+                chunks.add(new ChunkPos(x, z));
+            }
+        }
         
         TransportItemTarget bestTarget = null;
         double bestDistance = Float.MAX_VALUE;
+        int chestsFound = 0;
 
         for (ChunkPos chunkPos : chunks) {
-            LevelChunk chunk = level.getChunkSource().getChunkNow(chunkPos.x, chunkPos.z);
+            LevelChunk chunk = level.getChunk(chunkPos.x, chunkPos.z);
             if (chunk != null) {
                 for (BlockEntity blockEntity : chunk.getBlockEntities().values()) {
                     if (blockEntity instanceof ChestBlockEntity chestBlockEntity) {
+                        chestsFound++;
                         double distance = chestBlockEntity.getBlockPos().distToCenterSqr(mob.position());
                         if (distance < bestDistance) {
                             TransportItemTarget candidateTarget = this.isTargetValidToPick(
@@ -335,9 +346,11 @@ public class TransportItemsBetweenContainers extends Behavior<PathfinderMob> {
             return null;
         }
         
-        boolean isValid = this.isWantedBlock(mob, target.state)
-            && !this.isPositionAlreadyVisited(visited, unreachable, target, level)
-            && !this.isContainerLocked(target);
+        boolean isWanted = this.isWantedBlock(mob, target.state);
+        boolean notVisited = !this.isPositionAlreadyVisited(visited, unreachable, target, level);
+        boolean notLocked = !this.isContainerLocked(target);
+        
+        boolean isValid = isWanted && notVisited && notLocked;
         return isValid ? target : null;
     }
 
@@ -374,17 +387,22 @@ public class TransportItemsBetweenContainers extends Behavior<PathfinderMob> {
         Vec3 vec3 = this.getPositionToReachTargetFrom(path, mob);
         boolean withinRange = this.isWithinTargetDistance(getInteractionRange(mob), target, level, mob, vec3);
         boolean noPathAndNotInRange = path == null && !withinRange;
-        return noPathAndNotInRange || this.targetIsReachableFromPosition(level, withinRange, vec3, target, mob);
+        boolean reachable = this.targetIsReachableFromPosition(level, withinRange, vec3, target, mob);
+        
+        // If we have a path, the target is reachable (even if not in range yet)
+        boolean hasValidPath = path != null;
+        
+        return hasValidPath || noPathAndNotInRange || reachable;
     }
 
     private Vec3 getPositionToReachTargetFrom(@Nullable Path path, PathfinderMob mob) {
         boolean noPath = path == null || path.getEndNode() == null;
-        Vec3 vec3 = noPath ? mob.position() : path.getEndNode().asBlockPos().getBottomCenter();
+        Vec3 vec3 = noPath ? mob.position() : new BlockPos(path.getEndNode().x, path.getEndNode().y, path.getEndNode().z).getCenter();
         return this.setMiddleYPosition(mob, vec3);
     }
 
     private Vec3 setMiddleYPosition(PathfinderMob mob, Vec3 pos) {
-        return pos.add(0.0, mob.getBoundingBox().getYsize() / 2.0, 0.0);
+        return pos.add(0.0, mob.getBbHeight() / 2.0, 0.0);
     }
 
     private boolean isTargetBlocked(Level level, TransportItemTarget target) {
@@ -441,7 +459,7 @@ public class TransportItemsBetweenContainers extends Behavior<PathfinderMob> {
         Set<GlobalPos> visited, Set<GlobalPos> unreachable, TransportItemTarget target, Level level
     ) {
         return this.getConnectedTargets(target, level)
-            .map(t -> new GlobalPos(level.dimension(), t.pos))
+            .map(t -> GlobalPos.of(level.dimension(), t.pos))
             .anyMatch(globalPos -> visited.contains(globalPos) || unreachable.contains(globalPos));
     }
 
@@ -451,7 +469,7 @@ public class TransportItemsBetweenContainers extends Behavior<PathfinderMob> {
 
     protected void setVisitedBlockPos(PathfinderMob mob, Level level, BlockPos pos) {
         Set<GlobalPos> visited = new HashSet<>(getVisitedPositions(mob));
-        visited.add(new GlobalPos(level.dimension(), pos));
+        visited.add(GlobalPos.of(level.dimension(), pos));
         if (visited.size() > MAX_VISITED_POSITIONS) {
             this.enterCooldownAfterNoMatchingTargetFound(mob);
         } else {
@@ -461,9 +479,9 @@ public class TransportItemsBetweenContainers extends Behavior<PathfinderMob> {
 
     protected void markVisitedBlockPosAsUnreachable(PathfinderMob mob, Level level, BlockPos pos) {
         Set<GlobalPos> visited = new HashSet<>(getVisitedPositions(mob));
-        visited.remove(new GlobalPos(level.dimension(), pos));
+        visited.remove(GlobalPos.of(level.dimension(), pos));
         Set<GlobalPos> unreachable = new HashSet<>(getUnreachablePositions(mob));
-        unreachable.add(new GlobalPos(level.dimension(), pos));
+        unreachable.add(GlobalPos.of(level.dimension(), pos));
         if (unreachable.size() > MAX_UNREACHABLE_POSITIONS) {
             this.enterCooldownAfterNoMatchingTargetFound(mob);
         } else {
@@ -473,7 +491,8 @@ public class TransportItemsBetweenContainers extends Behavior<PathfinderMob> {
     }
 
     private boolean isWantedBlock(PathfinderMob mob, BlockState state) {
-        return isPickingUpItems(mob) ? this.sourceBlockType.test(state) : this.destinationBlockType.test(state);
+        boolean picking = isPickingUpItems(mob);
+        return picking ? this.sourceBlockType.test(state) : this.destinationBlockType.test(state);
     }
 
     private static double getInteractionRange(PathfinderMob mob) {
@@ -486,10 +505,15 @@ public class TransportItemsBetweenContainers extends Behavior<PathfinderMob> {
         double distance, TransportItemTarget target, Level level, PathfinderMob mob, Vec3 center
     ) {
         AABB mobBounds = mob.getBoundingBox();
-        AABB centerBounds = AABB.ofSize(center, mobBounds.getXsize(), mobBounds.getYsize(), mobBounds.getZsize());
+        double width = mobBounds.getXsize();
+        double height = mob.getBbHeight();
+        AABB centerBounds = new AABB(
+            center.x - width / 2, center.y - height / 2, center.z - width / 2,
+            center.x + width / 2, center.y + height / 2, center.z + width / 2
+        );
         return target.state.getCollisionShape(level, target.pos)
             .bounds()
-            .inflate(distance, 0.5, distance)
+            .inflate(distance, distance, distance)
             .move(target.pos)
             .intersects(centerBounds);
     }
@@ -502,7 +526,7 @@ public class TransportItemsBetweenContainers extends Behavior<PathfinderMob> {
 
     private boolean canSeeAnyTargetSide(TransportItemTarget target, Level level, PathfinderMob mob, Vec3 pos) {
         Vec3 targetCenter = target.pos.getCenter();
-        return Direction.stream()
+        return Arrays.stream(Direction.values())
             .map(dir -> targetCenter.add(0.5 * dir.getStepX(), 0.5 * dir.getStepY(), 0.5 * dir.getStepZ()))
             .map(sidePos -> level.clip(new ClipContext(pos, sidePos, ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, mob)))
             .anyMatch(hitResult -> hitResult.getType() == HitResult.Type.BLOCK && hitResult.getBlockPos().equals(target.pos));
@@ -536,7 +560,8 @@ public class TransportItemsBetweenContainers extends Behavior<PathfinderMob> {
     }
 
     private void pickUpItems(PathfinderMob mob, Container container) {
-        mob.setItemSlot(EquipmentSlot.MAINHAND, pickupItemFromContainer(container));
+        ItemStack pickedUp = pickupItemFromContainer(container);
+        mob.setItemSlot(EquipmentSlot.MAINHAND, pickedUp);
         mob.setGuaranteedDrop(EquipmentSlot.MAINHAND);
         container.setChanged();
         this.clearMemoriesAfterMatchingTargetFound(mob);
@@ -574,7 +599,7 @@ public class TransportItemsBetweenContainers extends Behavior<PathfinderMob> {
                 return ItemStack.EMPTY;
             }
 
-            if (ItemStack.isSameItemSameComponents(containerItem, handItem) 
+            if (ItemStack.isSameItemSameTags(containerItem, handItem) 
                 && containerItem.getCount() < containerItem.getMaxStackSize()) {
                 int spaceLeft = containerItem.getMaxStackSize() - containerItem.getCount();
                 int toAdd = Math.min(spaceLeft, handItem.getCount());
@@ -633,8 +658,8 @@ public class TransportItemsBetweenContainers extends Behavior<PathfinderMob> {
         PLACE_NO_ITEM
     }
 
-    @FunctionalInterface
-    public interface OnTargetReachedInteraction extends TriConsumer<PathfinderMob, TransportItemTarget, Integer> {
+    public interface OnTargetReachedInteraction {
+        void accept(PathfinderMob mob, TransportItemTarget target, Integer ticks);
     }
 
     public enum TransportItemState {

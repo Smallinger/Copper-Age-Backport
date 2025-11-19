@@ -11,14 +11,13 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.ItemInteractionResult;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
-import com.mojang.serialization.MapCodec;
 import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.RenderShape;
@@ -64,11 +63,6 @@ public class CopperGolemStatueBlock extends BaseEntityBlock implements SimpleWat
     }
 
     @Override
-    protected MapCodec<? extends BaseEntityBlock> codec() {
-        return simpleCodec(props -> new CopperGolemStatueBlock(this.weatheringState, props));
-    }
-
-    @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         builder.add(FACING, POSE, WATERLOGGED);
     }
@@ -82,13 +76,14 @@ public class CopperGolemStatueBlock extends BaseEntityBlock implements SimpleWat
     }
 
     @Override
-    protected VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
+    public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
         return SHAPE;
     }
 
     @Override
-    protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, 
-                                             Player player, InteractionHand hand, BlockHitResult hitResult) {
+    public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
+        ItemStack stack = player.getItemInHand(hand);
+        
         // Empty hand interaction - change pose
         if (stack.isEmpty()) {
             if (!level.isClientSide()) {
@@ -98,7 +93,7 @@ public class CopperGolemStatueBlock extends BaseEntityBlock implements SimpleWat
                 level.playSound(null, pos, ModSounds.COPPER_STATUE_HIT.get(), SoundSource.BLOCKS, 1.0F, 1.0F);
                 level.gameEvent(player, GameEvent.BLOCK_CHANGE, pos);
             }
-            return ItemInteractionResult.SUCCESS;
+            return InteractionResult.SUCCESS;
         }
         
         // Axe interaction - restore golem
@@ -112,17 +107,17 @@ public class CopperGolemStatueBlock extends BaseEntityBlock implements SimpleWat
                     serverLevel.addFreshEntity(golem);
                     level.playSound(null, pos, ModSounds.COPPER_STATUE_BREAK.get(), SoundSource.BLOCKS, 1.0F, 1.0F);
                     level.gameEvent(player, GameEvent.BLOCK_DESTROY, pos);
-                    stack.hurtAndBreak(1, player, player.getEquipmentSlotForItem(stack));
-                    return ItemInteractionResult.SUCCESS;
+                    stack.hurtAndBreak(1, player, (p) -> p.broadcastBreakEvent(hand));
+                    return InteractionResult.SUCCESS;
                 }
             }
         }
         
-        return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+        return InteractionResult.PASS;
     }
 
     @Override
-    protected RenderShape getRenderShape(BlockState state) {
+    public RenderShape getRenderShape(BlockState state) {
         return RenderShape.MODEL;
     }
 
@@ -133,7 +128,7 @@ public class CopperGolemStatueBlock extends BaseEntityBlock implements SimpleWat
     }
 
     @Override
-    protected FluidState getFluidState(BlockState state) {
+    public FluidState getFluidState(BlockState state) {
         return state.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(state);
     }
 

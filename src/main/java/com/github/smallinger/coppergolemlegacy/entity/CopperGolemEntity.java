@@ -97,16 +97,15 @@ public class CopperGolemEntity extends AbstractGolem implements Shearable, Conta
         // Benötigt für Türöffnung mit Brain-based AI
         this.setCanPickUpLoot(true);
         // Pathfinding-Malus: Meidet Feuer-Gefahren
-        this.setPathfindingMalus(net.minecraft.world.level.pathfinder.PathType.DANGER_FIRE, 16.0F);
-        this.setPathfindingMalus(net.minecraft.world.level.pathfinder.PathType.DANGER_OTHER, 16.0F);
-        this.setPathfindingMalus(net.minecraft.world.level.pathfinder.PathType.DAMAGE_FIRE, -1.0F);
+        this.setPathfindingMalus(net.minecraft.world.level.pathfinder.BlockPathTypes.DANGER_FIRE, 16.0F);
+        this.setPathfindingMalus(net.minecraft.world.level.pathfinder.BlockPathTypes.DANGER_OTHER, 16.0F);
+        this.setPathfindingMalus(net.minecraft.world.level.pathfinder.BlockPathTypes.DAMAGE_FIRE, -1.0F);
     }
 
     public static AttributeSupplier.Builder createAttributes() {
         return Mob.createMobAttributes()
             .add(Attributes.MAX_HEALTH, 12.0)
-            .add(Attributes.MOVEMENT_SPEED, 0.2F)
-            .add(Attributes.STEP_HEIGHT, 1.0);
+            .add(Attributes.MOVEMENT_SPEED, 0.2F);
     }
 
     // Brain-based AI statt Goal-based AI
@@ -137,10 +136,10 @@ public class CopperGolemEntity extends AbstractGolem implements Shearable, Conta
     }
 
     @Override
-    protected void defineSynchedData(SynchedEntityData.Builder builder) {
-        super.defineSynchedData(builder);
-        builder.define(DATA_WEATHER_STATE, WeatheringCopper.WeatherState.UNAFFECTED.ordinal());
-        builder.define(COPPER_GOLEM_STATE, CopperGolemState.IDLE.ordinal());
+    protected void defineSynchedData() {
+        super.defineSynchedData();
+        this.entityData.define(DATA_WEATHER_STATE, WeatheringCopper.WeatherState.UNAFFECTED.ordinal());
+        this.entityData.define(COPPER_GOLEM_STATE, CopperGolemState.IDLE.ordinal());
     }
 
     public CopperGolemState getState() {
@@ -360,7 +359,7 @@ public class CopperGolemEntity extends AbstractGolem implements Shearable, Conta
         if (itemstack.is(Items.SHEARS) && this.readyForShearing()) {
             if (level instanceof ServerLevel serverLevel) {
                 this.shear(SoundSource.PLAYERS);
-                itemstack.hurtAndBreak(1, player, LivingEntity.getSlotForHand(hand));
+                itemstack.hurtAndBreak(1, player, (p) -> p.broadcastBreakEvent(hand));
             }
             return InteractionResult.sidedSuccess(level.isClientSide());
         }
@@ -370,7 +369,7 @@ public class CopperGolemEntity extends AbstractGolem implements Shearable, Conta
             if (!level.isClientSide()) {
                 level.levelEvent(null, 3003, this.blockPosition(), 0);
                 this.nextWeatheringTick = IGNORE_WEATHERING_TICK;
-                itemstack.consume(1, player);
+                itemstack.shrink(1);
             }
             return InteractionResult.sidedSuccess(level.isClientSide());
         }
@@ -385,7 +384,7 @@ public class CopperGolemEntity extends AbstractGolem implements Shearable, Conta
                     level.playSound(null, this, SoundEvents.AXE_SCRAPE, this.getSoundSource(), 1.0F, 1.0F);
                     level.levelEvent(null, 3004, this.blockPosition(), 0);
                     this.nextWeatheringTick = UNSET_WEATHERING_TICK;
-                    itemstack.hurtAndBreak(1, player, LivingEntity.getSlotForHand(hand));
+                    itemstack.hurtAndBreak(1, player, (p) -> p.broadcastBreakEvent(hand));
                     return InteractionResult.SUCCESS;
                 }
                 
@@ -395,7 +394,7 @@ public class CopperGolemEntity extends AbstractGolem implements Shearable, Conta
                     level.levelEvent(null, 3005, this.blockPosition(), 0);
                     this.nextWeatheringTick = UNSET_WEATHERING_TICK;
                     this.setWeatherState(getPreviousWeatherState(weatherState));
-                    itemstack.hurtAndBreak(1, player, LivingEntity.getSlotForHand(hand));
+                    itemstack.hurtAndBreak(1, player, (p) -> p.broadcastBreakEvent(hand));
                     return InteractionResult.SUCCESS;
                 }
             }
@@ -472,10 +471,11 @@ public class CopperGolemEntity extends AbstractGolem implements Shearable, Conta
         ServerLevelAccessor level,
         DifficultyInstance difficulty,
         MobSpawnType spawnType,
-        @Nullable SpawnGroupData spawnData
+        @Nullable SpawnGroupData spawnData,
+        @Nullable CompoundTag dataTag
     ) {
         this.playSound(SoundEvents.IRON_GOLEM_REPAIR); // Placeholder for spawn sound
-        return super.finalizeSpawn(level, difficulty, spawnType, spawnData);
+        return super.finalizeSpawn(level, difficulty, spawnType, spawnData, dataTag);
     }
 
     @Override
@@ -499,8 +499,8 @@ public class CopperGolemEntity extends AbstractGolem implements Shearable, Conta
     }
 
     @Override
-    protected void dropCustomDeathLoot(ServerLevel level, DamageSource damageSource, boolean hitByPlayer) {
-        super.dropCustomDeathLoot(level, damageSource, hitByPlayer);
+    protected void dropCustomDeathLoot(DamageSource damageSource, int looting, boolean hitByPlayer) {
+        super.dropCustomDeathLoot(damageSource, looting, hitByPlayer);
         // Drop 3 copper ingots when killed
         ItemStack copperIngots = new ItemStack(Items.COPPER_INGOT, 3);
         this.spawnAtLocation(copperIngots);

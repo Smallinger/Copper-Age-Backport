@@ -20,8 +20,8 @@ public class CopperGolemStatueModel extends Model {
     }
 
     @Override
-    public void renderToBuffer(PoseStack poseStack, VertexConsumer buffer, int packedLight, int packedOverlay, int color) {
-        this.root.render(poseStack, buffer, packedLight, packedOverlay, color);
+    public void renderToBuffer(PoseStack poseStack, VertexConsumer buffer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
+        this.root.render(poseStack, buffer, packedLight, packedOverlay, red, green, blue, alpha);
     }
 
     /**
