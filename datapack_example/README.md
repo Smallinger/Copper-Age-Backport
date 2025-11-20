@@ -21,9 +21,9 @@ datapacks/
 {
   "replace": false,
   "values": [
-    "storagedrawers:oak_full_drawers_1",
-    "storagedrawers:oak_full_drawers_2",
-    "storagedrawers:oak_full_drawers_4"
+    {"id": "storagedrawers:oak_full_drawers_1", "required": false},
+    {"id": "storagedrawers:oak_full_drawers_2", "required": false},
+    {"id": "storagedrawers:oak_full_drawers_4", "required": false}
   ]
 }
 ```
@@ -33,9 +33,9 @@ datapacks/
 {
   "replace": false,
   "values": [
-    "sophisticatedstorage:barrel",
-    "sophisticatedstorage:chest",
-    "sophisticatedstorage:limited_barrel"
+    {"id": "sophisticatedstorage:barrel", "required": false},
+    {"id": "sophisticatedstorage:chest", "required": false},
+    {"id": "sophisticatedstorage:limited_barrel", "required": false}
   ]
 }
 ```
@@ -45,9 +45,9 @@ datapacks/
 {
   "replace": false,
   "values": [
-    "storagedrawers:oak_full_drawers_1",
-    "sophisticatedstorage:barrel",
-    "ae2:chest"
+    {"id": "storagedrawers:oak_full_drawers_1", "required": false},
+    {"id": "sophisticatedstorage:barrel", "required": false},
+    {"id": "ae2:chest", "required": false}
   ]
 }
 ```
@@ -60,3 +60,5 @@ datapacks/
 4. The Copper Golem can now place items into these chests!
 
 **Important**: Always set `"replace": false`, otherwise the default chests (Vanilla + IronChest) will be overwritten!
+
+**Note**: Use `"required": false` for optional mod compatibility. This prevents errors if the referenced mod is not installed.

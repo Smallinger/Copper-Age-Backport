@@ -2,6 +2,16 @@
 
 All notable changes to the Copper Golem Legacy mod will be documented in this file.
 
+## [1.21.1-0.0.5-hotfix1] - 2025-11-20
+
+### Fixed
+- **Tag Loading Error**: Fixed "missing references" error for optional mod chests
+  - Issue: Tag loading failed when IronChest mod were not installed
+  - Error: `Couldn't load tag coppergolemlegacy:golem_target_chests as it is missing following references`
+  - Solution: Changed all optional mod entries to use `{"id": "...", "required": false}` format
+  - Affected mods: IronChest (14 chest types)
+  - Mod now works properly both with and without IronChest installed
+
 ## [1.21.1-0.0.5] - 2025-11-20
 
 ### Added
