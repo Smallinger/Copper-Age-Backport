@@ -4,23 +4,69 @@
     "minecraft:chest",
     "minecraft:trapped_chest",
     "minecraft:barrel",
-    "ironchest:iron_chest",
-    "ironchest:gold_chest",
-    "ironchest:diamond_chest",
-    "ironchest:copper_chest",
-    "ironchest:crystal_chest",
-    "ironchest:obsidian_chest",
-    "ironchest:dirt_chest",
-    "ironchest:trapped_iron_chest",
-    "ironchest:trapped_gold_chest",
-    "ironchest:trapped_diamond_chest",
-    "ironchest:trapped_copper_chest",
-    "ironchest:trapped_crystal_chest",
-    "ironchest:trapped_obsidian_chest",
-    "ironchest:trapped_dirt_chest",
-
-    "ars_nouveau:archwood_chest",
-    "ars_nouveau:repository"
-
+    {
+      "id": "ironchest:iron_chest",
+      "required": false
+    },
+    {
+      "id": "ironchest:gold_chest",
+      "required": false
+    },
+    {
+      "id": "ironchest:diamond_chest",
+      "required": false
+    },
+    {
+      "id": "ironchest:copper_chest",
+      "required": false
+    },
+    {
+      "id": "ironchest:crystal_chest",
+      "required": false
+    },
+    {
+      "id": "ironchest:obsidian_chest",
+      "required": false
+    },
+    {
+      "id": "ironchest:dirt_chest",
+      "required": false
+    },
+    {
+      "id": "ironchest:trapped_iron_chest",
+      "required": false
+    },
+    {
+      "id": "ironchest:trapped_gold_chest",
+      "required": false
+    },
+    {
+      "id": "ironchest:trapped_diamond_chest",
+      "required": false
+    },
+    {
+      "id": "ironchest:trapped_copper_chest",
+      "required": false
+    },
+    {
+      "id": "ironchest:trapped_crystal_chest",
+      "required": false
+    },
+    {
+      "id": "ironchest:trapped_obsidian_chest",
+      "required": false
+    },
+    {
+      "id": "ironchest:trapped_dirt_chest",
+      "required": false
+    },
+    {
+      "id": "ars_nouveau:archwood_chest",
+      "required": false
+    },
+    {
+      "id": "ars_nouveau:repository",
+      "required": false
+    }
   ]
 }

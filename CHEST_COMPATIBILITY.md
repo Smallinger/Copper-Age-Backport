@@ -14,24 +14,75 @@ Defines which chests the golem can place items into.
 
 ```json
 {
+  "replace": false,
   "values": [
     "minecraft:chest",
     "minecraft:trapped_chest",
     "minecraft:barrel",
-    "ironchest:iron_chest",
-    "ironchest:gold_chest",
-    "ironchest:diamond_chest",
-    "ironchest:copper_chest",
-    "ironchest:crystal_chest",
-    "ironchest:obsidian_chest",
-    "ironchest:dirt_chest",
-    "ironchest:trapped_iron_chest",
-    "ironchest:trapped_gold_chest",
-    "ironchest:trapped_diamond_chest",
-    "ironchest:trapped_copper_chest",
-    "ironchest:trapped_crystal_chest",
-    "ironchest:trapped_obsidian_chest",
-    "ironchest:trapped_dirt_chest"
+    {
+      "id": "ironchest:iron_chest",
+      "required": false
+    },
+    {
+      "id": "ironchest:gold_chest",
+      "required": false
+    },
+    {
+      "id": "ironchest:diamond_chest",
+      "required": false
+    },
+    {
+      "id": "ironchest:copper_chest",
+      "required": false
+    },
+    {
+      "id": "ironchest:crystal_chest",
+      "required": false
+    },
+    {
+      "id": "ironchest:obsidian_chest",
+      "required": false
+    },
+    {
+      "id": "ironchest:dirt_chest",
+      "required": false
+    },
+    {
+      "id": "ironchest:trapped_iron_chest",
+      "required": false
+    },
+    {
+      "id": "ironchest:trapped_gold_chest",
+      "required": false
+    },
+    {
+      "id": "ironchest:trapped_diamond_chest",
+      "required": false
+    },
+    {
+      "id": "ironchest:trapped_copper_chest",
+      "required": false
+    },
+    {
+      "id": "ironchest:trapped_crystal_chest",
+      "required": false
+    },
+    {
+      "id": "ironchest:trapped_obsidian_chest",
+      "required": false
+    },
+    {
+      "id": "ironchest:trapped_dirt_chest",
+      "required": false
+    },
+    {
+      "id": "ars_nouveau:archwood_chest",
+      "required": false
+    },
+    {
+      "id": "ars_nouveau:repository",
+      "required": false
+    }
   ]
 }
 ```
@@ -48,30 +99,44 @@ Add individual block IDs directly:
 
 ```json
 {
+  "replace": false,
   "values": [
     "minecraft:chest",
     "minecraft:trapped_chest",
     "minecraft:barrel",
-    "#ironchest:iron_chests",
-    "othermod:special_chest",
-    "othermod:large_chest"
+    {
+      "id": "othermod:special_chest",
+      "required": false
+    },
+    {
+      "id": "othermod:large_chest",
+      "required": false
+    }
   ]
 }
 ```
+
+**Note**: Use `"required": false` for optional mod compatibility.
 
 ### Method 2: Using Mod Tags
 If another mod already defines tags for their chests, use those:
 
 ```json
 {
+  "replace": false,
   "values": [
     "minecraft:chest",
     "minecraft:trapped_chest",
-    "#ironchest:iron_chests",
-    "#othermod:chests"
+    "minecraft:barrel",
+    {
+      "id": "#othermod:chests",
+      "required": false
+    }
   ]
 }
 ```
+
+**Note**: Tag references with `#` can also be optional.
 
 ### Method 3: Datapack
 Players can also add chests via datapack without modifying the mod:
@@ -83,29 +148,46 @@ Players can also add chests via datapack without modifying the mod:
 {
   "replace": false,
   "values": [
-    "my_mod:my_chest"
+    {
+      "id": "my_mod:my_chest",
+      "required": false
+    }
   ]
 }
 ```
 
-**Important**: `"replace": false` so default values aren't overwritten!
+**Important**: 
+- `"replace": false` - Keeps default values
+- `"required": false` - Optional mod dependency (won't error if mod is not installed)
 
 ## Examples for Other Mods
 
 ### Storage Drawers
 ```json
-"#storagedrawers:drawers"
+{
+  "id": "#storagedrawers:drawers",
+  "required": false
+}
 ```
 
 ### Sophisticated Storage
 ```json
-"#sophisticatedstorage:barrels",
-"#sophisticatedstorage:chests"
+{
+  "id": "#sophisticatedstorage:barrels",
+  "required": false
+},
+{
+  "id": "#sophisticatedstorage:chests",
+  "required": false
+}
 ```
 
 ### Applied Energistics 2
 ```json
-"ae2:chest"
+{
+  "id": "ae2:chest",
+  "required": false
+}
 ```
 
 ## Developer Notes

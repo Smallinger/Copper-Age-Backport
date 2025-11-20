@@ -1,5 +1,16 @@
 # Changelog - Forge 1.20.1 Port
 
+## [1.20.1-0.0.5-hotfix1] - 2025-11-20
+
+### Fixed
+- **Tag Loading Error**: Fixed "missing references" error for optional mod chests
+  - Issue: Tag loading failed when IronChest or Ars Nouveau mods were not installed
+  - Error: `Couldn't load tag coppergolemlegacy:golem_target_chests as it is missing following references`
+  - Solution: Changed all optional mod entries to use `{"id": "...", "required": false}` format
+  - Affected mods: IronChest (14 chest types) and Ars Nouveau (2 chest types)
+  - Vanilla chests (chest, trapped_chest, barrel) remain required and work without dependencies
+  - Golem now works correctly with only Minecraft vanilla chests when no chest mods are installed
+
 ## [1.20.1-0.0.5] - 2025-11-20
 
 ### Added

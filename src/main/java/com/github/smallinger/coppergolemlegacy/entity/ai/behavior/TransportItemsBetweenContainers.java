@@ -304,6 +304,7 @@ public class TransportItemsBetweenContainers extends Behavior<PathfinderMob> {
         TransportItemTarget bestTarget = null;
         double bestDistance = Float.MAX_VALUE;
         int chestsFound = 0;
+        int vanillaChestsFound = 0;
 
         for (ChunkPos chunkPos : chunks) {
             LevelChunk chunk = level.getChunk(chunkPos.x, chunkPos.z);
@@ -312,6 +313,11 @@ public class TransportItemsBetweenContainers extends Behavior<PathfinderMob> {
                     // Support all container types (BaseContainerBlockEntity) - not just chests
                     if (blockEntity instanceof BaseContainerBlockEntity containerBlockEntity) {
                         chestsFound++;
+                        BlockState state = containerBlockEntity.getBlockState();
+                        if (state.getBlock() == net.minecraft.world.level.block.Blocks.CHEST) {
+                            vanillaChestsFound++;
+                        }
+                        
                         double distance = containerBlockEntity.getBlockPos().distToCenterSqr(mob.position());
                         if (distance < bestDistance) {
                             TransportItemTarget candidateTarget = this.isTargetValidToPick(
@@ -325,6 +331,14 @@ public class TransportItemsBetweenContainers extends Behavior<PathfinderMob> {
                     }
                 }
             }
+        }
+        
+        // Debug logging
+        if (chestsFound > 0 || vanillaChestsFound > 0) {
+            com.github.smallinger.coppergolemlegacy.CopperGolemLegacy.LOGGER.info(
+                "Golem searched for containers: Found " + chestsFound + " containers total, " + 
+                vanillaChestsFound + " vanilla chests, best target: " + (bestTarget != null ? bestTarget.pos : "none")
+            );
         }
 
         return bestTarget == null ? Optional.empty() : Optional.of(bestTarget);
@@ -492,7 +506,16 @@ public class TransportItemsBetweenContainers extends Behavior<PathfinderMob> {
 
     private boolean isWantedBlock(PathfinderMob mob, BlockState state) {
         boolean picking = isPickingUpItems(mob);
-        return picking ? this.sourceBlockType.test(state) : this.destinationBlockType.test(state);
+        boolean result = picking ? this.sourceBlockType.test(state) : this.destinationBlockType.test(state);
+        
+        // Debug logging
+        if (!picking && state.getBlock() == net.minecraft.world.level.block.Blocks.CHEST) {
+            com.github.smallinger.coppergolemlegacy.CopperGolemLegacy.LOGGER.info(
+                "Checking minecraft:chest - Tag test result: " + result + " for state: " + state
+            );
+        }
+        
+        return result;
     }
 
     private static double getInteractionRange(PathfinderMob mob) {
