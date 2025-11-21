@@ -2,7 +2,7 @@
 
 All notable changes to the Copper Golem Legacy mod will be documented in this file.
 
-## [1.21.1-0.0.6] - In Development
+## [1.21.1-0.0.6] - 22.11.2025
 
 ### Added
 - 3D Item Rendering for Copper Chests and Copper Golem Statues in inventory, hand, and item frames
