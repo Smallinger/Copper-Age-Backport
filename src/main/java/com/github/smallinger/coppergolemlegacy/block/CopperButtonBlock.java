@@ -1,6 +1,7 @@
 package com.github.smallinger.coppergolemlegacy.block;
 
 import com.github.smallinger.coppergolemlegacy.CopperGolemLegacy;
+import com.github.smallinger.coppergolemlegacy.util.WeatheringHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
@@ -35,6 +36,20 @@ public class CopperButtonBlock extends ButtonBlock implements WeatheringCopper {
 
     public void setWaxedButton(Supplier<WaxedCopperButtonBlock> waxedButton) {
         this.waxedButton = waxedButton;
+    }
+    
+    /**
+     * Override to provide our own oxidation chain since we can't modify the static BiMap
+     */
+    public static Optional<Block> getNextBlock(Block block) {
+        if (block == CopperGolemLegacy.COPPER_BUTTON.get()) {
+            return Optional.of(CopperGolemLegacy.EXPOSED_COPPER_BUTTON.get());
+        } else if (block == CopperGolemLegacy.EXPOSED_COPPER_BUTTON.get()) {
+            return Optional.of(CopperGolemLegacy.WEATHERED_COPPER_BUTTON.get());
+        } else if (block == CopperGolemLegacy.WEATHERED_COPPER_BUTTON.get()) {
+            return Optional.of(CopperGolemLegacy.OXIDIZED_COPPER_BUTTON.get());
+        }
+        return WeatheringCopper.getNext(block);
     }
 
     @Override
@@ -105,11 +120,11 @@ public class CopperButtonBlock extends ButtonBlock implements WeatheringCopper {
 
     @Override
     public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
-        this.onRandomTick(state, level, pos, random);
+        WeatheringHelper.tryWeather(state, level, pos, random, CopperButtonBlock::getNextBlock);
     }
 
     @Override
     public boolean isRandomlyTicking(BlockState state) {
-        return Optional.ofNullable(WeatheringCopper.getNext(state.getBlock())).isPresent();
+        return WeatheringHelper.canWeather(state, CopperButtonBlock::getNextBlock);
     }
 }

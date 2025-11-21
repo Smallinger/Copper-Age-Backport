@@ -4,17 +4,20 @@ import com.github.smallinger.coppergolemlegacy.block.entity.CopperGolemStatueBlo
 import com.github.smallinger.coppergolemlegacy.entity.CopperGolemEntity;
 import com.github.smallinger.coppergolemlegacy.CopperGolemLegacy;
 import com.github.smallinger.coppergolemlegacy.ModSounds;
+import com.github.smallinger.coppergolemlegacy.util.WeatheringHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.ItemTags;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -39,7 +42,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraft.util.StringRepresentable;
 import org.jetbrains.annotations.Nullable;
 
-public class CopperGolemStatueBlock extends BaseEntityBlock implements SimpleWaterloggedBlock {
+public class CopperGolemStatueBlock extends BaseEntityBlock implements SimpleWaterloggedBlock, WeatheringCopper {
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
     public static final EnumProperty<Pose> POSE = EnumProperty.create("pose", Pose.class);
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
@@ -60,6 +63,55 @@ public class CopperGolemStatueBlock extends BaseEntityBlock implements SimpleWat
 
     public WeatheringCopper.WeatherState getWeatheringState() {
         return this.weatheringState;
+    }
+
+    @Override
+    public WeatherState getAge() {
+        return this.weatheringState;
+    }
+
+    /**
+     * Override to provide our own oxidation chain
+     */
+    public static java.util.Optional<Block> getNextBlock(Block block) {
+        if (block == CopperGolemLegacy.COPPER_GOLEM_STATUE.get()) {
+            return java.util.Optional.of(CopperGolemLegacy.EXPOSED_COPPER_GOLEM_STATUE.get());
+        } else if (block == CopperGolemLegacy.EXPOSED_COPPER_GOLEM_STATUE.get()) {
+            return java.util.Optional.of(CopperGolemLegacy.WEATHERED_COPPER_GOLEM_STATUE.get());
+        } else if (block == CopperGolemLegacy.WEATHERED_COPPER_GOLEM_STATUE.get()) {
+            return java.util.Optional.of(CopperGolemLegacy.OXIDIZED_COPPER_GOLEM_STATUE.get());
+        }
+        return WeatheringCopper.getNext(block);
+    }
+
+    /**
+     * Get the previous oxidation stage for scraping with axe
+     */
+    public static java.util.Optional<Block> getPreviousBlock(Block block) {
+        if (block == CopperGolemLegacy.OXIDIZED_COPPER_GOLEM_STATUE.get()) {
+            return java.util.Optional.of(CopperGolemLegacy.WEATHERED_COPPER_GOLEM_STATUE.get());
+        } else if (block == CopperGolemLegacy.WEATHERED_COPPER_GOLEM_STATUE.get()) {
+            return java.util.Optional.of(CopperGolemLegacy.EXPOSED_COPPER_GOLEM_STATUE.get());
+        } else if (block == CopperGolemLegacy.EXPOSED_COPPER_GOLEM_STATUE.get()) {
+            return java.util.Optional.of(CopperGolemLegacy.COPPER_GOLEM_STATUE.get());
+        }
+        return java.util.Optional.empty();
+    }
+
+    /**
+     * Get the waxed version of this statue
+     */
+    public static java.util.Optional<Block> getWaxedBlock(Block block) {
+        if (block == CopperGolemLegacy.COPPER_GOLEM_STATUE.get()) {
+            return java.util.Optional.of(CopperGolemLegacy.WAXED_COPPER_GOLEM_STATUE.get());
+        } else if (block == CopperGolemLegacy.EXPOSED_COPPER_GOLEM_STATUE.get()) {
+            return java.util.Optional.of(CopperGolemLegacy.WAXED_EXPOSED_COPPER_GOLEM_STATUE.get());
+        } else if (block == CopperGolemLegacy.WEATHERED_COPPER_GOLEM_STATUE.get()) {
+            return java.util.Optional.of(CopperGolemLegacy.WAXED_WEATHERED_COPPER_GOLEM_STATUE.get());
+        } else if (block == CopperGolemLegacy.OXIDIZED_COPPER_GOLEM_STATUE.get()) {
+            return java.util.Optional.of(CopperGolemLegacy.WAXED_OXIDIZED_COPPER_GOLEM_STATUE.get());
+        }
+        return java.util.Optional.empty();
     }
 
     @Override
@@ -84,6 +136,74 @@ public class CopperGolemStatueBlock extends BaseEntityBlock implements SimpleWat
     public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
         ItemStack stack = player.getItemInHand(hand);
         
+        // Axe interaction - scrape oxidation if possible, otherwise restore golem
+        if (stack.is(ItemTags.AXES)) {
+            // Try scraping first if there's oxidation to remove
+            java.util.Optional<Block> previousBlock = getPreviousBlock(state.getBlock());
+            
+            if (previousBlock.isPresent()) {
+                level.playSound(player, pos, SoundEvents.AXE_SCRAPE, SoundSource.BLOCKS, 1.0F, 1.0F);
+                level.levelEvent(player, 3005, pos, 0);
+                
+                if (!level.isClientSide) {
+                    BlockState newState = previousBlock.get().defaultBlockState()
+                        .setValue(FACING, state.getValue(FACING))
+                        .setValue(POSE, state.getValue(POSE))
+                        .setValue(WATERLOGGED, state.getValue(WATERLOGGED));
+                    level.setBlock(pos, newState, Block.UPDATE_ALL);
+                    
+                    if (!player.isCreative()) {
+                        stack.hurtAndBreak(1, player, (p) -> p.broadcastBreakEvent(hand));
+                    }
+                }
+                
+                return InteractionResult.SUCCESS;
+            }
+            
+            // No oxidation to remove - restore golem
+            if (!level.isClientSide()) {
+                ServerLevel serverLevel = (ServerLevel) level;
+                
+                if (level.getBlockEntity(pos) instanceof CopperGolemStatueBlockEntity statueEntity) {
+                    CopperGolemEntity golem = statueEntity.removeStatue(state, serverLevel);
+                    if (golem != null) {
+                        level.removeBlock(pos, false);
+                        serverLevel.addFreshEntity(golem);
+                        level.playSound(null, pos, ModSounds.COPPER_STATUE_BREAK.get(), SoundSource.BLOCKS, 1.0F, 1.0F);
+                        level.gameEvent(player, GameEvent.BLOCK_DESTROY, pos);
+                        stack.hurtAndBreak(1, player, (p) -> p.broadcastBreakEvent(hand));
+                        return InteractionResult.SUCCESS;
+                    }
+                }
+            }
+            return InteractionResult.PASS;
+        }
+        
+        // Honeycomb interaction - wax the statue
+        if (stack.is(Items.HONEYCOMB)) {
+            java.util.Optional<Block> waxedBlock = getWaxedBlock(state.getBlock());
+            
+            if (waxedBlock.isPresent()) {
+                level.playSound(player, pos, SoundEvents.HONEYCOMB_WAX_ON, SoundSource.BLOCKS, 1.0F, 1.0F);
+                level.levelEvent(player, 3003, pos, 0);
+                
+                if (!level.isClientSide) {
+                    BlockState waxedState = waxedBlock.get().defaultBlockState()
+                        .setValue(FACING, state.getValue(FACING))
+                        .setValue(POSE, state.getValue(POSE))
+                        .setValue(WATERLOGGED, state.getValue(WATERLOGGED));
+                    level.setBlock(pos, waxedState, Block.UPDATE_ALL);
+                    
+                    if (!player.isCreative()) {
+                        stack.shrink(1);
+                    }
+                }
+                
+                return InteractionResult.SUCCESS;
+            }
+            return InteractionResult.PASS;
+        }
+        
         // Empty hand interaction - change pose
         if (stack.isEmpty()) {
             if (!level.isClientSide()) {
@@ -94,23 +214,6 @@ public class CopperGolemStatueBlock extends BaseEntityBlock implements SimpleWat
                 level.gameEvent(player, GameEvent.BLOCK_CHANGE, pos);
             }
             return InteractionResult.SUCCESS;
-        }
-        
-        // Axe interaction - restore golem
-        if (stack.is(ItemTags.AXES) && !level.isClientSide()) {
-            ServerLevel serverLevel = (ServerLevel) level;
-            
-            if (level.getBlockEntity(pos) instanceof CopperGolemStatueBlockEntity statueEntity) {
-                CopperGolemEntity golem = statueEntity.removeStatue(state, serverLevel);
-                if (golem != null) {
-                    level.removeBlock(pos, false);
-                    serverLevel.addFreshEntity(golem);
-                    level.playSound(null, pos, ModSounds.COPPER_STATUE_BREAK.get(), SoundSource.BLOCKS, 1.0F, 1.0F);
-                    level.gameEvent(player, GameEvent.BLOCK_DESTROY, pos);
-                    stack.hurtAndBreak(1, player, (p) -> p.broadcastBreakEvent(hand));
-                    return InteractionResult.SUCCESS;
-                }
-            }
         }
         
         return InteractionResult.PASS;
@@ -130,6 +233,24 @@ public class CopperGolemStatueBlock extends BaseEntityBlock implements SimpleWat
     @Override
     public FluidState getFluidState(BlockState state) {
         return state.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(state);
+    }
+
+    @Override
+    public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
+        java.util.Optional<Block> nextBlock = getNextBlock(state.getBlock());
+        
+        if (nextBlock.isPresent() && random.nextFloat() < WeatheringHelper.OXIDATION_CHANCE) {
+            BlockState newState = nextBlock.get().defaultBlockState()
+                .setValue(FACING, state.getValue(FACING))
+                .setValue(POSE, state.getValue(POSE))
+                .setValue(WATERLOGGED, state.getValue(WATERLOGGED));
+            level.setBlockAndUpdate(pos, newState);
+        }
+    }
+
+    @Override
+    public boolean isRandomlyTicking(BlockState state) {
+        return WeatheringHelper.canWeather(state, CopperGolemStatueBlock::getNextBlock);
     }
 
     public enum Pose implements StringRepresentable {

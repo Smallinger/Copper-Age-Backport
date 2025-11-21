@@ -332,15 +332,6 @@ public class TransportItemsBetweenContainers extends Behavior<PathfinderMob> {
                 }
             }
         }
-        
-        // Debug logging
-        if (chestsFound > 0 || vanillaChestsFound > 0) {
-            com.github.smallinger.coppergolemlegacy.CopperGolemLegacy.LOGGER.info(
-                "Golem searched for containers: Found " + chestsFound + " containers total, " + 
-                vanillaChestsFound + " vanilla chests, best target: " + (bestTarget != null ? bestTarget.pos : "none")
-            );
-        }
-
         return bestTarget == null ? Optional.empty() : Optional.of(bestTarget);
     }
 
@@ -507,14 +498,6 @@ public class TransportItemsBetweenContainers extends Behavior<PathfinderMob> {
     private boolean isWantedBlock(PathfinderMob mob, BlockState state) {
         boolean picking = isPickingUpItems(mob);
         boolean result = picking ? this.sourceBlockType.test(state) : this.destinationBlockType.test(state);
-        
-        // Debug logging
-        if (!picking && state.getBlock() == net.minecraft.world.level.block.Blocks.CHEST) {
-            com.github.smallinger.coppergolemlegacy.CopperGolemLegacy.LOGGER.info(
-                "Checking minecraft:chest - Tag test result: " + result + " for state: " + state
-            );
-        }
-        
         return result;
     }
 

@@ -128,25 +128,25 @@ public class CopperChestRenderer implements BlockEntityRenderer<ChestBlockEntity
     private Material getMaterial(BlockState state, ChestType chestType) {
         Block block = state.getBlock();
         
-        if (block == CopperGolemLegacy.COPPER_CHEST.get()) {
+        if (block == CopperGolemLegacy.COPPER_CHEST.get() || block == CopperGolemLegacy.WAXED_COPPER_CHEST.get()) {
             return switch (chestType) {
                 case LEFT -> COPPER_CHEST_LEFT_MATERIAL;
                 case RIGHT -> COPPER_CHEST_RIGHT_MATERIAL;
                 default -> COPPER_CHEST_MATERIAL;
             };
-        } else if (block == CopperGolemLegacy.EXPOSED_COPPER_CHEST.get()) {
+        } else if (block == CopperGolemLegacy.EXPOSED_COPPER_CHEST.get() || block == CopperGolemLegacy.WAXED_EXPOSED_COPPER_CHEST.get()) {
             return switch (chestType) {
                 case LEFT -> EXPOSED_COPPER_CHEST_LEFT_MATERIAL;
                 case RIGHT -> EXPOSED_COPPER_CHEST_RIGHT_MATERIAL;
                 default -> EXPOSED_COPPER_CHEST_MATERIAL;
             };
-        } else if (block == CopperGolemLegacy.WEATHERED_COPPER_CHEST.get()) {
+        } else if (block == CopperGolemLegacy.WEATHERED_COPPER_CHEST.get() || block == CopperGolemLegacy.WAXED_WEATHERED_COPPER_CHEST.get()) {
             return switch (chestType) {
                 case LEFT -> WEATHERED_COPPER_CHEST_LEFT_MATERIAL;
                 case RIGHT -> WEATHERED_COPPER_CHEST_RIGHT_MATERIAL;
                 default -> WEATHERED_COPPER_CHEST_MATERIAL;
             };
-        } else if (block == CopperGolemLegacy.OXIDIZED_COPPER_CHEST.get()) {
+        } else if (block == CopperGolemLegacy.OXIDIZED_COPPER_CHEST.get() || block == CopperGolemLegacy.WAXED_OXIDIZED_COPPER_CHEST.get()) {
             return switch (chestType) {
                 case LEFT -> OXIDIZED_COPPER_CHEST_LEFT_MATERIAL;
                 case RIGHT -> OXIDIZED_COPPER_CHEST_RIGHT_MATERIAL;

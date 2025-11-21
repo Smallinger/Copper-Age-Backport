@@ -1,6 +1,31 @@
 {
-  "parent": "minecraft:item/generated",
-  "textures": {
-    "layer0": "coppergolemlegacy:item/weathered_copper_chest"
+  "parent": "builtin/entity",
+  "gui_light": "front",
+  "display": {
+    "gui": {
+      "rotation": [30, 45, 0],
+      "translation": [-7, -4, 0],
+      "scale": [0.61, 0.61, 0.61]
+    },
+    "ground": {
+      "rotation": [0, 0, 0],
+      "translation": [-2.5, 0, -2.5],
+      "scale": [0.28, 0.28, 0.28]
+    },
+    "fixed": {
+      "rotation": [0, 180, 0],
+      "translation": [0, 0, 0],
+      "scale": [1, 1, 1]
+    },
+    "thirdperson_righthand": {
+      "rotation": [75, 315, 0],
+      "translation": [0, 6, -5],
+      "scale": [0.4, 0.4, 0.4]
+    },
+    "firstperson_righthand": {
+      "rotation": [0, 315, 0],
+      "translation": [0, -3, -4.5],
+      "scale": [0.39, 0.39, 0.39]
+    }
   }
 }

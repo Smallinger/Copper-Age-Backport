@@ -8,7 +8,6 @@ import com.github.smallinger.coppergolemlegacy.client.renderer.CopperGolemStatue
 import net.minecraft.client.Minecraft;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.client.event.EntityRenderersEvent;
@@ -31,9 +30,7 @@ public class CopperGolemLegacyClient {
             );
         });
         
-        // Some client setup code
-        CopperGolemLegacy.LOGGER.info("HELLO FROM CLIENT SETUP");
-        CopperGolemLegacy.LOGGER.info("MINECRAFT NAME >> {}", Minecraft.getInstance().getUser().getName());
+        // Client setup initialized
     }
     
     @SubscribeEvent

@@ -96,4 +96,11 @@ public class CopperChestBlockEntity extends ChestBlockEntity {
             this.openersCounter.recheckOpeners(this.getLevel(), this.getBlockPos(), this.getBlockState());
         }
     }
+    
+    /**
+     * Check if the chest is currently open by any player
+     */
+    public boolean isChestOpen() {
+        return this.openersCounter.getOpenerCount() > 0;
+    }
 }
