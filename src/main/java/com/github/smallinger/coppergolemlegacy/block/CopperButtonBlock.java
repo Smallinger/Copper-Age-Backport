@@ -1,22 +1,23 @@
 package com.github.smallinger.coppergolemlegacy.block;
 
 import com.github.smallinger.coppergolemlegacy.CopperGolemLegacy;
+import com.github.smallinger.coppergolemlegacy.util.WeatheringHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.ItemInteractionResult;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.ButtonBlock;
-import net.minecraft.world.level.block.ChangeOverTimeBlock;
 import net.minecraft.world.level.block.WeatheringCopper;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
@@ -30,7 +31,7 @@ public class CopperButtonBlock extends ButtonBlock implements WeatheringCopper {
     private Supplier<WaxedCopperButtonBlock> waxedButton;
 
     public CopperButtonBlock(WeatheringCopper.WeatherState weatherState, Properties properties) {
-        super(BlockSetType.COPPER, 15, properties); // 15 ticks = 1.5 seconds activation time
+        super(BlockSetType.COPPER, 15, properties);
         this.weatherState = weatherState;
     }
 
@@ -42,9 +43,48 @@ public class CopperButtonBlock extends ButtonBlock implements WeatheringCopper {
     public WeatherState getAge() {
         return this.weatherState;
     }
+    
+    /**
+     * Get the next oxidation stage
+     */
+    public static Optional<Block> getNextBlock(Block block) {
+        if (block == CopperGolemLegacy.COPPER_BUTTON.get()) {
+            return Optional.of(CopperGolemLegacy.EXPOSED_COPPER_BUTTON.get());
+        } else if (block == CopperGolemLegacy.EXPOSED_COPPER_BUTTON.get()) {
+            return Optional.of(CopperGolemLegacy.WEATHERED_COPPER_BUTTON.get());
+        } else if (block == CopperGolemLegacy.WEATHERED_COPPER_BUTTON.get()) {
+            return Optional.of(CopperGolemLegacy.OXIDIZED_COPPER_BUTTON.get());
+        }
+        return WeatheringCopper.getNext(block);
+    }
+    
+    /**
+     * Get the previous oxidation stage for scraping
+     */
+    public static Optional<Block> getPreviousBlock(Block block) {
+        if (block == CopperGolemLegacy.OXIDIZED_COPPER_BUTTON.get()) {
+            return Optional.of(CopperGolemLegacy.WEATHERED_COPPER_BUTTON.get());
+        } else if (block == CopperGolemLegacy.WEATHERED_COPPER_BUTTON.get()) {
+            return Optional.of(CopperGolemLegacy.EXPOSED_COPPER_BUTTON.get());
+        } else if (block == CopperGolemLegacy.EXPOSED_COPPER_BUTTON.get()) {
+            return Optional.of(CopperGolemLegacy.COPPER_BUTTON.get());
+        }
+        return Optional.empty();
+    }
+    
+    /**
+     * Get the waxed version of this block
+     */
+    private Optional<Block> getWaxedBlock(Block block) {
+        if (waxedButton == null) {
+            return Optional.empty();
+        }
+        return Optional.of(waxedButton.get());
+    }
 
     @Override
-    protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
+    protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos,
+                                               Player player, InteractionHand hand, BlockHitResult hitResult) {
         // Check if player is using honeycomb to wax the button
         if (stack.is(Items.HONEYCOMB) && waxedButton != null) {
             level.playSound(player, pos, SoundEvents.HONEYCOMB_WAX_ON, SoundSource.BLOCKS, 1.0F, 1.0F);
@@ -58,8 +98,8 @@ public class CopperButtonBlock extends ButtonBlock implements WeatheringCopper {
                     .setValue(FACE, state.getValue(FACE));
                 level.setBlock(pos, waxedState, 11);
                 
-                if (player != null && !player.isCreative()) {
-                    stack.consume(1, player);
+                if (!player.isCreative()) {
+                    stack.shrink(1);
                 }
             }
             
@@ -91,8 +131,8 @@ public class CopperButtonBlock extends ButtonBlock implements WeatheringCopper {
                         .setValue(FACE, state.getValue(FACE));
                     level.setBlock(pos, newState, 11);
                     
-                    if (player != null && !player.isCreative()) {
-                        stack.hurtAndBreak(1, player, player.getEquipmentSlotForItem(stack));
+                    if (!player.isCreative()) {
+                        stack.hurtAndBreak(1, player, EquipmentSlot.MAINHAND);
                     }
                 }
                 
@@ -107,7 +147,6 @@ public class CopperButtonBlock extends ButtonBlock implements WeatheringCopper {
     protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult) {
         // Oxidized buttons cannot be pressed
         if (this.weatherState == WeatherState.OXIDIZED) {
-            // Play hit sound when trying to use oxidized button
             level.playSound(player, pos, SoundEvents.COPPER_HIT, SoundSource.BLOCKS, 1.0F, 1.0F);
             return InteractionResult.PASS;
         }
@@ -115,12 +154,12 @@ public class CopperButtonBlock extends ButtonBlock implements WeatheringCopper {
     }
 
     @Override
-    public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
-        this.changeOverTime(state, level, pos, random);
+    protected void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
+        WeatheringHelper.tryWeather(state, level, pos, random, CopperButtonBlock::getNextBlock);
     }
 
     @Override
-    public boolean isRandomlyTicking(BlockState state) {
-        return Optional.ofNullable(WeatheringCopper.getNext(state.getBlock())).isPresent();
+    protected boolean isRandomlyTicking(BlockState state) {
+        return WeatheringHelper.canWeather(state, CopperButtonBlock::getNextBlock);
     }
 }

@@ -22,8 +22,10 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import com.github.smallinger.coppergolemlegacy.block.CopperButtonBlock;
 import com.github.smallinger.coppergolemlegacy.block.CopperChestBlock;
 import com.github.smallinger.coppergolemlegacy.block.CopperGolemStatueBlock;
+import com.github.smallinger.coppergolemlegacy.block.WeatheringCopperChestBlock;
 import com.github.smallinger.coppergolemlegacy.block.WeatheringCopperGolemStatueBlock;
 import com.github.smallinger.coppergolemlegacy.block.WaxedCopperButtonBlock;
+import com.github.smallinger.coppergolemlegacy.block.WaxedCopperGolemStatueBlock;
 import com.github.smallinger.coppergolemlegacy.block.entity.CopperChestBlockEntity;
 import com.github.smallinger.coppergolemlegacy.block.entity.CopperGolemStatueBlockEntity;
 import net.neoforged.bus.api.IEventBus;
@@ -63,7 +65,44 @@ public class CopperGolemLegacy {
             .build("copper_golem"));
     
     // Register Copper Chest Blocks
-    public static final DeferredHolder<Block, CopperChestBlock> COPPER_CHEST = BLOCKS.register("copper_chest",
+    public static final DeferredHolder<Block, WeatheringCopperChestBlock> COPPER_CHEST = BLOCKS.register("copper_chest",
+        () -> new WeatheringCopperChestBlock(
+            WeatheringCopper.WeatherState.UNAFFECTED,
+            BlockBehaviour.Properties.of()
+                .strength(3.0F, 6.0F)
+                .sound(SoundType.COPPER)
+                .requiresCorrectToolForDrops()
+                .randomTicks()));
+    
+    public static final DeferredHolder<Block, WeatheringCopperChestBlock> EXPOSED_COPPER_CHEST = BLOCKS.register("exposed_copper_chest",
+        () -> new WeatheringCopperChestBlock(
+            WeatheringCopper.WeatherState.EXPOSED,
+            BlockBehaviour.Properties.of()
+                .strength(3.0F, 6.0F)
+                .sound(SoundType.COPPER)
+                .requiresCorrectToolForDrops()
+                .randomTicks()));
+    
+    public static final DeferredHolder<Block, WeatheringCopperChestBlock> WEATHERED_COPPER_CHEST = BLOCKS.register("weathered_copper_chest",
+        () -> new WeatheringCopperChestBlock(
+            WeatheringCopper.WeatherState.WEATHERED,
+            BlockBehaviour.Properties.of()
+                .strength(3.0F, 6.0F)
+                .sound(SoundType.COPPER)
+                .requiresCorrectToolForDrops()
+                .randomTicks()));
+    
+    public static final DeferredHolder<Block, WeatheringCopperChestBlock> OXIDIZED_COPPER_CHEST = BLOCKS.register("oxidized_copper_chest",
+        () -> new WeatheringCopperChestBlock(
+            WeatheringCopper.WeatherState.OXIDIZED,
+            BlockBehaviour.Properties.of()
+                .strength(3.0F, 6.0F)
+                .sound(SoundType.COPPER)
+                .requiresCorrectToolForDrops()
+                .randomTicks()));
+    
+    // Register Waxed Copper Chest Blocks
+    public static final DeferredHolder<Block, CopperChestBlock> WAXED_COPPER_CHEST = BLOCKS.register("waxed_copper_chest",
         () -> new CopperChestBlock(
             WeatheringCopper.WeatherState.UNAFFECTED,
             BlockBehaviour.Properties.of()
@@ -71,7 +110,7 @@ public class CopperGolemLegacy {
                 .sound(SoundType.COPPER)
                 .requiresCorrectToolForDrops()));
     
-    public static final DeferredHolder<Block, CopperChestBlock> EXPOSED_COPPER_CHEST = BLOCKS.register("exposed_copper_chest",
+    public static final DeferredHolder<Block, CopperChestBlock> WAXED_EXPOSED_COPPER_CHEST = BLOCKS.register("waxed_exposed_copper_chest",
         () -> new CopperChestBlock(
             WeatheringCopper.WeatherState.EXPOSED,
             BlockBehaviour.Properties.of()
@@ -79,7 +118,7 @@ public class CopperGolemLegacy {
                 .sound(SoundType.COPPER)
                 .requiresCorrectToolForDrops()));
     
-    public static final DeferredHolder<Block, CopperChestBlock> WEATHERED_COPPER_CHEST = BLOCKS.register("weathered_copper_chest",
+    public static final DeferredHolder<Block, CopperChestBlock> WAXED_WEATHERED_COPPER_CHEST = BLOCKS.register("waxed_weathered_copper_chest",
         () -> new CopperChestBlock(
             WeatheringCopper.WeatherState.WEATHERED,
             BlockBehaviour.Properties.of()
@@ -87,7 +126,7 @@ public class CopperGolemLegacy {
                 .sound(SoundType.COPPER)
                 .requiresCorrectToolForDrops()));
     
-    public static final DeferredHolder<Block, CopperChestBlock> OXIDIZED_COPPER_CHEST = BLOCKS.register("oxidized_copper_chest",
+    public static final DeferredHolder<Block, CopperChestBlock> WAXED_OXIDIZED_COPPER_CHEST = BLOCKS.register("waxed_oxidized_copper_chest",
         () -> new CopperChestBlock(
             WeatheringCopper.WeatherState.OXIDIZED,
             BlockBehaviour.Properties.of()
@@ -173,6 +212,7 @@ public class CopperGolemLegacy {
                 .strength(3.0F, 6.0F)
                 .sound(ModSoundTypes.COPPER_STATUE)
                 .requiresCorrectToolForDrops()
+                .randomTicks()
                 .noOcclusion()));
     
     public static final DeferredHolder<Block, WeatheringCopperGolemStatueBlock> EXPOSED_COPPER_GOLEM_STATUE = BLOCKS.register("exposed_copper_golem_statue",
@@ -182,6 +222,7 @@ public class CopperGolemLegacy {
                 .strength(3.0F, 6.0F)
                 .sound(ModSoundTypes.COPPER_STATUE)
                 .requiresCorrectToolForDrops()
+                .randomTicks()
                 .noOcclusion()));
     
     public static final DeferredHolder<Block, WeatheringCopperGolemStatueBlock> WEATHERED_COPPER_GOLEM_STATUE = BLOCKS.register("weathered_copper_golem_statue",
@@ -191,10 +232,49 @@ public class CopperGolemLegacy {
                 .strength(3.0F, 6.0F)
                 .sound(ModSoundTypes.COPPER_STATUE)
                 .requiresCorrectToolForDrops()
+                .randomTicks()
                 .noOcclusion()));
     
-    public static final DeferredHolder<Block, CopperGolemStatueBlock> OXIDIZED_COPPER_GOLEM_STATUE = BLOCKS.register("oxidized_copper_golem_statue",
-        () -> new CopperGolemStatueBlock(
+    public static final DeferredHolder<Block, WeatheringCopperGolemStatueBlock> OXIDIZED_COPPER_GOLEM_STATUE = BLOCKS.register("oxidized_copper_golem_statue",
+        () -> new WeatheringCopperGolemStatueBlock(
+            WeatheringCopper.WeatherState.OXIDIZED,
+            BlockBehaviour.Properties.of()
+                .strength(3.0F, 6.0F)
+                .sound(ModSoundTypes.COPPER_STATUE)
+                .requiresCorrectToolForDrops()
+                .randomTicks()
+                .noOcclusion()));
+    
+    // Register Waxed Copper Golem Statue Blocks
+    public static final DeferredHolder<Block, WaxedCopperGolemStatueBlock> WAXED_COPPER_GOLEM_STATUE = BLOCKS.register("waxed_copper_golem_statue",
+        () -> new WaxedCopperGolemStatueBlock(
+            WeatheringCopper.WeatherState.UNAFFECTED,
+            BlockBehaviour.Properties.of()
+                .strength(3.0F, 6.0F)
+                .sound(ModSoundTypes.COPPER_STATUE)
+                .requiresCorrectToolForDrops()
+                .noOcclusion()));
+    
+    public static final DeferredHolder<Block, WaxedCopperGolemStatueBlock> WAXED_EXPOSED_COPPER_GOLEM_STATUE = BLOCKS.register("waxed_exposed_copper_golem_statue",
+        () -> new WaxedCopperGolemStatueBlock(
+            WeatheringCopper.WeatherState.EXPOSED,
+            BlockBehaviour.Properties.of()
+                .strength(3.0F, 6.0F)
+                .sound(ModSoundTypes.COPPER_STATUE)
+                .requiresCorrectToolForDrops()
+                .noOcclusion()));
+    
+    public static final DeferredHolder<Block, WaxedCopperGolemStatueBlock> WAXED_WEATHERED_COPPER_GOLEM_STATUE = BLOCKS.register("waxed_weathered_copper_golem_statue",
+        () -> new WaxedCopperGolemStatueBlock(
+            WeatheringCopper.WeatherState.WEATHERED,
+            BlockBehaviour.Properties.of()
+                .strength(3.0F, 6.0F)
+                .sound(ModSoundTypes.COPPER_STATUE)
+                .requiresCorrectToolForDrops()
+                .noOcclusion()));
+    
+    public static final DeferredHolder<Block, WaxedCopperGolemStatueBlock> WAXED_OXIDIZED_COPPER_GOLEM_STATUE = BLOCKS.register("waxed_oxidized_copper_golem_statue",
+        () -> new WaxedCopperGolemStatueBlock(
             WeatheringCopper.WeatherState.OXIDIZED,
             BlockBehaviour.Properties.of()
                 .strength(3.0F, 6.0F)
@@ -209,7 +289,11 @@ public class CopperGolemLegacy {
             COPPER_CHEST.get(),
             EXPOSED_COPPER_CHEST.get(),
             WEATHERED_COPPER_CHEST.get(),
-            OXIDIZED_COPPER_CHEST.get()
+            OXIDIZED_COPPER_CHEST.get(),
+            WAXED_COPPER_CHEST.get(),
+            WAXED_EXPOSED_COPPER_CHEST.get(),
+            WAXED_WEATHERED_COPPER_CHEST.get(),
+            WAXED_OXIDIZED_COPPER_CHEST.get()
         ).build(null));
     
     // Register Copper Golem Statue Block Entity
@@ -219,7 +303,11 @@ public class CopperGolemLegacy {
             COPPER_GOLEM_STATUE.get(),
             EXPOSED_COPPER_GOLEM_STATUE.get(),
             WEATHERED_COPPER_GOLEM_STATUE.get(),
-            OXIDIZED_COPPER_GOLEM_STATUE.get()
+            OXIDIZED_COPPER_GOLEM_STATUE.get(),
+            WAXED_COPPER_GOLEM_STATUE.get(),
+            WAXED_EXPOSED_COPPER_GOLEM_STATUE.get(),
+            WAXED_WEATHERED_COPPER_GOLEM_STATUE.get(),
+            WAXED_OXIDIZED_COPPER_GOLEM_STATUE.get()
         ).build(null));
     
     // Register Copper Golem Spawn Egg
@@ -238,6 +326,19 @@ public class CopperGolemLegacy {
     
     public static final DeferredItem<BlockItem> OXIDIZED_COPPER_CHEST_ITEM = ITEMS.register("oxidized_copper_chest",
         () -> new BlockItem(OXIDIZED_COPPER_CHEST.get(), new Item.Properties()));
+    
+    // Register Waxed Copper Chest Items
+    public static final DeferredItem<BlockItem> WAXED_COPPER_CHEST_ITEM = ITEMS.register("waxed_copper_chest",
+        () -> new BlockItem(WAXED_COPPER_CHEST.get(), new Item.Properties()));
+    
+    public static final DeferredItem<BlockItem> WAXED_EXPOSED_COPPER_CHEST_ITEM = ITEMS.register("waxed_exposed_copper_chest",
+        () -> new BlockItem(WAXED_EXPOSED_COPPER_CHEST.get(), new Item.Properties()));
+    
+    public static final DeferredItem<BlockItem> WAXED_WEATHERED_COPPER_CHEST_ITEM = ITEMS.register("waxed_weathered_copper_chest",
+        () -> new BlockItem(WAXED_WEATHERED_COPPER_CHEST.get(), new Item.Properties()));
+    
+    public static final DeferredItem<BlockItem> WAXED_OXIDIZED_COPPER_CHEST_ITEM = ITEMS.register("waxed_oxidized_copper_chest",
+        () -> new BlockItem(WAXED_OXIDIZED_COPPER_CHEST.get(), new Item.Properties()));
     
     // Register Copper Button Items
     public static final DeferredItem<BlockItem> COPPER_BUTTON_ITEM = ITEMS.register("copper_button",
@@ -277,6 +378,19 @@ public class CopperGolemLegacy {
     
     public static final DeferredItem<BlockItem> OXIDIZED_COPPER_GOLEM_STATUE_ITEM = ITEMS.register("oxidized_copper_golem_statue",
         () -> new BlockItem(OXIDIZED_COPPER_GOLEM_STATUE.get(), new Item.Properties()));
+
+    // Register Waxed Copper Golem Statue Items
+    public static final DeferredItem<BlockItem> WAXED_COPPER_GOLEM_STATUE_ITEM = ITEMS.register("waxed_copper_golem_statue",
+        () -> new BlockItem(WAXED_COPPER_GOLEM_STATUE.get(), new Item.Properties()));
+
+    public static final DeferredItem<BlockItem> WAXED_EXPOSED_COPPER_GOLEM_STATUE_ITEM = ITEMS.register("waxed_exposed_copper_golem_statue",
+        () -> new BlockItem(WAXED_EXPOSED_COPPER_GOLEM_STATUE.get(), new Item.Properties()));
+
+    public static final DeferredItem<BlockItem> WAXED_WEATHERED_COPPER_GOLEM_STATUE_ITEM = ITEMS.register("waxed_weathered_copper_golem_statue",
+        () -> new BlockItem(WAXED_WEATHERED_COPPER_GOLEM_STATUE.get(), new Item.Properties()));
+
+    public static final DeferredItem<BlockItem> WAXED_OXIDIZED_COPPER_GOLEM_STATUE_ITEM = ITEMS.register("waxed_oxidized_copper_golem_statue",
+        () -> new BlockItem(WAXED_OXIDIZED_COPPER_GOLEM_STATUE.get(), new Item.Properties()));
 
     // The constructor for the mod class is the first code that is run when your mod is loaded.
     // FML will recognize some parameter types like IEventBus or ModContainer and pass them in automatically.
@@ -337,10 +451,18 @@ public class CopperGolemLegacy {
             event.accept(EXPOSED_COPPER_CHEST_ITEM);
             event.accept(WEATHERED_COPPER_CHEST_ITEM);
             event.accept(OXIDIZED_COPPER_CHEST_ITEM);
+            event.accept(WAXED_COPPER_CHEST_ITEM);
+            event.accept(WAXED_EXPOSED_COPPER_CHEST_ITEM);
+            event.accept(WAXED_WEATHERED_COPPER_CHEST_ITEM);
+            event.accept(WAXED_OXIDIZED_COPPER_CHEST_ITEM);
             event.accept(COPPER_GOLEM_STATUE_ITEM);
             event.accept(EXPOSED_COPPER_GOLEM_STATUE_ITEM);
             event.accept(WEATHERED_COPPER_GOLEM_STATUE_ITEM);
             event.accept(OXIDIZED_COPPER_GOLEM_STATUE_ITEM);
+            event.accept(WAXED_COPPER_GOLEM_STATUE_ITEM);
+            event.accept(WAXED_EXPOSED_COPPER_GOLEM_STATUE_ITEM);
+            event.accept(WAXED_WEATHERED_COPPER_GOLEM_STATUE_ITEM);
+            event.accept(WAXED_OXIDIZED_COPPER_GOLEM_STATUE_ITEM);
         }
         
         // Add copper buttons to redstone blocks tab

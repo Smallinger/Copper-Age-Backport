@@ -1,0 +1,40 @@
+{
+  "values": {
+    "coppergolemlegacy:copper_chest": {
+      "waxed": "coppergolemlegacy:waxed_copper_chest"
+    },
+    "coppergolemlegacy:exposed_copper_chest": {
+      "waxed": "coppergolemlegacy:waxed_exposed_copper_chest"
+    },
+    "coppergolemlegacy:weathered_copper_chest": {
+      "waxed": "coppergolemlegacy:waxed_weathered_copper_chest"
+    },
+    "coppergolemlegacy:oxidized_copper_chest": {
+      "waxed": "coppergolemlegacy:waxed_oxidized_copper_chest"
+    },
+    "coppergolemlegacy:copper_button": {
+      "waxed": "coppergolemlegacy:waxed_copper_button"
+    },
+    "coppergolemlegacy:exposed_copper_button": {
+      "waxed": "coppergolemlegacy:waxed_exposed_copper_button"
+    },
+    "coppergolemlegacy:weathered_copper_button": {
+      "waxed": "coppergolemlegacy:waxed_weathered_copper_button"
+    },
+    "coppergolemlegacy:oxidized_copper_button": {
+      "waxed": "coppergolemlegacy:waxed_oxidized_copper_button"
+    },
+    "coppergolemlegacy:copper_golem_statue": {
+      "waxed": "coppergolemlegacy:waxed_copper_golem_statue"
+    },
+    "coppergolemlegacy:exposed_copper_golem_statue": {
+      "waxed": "coppergolemlegacy:waxed_exposed_copper_golem_statue"
+    },
+    "coppergolemlegacy:weathered_copper_golem_statue": {
+      "waxed": "coppergolemlegacy:waxed_weathered_copper_golem_statue"
+    },
+    "coppergolemlegacy:oxidized_copper_golem_statue": {
+      "waxed": "coppergolemlegacy:waxed_oxidized_copper_golem_statue"
+    }
+  }
+}

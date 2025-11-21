@@ -224,7 +224,10 @@
   "entity.copper_golem.become_statue": {
     "subtitle": "subtitles.entity.copper_golem.become_statue",
     "sounds": [
-      "coppergolemlegacy:entity/copper_golem/become_statue"
+      "coppergolemlegacy:block/copper_statue/become_statue1",
+      "coppergolemlegacy:block/copper_statue/become_statue2",
+      "coppergolemlegacy:block/copper_statue/become_statue3",
+      "coppergolemlegacy:block/copper_statue/become_statue4"
     ]
   },
   "block.copper_statue.hit": {

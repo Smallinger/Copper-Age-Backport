@@ -273,6 +273,13 @@ public class CopperGolemEntity extends AbstractGolem implements Shearable, Conta
             statueEntity.createStatue(this);
             this.playSound(ModSounds.COPPER_GOLEM_BECOME_STATUE.get());
             level.playSound(null, blockPos, ModSounds.COPPER_STATUE_BECOME.get(), SoundSource.BLOCKS, 1.0F, 1.0F);
+
+            // Drop held item if any
+            ItemStack heldItem = this.getItemBySlot(EquipmentSlot.MAINHAND);
+            if (!heldItem.isEmpty()) {
+                this.spawnAtLocation(heldItem);
+                this.setItemSlot(EquipmentSlot.MAINHAND, ItemStack.EMPTY);
+            }
             
             // Drop leash if leashed
             if (this.isLeashed()) {

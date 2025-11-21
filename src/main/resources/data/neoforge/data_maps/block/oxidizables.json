@@ -1,0 +1,31 @@
+{
+  "values": {
+    "coppergolemlegacy:copper_chest": {
+      "next_oxidation_stage": "coppergolemlegacy:exposed_copper_chest"
+    },
+    "coppergolemlegacy:exposed_copper_chest": {
+      "next_oxidation_stage": "coppergolemlegacy:weathered_copper_chest"
+    },
+    "coppergolemlegacy:weathered_copper_chest": {
+      "next_oxidation_stage": "coppergolemlegacy:oxidized_copper_chest"
+    },
+    "coppergolemlegacy:copper_button": {
+      "next_oxidation_stage": "coppergolemlegacy:exposed_copper_button"
+    },
+    "coppergolemlegacy:exposed_copper_button": {
+      "next_oxidation_stage": "coppergolemlegacy:weathered_copper_button"
+    },
+    "coppergolemlegacy:weathered_copper_button": {
+      "next_oxidation_stage": "coppergolemlegacy:oxidized_copper_button"
+    },
+    "coppergolemlegacy:copper_golem_statue": {
+      "next_oxidation_stage": "coppergolemlegacy:exposed_copper_golem_statue"
+    },
+    "coppergolemlegacy:exposed_copper_golem_statue": {
+      "next_oxidation_stage": "coppergolemlegacy:weathered_copper_golem_statue"
+    },
+    "coppergolemlegacy:weathered_copper_golem_statue": {
+      "next_oxidation_stage": "coppergolemlegacy:oxidized_copper_golem_statue"
+    }
+  }
+}

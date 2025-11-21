@@ -3,11 +3,12 @@ package com.github.smallinger.coppergolemlegacy.block;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.ItemInteractionResult;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.ButtonBlock;
@@ -16,8 +17,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
 import net.minecraft.world.phys.BlockHitResult;
 
-import java.util.Optional;
-import java.util.function.Supplier;
 import java.util.function.Supplier;
 
 public class WaxedCopperButtonBlock extends ButtonBlock {
@@ -29,9 +28,10 @@ public class WaxedCopperButtonBlock extends ButtonBlock {
         this.weatherState = weatherState;
         this.unwaxedButton = unwaxedButton;
     }
-
+    
     @Override
-    protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
+    protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos,
+                                               Player player, InteractionHand hand, BlockHitResult hitResult) {
         // Check if player is using an axe to remove wax
         if (stack.is(ItemTags.AXES)) {
             level.playSound(player, pos, SoundEvents.AXE_WAX_OFF, SoundSource.BLOCKS, 1.0F, 1.0F);
@@ -45,8 +45,8 @@ public class WaxedCopperButtonBlock extends ButtonBlock {
                     .setValue(FACE, state.getValue(FACE));
                 level.setBlock(pos, unwaxedState, 11);
                 
-                if (player != null && !player.isCreative()) {
-                    stack.hurtAndBreak(1, player, player.getEquipmentSlotForItem(stack));
+                if (!player.isCreative()) {
+                    stack.hurtAndBreak(1, player, EquipmentSlot.MAINHAND);
                 }
             }
             
@@ -60,5 +60,10 @@ public class WaxedCopperButtonBlock extends ButtonBlock {
     protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult) {
         // Waxed buttons can still be pressed, even when oxidized
         return super.useWithoutItem(state, level, pos, player, hitResult);
+    }
+    
+    @Override
+    protected boolean isRandomlyTicking(BlockState state) {
+        return false; // Waxed buttons don't oxidize
     }
 }
