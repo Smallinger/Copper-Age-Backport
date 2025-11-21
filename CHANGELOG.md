@@ -1,6 +1,6 @@
 # Changelog - Forge 1.20.1 Port
 
-## [1.20.1-0.0.6] - 2025-11-21
+## [1.20.1-0.0.6] - 2025-11-22
 
 ### Added
 - 3D Item Rendering for Copper Chests and Copper Golem Statues in inventory, hand, and item frames
