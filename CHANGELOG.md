@@ -2,7 +2,7 @@
 
 All notable changes to the Copper Golem Legacy mod will be documented in this file.
 
-## [1.21.1-0.0.8] - In Development
+## [1.21.1-0.0.8] - 22.11.2025
 
 ### Fixed
 - Recipe format corrected to Minecraft 1.21.1 specification (using `"id"` instead of `"item"` in result field)
