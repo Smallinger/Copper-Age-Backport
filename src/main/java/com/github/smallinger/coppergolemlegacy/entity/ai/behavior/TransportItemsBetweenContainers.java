@@ -1,6 +1,7 @@
 package com.github.smallinger.coppergolemlegacy.entity.ai.behavior;
 
 import com.github.smallinger.coppergolemlegacy.ModMemoryTypes;
+import com.github.smallinger.coppergolemlegacy.ModTags;
 import com.google.common.collect.ImmutableMap;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -19,11 +20,13 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.BarrelBlock;
 import net.minecraft.world.level.block.ChestBlock;
 import net.minecraft.world.level.block.entity.BaseContainerBlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.ChestBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.ChestType;
 import net.minecraft.world.level.chunk.LevelChunk;
 import net.minecraft.world.level.pathfinder.Path;
@@ -389,7 +392,32 @@ public class TransportItemsBetweenContainers extends Behavior<PathfinderMob> {
     }
 
     private boolean isTargetBlocked(Level level, TransportItemTarget target) {
-        return ChestBlock.isChestBlockedAt(level, target.pos);
+        BlockState state = target.state;
+        
+        // Chests: Prüfen ob Platz oben frei ist (Standard-Chest-Verhalten)
+        if (state.getBlock() instanceof ChestBlock) {
+            return ChestBlock.isChestBlockedAt(level, target.pos);
+        }
+        
+        // Barrels: Prüfen ob die FACING-Seite frei ist (nur horizontale Richtungen)
+        if (state.is(ModTags.Blocks.GOLEM_TARGET_BARRELS)) {
+            // Barrels haben die FACING Property von BlockStateProperties
+            if (state.hasProperty(BlockStateProperties.FACING)) {
+                Direction facing = state.getValue(BlockStateProperties.FACING);
+                // Nur horizontale Richtungen prüfen (Barrels können seitlich montiert werden)
+                if (facing.getAxis().isHorizontal()) {
+                    BlockPos facingPos = target.pos.relative(facing);
+                    BlockState facingState = level.getBlockState(facingPos);
+                    // Blockiert wenn die Vorderseite nicht frei ist
+                    return !facingState.isAir() && facingState.isSolidRender(level, facingPos);
+                }
+            }
+            // Keine horizontale Facing-Richtung oder keine FACING Property -> nicht blockiert
+            return false;
+        }
+        
+        // Andere Container (Copper Chests, IronChest, etc.): Keine Blockierung-Prüfung nötig
+        return false;
     }
 
     private boolean targetHasNotChanged(Level level, TransportItemTarget target) {

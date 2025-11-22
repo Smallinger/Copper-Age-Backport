@@ -2,6 +2,26 @@
 
 All notable changes to the Copper Golem Legacy mod will be documented in this file.
 
+## [1.21.1-0.0.7] - 22.11.2025
+
+### Fixed
+- Waxed Copper Chests are now recognized by Copper Golem as valid source containers
+- Enclosed barrels with only front face exposed are now properly accessible by Copper Golem
+- Container-specific blocking checks: Chests check top space, Barrels check facing direction
+
+### Added
+- Separate `golem_target_barrels` tag for modpack-friendly barrel variants
+- All 4 waxed Copper Chest variants added to `copper_chests` tag:
+  - `waxed_copper_chest`
+  - `waxed_exposed_copper_chest`
+  - `waxed_weathered_copper_chest`
+  - `waxed_oxidized_copper_chest`
+
+### Changed
+- Improved container blocking logic: Barrels only need facing side clear, not all sides
+- Barrel moved from `golem_target_chests` to separate `golem_target_barrels` tag
+- Sound system now uses barrel tag instead of hardcoded block check
+
 ## [1.21.1-0.0.6] - 22.11.2025
 
 ### Added

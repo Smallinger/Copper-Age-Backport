@@ -117,7 +117,7 @@ public class CopperGolemAi {
         behaviorsBuilder.add(Pair.of(0, new TransportItemsBetweenContainers(
             1.0F,  // Speed Modifier
             state -> state.is(ModTags.Blocks.COPPER_CHESTS),  // Source: Nur Copper Chests (fest)
-            state -> state.is(ModTags.Blocks.GOLEM_TARGET_CHESTS),  // Target: Alle kompatiblen Chests (über Tag erweiterbar)
+            state -> state.is(ModTags.Blocks.GOLEM_TARGET_CHESTS) || state.is(ModTags.Blocks.GOLEM_TARGET_BARRELS),  // Target: Alle kompatiblen Chests und Barrels (über Tag erweiterbar)
             32,  // Horizontal Search Distance
             8,   // Vertical Search Distance
             getTargetReachedInteractions(),  // Interaction callbacks
@@ -214,7 +214,7 @@ public class CopperGolemAi {
         if (blockState.is(ModTags.Blocks.COPPER_CHESTS)) {
             // Copper Chest Sound
             soundEvent = open ? ModSounds.COPPER_CHEST_OPEN.get() : ModSounds.COPPER_CHEST_CLOSE.get();
-        } else if (blockState.is(Blocks.BARREL)) {
+        } else if (blockState.is(ModTags.Blocks.GOLEM_TARGET_BARRELS)) {
             // Barrel Sound
             soundEvent = open ? SoundEvents.BARREL_OPEN : SoundEvents.BARREL_CLOSE;
         } else {
@@ -228,7 +228,7 @@ public class CopperGolemAi {
         net.minecraft.world.level.block.entity.BlockEntity blockEntity = level.getBlockEntity(pos);
         
         // Barrel: Setze direkt den OPEN BlockState Property
-        if (blockState.is(Blocks.BARREL)) {
+        if (blockState.is(ModTags.Blocks.GOLEM_TARGET_BARRELS)) {
             level.setBlock(pos, blockState.setValue(net.minecraft.world.level.block.BarrelBlock.OPEN, open), 3);
         }
         // Chests: Nutze blockEvent für Animation

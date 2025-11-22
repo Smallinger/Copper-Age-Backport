@@ -3,7 +3,6 @@
   "values": [
     "minecraft:chest",
     "minecraft:trapped_chest",
-    "minecraft:barrel",
     {
       "id": "ironchest:iron_chest",
       "required": false
