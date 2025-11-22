@@ -1,7 +1,7 @@
 # Changelog - Forge 1.20.1 Port
 
 
-## [1.20.1-0.0.8] - In Development
+## [1.20.1-0.0.8] - 2025-11-22
 
 ### Fixed
 - Recipe format corrected from 1.20.5+ format to 1.20.1 format (changed `"id"` to `"item"` in result objects)
