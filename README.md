@@ -3,12 +3,26 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Minecraft](https://img.shields.io/badge/Minecraft-1.21.1-green.svg)](https://www.minecraft.net/)
 [![NeoForge](https://img.shields.io/badge/NeoForge-21.1.215-blue.svg)](https://neoforged.net/)
+[![Crowdin](https://badges.crowdin.net/copper-golem-legacy/localized.svg)](https://crowdin.com/project/copper-golem-legacy)
 
 ![Demo](./src/main/resources/logo.png)
 
 A Minecraft mod that brings back the Copper Golem from the Minecraft Live 2021 mob vote. This lovable copper companion oxidizes over time, can hold items, press copper buttons, and eventually becomes a statue.
 
 ![transport](./.github/media/transport.gif)
+
+## Support
+
+If you enjoy this mod and would like to support further development, consider buying me a coffee! Your support helps keep the project alive and encourages new features and updates.
+
+By supporting the mod, you get **direct access to all new Preview versions** as they are released for **Fabric, Forge, and NeoForge**, letting you test new features early, report bugs, and help shape the mod.  
+
+[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/smallinger)
+
+### Localization
+
+Anyone can help with translations! By contributing, you make the mod accessible to players all around the world.  
+You can submit translations here: [Crowdin](https://crowdin.com/project/copper-golem-legacy)
 
 ## Features
 
@@ -116,12 +130,6 @@ Copyright (c) 2025 Marc Schirrmann
 - [Issue Tracker](https://github.com/Smallinger/Copper-Golem-Legacy/issues)
 - [Changelog](CHANGELOG.md)
 
-## Support
+## Support Development
 
 If you encounter any issues or have questions, please open an issue on the [GitHub issue tracker](https://github.com/Smallinger/Copper-Golem-Legacy/issues).
-
-### Support Development
-
-If you enjoy this mod and would like to support further development, consider buying me a coffee! Your support helps keep the project alive and encourages new features and updates.
-
-[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/smallinger)
