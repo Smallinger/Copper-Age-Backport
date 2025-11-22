@@ -1,5 +1,24 @@
 # Changelog - Forge 1.20.1 Port
 
+## [1.20.1-0.0.7] - 2025-11-22
+
+### Fixed
+- Waxed Copper Chests are now recognized by Copper Golems as source containers
+- Barrels surrounded by blocks (only front face accessible) are now correctly detected by Copper Golems
+
+### Added
+- Separate tag system for container types: `golem_target_chests` and `golem_target_barrels`
+- Tag-based barrel detection for modpack compatibility
+- Container-specific blocking checks (chests need space above, barrels only need front face free)
+- Copper Golem AI now accepts both chest and barrel tags as valid target containers
+- Automatic sound detection based on container type (Copper Chest, Barrel, or Regular Chest sounds)
+- Spawn Egg now uses color-based rendering (`0xB87333` and `0x48D1CC`) instead of texture files
+
+### Changed
+- Updated `CHEST_COMPATIBILITY.md` with separate documentation for chests and barrels
+- Updated datapack example to include `golem_target_barrels.json`
+- Improved barrel accessibility logic for better pathfinding in tight spaces
+
 ## [1.20.1-0.0.6] - 2025-11-22
 
 ### Added

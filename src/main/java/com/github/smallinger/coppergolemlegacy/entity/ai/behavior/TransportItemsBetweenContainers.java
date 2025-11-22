@@ -411,7 +411,27 @@ public class TransportItemsBetweenContainers extends Behavior<PathfinderMob> {
     }
 
     private boolean isTargetBlocked(Level level, TransportItemTarget target) {
-        return ChestBlock.isChestBlockedAt(level, target.pos);
+        // Chests need space above, but barrels only need one accessible side
+        if (target.state.getBlock() instanceof ChestBlock) {
+            return ChestBlock.isChestBlockedAt(level, target.pos);
+        } else if (target.state.is(com.github.smallinger.coppergolemlegacy.ModTags.Blocks.GOLEM_TARGET_BARRELS)) {
+            // Barrel is accessible if at least one horizontal side is free
+            // Check if the front face (FACING property) is accessible
+            if (target.state.hasProperty(net.minecraft.world.level.block.BarrelBlock.FACING)) {
+                Direction facing = target.state.getValue(net.minecraft.world.level.block.BarrelBlock.FACING);
+                // Only check horizontal directions (barrels can face up/down but we treat them as accessible)
+                if (facing.getAxis().isHorizontal()) {
+                    BlockPos frontPos = target.pos.relative(facing);
+                    BlockState frontState = level.getBlockState(frontPos);
+                    // If front is not a full block, barrel is accessible
+                    return frontState.isCollisionShapeFullBlock(level, frontPos);
+                }
+            }
+            // If facing is vertical or property missing, assume accessible
+            return false;
+        }
+        // Other containers (copper chests, etc.) don't have blocked checks
+        return false;
     }
 
     private boolean targetHasNotChanged(Level level, TransportItemTarget target) {

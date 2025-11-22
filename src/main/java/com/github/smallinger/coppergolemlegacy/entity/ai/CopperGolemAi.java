@@ -115,11 +115,11 @@ public class CopperGolemAi {
     private static void initIdleActivity(Brain<CopperGolemEntity> brain) {
         ImmutableList.Builder<Pair<Integer, ? extends BehaviorControl<? super CopperGolemEntity>>> behaviorsBuilder = ImmutableList.builder();
         
-        // Prio 0: Item Transport zwischen Copper Chests und Regular Chests
+        // Prio 0: Item Transport zwischen Copper Chests und Regular Chests/Barrels
         behaviorsBuilder.add(Pair.of(0, new TransportItemsBetweenContainers(
             1.0F,  // Speed Modifier
             state -> state.is(ModTags.Blocks.COPPER_CHESTS),  // Source: Copper Chests
-            state -> state.is(ModTags.Blocks.GOLEM_TARGET_CHESTS),  // Destination: Target Chests (via tag)
+            state -> state.is(ModTags.Blocks.GOLEM_TARGET_CHESTS) || state.is(ModTags.Blocks.GOLEM_TARGET_BARRELS),  // Destination: Target Chests and Barrels (via tags)
             32,  // Horizontal Search Distance
             8,   // Vertical Search Distance
             getTargetReachedInteractions(),  // Interaction callbacks
@@ -217,8 +217,8 @@ public class CopperGolemAi {
         if (blockState.is(ModTags.Blocks.COPPER_CHESTS)) {
             // Copper Chest Sound
             soundEvent = open ? ModSounds.COPPER_CHEST_OPEN.get() : ModSounds.COPPER_CHEST_CLOSE.get();
-        } else if (blockState.is(Blocks.BARREL)) {
-            // Barrel Sound
+        } else if (blockState.is(ModTags.Blocks.GOLEM_TARGET_BARRELS)) {
+            // Barrel Sound (includes modded barrels)
             soundEvent = open ? SoundEvents.BARREL_OPEN : SoundEvents.BARREL_CLOSE;
         } else {
             // Regular Chest Sound (default)
@@ -230,7 +230,7 @@ public class CopperGolemAi {
         // Trigger container animation
         net.minecraft.world.level.block.entity.BlockEntity blockEntity = level.getBlockEntity(pos);
         if (blockEntity != null) {
-            if (blockState.is(Blocks.BARREL)) {
+            if (blockState.is(ModTags.Blocks.GOLEM_TARGET_BARRELS)) {
                 // Barrels use BlockState property for animation
                 level.setBlock(pos, blockState.setValue(net.minecraft.world.level.block.BarrelBlock.OPEN, open), 3);
             } else {
