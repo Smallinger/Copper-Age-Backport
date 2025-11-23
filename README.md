@@ -3,6 +3,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Minecraft](https://img.shields.io/badge/Minecraft-1.20.1-green.svg)](https://www.minecraft.net/)
 [![Forge](https://img.shields.io/badge/Forge-47.3.0-blue.svg)](https://files.minecraftforge.net/)
+[![Discord](https://img.shields.io/discord/1441831886719811654?label=Discord&logo=discord&color=5865F2)](https://discord.gg/hGrWUW9vSb)
 [![Crowdin](https://badges.crowdin.net/copper-golem-legacy/localized.svg)](https://crowdin.com/project/copper-golem-legacy)
 
 ![Demo](./src/main/resources/logo.png)
