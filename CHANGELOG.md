@@ -1,6 +1,11 @@
 # Changelog - Forge 1.20.1 Port
 
 
+## [1.20.1-0.0.9-hotfix1] - 23.11.2025
+
+### Fixed
+- Copper Golem Spawn Egg model now uses correct template_spawn_egg parent instead of generated item model
+
 ## [1.20.1-0.0.9] - 23.11.2025
 
 ### Added
