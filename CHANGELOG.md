@@ -2,6 +2,15 @@
 
 All notable changes to the Copper Golem Legacy mod will be documented in this file.
 
+## [1.21.1-0.0.9-hotfix1] - 23.11.2025
+
+### Fixed
+- Critical bug: Copper Golem spawning was broken due to missing block tag definitions
+- Added missing `copper.json` tag file defining all copper block variants (normal + oxidized + waxed)
+- Added missing `copper_chests.json` tag file defining all copper chest variants
+- Added missing `golem_target_chests.json` and `golem_target_barrels.json` tag files for item transport
+- Golem spawning now works correctly: Place carved pumpkin on copper block to spawn golem + copper chest
+
 ## [1.21.1-0.0.9] - 23.11.2025
 
 ### Added
