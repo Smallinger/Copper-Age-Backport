@@ -2,6 +2,21 @@
 
 All notable changes to the Copper Golem Legacy mod will be documented in this file.
 
+## [1.21.1-0.0.9] - 23.11.2025
+
+### Added
+- Mining support for Copper Chests and Copper Golem Statues with pickaxe
+- Block tags for mineable/pickaxe and needs_stone_tool for all chest and statue variants
+- Pose preservation: Statue items now retain their pose in inventory, GUIs, and item frames
+- Block state component rendering for statue items
+
+### Fixed
+- Copper Chests and Copper Golem Statues can now be mined and harvested with correct tool (stone pickaxe or better)
+- Copper Golem Statue items now display the correct pose in all contexts (inventory, item frames, GUIs)
+- Item renderer now reads DataComponents.BLOCK_STATE from dropped statue items
+- Loot tables correctly apply minecraft:copy_state for pose property
+- Item frame rendering: Copper Chests and Copper Golem Statues now display correctly without offset issues
+
 ## [1.21.1-0.0.8] - 22.11.2025
 
 ### Fixed
@@ -30,7 +45,7 @@ All notable changes to the Copper Golem Legacy mod will be documented in this fi
 ## [1.21.1-0.0.6] - 22.11.2025
 
 ### Added
-- 3D Item Rendering for Copper Chests and Copper Golem Statues in inventory, hand, and item frames
+- 3D Item Rendering for Copper Chests and Copper Golem Statues in inventory, hand, and item slot
 - Copper Chest Oxidation through 4 stages (Copper → Exposed → Weathered → Oxidized)
 - Copper Chest weathering mechanics: scraping with axe removes oxidation stages
 - Copper Chest waxing with honeycomb prevents oxidation

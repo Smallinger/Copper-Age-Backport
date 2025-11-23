@@ -3,17 +3,12 @@ description: Report a bug or an issue with the mod.
 title: "[Bug] "
 labels: ["bug"]
 body:
-  - type: dropdown
+  - type: input
     id: mod_version
     attributes:
       label: Mod Version
       description: Which version of the mod are you using?
-      options:
-        - "1.21.1-0.0.4"
-        - "1.21.1-0.0.3"
-        - "1.21.1-0.0.2"
-        - "1.21.1-0.0.1"
-        - Other (please specify in description)
+      placeholder: "e.g., 1.21.1-0.0.8"
     validations:
       required: true
 

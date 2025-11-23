@@ -1,0 +1,93 @@
+name: Mod Support Request
+description: Request support for another mod to work with Copper Golem Legacy.
+title: "[Mod Support] "
+labels: ["mod-support", "enhancement"]
+body:
+  - type: dropdown
+    id: mod_loader
+    attributes:
+      label: Mod Loader
+      description: Which mod loader are you using?
+      options:
+        - NeoForge
+        - Forge
+        - Other (please specify in Additional Context)
+    validations:
+      required: true
+
+  - type: input
+    id: mod_name
+    attributes:
+      label: Mod Name
+      description: What is the name of the mod you want support for?
+      placeholder: e.g., Iron Chests, Storage Drawers, Applied Energistics 2
+    validations:
+      required: true
+
+  - type: input
+    id: mod_version
+    attributes:
+      label: Mod Version
+      description: Which version of the mod are you using?
+      placeholder: e.g., 1.21.1-15.0.0
+    validations:
+      required: true
+
+  - type: input
+    id: mod_link
+    attributes:
+      label: Mod Link
+      description: Please provide a link to the mod (CurseForge, Modrinth, etc.)
+      placeholder: https://www.curseforge.com/minecraft/mc-mods/...
+    validations:
+      required: false
+
+  - type: input
+    id: mod_source
+    attributes:
+      label: Source Code Link (Optional)
+      description: If available, provide a link to the mod's source code repository (GitHub, GitLab, etc.)
+      placeholder: https://github.com/username/modname
+    validations:
+      required: false
+
+  - type: textarea
+    id: support_description
+    attributes:
+      label: What support do you need?
+      description: Describe what specific features or blocks from the other mod should work with Copper Golem Legacy.
+      placeholder: |
+        Example:
+        - Copper Golems should be able to transport items to/from Iron Chests
+        - Copper Golems should interact with Storage Drawers
+        - Custom copper blocks from the mod should oxidize like vanilla copper
+    validations:
+      required: true
+
+  - type: textarea
+    id: current_behavior
+    attributes:
+      label: Current Behavior
+      description: What happens now when you try to use these mods together?
+      placeholder: Describe any issues, incompatibilities, or missing features you've noticed.
+    validations:
+      required: false
+
+  - type: textarea
+    id: expected_behavior
+    attributes:
+      label: Expected Behavior
+      description: How do you expect the mods to work together?
+      placeholder: Describe the ideal integration between the mods.
+    validations:
+      required: false
+
+  - type: textarea
+    id: additional_context
+    attributes:
+      label: Additional Context
+      description: Add any other context, screenshots, or information about the mod support request.
+      placeholder: Any additional details that might be helpful.
+    validations:
+      required: false
+

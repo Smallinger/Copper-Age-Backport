@@ -76,9 +76,19 @@ public class CopperChestRenderer implements BlockEntityRenderer<ChestBlockEntity
 
     @Override
     public void render(ChestBlockEntity blockEntity, float partialTick, PoseStack poseStack, MultiBufferSource bufferSource, int packedLight, int packedOverlay) {
+        BlockState blockstate = blockEntity.getBlockState();
+        if (!(blockstate.getBlock() instanceof CopperChestBlock)) {
+            blockstate = CopperGolemLegacy.COPPER_CHEST.get().defaultBlockState();
+        }
+
         Level level = blockEntity.getLevel();
         boolean flag = level != null;
-        BlockState blockstate = flag ? blockEntity.getBlockState() : CopperGolemLegacy.COPPER_CHEST.get().defaultBlockState().setValue(ChestBlock.FACING, Direction.SOUTH);
+        if (blockstate.hasProperty(ChestBlock.FACING) && !flag) {
+            blockstate = blockstate.setValue(ChestBlock.FACING, Direction.SOUTH);
+        }
+        if (!blockstate.hasProperty(ChestBlock.FACING)) {
+            blockstate = blockstate.setValue(ChestBlock.FACING, Direction.SOUTH);
+        }
         Block block = blockstate.getBlock();
         
         if (block instanceof CopperChestBlock copperChestBlock) {

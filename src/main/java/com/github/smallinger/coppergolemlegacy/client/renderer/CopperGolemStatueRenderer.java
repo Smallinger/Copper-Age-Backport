@@ -13,6 +13,7 @@ import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 
 import java.util.HashMap;
@@ -44,7 +45,9 @@ public class CopperGolemStatueRenderer implements BlockEntityRenderer<CopperGole
 
         // Get the pose and facing direction
         CopperGolemStatueBlock.Pose pose = blockState.getValue(CopperGolemStatueBlock.POSE);
-        Direction facing = blockState.getValue(CopperGolemStatueBlock.FACING);
+        Level level = blockEntity.getLevel();
+        boolean hasLevel = level != null;
+        Direction facing = hasLevel ? blockState.getValue(CopperGolemStatueBlock.FACING) : Direction.SOUTH;
         
         // Get the appropriate model for this pose
         CopperGolemStatueModel model = this.models.get(pose);
