@@ -45,6 +45,9 @@ public class CopperGolemStatueRenderer implements BlockEntityRenderer<CopperGole
         // Get the pose and facing direction
         CopperGolemStatueBlock.Pose pose = blockState.getValue(CopperGolemStatueBlock.POSE);
         Direction facing = blockState.getValue(CopperGolemStatueBlock.FACING);
+        if (blockEntity.getLevel() == null) {
+            facing = Direction.SOUTH;
+        }
         
         // Get the appropriate model for this pose
         CopperGolemStatueModel model = this.models.get(pose);

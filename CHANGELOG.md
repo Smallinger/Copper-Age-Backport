@@ -1,6 +1,21 @@
 # Changelog - Forge 1.20.1 Port
 
 
+## [1.20.1-0.0.9] - 23.11.2025
+
+### Added
+- Mining support for Copper Chests and Copper Golem Statues with pickaxe
+- Block tags for mineable/pickaxe and needs_stone_tool for all chest and statue variants
+- Pose preservation: Statue items now retain their pose in inventory, GUIs, and item frames
+- Block state component rendering for statue items
+
+### Fixed
+- Copper Chests and Copper Golem Statues can now be mined and harvested with correct tool (stone pickaxe or better)
+- Copper Golem Statue items now display the correct pose in all contexts (inventory, item frames, GUIs)
+- Item renderer now reads DataComponents.BLOCK_STATE from dropped statue items
+- Loot tables correctly apply minecraft:copy_state for pose property
+- Item frame rendering: Copper Chests and Copper Golem Statues now display correctly without offset issues
+
 ## [1.20.1-0.0.8] - 2025-11-22
 
 ### Fixed

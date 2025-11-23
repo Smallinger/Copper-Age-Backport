@@ -77,44 +77,70 @@ public class CopperChestRenderer implements BlockEntityRenderer<ChestBlockEntity
     @Override
     public void render(ChestBlockEntity blockEntity, float partialTick, PoseStack poseStack, MultiBufferSource bufferSource, int packedLight, int packedOverlay) {
         Level level = blockEntity.getLevel();
-        boolean flag = level != null;
-        BlockState blockstate = flag ? blockEntity.getBlockState() : CopperGolemLegacy.COPPER_CHEST.get().defaultBlockState().setValue(ChestBlock.FACING, Direction.SOUTH);
+        boolean hasLevel = level != null;
+        BlockState blockstate = blockEntity.getBlockState();
         Block block = blockstate.getBlock();
-        
-        if (block instanceof CopperChestBlock copperChestBlock) {
-            poseStack.pushPose();
-            float f = blockstate.getValue(ChestBlock.FACING).toYRot();
-            poseStack.translate(0.5F, 0.5F, 0.5F);
-            poseStack.mulPose(com.mojang.math.Axis.YP.rotationDegrees(-f));
-            poseStack.translate(-0.5F, -0.5F, -0.5F);
-            
-            DoubleBlockCombiner.NeighborCombineResult<? extends ChestBlockEntity> result;
-            if (flag) {
-                result = copperChestBlock.combine(blockstate, level, blockEntity.getBlockPos(), true);
-            } else {
-                result = DoubleBlockCombiner.Combiner::acceptNone;
-            }
 
-            float openness = result.apply(ChestBlock.opennessCombiner((LidBlockEntity)blockEntity)).get(partialTick);
-            openness = 1.0F - openness;
-            openness = 1.0F - openness * openness * openness;
-            
-            int light = result.apply(new BrightnessCombiner<>()).applyAsInt(packedLight);
-            
-            ChestType chestType = blockstate.hasProperty(ChestBlock.TYPE) ? blockstate.getValue(ChestBlock.TYPE) : ChestType.SINGLE;
-            Material material = getMaterial(blockstate, chestType);
-            VertexConsumer vertexconsumer = material.buffer(bufferSource, RenderType::entityCutout);
-            
-            if (chestType == ChestType.LEFT) {
-                renderParts(poseStack, vertexconsumer, this.doubleLeftLid, this.doubleLeftLock, this.doubleLeftBottom, openness, light, packedOverlay);
-            } else if (chestType == ChestType.RIGHT) {
-                renderParts(poseStack, vertexconsumer, this.doubleRightLid, this.doubleRightLock, this.doubleRightBottom, openness, light, packedOverlay);
-            } else {
-                renderParts(poseStack, vertexconsumer, this.lid, this.lock, this.bottom, openness, light, packedOverlay);
+        CopperChestBlock copperChestBlock;
+        if (block instanceof CopperChestBlock chestBlock) {
+            copperChestBlock = chestBlock;
+        } else {
+            blockstate = CopperGolemLegacy.COPPER_CHEST.get().defaultBlockState();
+            block = blockstate.getBlock();
+            if (!(block instanceof CopperChestBlock fallback)) {
+                return;
             }
-
-            poseStack.popPose();
+            copperChestBlock = fallback;
         }
+
+        if (!blockstate.hasProperty(ChestBlock.FACING)) {
+            blockstate = blockstate.getBlock().defaultBlockState();
+        }
+
+        if (!blockstate.hasProperty(ChestBlock.FACING)) {
+            blockstate = CopperGolemLegacy.COPPER_CHEST.get().defaultBlockState();
+        }
+
+        if (!blockstate.hasProperty(ChestBlock.FACING)) {
+            return;
+        }
+
+        if (!hasLevel) {
+            blockstate = blockstate.setValue(ChestBlock.FACING, Direction.SOUTH);
+        }
+
+        poseStack.pushPose();
+        float f = blockstate.getValue(ChestBlock.FACING).toYRot();
+        poseStack.translate(0.5F, 0.5F, 0.5F);
+        poseStack.mulPose(com.mojang.math.Axis.YP.rotationDegrees(-f));
+        poseStack.translate(-0.5F, -0.5F, -0.5F);
+
+        DoubleBlockCombiner.NeighborCombineResult<? extends ChestBlockEntity> result;
+        if (hasLevel) {
+            result = copperChestBlock.combine(blockstate, level, blockEntity.getBlockPos(), true);
+        } else {
+            result = DoubleBlockCombiner.Combiner::acceptNone;
+        }
+
+        float openness = result.apply(ChestBlock.opennessCombiner((LidBlockEntity)blockEntity)).get(partialTick);
+        openness = 1.0F - openness;
+        openness = 1.0F - openness * openness * openness;
+
+        int light = result.apply(new BrightnessCombiner<>()).applyAsInt(packedLight);
+
+        ChestType chestType = blockstate.hasProperty(ChestBlock.TYPE) ? blockstate.getValue(ChestBlock.TYPE) : ChestType.SINGLE;
+        Material material = getMaterial(blockstate, chestType);
+        VertexConsumer vertexconsumer = material.buffer(bufferSource, RenderType::entityCutout);
+
+        if (chestType == ChestType.LEFT) {
+            renderParts(poseStack, vertexconsumer, this.doubleLeftLid, this.doubleLeftLock, this.doubleLeftBottom, openness, light, packedOverlay);
+        } else if (chestType == ChestType.RIGHT) {
+            renderParts(poseStack, vertexconsumer, this.doubleRightLid, this.doubleRightLock, this.doubleRightBottom, openness, light, packedOverlay);
+        } else {
+            renderParts(poseStack, vertexconsumer, this.lid, this.lock, this.bottom, openness, light, packedOverlay);
+        }
+
+        poseStack.popPose();
     }
 
     private void renderParts(PoseStack poseStack, VertexConsumer consumer, ModelPart lid, ModelPart lock, ModelPart bottom, float openness, int light, int overlay) {
