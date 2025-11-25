@@ -94,6 +94,18 @@ public class ModItems {
     
     // Copper Torch Item
     public static Supplier<StandingAndWallBlockItem> COPPER_TORCH_ITEM;
+    
+    // Copper Lantern Items (Weathering)
+    public static Supplier<BlockItem> COPPER_LANTERN_ITEM;
+    public static Supplier<BlockItem> EXPOSED_COPPER_LANTERN_ITEM;
+    public static Supplier<BlockItem> WEATHERED_COPPER_LANTERN_ITEM;
+    public static Supplier<BlockItem> OXIDIZED_COPPER_LANTERN_ITEM;
+    
+    // Waxed Copper Lantern Items
+    public static Supplier<BlockItem> WAXED_COPPER_LANTERN_ITEM;
+    public static Supplier<BlockItem> WAXED_EXPOSED_COPPER_LANTERN_ITEM;
+    public static Supplier<BlockItem> WAXED_WEATHERED_COPPER_LANTERN_ITEM;
+    public static Supplier<BlockItem> WAXED_OXIDIZED_COPPER_LANTERN_ITEM;
 
     public static void register() {
         Constants.LOG.info("Registering items for {}", Constants.MOD_NAME);
@@ -229,6 +241,32 @@ public class ModItems {
                 ModBlocks.COPPER_WALL_TORCH.get(),
                 new Item.Properties(),
                 Direction.DOWN));
+
+        // Register Copper Lantern Items (Weathering)
+        COPPER_LANTERN_ITEM = helper.register(ITEM, "copper_lantern",
+            () -> new BlockItem(ModBlocks.COPPER_LANTERN.get(), new Item.Properties()));
+        
+        EXPOSED_COPPER_LANTERN_ITEM = helper.register(ITEM, "exposed_copper_lantern",
+            () -> new BlockItem(ModBlocks.EXPOSED_COPPER_LANTERN.get(), new Item.Properties()));
+        
+        WEATHERED_COPPER_LANTERN_ITEM = helper.register(ITEM, "weathered_copper_lantern",
+            () -> new BlockItem(ModBlocks.WEATHERED_COPPER_LANTERN.get(), new Item.Properties()));
+        
+        OXIDIZED_COPPER_LANTERN_ITEM = helper.register(ITEM, "oxidized_copper_lantern",
+            () -> new BlockItem(ModBlocks.OXIDIZED_COPPER_LANTERN.get(), new Item.Properties()));
+        
+        // Register Waxed Copper Lantern Items
+        WAXED_COPPER_LANTERN_ITEM = helper.register(ITEM, "waxed_copper_lantern",
+            () -> new BlockItem(ModBlocks.WAXED_COPPER_LANTERN.get(), new Item.Properties()));
+        
+        WAXED_EXPOSED_COPPER_LANTERN_ITEM = helper.register(ITEM, "waxed_exposed_copper_lantern",
+            () -> new BlockItem(ModBlocks.WAXED_EXPOSED_COPPER_LANTERN.get(), new Item.Properties()));
+        
+        WAXED_WEATHERED_COPPER_LANTERN_ITEM = helper.register(ITEM, "waxed_weathered_copper_lantern",
+            () -> new BlockItem(ModBlocks.WAXED_WEATHERED_COPPER_LANTERN.get(), new Item.Properties()));
+        
+        WAXED_OXIDIZED_COPPER_LANTERN_ITEM = helper.register(ITEM, "waxed_oxidized_copper_lantern",
+            () -> new BlockItem(ModBlocks.WAXED_OXIDIZED_COPPER_LANTERN.get(), new Item.Properties()));
 
         // Register Copper Tools
         // Copper Axe: 7.0 base attack damage + 1.0 material bonus = 8 total, -3.2 attack speed

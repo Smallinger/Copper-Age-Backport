@@ -87,6 +87,15 @@ public class CopperAgeBackportNeoForge {
             event.accept(ModItems.WAXED_EXPOSED_COPPER_GOLEM_STATUE_ITEM.get());
             event.accept(ModItems.WAXED_WEATHERED_COPPER_GOLEM_STATUE_ITEM.get());
             event.accept(ModItems.WAXED_OXIDIZED_COPPER_GOLEM_STATUE_ITEM.get());
+            // Copper Lanterns
+            event.accept(ModItems.COPPER_LANTERN_ITEM.get());
+            event.accept(ModItems.EXPOSED_COPPER_LANTERN_ITEM.get());
+            event.accept(ModItems.WEATHERED_COPPER_LANTERN_ITEM.get());
+            event.accept(ModItems.OXIDIZED_COPPER_LANTERN_ITEM.get());
+            event.accept(ModItems.WAXED_COPPER_LANTERN_ITEM.get());
+            event.accept(ModItems.WAXED_EXPOSED_COPPER_LANTERN_ITEM.get());
+            event.accept(ModItems.WAXED_WEATHERED_COPPER_LANTERN_ITEM.get());
+            event.accept(ModItems.WAXED_OXIDIZED_COPPER_LANTERN_ITEM.get());
             // Shelves
             event.accept(ModItems.OAK_SHELF_ITEM.get());
             event.accept(ModItems.BIRCH_SHELF_ITEM.get());

@@ -114,6 +114,15 @@ public class CopperAgeBackportFabric implements ModInitializer {
             entries.accept(ModItems.WAXED_EXPOSED_COPPER_GOLEM_STATUE_ITEM.get());
             entries.accept(ModItems.WAXED_WEATHERED_COPPER_GOLEM_STATUE_ITEM.get());
             entries.accept(ModItems.WAXED_OXIDIZED_COPPER_GOLEM_STATUE_ITEM.get());
+            // Copper Lanterns
+            entries.accept(ModItems.COPPER_LANTERN_ITEM.get());
+            entries.accept(ModItems.EXPOSED_COPPER_LANTERN_ITEM.get());
+            entries.accept(ModItems.WEATHERED_COPPER_LANTERN_ITEM.get());
+            entries.accept(ModItems.OXIDIZED_COPPER_LANTERN_ITEM.get());
+            entries.accept(ModItems.WAXED_COPPER_LANTERN_ITEM.get());
+            entries.accept(ModItems.WAXED_EXPOSED_COPPER_LANTERN_ITEM.get());
+            entries.accept(ModItems.WAXED_WEATHERED_COPPER_LANTERN_ITEM.get());
+            entries.accept(ModItems.WAXED_OXIDIZED_COPPER_LANTERN_ITEM.get());
             // Shelves
             entries.accept(ModItems.OAK_SHELF_ITEM.get());
             entries.accept(ModItems.BIRCH_SHELF_ITEM.get());

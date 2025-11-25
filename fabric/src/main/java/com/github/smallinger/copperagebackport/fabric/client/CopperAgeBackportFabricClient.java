@@ -82,6 +82,15 @@ public class CopperAgeBackportFabricClient implements ClientModInitializer {
     private void registerBlockRenderLayers() {
         BlockRenderLayerMap.INSTANCE.putBlocks(RenderType.cutout(),
             ModBlocks.COPPER_TORCH.get(),
-            ModBlocks.COPPER_WALL_TORCH.get());
+            ModBlocks.COPPER_WALL_TORCH.get(),
+            // Copper Lanterns
+            ModBlocks.COPPER_LANTERN.get(),
+            ModBlocks.EXPOSED_COPPER_LANTERN.get(),
+            ModBlocks.WEATHERED_COPPER_LANTERN.get(),
+            ModBlocks.OXIDIZED_COPPER_LANTERN.get(),
+            ModBlocks.WAXED_COPPER_LANTERN.get(),
+            ModBlocks.WAXED_EXPOSED_COPPER_LANTERN.get(),
+            ModBlocks.WAXED_WEATHERED_COPPER_LANTERN.get(),
+            ModBlocks.WAXED_OXIDIZED_COPPER_LANTERN.get());
     }
 }
