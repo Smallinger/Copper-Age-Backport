@@ -113,6 +113,11 @@ public class CopperAgeBackportForge {
             event.accept(ModItems.WAXED_OXIDIZED_COPPER_BUTTON_ITEM.get());
         }
         
+        // Add copper torch to functional blocks tab
+        if (event.getTabKey() == CreativeModeTabs.FUNCTIONAL_BLOCKS) {
+            event.accept(ModItems.COPPER_TORCH_ITEM.get());
+        }
+        
         // Add copper tools to tools tab
         if (event.getTabKey() == CreativeModeTabs.TOOLS_AND_UTILITIES) {
             event.accept(ModItems.COPPER_SHOVEL.get());

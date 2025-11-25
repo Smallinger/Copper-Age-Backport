@@ -1,6 +1,218 @@
 {
   "replace": false,
   "values": [
-    "minecraft:barrel"
+    "minecraft:barrel",
+    {
+      "id": "sophisticatedstorage:barrel",
+      "required": false
+    },
+    {
+      "id": "sophisticatedstorage:iron_barrel",
+      "required": false
+    },
+    {
+      "id": "sophisticatedstorage:gold_barrel",
+      "required": false
+    },
+    {
+      "id": "sophisticatedstorage:diamond_barrel",
+      "required": false
+    },
+    {
+      "id": "sophisticatedstorage:netherite_barrel",
+      "required": false
+    },
+    {
+      "id": "sophisticatedstorage:limited_barrel_1",
+      "required": false
+    },
+    {
+      "id": "sophisticatedstorage:limited_barrel_2",
+      "required": false
+    },
+    {
+      "id": "sophisticatedstorage:limited_barrel_3",
+      "required": false
+    },
+    {
+      "id": "sophisticatedstorage:limited_barrel_4",
+      "required": false
+    },
+    {
+      "id": "sophisticatedstorage:limited_iron_barrel_1",
+      "required": false
+    },
+    {
+      "id": "sophisticatedstorage:limited_iron_barrel_2",
+      "required": false
+    },
+    {
+      "id": "sophisticatedstorage:limited_iron_barrel_3",
+      "required": false
+    },
+    {
+      "id": "sophisticatedstorage:limited_iron_barrel_4",
+      "required": false
+    },
+    {
+      "id": "sophisticatedstorage:limited_gold_barrel_1",
+      "required": false
+    },
+    {
+      "id": "sophisticatedstorage:limited_gold_barrel_2",
+      "required": false
+    },
+    {
+      "id": "sophisticatedstorage:limited_gold_barrel_3",
+      "required": false
+    },
+    {
+      "id": "sophisticatedstorage:limited_gold_barrel_4",
+      "required": false
+    },
+    {
+      "id": "sophisticatedstorage:limited_diamond_barrel_1",
+      "required": false
+    },
+    {
+      "id": "sophisticatedstorage:limited_diamond_barrel_2",
+      "required": false
+    },
+    {
+      "id": "sophisticatedstorage:limited_diamond_barrel_3",
+      "required": false
+    },
+    {
+      "id": "sophisticatedstorage:limited_diamond_barrel_4",
+      "required": false
+    },
+    {
+      "id": "sophisticatedstorage:limited_netherite_barrel_1",
+      "required": false
+    },
+    {
+      "id": "sophisticatedstorage:limited_netherite_barrel_2",
+      "required": false
+    },
+    {
+      "id": "sophisticatedstorage:limited_netherite_barrel_3",
+      "required": false
+    },
+    {
+      "id": "sophisticatedstorage:limited_netherite_barrel_4",
+      "required": false
+    },
+    {
+      "id": "expandedstorage:wood_barrel",
+      "required": false
+    },
+    {
+      "id": "expandedstorage:iron_barrel",
+      "required": false
+    },
+    {
+      "id": "expandedstorage:gold_barrel",
+      "required": false
+    },
+    {
+      "id": "expandedstorage:diamond_barrel",
+      "required": false
+    },
+    {
+      "id": "expandedstorage:netherite_barrel",
+      "required": false
+    },
+    {
+      "id": "expandedstorage:obsidian_barrel",
+      "required": false
+    },
+    {
+      "id": "expandedstorage:copper_barrel",
+      "required": false
+    },
+    {
+      "id": "expandedstorage:exposed_copper_barrel",
+      "required": false
+    },
+    {
+      "id": "expandedstorage:weathered_copper_barrel",
+      "required": false
+    },
+    {
+      "id": "expandedstorage:oxidized_copper_barrel",
+      "required": false
+    },
+    {
+      "id": "expandedstorage:waxed_copper_barrel",
+      "required": false
+    },
+    {
+      "id": "expandedstorage:waxed_exposed_copper_barrel",
+      "required": false
+    },
+    {
+      "id": "expandedstorage:waxed_weathered_copper_barrel",
+      "required": false
+    },
+    {
+      "id": "expandedstorage:waxed_oxidized_copper_barrel",
+      "required": false
+    },
+    {
+      "id": "expandedstorage:mini_barrel",
+      "required": false
+    },
+    {
+      "id": "expandedstorage:iron_mini_barrel",
+      "required": false
+    },
+    {
+      "id": "expandedstorage:gold_mini_barrel",
+      "required": false
+    },
+    {
+      "id": "expandedstorage:diamond_mini_barrel",
+      "required": false
+    },
+    {
+      "id": "expandedstorage:netherite_mini_barrel",
+      "required": false
+    },
+    {
+      "id": "expandedstorage:obsidian_mini_barrel",
+      "required": false
+    },
+    {
+      "id": "expandedstorage:copper_mini_barrel",
+      "required": false
+    },
+    {
+      "id": "expandedstorage:exposed_copper_mini_barrel",
+      "required": false
+    },
+    {
+      "id": "expandedstorage:weathered_copper_mini_barrel",
+      "required": false
+    },
+    {
+      "id": "expandedstorage:oxidized_copper_mini_barrel",
+      "required": false
+    },
+    {
+      "id": "expandedstorage:waxed_copper_mini_barrel",
+      "required": false
+    },
+    {
+      "id": "expandedstorage:waxed_exposed_copper_mini_barrel",
+      "required": false
+    },
+    {
+      "id": "expandedstorage:waxed_weathered_copper_mini_barrel",
+      "required": false
+    },
+    {
+      "id": "expandedstorage:waxed_oxidized_copper_mini_barrel",
+      "required": false
+    }
   ]
 }

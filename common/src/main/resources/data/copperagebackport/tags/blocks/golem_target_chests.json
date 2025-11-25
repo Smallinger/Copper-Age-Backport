@@ -66,6 +66,134 @@
     {
       "id": "ars_nouveau:repository",
       "required": false
+    },
+    {
+      "id": "sophisticatedstorage:chest",
+      "required": false
+    },
+    {
+      "id": "sophisticatedstorage:iron_chest",
+      "required": false
+    },
+    {
+      "id": "sophisticatedstorage:gold_chest",
+      "required": false
+    },
+    {
+      "id": "sophisticatedstorage:diamond_chest",
+      "required": false
+    },
+    {
+      "id": "sophisticatedstorage:netherite_chest",
+      "required": false
+    },
+    {
+      "id": "sophisticatedstorage:shulker_box",
+      "required": false
+    },
+    {
+      "id": "sophisticatedstorage:iron_shulker_box",
+      "required": false
+    },
+    {
+      "id": "sophisticatedstorage:gold_shulker_box",
+      "required": false
+    },
+    {
+      "id": "sophisticatedstorage:diamond_shulker_box",
+      "required": false
+    },
+    {
+      "id": "sophisticatedstorage:netherite_shulker_box",
+      "required": false
+    },
+    {
+      "id": "expandedstorage:wood_chest",
+      "required": false
+    },
+    {
+      "id": "expandedstorage:iron_chest",
+      "required": false
+    },
+    {
+      "id": "expandedstorage:gold_chest",
+      "required": false
+    },
+    {
+      "id": "expandedstorage:diamond_chest",
+      "required": false
+    },
+    {
+      "id": "expandedstorage:netherite_chest",
+      "required": false
+    },
+    {
+      "id": "expandedstorage:obsidian_chest",
+      "required": false
+    },
+    {
+      "id": "expandedstorage:old_wood_chest",
+      "required": false
+    },
+    {
+      "id": "expandedstorage:old_iron_chest",
+      "required": false
+    },
+    {
+      "id": "expandedstorage:old_gold_chest",
+      "required": false
+    },
+    {
+      "id": "expandedstorage:old_diamond_chest",
+      "required": false
+    },
+    {
+      "id": "expandedstorage:old_netherite_chest",
+      "required": false
+    },
+    {
+      "id": "expandedstorage:old_obsidian_chest",
+      "required": false
+    },
+    {
+      "id": "expandedstorage:pumpkin_chest",
+      "required": false
+    },
+    {
+      "id": "expandedstorage:moss_chest",
+      "required": false
+    },
+    {
+      "id": "expandedstorage:bamboo_chest",
+      "required": false
+    },
+    {
+      "id": "expandedstorage:vanilla_wood_mini_chest",
+      "required": false
+    },
+    {
+      "id": "expandedstorage:iron_mini_chest",
+      "required": false
+    },
+    {
+      "id": "expandedstorage:gold_mini_chest",
+      "required": false
+    },
+    {
+      "id": "expandedstorage:diamond_mini_chest",
+      "required": false
+    },
+    {
+      "id": "expandedstorage:netherite_mini_chest",
+      "required": false
+    },
+    {
+      "id": "expandedstorage:obsidian_mini_chest",
+      "required": false
+    },
+    {
+      "id": "expandedstorage:pumpkin_mini_chest",
+      "required": false
     }
   ]
 }

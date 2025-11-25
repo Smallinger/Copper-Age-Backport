@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "copperagebackport:block/copper_wall_torch"
+    },
+    "facing=north": {
+      "model": "copperagebackport:block/copper_wall_torch",
+      "y": 270
+    },
+    "facing=south": {
+      "model": "copperagebackport:block/copper_wall_torch",
+      "y": 90
+    },
+    "facing=west": {
+      "model": "copperagebackport:block/copper_wall_torch",
+      "y": 180
+    }
+  }
+}

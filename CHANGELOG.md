@@ -2,7 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
-## [1.20.1] - 0.1.0 - Copper Age Backport
+## [1.20.1] - 0.1.1 - In Development
+
+### Added
+
+#### Copper Torch
+- **New light source**: Copper Torch with unique flame particle effects
+- **Wall variant**: Can be placed on walls like regular torches
+- **Custom particles**: Special copper-colored flame particles
+
+## [1.20.1] - 0.1.0 - 25.11.2025 - Copper Age Backport
 
 ### Added
 
@@ -21,6 +30,11 @@ All notable changes to this project will be documented in this file.
 - **Full armor set**: Helmet, Chestplate, Leggings, and Boots
 - **Custom sounds**: Unique equip sounds for copper armor
 - **Balanced protection**: Between chainmail and iron tier
+
+### Fixed
+- **Pale Oak wouldn't connect to other shelves**
+- **Sound glitches after running the GitHub Action**
+- **Copper items and armor added to the default Minecraft tag**
 
 #### Other
 - Fabric support added (Fabric Loader 0.16.9)

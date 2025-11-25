@@ -7,11 +7,19 @@ import com.github.smallinger.copperagebackport.client.renderer.CopperGolemRender
 import com.github.smallinger.copperagebackport.client.renderer.CopperGolemStatueRenderer;
 import com.github.smallinger.copperagebackport.client.renderer.ShelfRenderer;
 import com.github.smallinger.copperagebackport.registry.ModBlockEntities;
+import com.github.smallinger.copperagebackport.registry.ModBlocks;
 import com.github.smallinger.copperagebackport.registry.ModEntities;
+import com.github.smallinger.copperagebackport.registry.ModParticles;
+import net.minecraft.client.particle.FlameParticle;
+import net.minecraft.client.renderer.ItemBlockRenderTypes;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
+import net.minecraftforge.client.event.RegisterParticleProvidersEvent;
+import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 
 @Mod.EventBusSubscriber(modid = Constants.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class CopperAgeBackportForgeClientRenderers {
@@ -43,5 +51,24 @@ public class CopperAgeBackportForgeClientRenderers {
         event.registerBlockEntityRenderer(ModBlockEntities.COPPER_CHEST_BLOCK_ENTITY.get(), CopperChestRenderer::new);
         event.registerBlockEntityRenderer(ModBlockEntities.COPPER_GOLEM_STATUE_BLOCK_ENTITY.get(), CopperGolemStatueRenderer::new);
         event.registerBlockEntityRenderer(ModBlockEntities.SHELF_BLOCK_ENTITY.get(), ShelfRenderer::new);
+    }
+    
+    /**
+     * Register particle providers.
+     */
+    @SubscribeEvent
+    public static void registerParticleProviders(RegisterParticleProvidersEvent event) {
+        event.registerSpriteSet(ModParticles.COPPER_FIRE_FLAME.get(), FlameParticle.Provider::new);
+    }
+
+    /**
+     * Register render layers for translucent/cutout blocks.
+     */
+    @SubscribeEvent(priority = EventPriority.LOW)
+    public static void onClientSetup(FMLClientSetupEvent event) {
+        event.enqueueWork(() -> {
+            ItemBlockRenderTypes.setRenderLayer(ModBlocks.COPPER_TORCH.get(), RenderType.cutout());
+            ItemBlockRenderTypes.setRenderLayer(ModBlocks.COPPER_WALL_TORCH.get(), RenderType.cutout());
+        });
     }
 }

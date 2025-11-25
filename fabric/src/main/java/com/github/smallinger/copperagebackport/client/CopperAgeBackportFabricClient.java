@@ -7,12 +7,18 @@ import com.github.smallinger.copperagebackport.client.renderer.CopperGolemStatue
 import com.github.smallinger.copperagebackport.client.renderer.CopperItemRenderer;
 import com.github.smallinger.copperagebackport.client.renderer.ShelfRenderer;
 import com.github.smallinger.copperagebackport.registry.ModBlockEntities;
+import com.github.smallinger.copperagebackport.registry.ModBlocks;
 import com.github.smallinger.copperagebackport.registry.ModEntities;
 import com.github.smallinger.copperagebackport.registry.ModItems;
+import com.github.smallinger.copperagebackport.registry.ModParticles;
 import net.fabricmc.api.ClientModInitializer;
+import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
+import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.BuiltinItemRendererRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
+import net.minecraft.client.particle.FlameParticle;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
 
 /**
@@ -23,6 +29,9 @@ public class CopperAgeBackportFabricClient implements ClientModInitializer {
 
     @Override
     public void onInitializeClient() {
+        // Register particle providers
+        ParticleFactoryRegistry.getInstance().register(ModParticles.COPPER_FIRE_FLAME.get(), FlameParticle.Provider::new);
+        
         // Register model layers for statue rendering
         EntityModelLayerRegistry.registerModelLayer(CopperGolemModel.STATUE_STANDING, CopperGolemModel::createStandingStatueBodyLayer);
         EntityModelLayerRegistry.registerModelLayer(CopperGolemModel.STATUE_RUNNING, CopperGolemModel::createRunningPoseBodyLayer);
@@ -39,6 +48,8 @@ public class CopperAgeBackportFabricClient implements ClientModInitializer {
         BlockEntityRenderers.register(ModBlockEntities.COPPER_CHEST_BLOCK_ENTITY.get(), CopperChestRenderer::new);
         BlockEntityRenderers.register(ModBlockEntities.COPPER_GOLEM_STATUE_BLOCK_ENTITY.get(), CopperGolemStatueRenderer::new);
         BlockEntityRenderers.register(ModBlockEntities.SHELF_BLOCK_ENTITY.get(), ShelfRenderer::new);
+
+        registerBlockRenderLayers();
 
         // Create single renderer instance for all 3D items
         CopperItemRenderer renderer = new CopperItemRenderer();
@@ -62,6 +73,12 @@ public class CopperAgeBackportFabricClient implements ClientModInitializer {
         BuiltinItemRendererRegistry.INSTANCE.register(ModItems.WAXED_EXPOSED_COPPER_GOLEM_STATUE_ITEM.get(), renderer);
         BuiltinItemRendererRegistry.INSTANCE.register(ModItems.WAXED_WEATHERED_COPPER_GOLEM_STATUE_ITEM.get(), renderer);
         BuiltinItemRendererRegistry.INSTANCE.register(ModItems.WAXED_OXIDIZED_COPPER_GOLEM_STATUE_ITEM.get(), renderer);
+    }
+
+    private void registerBlockRenderLayers() {
+        BlockRenderLayerMap.INSTANCE.putBlocks(RenderType.cutout(),
+            ModBlocks.COPPER_TORCH.get(),
+            ModBlocks.COPPER_WALL_TORCH.get());
     }
 }
 

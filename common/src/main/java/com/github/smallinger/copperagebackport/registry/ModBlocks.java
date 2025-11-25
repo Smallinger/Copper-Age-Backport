@@ -9,6 +9,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.WeatheringCopper;
 import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.material.PushReaction;
 
 import java.util.function.Supplier;
 
@@ -68,6 +69,10 @@ public class ModBlocks {
     public static Supplier<ShelfBlock> CRIMSON_SHELF;
     public static Supplier<ShelfBlock> WARPED_SHELF;
     public static Supplier<ShelfBlock> PALE_OAK_SHELF; // Requires VanillaBackport for crafting
+    
+    // Copper Torch Blocks
+    public static Supplier<CopperTorchBlock> COPPER_TORCH;
+    public static Supplier<CopperWallTorchBlock> COPPER_WALL_TORCH;
     
     public static void register() {
         Constants.LOG.info("Registering blocks for {}", Constants.MOD_NAME);
@@ -312,6 +317,26 @@ public class ModBlocks {
         } else {
             Constants.LOG.info("VanillaBackport not found - Pale Oak Shelf disabled");
         }
+        
+        // Register Copper Torch Blocks
+        COPPER_TORCH = helper.register(BLOCK, "copper_torch",
+            () -> new CopperTorchBlock(
+                BlockBehaviour.Properties.of()
+                    .noCollission()
+                    .instabreak()
+                    .lightLevel(p -> 14)
+                    .sound(SoundType.WOOD)
+                    .pushReaction(PushReaction.DESTROY)));
+        
+        COPPER_WALL_TORCH = helper.register(BLOCK, "copper_wall_torch",
+            () -> new CopperWallTorchBlock(
+                BlockBehaviour.Properties.of()
+                    .noCollission()
+                    .instabreak()
+                    .lightLevel(p -> 14)
+                    .sound(SoundType.WOOD)
+                    .pushReaction(PushReaction.DESTROY)
+                    .dropsLike(COPPER_TORCH.get())));
         
         // Setup button references after registration
         helper.onRegisterComplete(() -> {
