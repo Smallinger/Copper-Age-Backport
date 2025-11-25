@@ -2,7 +2,6 @@ package com.github.smallinger.copperagebackport.neoforge;
 
 import com.github.smallinger.copperagebackport.CommonClass;
 import com.github.smallinger.copperagebackport.Constants;
-import com.github.smallinger.copperagebackport.client.gui.ConfigScreen;
 import com.github.smallinger.copperagebackport.client.model.CopperGolemModel;
 import com.github.smallinger.copperagebackport.client.renderer.CopperChestRenderer;
 import com.github.smallinger.copperagebackport.client.renderer.CopperGolemRenderer;
@@ -29,7 +28,6 @@ import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.fml.loading.FMLPaths;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
-import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.event.entity.EntityAttributeCreationEvent;
@@ -49,7 +47,6 @@ public class CopperAgeBackportNeoForge {
         RegistryHelper.setInstance(new NeoForgeRegistryHelper(modEventBus));
 
         modEventBus.addListener(this::commonSetup);
-        modEventBus.addListener(this::onClientSetup);
         modEventBus.addListener(this::registerEntityAttributes);
         modEventBus.addListener(this::onBuildCreativeTabs);
         modEventBus.addListener(this::registerLayerDefinitions);
@@ -57,15 +54,7 @@ public class CopperAgeBackportNeoForge {
 
         NeoForge.EVENT_BUS.register(this);
 
-        // Register config screen factory
-        modContainer.registerExtensionPoint(IConfigScreenFactory.class, 
-            (mc, parent) -> ConfigScreen.create(parent));
-
         CommonClass.init();
-    }
-
-    private void onClientSetup(FMLClientSetupEvent event) {
-        // Client-only setup if needed
     }
 
     private void commonSetup(FMLCommonSetupEvent event) {
