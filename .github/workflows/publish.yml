@@ -64,64 +64,64 @@ jobs:
           asset_name: ${{ steps.find-neoforge.outputs.name }}
           asset_content_type: application/java-archive
 
-      # Upload Fabric to CurseForge (disabled temporarily)
-      # - name: Upload Fabric to CurseForge
-      #   uses: itsmeow/curseforge-upload@v3
-      #   with:
-      #     token: ${{ secrets.CURSEFORGE_TOKEN }}
-      #     project_id: ${{ secrets.CURSEFORGE_PROJECT_ID }}
-      #     game_endpoint: minecraft
-      #     file_path: ${{ steps.find-fabric.outputs.jar }}
-      #     changelog: ${{ github.event.release.body }}
-      #     changelog_type: markdown
-      #     display_name: ${{ steps.find-fabric.outputs.name }}
-      #     game_versions: "Minecraft 1.21:1.21.1,Java 17,Fabric,Client,Server"
-      #     release_type: ${{ github.event.release.prerelease && 'beta' || 'release' }}
-      #     relations: "fabric-api:requiredDependency"
+      # Upload Fabric to CurseForge
+      - name: Upload Fabric to CurseForge
+        uses: itsmeow/curseforge-upload@v3
+        with:
+          token: ${{ secrets.CURSEFORGE_TOKEN }}
+          project_id: ${{ secrets.CURSEFORGE_PROJECT_ID }}
+          game_endpoint: minecraft
+          file_path: ${{ steps.find-fabric.outputs.jar }}
+          changelog: ${{ github.event.release.body }}
+          changelog_type: markdown
+          display_name: ${{ steps.find-fabric.outputs.name }}
+          game_versions: "Minecraft 1.21:1.21.1,Java 21,Fabric,Client,Server"
+          release_type: ${{ github.event.release.prerelease && 'beta' || 'release' }}
+          relations: "fabric-api:requiredDependency"
 
-      # Upload NeoForge to CurseForge (disabled temporarily)
-      # - name: Upload NeoForge to CurseForge
-      #   uses: itsmeow/curseforge-upload@v3
-      #   with:
-      #     token: ${{ secrets.CURSEFORGE_TOKEN }}
-      #     project_id: ${{ secrets.CURSEFORGE_PROJECT_ID }}
-      #     game_endpoint: minecraft
-      #     file_path: ${{ steps.find-neoforge.outputs.jar }}
-      #     changelog: ${{ github.event.release.body }}
-      #     changelog_type: markdown
-      #     display_name: ${{ steps.find-neoforge.outputs.name }}
-      #     game_versions: "Minecraft 1.21:1.21.1,Java 17,NeoForge,Client,Server"
-      #     release_type: ${{ github.event.release.prerelease && 'beta' || 'release' }}
+      # Upload NeoForge to CurseForge
+      - name: Upload NeoForge to CurseForge
+        uses: itsmeow/curseforge-upload@v3
+        with:
+          token: ${{ secrets.CURSEFORGE_TOKEN }}
+          project_id: ${{ secrets.CURSEFORGE_PROJECT_ID }}
+          game_endpoint: minecraft
+          file_path: ${{ steps.find-neoforge.outputs.jar }}
+          changelog: ${{ github.event.release.body }}
+          changelog_type: markdown
+          display_name: ${{ steps.find-neoforge.outputs.name }}
+          game_versions: "Minecraft 1.21:1.21.1,Java 21,NeoForge,Client,Server"
+          release_type: ${{ github.event.release.prerelease && 'beta' || 'release' }}
 
-      # Upload Fabric to Modrinth (disabled temporarily)
-      # - name: Upload Fabric to Modrinth
-      #   uses: cloudnode-pro/modrinth-publish@v2
-      #   with:
-      #     token: ${{ secrets.MODRINTH_TOKEN }}
-      #     project: ${{ secrets.MODRINTH_PROJECT_ID }}
-      #     name: ${{ github.event.release.name }} (Fabric)
-      #     version: ${{ github.event.release.tag_name }}
-      #     changelog: ${{ github.event.release.body }}
-      #     loaders: fabric
-      #     game-versions: "1.21.1"
-      #     files: ${{ steps.find-fabric.outputs.jar }}
-      #     channel: ${{ github.event.release.prerelease && 'beta' || 'release' }}
-      #     dependencies: |
-      #       [{
-      #         "project_id": "P7dR8mSH",
-      #         "dependency_type": "required"
-      #       }]
+      # Upload Fabric to Modrinth
+      - name: Upload Fabric to Modrinth
+        uses: cloudnode-pro/modrinth-publish@v2
+        with:
+          token: ${{ secrets.MODRINTH_TOKEN }}
+          project: ${{ secrets.MODRINTH_PROJECT_ID }}
+          name: ${{ github.event.release.name }} (Fabric)
+          version: ${{ github.event.release.tag_name }}
+          changelog: ${{ github.event.release.body }}
+          loaders: fabric
+          game-versions: "1.21.1"
+          files: ${{ steps.find-fabric.outputs.jar }}
+          channel: ${{ github.event.release.prerelease && 'beta' || 'release' }}
+          dependencies: |
+            [{
+              "project_id": "P7dR8mSH",
+              "dependency_type": "required"
+            }]
 
-      # Upload NeoForge to Modrinth (disabled temporarily)
-      # - name: Upload NeoForge to Modrinth
-      #   uses: cloudnode-pro/modrinth-publish@v2
-      #   with:
-      #     token: ${{ secrets.MODRINTH_TOKEN }}
-      #     project: ${{ secrets.MODRINTH_PROJECT_ID }}
-      #     name: ${{ github.event.release.name }} (NeoForge)
-      #     version: ${{ github.event.release.tag_name }}
-      #     changelog: ${{ github.event.release.body }}
-      #     loaders: neoforge
-      #     game-versions: "1.21.1"
-      #     files: ${{ steps.find-neoforge.outputs.jar }}
-      #     channel: ${{ github.event.release.prerelease && 'beta' || 'release' }}
+      # Upload NeoForge to Modrinth
+      - name: Upload NeoForge to Modrinth
+        uses: cloudnode-pro/modrinth-publish@v2
+        with:
+          token: ${{ secrets.MODRINTH_TOKEN }}
+          project: ${{ secrets.MODRINTH_PROJECT_ID }}
+          name: ${{ github.event.release.name }} (NeoForge)
+          version: ${{ github.event.release.tag_name }}
+          changelog: ${{ github.event.release.body }}
+          loaders: neoforge
+          game-versions: "1.21.1"
+          files: ${{ steps.find-neoforge.outputs.jar }}
+          channel: ${{ github.event.release.prerelease && 'beta' || 'release' }}
