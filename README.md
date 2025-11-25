@@ -10,11 +10,11 @@
 
 ![Demo](./.github/media/logo.png)
 
-A Minecraft mod that brings the complete Copper Age experience to older Minecraft versions. Starting with the beloved Copper Golem from the Minecraft Live 2021 mob vote, this mod will gradually introduce all copper-related blocks, items, and mechanics over time.
+A Minecraft mod that brings the complete Copper Age experience to Minecraft 1.20.1. Starting with the beloved Copper Golem from the Minecraft Live 2021 mob vote, this mod introduces copper-related blocks, items, and mechanics to this version.
 
 ## Copper Age Backport
 
-Whether you're playing on **1.20.1** or **1.21.1**, you'll get access to the full Copper Age feature set: Copper Chests, Statues, Buttons, and the Copper Golem himself – all functioning identically to newer releases with complete oxidation systems and transport logic. More copper content will be added in future updates to bring the entire Copper Age ecosystem to older versions.
+Get access to the full Copper Age feature set on **Minecraft 1.20.1**: Copper Chests, Statues, Buttons, and the Copper Golem himself – all functioning with complete oxidation systems and transport logic. More copper content will be added in future updates to bring the entire Copper Age ecosystem to this version.
 
 ![transport](./.github/media/transport.gif)
 
@@ -99,8 +99,8 @@ When [VanillaBackport](https://modrinth.com/mod/vanillabackport) is installed, C
 
 ## Installation
 
-1. Download the latest release from the [Releases](https://github.com/Smallinger/Copper-Golem-Legacy/releases) page
-2. Install [Forge](https://files.minecraftforge.net/) 47.3.0+ or [Fabric](https://fabricmc.net/) for Minecraft 1.20.1 or 1.21.1
+1. Download the latest release from the [Releases](https://github.com/Smallinger/Copper-Age-Backport/releases) page
+2. Install [Forge](https://files.minecraftforge.net/) 47.3.0+ or [Fabric](https://fabricmc.net/) for Minecraft 1.20.1
 3. Place the downloaded `.jar` file in your `mods` folder
 4. Launch Minecraft and enjoy!
 
@@ -108,13 +108,13 @@ When [VanillaBackport](https://modrinth.com/mod/vanillabackport) is installed, C
 
 ```bash
 # Clone the repository
-git clone https://github.com/Smallinger/Copper-Golem-Legacy.git
-cd Copper-Golem-Legacy
+git clone https://github.com/Smallinger/Copper-Age-Backport.git
+cd Copper-Age-Backport
 
 # Build the mod
 .\gradlew build
 
-# The compiled JAR will be in build/libs/
+# The compiled JARs will be in fabric/build/libs/ and forge/build/libs/
 ```
 
 ## Development
@@ -157,10 +157,10 @@ Copyright (c) 2025 Marc Schirrmann
 
 ## Links
 
-- [GitHub Repository](https://github.com/Smallinger/Copper-Golem-Legacy)
-- [Issue Tracker](https://github.com/Smallinger/Copper-Golem-Legacy/issues)
+- [GitHub Repository](https://github.com/Smallinger/Copper-Age-Backport)
+- [Issue Tracker](https://github.com/Smallinger/Copper-Age-Backport/issues)
 - [Changelog](CHANGELOG.md)
 
 ## Support Development
 
-If you encounter any issues or have questions, please open an issue on the [GitHub issue tracker](https://github.com/Smallinger/Copper-Golem-Legacy/issues).
+If you encounter any issues or have questions, please open an issue on the [GitHub issue tracker](https://github.com/Smallinger/Copper-Age-Backport/issues).
