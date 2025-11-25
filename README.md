@@ -8,7 +8,7 @@
 [![Discord](https://img.shields.io/discord/1441831886719811654?label=Discord&logo=discord&color=5865F2)](https://discord.gg/hGrWUW9vSb)
 [![Crowdin](https://badges.crowdin.net/copper-golem-legacy/localized.svg)](https://crowdin.com/project/copper-golem-legacy)
 
-![Demo](./src/main/resources/logo.png)
+![Demo](./.github/media/logo.png)
 
 A Minecraft mod that brings the complete Copper Age experience to older Minecraft versions. Starting with the beloved Copper Golem from the Minecraft Live 2021 mob vote, this mod will gradually introduce all copper-related blocks, items, and mechanics over time.
 

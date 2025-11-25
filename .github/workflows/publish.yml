@@ -1,0 +1,127 @@
+name: Publish Release
+
+on:
+  release:
+    types: [published]
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    name: Build and Publish
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: 17
+          distribution: temurin
+          cache: gradle
+
+      - name: Make gradlew executable
+        run: chmod +x ./gradlew
+
+      - name: Build with Gradle
+        run: ./gradlew build
+
+      - name: Find Fabric JAR
+        id: find-fabric
+        run: |
+          FABRIC_JAR=$(find fabric/build/libs -name "*-fabric-*.jar" ! -name "*-sources.jar" ! -name "*-javadoc.jar" | head -n 1)
+          echo "jar=$FABRIC_JAR" >> $GITHUB_OUTPUT
+          echo "name=$(basename $FABRIC_JAR)" >> $GITHUB_OUTPUT
+
+      - name: Find Forge JAR
+        id: find-forge
+        run: |
+          FORGE_JAR=$(find forge/build/libs -name "*-forge-*.jar" ! -name "*-sources.jar" ! -name "*-javadoc.jar" | head -n 1)
+          echo "jar=$FORGE_JAR" >> $GITHUB_OUTPUT
+          echo "name=$(basename $FORGE_JAR)" >> $GITHUB_OUTPUT
+
+      # Upload to GitHub Release
+      - name: Upload Fabric JAR to GitHub Release
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ github.event.release.upload_url }}
+          asset_path: ${{ steps.find-fabric.outputs.jar }}
+          asset_name: ${{ steps.find-fabric.outputs.name }}
+          asset_content_type: application/java-archive
+
+      - name: Upload Forge JAR to GitHub Release
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ github.event.release.upload_url }}
+          asset_path: ${{ steps.find-forge.outputs.jar }}
+          asset_name: ${{ steps.find-forge.outputs.name }}
+          asset_content_type: application/java-archive
+
+      # Upload Fabric to CurseForge
+      - name: Upload Fabric to CurseForge
+        uses: itsmeow/curseforge-upload@v3
+        with:
+          token: ${{ secrets.CURSEFORGE_TOKEN }}
+          project_id: ${{ secrets.CURSEFORGE_PROJECT_ID }}
+          game_endpoint: minecraft
+          file_path: ${{ steps.find-fabric.outputs.jar }}
+          changelog: ${{ github.event.release.body }}
+          changelog_type: markdown
+          display_name: ${{ steps.find-fabric.outputs.name }}
+          game_versions: "Minecraft 1.20:1.20.1,Java 17,Fabric,Client,Server"
+          release_type: ${{ github.event.release.prerelease && 'beta' || 'release' }}
+          relations: "fabric-api:requiredDependency"
+
+      # Upload Forge to CurseForge
+      - name: Upload Forge to CurseForge
+        uses: itsmeow/curseforge-upload@v3
+        with:
+          token: ${{ secrets.CURSEFORGE_TOKEN }}
+          project_id: ${{ secrets.CURSEFORGE_PROJECT_ID }}
+          game_endpoint: minecraft
+          file_path: ${{ steps.find-forge.outputs.jar }}
+          changelog: ${{ github.event.release.body }}
+          changelog_type: markdown
+          display_name: ${{ steps.find-forge.outputs.name }}
+          game_versions: "Minecraft 1.20:1.20.1,Java 17,Forge,Client,Server"
+          release_type: ${{ github.event.release.prerelease && 'beta' || 'release' }}
+
+      # Upload Fabric to Modrinth
+      - name: Upload Fabric to Modrinth
+        uses: cloudnode-pro/modrinth-publish@v2
+        with:
+          token: ${{ secrets.MODRINTH_TOKEN }}
+          project: ${{ secrets.MODRINTH_PROJECT_ID }}
+          name: ${{ github.event.release.name }} (Fabric)
+          version: ${{ github.event.release.tag_name }}
+          changelog: ${{ github.event.release.body }}
+          loaders: fabric
+          game-versions: "1.20.1"
+          files: ${{ steps.find-fabric.outputs.jar }}
+          channel: ${{ github.event.release.prerelease && 'beta' || 'release' }}
+          dependencies: |
+            [{
+              "project_id": "P7dR8mSH",
+              "dependency_type": "required"
+            }]
+
+      # Upload Forge to Modrinth
+      - name: Upload Forge to Modrinth
+        uses: cloudnode-pro/modrinth-publish@v2
+        with:
+          token: ${{ secrets.MODRINTH_TOKEN }}
+          project: ${{ secrets.MODRINTH_PROJECT_ID }}
+          name: ${{ github.event.release.name }} (Forge)
+          version: ${{ github.event.release.tag_name }}
+          changelog: ${{ github.event.release.body }}
+          loaders: forge
+          game-versions: "1.20.1"
+          files: ${{ steps.find-forge.outputs.jar }}
+          channel: ${{ github.event.release.prerelease && 'beta' || 'release' }}
