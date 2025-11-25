@@ -1,0 +1,17 @@
+﻿{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "copperagebackport:copper_golem_statue"
+    },
+    {
+      "item": "minecraft:honeycomb"
+    }
+  ],
+  "result": {
+    "item": "copperagebackport:waxed_copper_golem_statue",
+    "count": 1
+  }
+}
+

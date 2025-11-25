@@ -1,0 +1,16 @@
+{
+  "replace": false,
+  "values": [
+    "copperagebackport:oak_shelf",
+    "copperagebackport:spruce_shelf",
+    "copperagebackport:birch_shelf",
+    "copperagebackport:jungle_shelf",
+    "copperagebackport:acacia_shelf",
+    "copperagebackport:dark_oak_shelf",
+    "copperagebackport:mangrove_shelf",
+    "copperagebackport:cherry_shelf",
+    "copperagebackport:bamboo_shelf",
+    "copperagebackport:crimson_shelf",
+    "copperagebackport:warped_shelf"
+  ]
+}

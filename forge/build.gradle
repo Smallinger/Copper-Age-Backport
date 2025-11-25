@@ -1,0 +1,74 @@
+plugins {
+    id 'multiloader-loader'
+    id 'net.minecraftforge.gradle'
+    id 'org.parchmentmc.librarian.forgegradle'
+}
+
+minecraft {
+    mappings channel: 'parchment', version: "${parchment_version}-${parchment_minecraft}"
+
+    def atFile = project(':common').file('src/main/resources/META-INF/accesstransformer.cfg')
+    if (atFile.exists()) {
+        accessTransformer = atFile
+    }
+
+    runs {
+        client {
+            workingDirectory project.file('run')
+            property 'forge.logging.markers', 'REGISTRIES'
+            property 'forge.logging.console.level', 'debug'
+            property 'forge.enabledGameTestNamespaces', mod_id
+            property 'copperagebackport.preview', project.findProperty('preview_build') ?: 'false'
+
+            mods {
+                "${mod_id}" {
+                    source sourceSets.main
+                }
+            }
+        }
+
+        server {
+            workingDirectory project.file('run')
+            property 'forge.logging.markers', 'REGISTRIES'
+            property 'forge.logging.console.level', 'debug'
+            property 'forge.enabledGameTestNamespaces', mod_id
+            property 'copperagebackport.preview', project.findProperty('preview_build') ?: 'false'
+
+            mods {
+                "${mod_id}" {
+                    source sourceSets.main
+                }
+            }
+        }
+
+        // Dedicated run for automated data generation
+        data {
+            workingDirectory project.file('run')
+            property 'forge.logging.markers', 'REGISTRIES'
+            property 'forge.logging.console.level', 'debug'
+            args '--mod', mod_id, '--all', '--output', file('src/generated/resources/').absolutePath, '--existing', file('src/main/resources/').absolutePath
+
+            mods {
+                "${mod_id}" {
+                    source sourceSets.main
+                }
+            }
+        }
+    }
+}
+
+// Suppress javadoc warnings
+tasks.withType(Javadoc) {
+    options.addStringOption('Xdoclint:none', '-quiet')
+}
+
+sourceSets.main.resources.srcDir 'src/generated/resources'
+
+dependencies {
+    minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
+    compileOnly project(":common")
+}
+
+jar {
+    finalizedBy('reobfJar')
+}

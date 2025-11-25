@@ -1,0 +1,19 @@
+﻿{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "###",
+    "# #",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:exposed_copper"
+    }
+  },
+  "result": {
+    "item": "copperagebackport:exposed_copper_chest",
+    "count": 1
+  }
+}
+

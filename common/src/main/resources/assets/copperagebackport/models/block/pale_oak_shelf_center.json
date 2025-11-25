@@ -1,0 +1,9 @@
+{
+  "parent": "copperagebackport:block/template_shelf_center",
+  "textures": {
+    "all": "copperagebackport:block/pale_oak_shelf",
+    "particle": "copperagebackport:block/pale_oak_shelf"
+  }
+}
+
+

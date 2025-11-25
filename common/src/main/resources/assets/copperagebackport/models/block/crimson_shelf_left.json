@@ -1,0 +1,8 @@
+{
+  "parent": "copperagebackport:block/template_shelf_left",
+  "textures": {
+    "all": "copperagebackport:block/crimson_shelf",
+    "particle": "minecraft:block/stripped_crimson_stem"
+  }
+}
+

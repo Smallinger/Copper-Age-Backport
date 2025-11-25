@@ -1,0 +1,40 @@
+﻿{
+    "schemaVersion": 1,
+    "id": "copperagebackport",
+    "version": "${version}",
+    "name": "${mod_name}",
+    "description": "${description}",
+    "authors": [
+        "${mod_author}"
+    ],
+    "contact": {
+        "homepage": "https://github.com/Smallinger/Copper-Golem-Legacy",
+        "sources": "https://github.com/Smallinger/Copper-Golem-Legacy"
+    },
+    "license": "${license}",
+    "icon": "assets/copperagebackport/logo.png",
+    "environment": "*",
+    "entrypoints": {
+        "main": [
+            "com.github.smallinger.copperagebackport.CopperAgeBackportFabric"
+        ],
+        "client": [
+            "com.github.smallinger.copperagebackport.client.CopperAgeBackportFabricClient"
+        ],
+        "modmenu": [
+            "com.github.smallinger.copperagebackport.client.ModMenuIntegration"
+        ]
+    },
+    "mixins": [
+        "${mod_id}.mixins.json",
+        "${mod_id}.fabric.mixins.json"
+    ],
+    "depends": {
+        "fabricloader": ">=0.14",
+        "fabric-api": "*",
+        "minecraft": "${minecraft_version}",
+        "java": ">=17"
+    },
+    "suggests": {}
+}
+  

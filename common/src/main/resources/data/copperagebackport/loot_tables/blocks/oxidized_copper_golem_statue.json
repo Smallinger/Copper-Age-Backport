@@ -1,0 +1,34 @@
+﻿{
+  "type": "minecraft:block",
+  "random_sequence": "copperagebackport:blocks/oxidized_copper_golem_statue",
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "copperagebackport:oxidized_copper_golem_statue",
+          "functions": [
+            {
+              "function": "minecraft:copy_name",
+              "source": "block_entity"
+            },
+            {
+              "function": "minecraft:copy_state",
+              "block": "copperagebackport:oxidized_copper_golem_statue",
+              "properties": [
+                "pose"
+              ]
+            }
+          ]
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ]
+    }
+  ]
+}
+

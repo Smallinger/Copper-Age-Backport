@@ -1,0 +1,17 @@
+﻿{
+  "type": "minecraft:crafting_shapeless",
+  "category": "redstone",
+  "ingredients": [
+    {
+      "item": "copperagebackport:oxidized_copper_button"
+    },
+    {
+      "item": "minecraft:honeycomb"
+    }
+  ],
+  "result": {
+    "item": "copperagebackport:waxed_oxidized_copper_button",
+    "count": 1
+  }
+}
+
