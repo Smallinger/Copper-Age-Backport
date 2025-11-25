@@ -11,6 +11,13 @@ All notable changes to this project will be documented in this file.
 - **Wall variant**: Can be placed on walls like regular torches
 - **Custom particles**: Special copper-colored flame particles
 
+#### Copper Lantern
+- **8 variants**: Copper, Exposed, Weathered, Oxidized + Waxed versions
+- **Oxidation system**: Lanterns weather over time like other copper blocks
+- **Waxing support**: Use honeycomb to prevent oxidation
+- **Hanging variant**: Can be placed on ceilings or standing on blocks
+- **Light level 15**: Provides maximum light output
+
 ## [1.20.1] - 0.1.0 - 25.11.2025 - Copper Age Backport
 
 ### Added

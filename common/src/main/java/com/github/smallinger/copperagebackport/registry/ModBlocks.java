@@ -74,6 +74,18 @@ public class ModBlocks {
     public static Supplier<CopperTorchBlock> COPPER_TORCH;
     public static Supplier<CopperWallTorchBlock> COPPER_WALL_TORCH;
     
+    // Copper Lantern Blocks (Weathering)
+    public static Supplier<WeatheringCopperLanternBlock> COPPER_LANTERN;
+    public static Supplier<WeatheringCopperLanternBlock> EXPOSED_COPPER_LANTERN;
+    public static Supplier<WeatheringCopperLanternBlock> WEATHERED_COPPER_LANTERN;
+    public static Supplier<WeatheringCopperLanternBlock> OXIDIZED_COPPER_LANTERN;
+    
+    // Waxed Copper Lantern Blocks
+    public static Supplier<CopperLanternBlock> WAXED_COPPER_LANTERN;
+    public static Supplier<CopperLanternBlock> WAXED_EXPOSED_COPPER_LANTERN;
+    public static Supplier<CopperLanternBlock> WAXED_WEATHERED_COPPER_LANTERN;
+    public static Supplier<CopperLanternBlock> WAXED_OXIDIZED_COPPER_LANTERN;
+    
     public static void register() {
         Constants.LOG.info("Registering blocks for {}", Constants.MOD_NAME);
         
@@ -337,6 +349,92 @@ public class ModBlocks {
                     .sound(SoundType.WOOD)
                     .pushReaction(PushReaction.DESTROY)
                     .dropsLike(COPPER_TORCH.get())));
+        
+        // Register Copper Lantern Blocks (Weathering)
+        COPPER_LANTERN = helper.register(BLOCK, "copper_lantern",
+            () -> new WeatheringCopperLanternBlock(
+                WeatheringCopper.WeatherState.UNAFFECTED,
+                BlockBehaviour.Properties.of()
+                    .strength(3.5F)
+                    .sound(SoundType.LANTERN)
+                    .lightLevel(p -> 15)
+                    .noOcclusion()
+                    .pushReaction(PushReaction.DESTROY)
+                    .randomTicks()));
+        
+        EXPOSED_COPPER_LANTERN = helper.register(BLOCK, "exposed_copper_lantern",
+            () -> new WeatheringCopperLanternBlock(
+                WeatheringCopper.WeatherState.EXPOSED,
+                BlockBehaviour.Properties.of()
+                    .strength(3.5F)
+                    .sound(SoundType.LANTERN)
+                    .lightLevel(p -> 15)
+                    .noOcclusion()
+                    .pushReaction(PushReaction.DESTROY)
+                    .randomTicks()));
+        
+        WEATHERED_COPPER_LANTERN = helper.register(BLOCK, "weathered_copper_lantern",
+            () -> new WeatheringCopperLanternBlock(
+                WeatheringCopper.WeatherState.WEATHERED,
+                BlockBehaviour.Properties.of()
+                    .strength(3.5F)
+                    .sound(SoundType.LANTERN)
+                    .lightLevel(p -> 15)
+                    .noOcclusion()
+                    .pushReaction(PushReaction.DESTROY)
+                    .randomTicks()));
+        
+        OXIDIZED_COPPER_LANTERN = helper.register(BLOCK, "oxidized_copper_lantern",
+            () -> new WeatheringCopperLanternBlock(
+                WeatheringCopper.WeatherState.OXIDIZED,
+                BlockBehaviour.Properties.of()
+                    .strength(3.5F)
+                    .sound(SoundType.LANTERN)
+                    .lightLevel(p -> 15)
+                    .noOcclusion()
+                    .pushReaction(PushReaction.DESTROY)
+                    .randomTicks()));
+        
+        // Register Waxed Copper Lantern Blocks
+        WAXED_COPPER_LANTERN = helper.register(BLOCK, "waxed_copper_lantern",
+            () -> new CopperLanternBlock(
+                WeatheringCopper.WeatherState.UNAFFECTED,
+                BlockBehaviour.Properties.of()
+                    .strength(3.5F)
+                    .sound(SoundType.LANTERN)
+                    .lightLevel(p -> 15)
+                    .noOcclusion()
+                    .pushReaction(PushReaction.DESTROY)));
+        
+        WAXED_EXPOSED_COPPER_LANTERN = helper.register(BLOCK, "waxed_exposed_copper_lantern",
+            () -> new CopperLanternBlock(
+                WeatheringCopper.WeatherState.EXPOSED,
+                BlockBehaviour.Properties.of()
+                    .strength(3.5F)
+                    .sound(SoundType.LANTERN)
+                    .lightLevel(p -> 15)
+                    .noOcclusion()
+                    .pushReaction(PushReaction.DESTROY)));
+        
+        WAXED_WEATHERED_COPPER_LANTERN = helper.register(BLOCK, "waxed_weathered_copper_lantern",
+            () -> new CopperLanternBlock(
+                WeatheringCopper.WeatherState.WEATHERED,
+                BlockBehaviour.Properties.of()
+                    .strength(3.5F)
+                    .sound(SoundType.LANTERN)
+                    .lightLevel(p -> 15)
+                    .noOcclusion()
+                    .pushReaction(PushReaction.DESTROY)));
+        
+        WAXED_OXIDIZED_COPPER_LANTERN = helper.register(BLOCK, "waxed_oxidized_copper_lantern",
+            () -> new CopperLanternBlock(
+                WeatheringCopper.WeatherState.OXIDIZED,
+                BlockBehaviour.Properties.of()
+                    .strength(3.5F)
+                    .sound(SoundType.LANTERN)
+                    .lightLevel(p -> 15)
+                    .noOcclusion()
+                    .pushReaction(PushReaction.DESTROY)));
         
         // Setup button references after registration
         helper.onRegisterComplete(() -> {

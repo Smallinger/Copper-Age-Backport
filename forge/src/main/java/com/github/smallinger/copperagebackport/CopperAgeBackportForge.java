@@ -116,6 +116,15 @@ public class CopperAgeBackportForge {
         // Add copper torch to functional blocks tab
         if (event.getTabKey() == CreativeModeTabs.FUNCTIONAL_BLOCKS) {
             event.accept(ModItems.COPPER_TORCH_ITEM.get());
+            // Copper Lanterns
+            event.accept(ModItems.COPPER_LANTERN_ITEM.get());
+            event.accept(ModItems.EXPOSED_COPPER_LANTERN_ITEM.get());
+            event.accept(ModItems.WEATHERED_COPPER_LANTERN_ITEM.get());
+            event.accept(ModItems.OXIDIZED_COPPER_LANTERN_ITEM.get());
+            event.accept(ModItems.WAXED_COPPER_LANTERN_ITEM.get());
+            event.accept(ModItems.WAXED_EXPOSED_COPPER_LANTERN_ITEM.get());
+            event.accept(ModItems.WAXED_WEATHERED_COPPER_LANTERN_ITEM.get());
+            event.accept(ModItems.WAXED_OXIDIZED_COPPER_LANTERN_ITEM.get());
         }
         
         // Add copper tools to tools tab

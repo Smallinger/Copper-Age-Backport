@@ -1,0 +1,13 @@
+{
+  "replace": false,
+  "values": [
+    "copperagebackport:copper_lantern",
+    "copperagebackport:exposed_copper_lantern",
+    "copperagebackport:weathered_copper_lantern",
+    "copperagebackport:oxidized_copper_lantern",
+    "copperagebackport:waxed_copper_lantern",
+    "copperagebackport:waxed_exposed_copper_lantern",
+    "copperagebackport:waxed_weathered_copper_lantern",
+    "copperagebackport:waxed_oxidized_copper_lantern"
+  ]
+}

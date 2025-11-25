@@ -50,6 +50,15 @@
   "block.copperagebackport.pale_oak_shelf": "Pale Oak Shelf",
   
   "block.copperagebackport.copper_torch": "Copper Torch",
+  
+  "block.copperagebackport.copper_lantern": "Copper Lantern",
+  "block.copperagebackport.exposed_copper_lantern": "Exposed Copper Lantern",
+  "block.copperagebackport.weathered_copper_lantern": "Weathered Copper Lantern",
+  "block.copperagebackport.oxidized_copper_lantern": "Oxidized Copper Lantern",
+  "block.copperagebackport.waxed_copper_lantern": "Waxed Copper Lantern",
+  "block.copperagebackport.waxed_exposed_copper_lantern": "Waxed Exposed Copper Lantern",
+  "block.copperagebackport.waxed_weathered_copper_lantern": "Waxed Weathered Copper Lantern",
+  "block.copperagebackport.waxed_oxidized_copper_lantern": "Waxed Oxidized Copper Lantern",
 
   "subtitles.entity.copper_golem.death": "Copper Golem dies",
   "subtitles.entity.copper_golem.hurt": "Copper Golem hurts",
