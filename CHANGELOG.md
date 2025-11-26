@@ -6,6 +6,17 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 
+#### Copper Horse Armor
+- **New armor item**: Copper Horse Armor with 4 protection (between leather 3 and iron 5)
+- **Loot generation**: Can be found in dungeon, desert pyramid, jungle temple, nether bridge, stronghold, end city, and village weaponsmith chests
+- **Creative tab placement**: Appears after leather horse armor, before iron horse armor
+
+#### FastChest Support (Fabric only)
+- **Supported version**: FastChest 1.5 for 1.20.x
+- **Optional compatibility**: Copper Chests now render as static block models when FastChest mod is installed
+- **Performance boost**: Simplified rendering reduces lag with many chests
+- **Item rendering**: Chest items also use static models in inventories and when held
+
 #### Config Menu
 - **Copper Golem oxidation time**: The oxidation time of the Copper Golem can now be configured in the mod settings
 
@@ -27,14 +38,6 @@ All notable changes to this project will be documented in this file.
 - **Waxing support**: Use honeycomb to prevent oxidation
 - **Axe scraping**: Remove wax or reduce oxidation with an axe
 - **Rotatable**: Can be placed along any axis (X, Y, Z)
-- **Waterloggable**: Can be placed in water
-
-#### Copper Grate
-- **8 variants**: Copper, Exposed, Weathered, Oxidized + Waxed versions
-- **Oxidation system**: Grates weather over time like other copper blocks
-- **Waxing support**: Use honeycomb to prevent oxidation
-- **Axe scraping**: Remove wax or reduce oxidation with an axe
-- **Transparent**: See-through decorative block
 - **Waterloggable**: Can be placed in water
 
 ### Fixed

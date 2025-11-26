@@ -16,6 +16,7 @@ import net.minecraft.world.item.ShovelItem;
 import net.minecraft.world.item.StandingAndWallBlockItem;
 import net.minecraft.world.item.SwordItem;
 import net.minecraft.world.item.ArmorItem;
+import net.minecraft.world.item.HorseArmorItem;
 import net.minecraft.core.Direction;
 import com.github.smallinger.copperagebackport.platform.Services;
 
@@ -46,6 +47,7 @@ public class ModItems {
     public static Supplier<ArmorItem> COPPER_CHESTPLATE;
     public static Supplier<ArmorItem> COPPER_LEGGINGS;
     public static Supplier<ArmorItem> COPPER_BOOTS;
+    public static Supplier<Item> COPPER_HORSE_ARMOR;
     
     // Copper Chest Items
     public static Supplier<BlockItem> COPPER_CHEST_ITEM;
@@ -123,18 +125,6 @@ public class ModItems {
     public static Supplier<BlockItem> WAXED_EXPOSED_COPPER_CHAIN_ITEM;
     public static Supplier<BlockItem> WAXED_WEATHERED_COPPER_CHAIN_ITEM;
     public static Supplier<BlockItem> WAXED_OXIDIZED_COPPER_CHAIN_ITEM;
-    
-    // Copper Grate Items (Weathering)
-    public static Supplier<BlockItem> COPPER_GRATE_ITEM;
-    public static Supplier<BlockItem> EXPOSED_COPPER_GRATE_ITEM;
-    public static Supplier<BlockItem> WEATHERED_COPPER_GRATE_ITEM;
-    public static Supplier<BlockItem> OXIDIZED_COPPER_GRATE_ITEM;
-    
-    // Waxed Copper Grate Items
-    public static Supplier<BlockItem> WAXED_COPPER_GRATE_ITEM;
-    public static Supplier<BlockItem> WAXED_EXPOSED_COPPER_GRATE_ITEM;
-    public static Supplier<BlockItem> WAXED_WEATHERED_COPPER_GRATE_ITEM;
-    public static Supplier<BlockItem> WAXED_OXIDIZED_COPPER_GRATE_ITEM;
     
     public static void register() {
         Constants.LOG.info("Registering items for {}", Constants.MOD_NAME);
@@ -323,37 +313,10 @@ public class ModItems {
         WAXED_OXIDIZED_COPPER_CHAIN_ITEM = helper.register(ITEM, "waxed_oxidized_copper_chain",
             () -> new BlockItem(ModBlocks.WAXED_OXIDIZED_COPPER_CHAIN.get(), new Item.Properties()));
         
-        // Register Copper Grate Items
-        COPPER_GRATE_ITEM = helper.register(ITEM, "copper_grate",
-            () -> new BlockItem(ModBlocks.COPPER_GRATE.get(), new Item.Properties()));
-        
-        EXPOSED_COPPER_GRATE_ITEM = helper.register(ITEM, "exposed_copper_grate",
-            () -> new BlockItem(ModBlocks.EXPOSED_COPPER_GRATE.get(), new Item.Properties()));
-        
-        WEATHERED_COPPER_GRATE_ITEM = helper.register(ITEM, "weathered_copper_grate",
-            () -> new BlockItem(ModBlocks.WEATHERED_COPPER_GRATE.get(), new Item.Properties()));
-        
-        OXIDIZED_COPPER_GRATE_ITEM = helper.register(ITEM, "oxidized_copper_grate",
-            () -> new BlockItem(ModBlocks.OXIDIZED_COPPER_GRATE.get(), new Item.Properties()));
-        
-        // Register Waxed Copper Grate Items
-        WAXED_COPPER_GRATE_ITEM = helper.register(ITEM, "waxed_copper_grate",
-            () -> new BlockItem(ModBlocks.WAXED_COPPER_GRATE.get(), new Item.Properties()));
-        
-        WAXED_EXPOSED_COPPER_GRATE_ITEM = helper.register(ITEM, "waxed_exposed_copper_grate",
-            () -> new BlockItem(ModBlocks.WAXED_EXPOSED_COPPER_GRATE.get(), new Item.Properties()));
-        
-        WAXED_WEATHERED_COPPER_GRATE_ITEM = helper.register(ITEM, "waxed_weathered_copper_grate",
-            () -> new BlockItem(ModBlocks.WAXED_WEATHERED_COPPER_GRATE.get(), new Item.Properties()));
-        
-        WAXED_OXIDIZED_COPPER_GRATE_ITEM = helper.register(ITEM, "waxed_oxidized_copper_grate",
-            () -> new BlockItem(ModBlocks.WAXED_OXIDIZED_COPPER_GRATE.get(), new Item.Properties()));
-        
         // Register Copper Tools
-        // Copper Axe: 6.0 base + 1.0 material bonus = 7.0 attack damage, -3.2 attack speed
-        // In 1.20.1: base damage for axe is 6.0F, attack speed is -3.2F
+        // Copper Axe: 7.0 base + 1.0 material bonus + 1 player base = 9 attack damage, -3.2 attack speed (official MC 1.21.10 values)
         COPPER_AXE = helper.register(ITEM, "copper_axe",
-            () -> new CopperAxeItem(CopperTier.INSTANCE, 6.0F, -3.2F, new Item.Properties().stacksTo(1)));
+            () -> new CopperAxeItem(CopperTier.INSTANCE, 7.0F, -3.2F, new Item.Properties().stacksTo(1)));
         
         // Copper Pickaxe: 1.0 attack damage, -2.8 attack speed
         // In 1.20.1: PickaxeItem takes int for attackDamage
@@ -364,9 +327,9 @@ public class ModItems {
         COPPER_SHOVEL = helper.register(ITEM, "copper_shovel",
             () -> new CopperShovelItem(CopperTier.INSTANCE, 1.5F, -3.0F, new Item.Properties().stacksTo(1)));
         
-        // Copper Hoe: -2 attack damage, -1.0 attack speed (fast)
+        // Copper Hoe: -1 attack damage, -2.0 attack speed (official MC 1.21.10 values)
         COPPER_HOE = helper.register(ITEM, "copper_hoe",
-            () -> new CopperHoeItem(CopperTier.INSTANCE, -2, -1.0F, new Item.Properties().stacksTo(1)));
+            () -> new CopperHoeItem(CopperTier.INSTANCE, -1, -2.0F, new Item.Properties().stacksTo(1)));
         
         // Copper Sword: 3 attack damage, -2.4 attack speed
         COPPER_SWORD = helper.register(ITEM, "copper_sword",
@@ -388,5 +351,9 @@ public class ModItems {
         
         COPPER_BOOTS = helper.register(ITEM, "copper_boots",
             () -> new ArmorItem(com.github.smallinger.copperagebackport.item.armor.CopperArmorMaterial.COPPER, ArmorItem.Type.BOOTS, new Item.Properties().stacksTo(1)));
+        
+        // Copper Horse Armor: 4 protection (between leather 3 and iron 5)
+        COPPER_HORSE_ARMOR = helper.register(ITEM, "copper_horse_armor",
+            () -> new HorseArmorItem(4, "copper", new Item.Properties().stacksTo(1)));
     }
 }

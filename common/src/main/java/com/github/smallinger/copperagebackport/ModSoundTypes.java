@@ -12,15 +12,5 @@ public class ModSoundTypes {
         ModSounds.COPPER_STATUE_HIT.get(),
         ModSounds.COPPER_STATUE_PLACE.get()  // fall sound
     );
-    
-    public static final SoundType COPPER_GRATE = new SoundType(
-        1.0F, // volume
-        1.0F, // pitch
-        ModSounds.COPPER_GRATE_BREAK.get(),
-        ModSounds.COPPER_GRATE_STEP.get(),
-        ModSounds.COPPER_GRATE_PLACE.get(),
-        ModSounds.COPPER_GRATE_HIT.get(),
-        ModSounds.COPPER_GRATE_FALL.get()
-    );
 }
 

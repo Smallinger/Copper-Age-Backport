@@ -98,18 +98,6 @@ public class ModBlocks {
     public static Supplier<CopperChainBlock> WAXED_WEATHERED_COPPER_CHAIN;
     public static Supplier<CopperChainBlock> WAXED_OXIDIZED_COPPER_CHAIN;
     
-    // Copper Grate Blocks (Weathering)
-    public static Supplier<WeatheringCopperGrateBlock> COPPER_GRATE;
-    public static Supplier<WeatheringCopperGrateBlock> EXPOSED_COPPER_GRATE;
-    public static Supplier<WeatheringCopperGrateBlock> WEATHERED_COPPER_GRATE;
-    public static Supplier<WeatheringCopperGrateBlock> OXIDIZED_COPPER_GRATE;
-    
-    // Waxed Copper Grate Blocks
-    public static Supplier<CopperGrateBlock> WAXED_COPPER_GRATE;
-    public static Supplier<CopperGrateBlock> WAXED_EXPOSED_COPPER_GRATE;
-    public static Supplier<CopperGrateBlock> WAXED_WEATHERED_COPPER_GRATE;
-    public static Supplier<CopperGrateBlock> WAXED_OXIDIZED_COPPER_GRATE;
-    
     public static void register() {
         Constants.LOG.info("Registering blocks for {}", Constants.MOD_NAME);
         
@@ -545,112 +533,6 @@ public class ModBlocks {
                     .strength(5.0F, 6.0F)
                     .sound(SoundType.CHAIN)
                     .noOcclusion()));
-        
-        // Register Copper Grate Blocks
-        COPPER_GRATE = helper.register(BLOCK, "copper_grate",
-            () -> new WeatheringCopperGrateBlock(
-                WeatheringCopper.WeatherState.UNAFFECTED,
-                BlockBehaviour.Properties.of()
-                    .strength(3.0F, 6.0F)
-                    .sound(ModSoundTypes.COPPER_GRATE)
-                    .requiresCorrectToolForDrops()
-                    .noOcclusion()
-                    .isValidSpawn((state, level, pos, type) -> false)
-                    .isRedstoneConductor((state, level, pos) -> false)
-                    .isSuffocating((state, level, pos) -> false)
-                    .isViewBlocking((state, level, pos) -> false)
-                    .randomTicks()));
-        
-        EXPOSED_COPPER_GRATE = helper.register(BLOCK, "exposed_copper_grate",
-            () -> new WeatheringCopperGrateBlock(
-                WeatheringCopper.WeatherState.EXPOSED,
-                BlockBehaviour.Properties.of()
-                    .strength(3.0F, 6.0F)
-                    .sound(ModSoundTypes.COPPER_GRATE)
-                    .requiresCorrectToolForDrops()
-                    .noOcclusion()
-                    .isValidSpawn((state, level, pos, type) -> false)
-                    .isRedstoneConductor((state, level, pos) -> false)
-                    .isSuffocating((state, level, pos) -> false)
-                    .isViewBlocking((state, level, pos) -> false)
-                    .randomTicks()));
-        
-        WEATHERED_COPPER_GRATE = helper.register(BLOCK, "weathered_copper_grate",
-            () -> new WeatheringCopperGrateBlock(
-                WeatheringCopper.WeatherState.WEATHERED,
-                BlockBehaviour.Properties.of()
-                    .strength(3.0F, 6.0F)
-                    .sound(ModSoundTypes.COPPER_GRATE)
-                    .requiresCorrectToolForDrops()
-                    .noOcclusion()
-                    .isValidSpawn((state, level, pos, type) -> false)
-                    .isRedstoneConductor((state, level, pos) -> false)
-                    .isSuffocating((state, level, pos) -> false)
-                    .isViewBlocking((state, level, pos) -> false)
-                    .randomTicks()));
-        
-        OXIDIZED_COPPER_GRATE = helper.register(BLOCK, "oxidized_copper_grate",
-            () -> new WeatheringCopperGrateBlock(
-                WeatheringCopper.WeatherState.OXIDIZED,
-                BlockBehaviour.Properties.of()
-                    .strength(3.0F, 6.0F)
-                    .sound(ModSoundTypes.COPPER_GRATE)
-                    .requiresCorrectToolForDrops()
-                    .noOcclusion()
-                    .isValidSpawn((state, level, pos, type) -> false)
-                    .isRedstoneConductor((state, level, pos) -> false)
-                    .isSuffocating((state, level, pos) -> false)
-                    .isViewBlocking((state, level, pos) -> false)
-                    .randomTicks()));
-        
-        // Register Waxed Copper Grate Blocks
-        WAXED_COPPER_GRATE = helper.register(BLOCK, "waxed_copper_grate",
-            () -> new CopperGrateBlock(
-                BlockBehaviour.Properties.of()
-                    .strength(3.0F, 6.0F)
-                    .sound(ModSoundTypes.COPPER_GRATE)
-                    .requiresCorrectToolForDrops()
-                    .noOcclusion()
-                    .isValidSpawn((state, level, pos, type) -> false)
-                    .isRedstoneConductor((state, level, pos) -> false)
-                    .isSuffocating((state, level, pos) -> false)
-                    .isViewBlocking((state, level, pos) -> false)));
-        
-        WAXED_EXPOSED_COPPER_GRATE = helper.register(BLOCK, "waxed_exposed_copper_grate",
-            () -> new CopperGrateBlock(
-                BlockBehaviour.Properties.of()
-                    .strength(3.0F, 6.0F)
-                    .sound(ModSoundTypes.COPPER_GRATE)
-                    .requiresCorrectToolForDrops()
-                    .noOcclusion()
-                    .isValidSpawn((state, level, pos, type) -> false)
-                    .isRedstoneConductor((state, level, pos) -> false)
-                    .isSuffocating((state, level, pos) -> false)
-                    .isViewBlocking((state, level, pos) -> false)));
-        
-        WAXED_WEATHERED_COPPER_GRATE = helper.register(BLOCK, "waxed_weathered_copper_grate",
-            () -> new CopperGrateBlock(
-                BlockBehaviour.Properties.of()
-                    .strength(3.0F, 6.0F)
-                    .sound(ModSoundTypes.COPPER_GRATE)
-                    .requiresCorrectToolForDrops()
-                    .noOcclusion()
-                    .isValidSpawn((state, level, pos, type) -> false)
-                    .isRedstoneConductor((state, level, pos) -> false)
-                    .isSuffocating((state, level, pos) -> false)
-                    .isViewBlocking((state, level, pos) -> false)));
-        
-        WAXED_OXIDIZED_COPPER_GRATE = helper.register(BLOCK, "waxed_oxidized_copper_grate",
-            () -> new CopperGrateBlock(
-                BlockBehaviour.Properties.of()
-                    .strength(3.0F, 6.0F)
-                    .sound(ModSoundTypes.COPPER_GRATE)
-                    .requiresCorrectToolForDrops()
-                    .noOcclusion()
-                    .isValidSpawn((state, level, pos, type) -> false)
-                    .isRedstoneConductor((state, level, pos) -> false)
-                    .isSuffocating((state, level, pos) -> false)
-                    .isViewBlocking((state, level, pos) -> false)));
         
         // Setup button references after registration
         helper.onRegisterComplete(() -> {

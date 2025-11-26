@@ -33,4 +33,14 @@ public interface IPlatformHelper {
 
         return isDevelopmentEnvironment() ? "development" : "production";
     }
+    
+    /**
+     * Check if FastChest's simplified chest rendering mode is enabled.
+     * Only relevant for Fabric, always returns false on other platforms.
+     *
+     * @return True if FastChest simplified mode is active, false otherwise.
+     */
+    default boolean isFastChestSimplifiedEnabled() {
+        return false;
+    }
 }

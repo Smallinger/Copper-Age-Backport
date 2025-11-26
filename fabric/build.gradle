@@ -52,3 +52,16 @@ loom {
 tasks.withType(Javadoc) {
     options.addStringOption('Xdoclint:none', '-quiet')
 }
+
+// Allow fabric resources to override common resources (for FastChest block models)
+processResources {
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+}
+
+jar {
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+}
+
+sourcesJar {
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+}

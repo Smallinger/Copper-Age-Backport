@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:block/cube_all",
-  "textures": {
-    "all": "copperagebackport:block/weathered_copper_grate"
-  }
-}

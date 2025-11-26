@@ -42,6 +42,9 @@ public class CopperAgeBackportForge {
         // Common setup (for button references)
         modEventBus.addListener(this::commonSetup);
         
+        // Register loot modifiers
+        com.github.smallinger.copperagebackport.forge.loot.ForgeLootTableModifier.register(modEventBus);
+        
         // Register config screen only on client
         DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> {
             com.github.smallinger.copperagebackport.client.CopperAgeBackportForgeClient.registerConfigScreen();
@@ -138,15 +141,6 @@ public class CopperAgeBackportForge {
             event.accept(ModItems.WAXED_EXPOSED_COPPER_CHAIN_ITEM.get());
             event.accept(ModItems.WAXED_WEATHERED_COPPER_CHAIN_ITEM.get());
             event.accept(ModItems.WAXED_OXIDIZED_COPPER_CHAIN_ITEM.get());
-            // Copper Grates
-            event.accept(ModItems.COPPER_GRATE_ITEM.get());
-            event.accept(ModItems.EXPOSED_COPPER_GRATE_ITEM.get());
-            event.accept(ModItems.WEATHERED_COPPER_GRATE_ITEM.get());
-            event.accept(ModItems.OXIDIZED_COPPER_GRATE_ITEM.get());
-            event.accept(ModItems.WAXED_COPPER_GRATE_ITEM.get());
-            event.accept(ModItems.WAXED_EXPOSED_COPPER_GRATE_ITEM.get());
-            event.accept(ModItems.WAXED_WEATHERED_COPPER_GRATE_ITEM.get());
-            event.accept(ModItems.WAXED_OXIDIZED_COPPER_GRATE_ITEM.get());
         }
         
         // Add copper tools after stone tools
@@ -166,6 +160,8 @@ public class CopperAgeBackportForge {
             entries.putAfter(ModItems.COPPER_HELMET.get().getDefaultInstance(), ModItems.COPPER_CHESTPLATE.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
             entries.putAfter(ModItems.COPPER_CHESTPLATE.get().getDefaultInstance(), ModItems.COPPER_LEGGINGS.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
             entries.putAfter(ModItems.COPPER_LEGGINGS.get().getDefaultInstance(), ModItems.COPPER_BOOTS.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            // Add copper horse armor after leather horse armor (before iron horse armor)
+            entries.putAfter(Items.LEATHER_HORSE_ARMOR.getDefaultInstance(), ModItems.COPPER_HORSE_ARMOR.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
         }
         
         // Add copper nugget after iron nugget

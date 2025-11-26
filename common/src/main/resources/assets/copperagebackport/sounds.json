@@ -325,61 +325,6 @@
       "copperagebackport:item/armor/equip_copper/equip_copper4",
       "copperagebackport:item/armor/equip_copper/equip_copper5"
     ]
-  },
-  "block.copper_grate.break": {
-    "subtitle": "subtitles.block.generic.break",
-    "sounds": [
-      "copperagebackport:block/copper_grate/break1",
-      "copperagebackport:block/copper_grate/break2",
-      "copperagebackport:block/copper_grate/break3",
-      "copperagebackport:block/copper_grate/break4"
-    ]
-  },
-  "block.copper_grate.step": {
-    "subtitle": "subtitles.block.generic.footsteps",
-    "sounds": [
-      "copperagebackport:block/copper_grate/step1",
-      "copperagebackport:block/copper_grate/step2",
-      "copperagebackport:block/copper_grate/step3",
-      "copperagebackport:block/copper_grate/step4",
-      "copperagebackport:block/copper_grate/step5",
-      "copperagebackport:block/copper_grate/step6"
-    ]
-  },
-  "block.copper_grate.place": {
-    "subtitle": "subtitles.block.generic.place",
-    "sounds": [
-      "copperagebackport:block/copper_grate/break1",
-      {
-        "name": "copperagebackport:block/copper_grate/break1",
-        "pitch": 0.95
-      },
-      "copperagebackport:block/copper_grate/break2",
-      "copperagebackport:block/copper_grate/break3",
-      "copperagebackport:block/copper_grate/break4"
-    ]
-  },
-  "block.copper_grate.hit": {
-    "subtitle": "subtitles.block.generic.hit",
-    "sounds": [
-      "copperagebackport:block/copper_grate/step1",
-      "copperagebackport:block/copper_grate/step2",
-      "copperagebackport:block/copper_grate/step3",
-      "copperagebackport:block/copper_grate/step4",
-      "copperagebackport:block/copper_grate/step5",
-      "copperagebackport:block/copper_grate/step6"
-    ]
-  },
-  "block.copper_grate.fall": {
-    "subtitle": "subtitles.block.generic.fall",
-    "sounds": [
-      "copperagebackport:block/copper_grate/step1",
-      "copperagebackport:block/copper_grate/step2",
-      "copperagebackport:block/copper_grate/step3",
-      "copperagebackport:block/copper_grate/step4",
-      "copperagebackport:block/copper_grate/step5",
-      "copperagebackport:block/copper_grate/step6"
-    ]
   }
 }
 

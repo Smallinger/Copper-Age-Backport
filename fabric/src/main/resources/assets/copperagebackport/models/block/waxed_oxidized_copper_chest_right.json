@@ -1,0 +1,7 @@
+{
+  "parent": "copperagebackport:block/template_copper_chest_right",
+  "textures": {
+    "particle": "minecraft:block/oxidized_copper",
+    "chest": "copperagebackport:entity/chest/oxidized_copper_right"
+  }
+}

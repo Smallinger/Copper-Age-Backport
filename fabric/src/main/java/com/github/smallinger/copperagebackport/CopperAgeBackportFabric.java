@@ -79,6 +79,9 @@ public class CopperAgeBackportFabric implements ModInitializer {
         // Add items to creative tabs
         registerCreativeTabs();
         
+        // Register loot table modifications
+        com.github.smallinger.copperagebackport.fabric.loot.FabricLootTableModifier.register();
+        
         // Fire registration callbacks (like button waxed references)
         if (RegistryHelper.getInstance() instanceof FabricRegistryHelper helper) {
             helper.fireRegistrationCallbacks();
@@ -157,15 +160,6 @@ public class CopperAgeBackportFabric implements ModInitializer {
             content.accept(ModItems.WAXED_EXPOSED_COPPER_CHAIN_ITEM.get());
             content.accept(ModItems.WAXED_WEATHERED_COPPER_CHAIN_ITEM.get());
             content.accept(ModItems.WAXED_OXIDIZED_COPPER_CHAIN_ITEM.get());
-            // Copper Grates
-            content.accept(ModItems.COPPER_GRATE_ITEM.get());
-            content.accept(ModItems.EXPOSED_COPPER_GRATE_ITEM.get());
-            content.accept(ModItems.WEATHERED_COPPER_GRATE_ITEM.get());
-            content.accept(ModItems.OXIDIZED_COPPER_GRATE_ITEM.get());
-            content.accept(ModItems.WAXED_COPPER_GRATE_ITEM.get());
-            content.accept(ModItems.WAXED_EXPOSED_COPPER_GRATE_ITEM.get());
-            content.accept(ModItems.WAXED_WEATHERED_COPPER_GRATE_ITEM.get());
-            content.accept(ModItems.WAXED_OXIDIZED_COPPER_GRATE_ITEM.get());
         });
         
         // Add copper tools after stone tools
@@ -177,6 +171,8 @@ public class CopperAgeBackportFabric implements ModInitializer {
         ItemGroupEvents.modifyEntriesEvent(CreativeModeTabs.COMBAT).register(content -> {
             content.addAfter(Items.STONE_SWORD, ModItems.COPPER_SWORD.get());
             content.addAfter(Items.CHAINMAIL_BOOTS, ModItems.COPPER_HELMET.get(), ModItems.COPPER_CHESTPLATE.get(), ModItems.COPPER_LEGGINGS.get(), ModItems.COPPER_BOOTS.get());
+            // Add copper horse armor after leather horse armor (before iron horse armor)
+            content.addAfter(Items.LEATHER_HORSE_ARMOR, ModItems.COPPER_HORSE_ARMOR.get());
         });
         
         // Add copper nugget after iron nugget

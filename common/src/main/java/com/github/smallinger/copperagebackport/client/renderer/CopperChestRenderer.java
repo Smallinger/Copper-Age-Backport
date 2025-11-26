@@ -1,6 +1,7 @@
 package com.github.smallinger.copperagebackport.client.renderer;
 
 import com.github.smallinger.copperagebackport.block.CopperChestBlock;
+import com.github.smallinger.copperagebackport.platform.Services;
 import com.github.smallinger.copperagebackport.registry.ModBlocks;
 import com.github.smallinger.copperagebackport.Constants;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -77,6 +78,11 @@ public class CopperChestRenderer implements BlockEntityRenderer<ChestBlockEntity
 
     @Override
     public void render(ChestBlockEntity blockEntity, float partialTick, PoseStack poseStack, MultiBufferSource bufferSource, int packedLight, int packedOverlay) {
+        // Skip rendering if FastChest's simplified mode is active - block models handle rendering instead
+        if (Services.PLATFORM.isFastChestSimplifiedEnabled()) {
+            return;
+        }
+        
         Level level = blockEntity.getLevel();
         boolean hasLevel = level != null;
         BlockState blockstate = blockEntity.getBlockState();
