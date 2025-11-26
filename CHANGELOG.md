@@ -19,6 +19,7 @@ All notable changes to this project will be documented in this file.
 
 #### Config Menu
 - **Copper Golem oxidation time**: The oxidation time of the Copper Golem can now be configured in the mod settings
+- **Golem Transport Stack Size**: New config option to set how many items a Copper Golem can transport at once (1-64, default: 16)
 
 #### Copper Torch
 - **New light source**: Copper Torch with unique flame particle effects

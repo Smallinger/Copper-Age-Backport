@@ -100,6 +100,8 @@
   "config.copperagebackport.golem_presses_buttons.tooltip": "When enabled, Copper Golems will randomly press nearby copper buttons",
   "config.copperagebackport.button_press_chance": "Button Press Chance",
   "config.copperagebackport.button_press_chance.tooltip": "Chance (0-100%) that a golem will press a button when near one",
+  "config.copperagebackport.golem_transport_stack_size": "Golem Transport Stack Size",
+  "config.copperagebackport.golem_transport_stack_size.tooltip": "Number of items a Copper Golem can transport at once (1-64). Default: 16",
   "config.copperagebackport.group.weathering": "Weathering",
   "config.copperagebackport.weathering_tick_from": "Min Weathering Time",
   "config.copperagebackport.weathering_tick_from.tooltip": "Minimum time in ticks before the Copper Golem oxidizes to the next level. Default: 504000 (~21 Minecraft days). Set to 0 to disable oxidation.",

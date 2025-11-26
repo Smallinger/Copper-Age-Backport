@@ -23,18 +23,21 @@ public final class CommonConfig {
     // Config keys
     private static final String KEY_GOLEM_PRESSES_BUTTONS = "golemPressesButtons";
     private static final String KEY_BUTTON_PRESS_CHANCE = "buttonPressChancePercent";
+    private static final String KEY_GOLEM_TRANSPORT_STACK_SIZE = "golemTransportStackSize";
     private static final String KEY_WEATHERING_TICK_FROM = "weatheringTickFrom";
     private static final String KEY_WEATHERING_TICK_TO = "weatheringTickTo";
     
     // Default values
     private static final boolean DEFAULT_GOLEM_PRESSES_BUTTONS = true;
     private static final int DEFAULT_BUTTON_PRESS_CHANCE = 5;
+    private static final int DEFAULT_GOLEM_TRANSPORT_STACK_SIZE = 16;
     private static final int DEFAULT_WEATHERING_TICK_FROM = 504000; // ~7 minecraft days
     private static final int DEFAULT_WEATHERING_TICK_TO = 552000;   // ~7.7 minecraft days
     
     // Runtime values
     private static boolean golemPressesButtons = DEFAULT_GOLEM_PRESSES_BUTTONS;
     private static int buttonPressChancePercent = DEFAULT_BUTTON_PRESS_CHANCE;
+    private static int golemTransportStackSize = DEFAULT_GOLEM_TRANSPORT_STACK_SIZE;
     private static int weatheringTickFrom = DEFAULT_WEATHERING_TICK_FROM;
     private static int weatheringTickTo = DEFAULT_WEATHERING_TICK_TO;
     
@@ -73,6 +76,18 @@ public final class CommonConfig {
 
     public static void setButtonPressChancePercent(int value) {
         buttonPressChancePercent = clamp(value, 0, 100);
+    }
+
+    /**
+     * Number of items a Copper Golem can transport at once (1-64).
+     * Default: 16
+     */
+    public static int golemTransportStackSize() {
+        return golemTransportStackSize;
+    }
+
+    public static void setGolemTransportStackSize(int value) {
+        golemTransportStackSize = clamp(value, 1, 64);
     }
 
     /**
@@ -125,6 +140,9 @@ public final class CommonConfig {
             if (json.has(KEY_BUTTON_PRESS_CHANCE)) {
                 buttonPressChancePercent = clamp(json.get(KEY_BUTTON_PRESS_CHANCE).getAsInt(), 0, 100);
             }
+            if (json.has(KEY_GOLEM_TRANSPORT_STACK_SIZE)) {
+                golemTransportStackSize = clamp(json.get(KEY_GOLEM_TRANSPORT_STACK_SIZE).getAsInt(), 1, 64);
+            }
             if (json.has(KEY_WEATHERING_TICK_FROM)) {
                 weatheringTickFrom = Math.max(0, json.get(KEY_WEATHERING_TICK_FROM).getAsInt());
             }
@@ -132,8 +150,8 @@ public final class CommonConfig {
                 weatheringTickTo = Math.max(weatheringTickFrom, json.get(KEY_WEATHERING_TICK_TO).getAsInt());
             }
 
-            Constants.LOG.info("Loaded config: golemPressesButtons={}, buttonPressChance={}%, weatheringTickFrom={}, weatheringTickTo={}", 
-                golemPressesButtons, buttonPressChancePercent, weatheringTickFrom, weatheringTickTo);
+            Constants.LOG.info("Loaded config: golemPressesButtons={}, buttonPressChance={}%, golemTransportStackSize={}, weatheringTickFrom={}, weatheringTickTo={}", 
+                golemPressesButtons, buttonPressChancePercent, golemTransportStackSize, weatheringTickFrom, weatheringTickTo);
         } catch (IOException | IllegalStateException e) {
             Constants.LOG.error("Failed to load config, using defaults", e);
         }
@@ -151,6 +169,7 @@ public final class CommonConfig {
         JsonObject json = new JsonObject();
         json.addProperty(KEY_GOLEM_PRESSES_BUTTONS, golemPressesButtons);
         json.addProperty(KEY_BUTTON_PRESS_CHANCE, buttonPressChancePercent);
+        json.addProperty(KEY_GOLEM_TRANSPORT_STACK_SIZE, golemTransportStackSize);
         json.addProperty(KEY_WEATHERING_TICK_FROM, weatheringTickFrom);
         json.addProperty(KEY_WEATHERING_TICK_TO, weatheringTickTo);
 

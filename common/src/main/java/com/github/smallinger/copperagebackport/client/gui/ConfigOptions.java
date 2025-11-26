@@ -50,6 +50,18 @@ public class ConfigOptions {
             .available(CommonConfig::golemPressesButtons)
             .build();
 
+        // Golem transport stack size option
+        Option<Integer> golemTransportStackSize = OptionImpl.<Integer>builder(Integer.class)
+            .name("config.copperagebackport.golem_transport_stack_size")
+            .tooltip("config.copperagebackport.golem_transport_stack_size.tooltip")
+            .control(opt -> new SliderControl(opt, 1, 64, 1, ""))
+            .binding(
+                CommonConfig::golemTransportStackSize,
+                CommonConfig::setGolemTransportStackSize
+            )
+            .defaultValue(16)
+            .build();
+
         // Weathering time from option
         Option<Integer> weatheringTickFrom = OptionImpl.<Integer>builder(Integer.class)
             .name("config.copperagebackport.weathering_tick_from")
@@ -79,6 +91,7 @@ public class ConfigOptions {
             .name("config.copperagebackport.group.behavior")
             .add(golemPressesButtons)
             .add(buttonPressChance)
+            .add(golemTransportStackSize)
             .build();
 
         OptionGroup weatheringGroup = OptionGroup.builder()

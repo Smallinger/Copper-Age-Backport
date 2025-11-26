@@ -1,6 +1,7 @@
 package com.github.smallinger.copperagebackport.entity.ai.behavior;
 
 import com.github.smallinger.copperagebackport.ModMemoryTypes;
+import com.github.smallinger.copperagebackport.config.CommonConfig;
 import com.google.common.collect.ImmutableMap;
 import java.util.HashSet;
 import java.util.List;
@@ -541,7 +542,7 @@ public class TransportItemsBetweenContainers extends Behavior<PathfinderMob> {
         for (int i = 0; i < container.getContainerSize(); i++) {
             ItemStack itemstack = container.getItem(i);
             if (!itemstack.isEmpty()) {
-                int j = Math.min(itemstack.getCount(), 16);
+                int j = Math.min(itemstack.getCount(), CommonConfig.golemTransportStackSize());
                 return container.removeItem(i, j);
             }
         }
