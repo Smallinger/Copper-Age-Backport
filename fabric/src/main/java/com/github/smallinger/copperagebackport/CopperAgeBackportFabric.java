@@ -157,6 +157,15 @@ public class CopperAgeBackportFabric implements ModInitializer {
             content.accept(ModItems.WAXED_EXPOSED_COPPER_CHAIN_ITEM.get());
             content.accept(ModItems.WAXED_WEATHERED_COPPER_CHAIN_ITEM.get());
             content.accept(ModItems.WAXED_OXIDIZED_COPPER_CHAIN_ITEM.get());
+            // Copper Grates
+            content.accept(ModItems.COPPER_GRATE_ITEM.get());
+            content.accept(ModItems.EXPOSED_COPPER_GRATE_ITEM.get());
+            content.accept(ModItems.WEATHERED_COPPER_GRATE_ITEM.get());
+            content.accept(ModItems.OXIDIZED_COPPER_GRATE_ITEM.get());
+            content.accept(ModItems.WAXED_COPPER_GRATE_ITEM.get());
+            content.accept(ModItems.WAXED_EXPOSED_COPPER_GRATE_ITEM.get());
+            content.accept(ModItems.WAXED_WEATHERED_COPPER_GRATE_ITEM.get());
+            content.accept(ModItems.WAXED_OXIDIZED_COPPER_GRATE_ITEM.get());
         });
         
         // Add copper tools to tools tab

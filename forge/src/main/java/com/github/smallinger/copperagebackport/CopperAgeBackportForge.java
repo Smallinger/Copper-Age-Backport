@@ -136,6 +136,15 @@ public class CopperAgeBackportForge {
             event.accept(ModItems.WAXED_EXPOSED_COPPER_CHAIN_ITEM.get());
             event.accept(ModItems.WAXED_WEATHERED_COPPER_CHAIN_ITEM.get());
             event.accept(ModItems.WAXED_OXIDIZED_COPPER_CHAIN_ITEM.get());
+            // Copper Grates
+            event.accept(ModItems.COPPER_GRATE_ITEM.get());
+            event.accept(ModItems.EXPOSED_COPPER_GRATE_ITEM.get());
+            event.accept(ModItems.WEATHERED_COPPER_GRATE_ITEM.get());
+            event.accept(ModItems.OXIDIZED_COPPER_GRATE_ITEM.get());
+            event.accept(ModItems.WAXED_COPPER_GRATE_ITEM.get());
+            event.accept(ModItems.WAXED_EXPOSED_COPPER_GRATE_ITEM.get());
+            event.accept(ModItems.WAXED_WEATHERED_COPPER_GRATE_ITEM.get());
+            event.accept(ModItems.WAXED_OXIDIZED_COPPER_GRATE_ITEM.get());
         }
         
         // Add copper tools to tools tab

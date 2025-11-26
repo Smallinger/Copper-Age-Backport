@@ -32,7 +32,15 @@
     "copperagebackport:waxed_copper_chain",
     "copperagebackport:waxed_exposed_copper_chain",
     "copperagebackport:waxed_weathered_copper_chain",
-    "copperagebackport:waxed_oxidized_copper_chain"
+    "copperagebackport:waxed_oxidized_copper_chain",
+    "copperagebackport:copper_grate",
+    "copperagebackport:exposed_copper_grate",
+    "copperagebackport:weathered_copper_grate",
+    "copperagebackport:oxidized_copper_grate",
+    "copperagebackport:waxed_copper_grate",
+    "copperagebackport:waxed_exposed_copper_grate",
+    "copperagebackport:waxed_weathered_copper_grate",
+    "copperagebackport:waxed_oxidized_copper_grate"
   ]
 }
 

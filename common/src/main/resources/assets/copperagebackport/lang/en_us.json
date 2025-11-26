@@ -69,6 +69,15 @@
   "block.copperagebackport.waxed_weathered_copper_chain": "Waxed Weathered Copper Chain",
   "block.copperagebackport.waxed_oxidized_copper_chain": "Waxed Oxidized Copper Chain",
 
+  "block.copperagebackport.copper_grate": "Copper Grate",
+  "block.copperagebackport.exposed_copper_grate": "Exposed Copper Grate",
+  "block.copperagebackport.weathered_copper_grate": "Weathered Copper Grate",
+  "block.copperagebackport.oxidized_copper_grate": "Oxidized Copper Grate",
+  "block.copperagebackport.waxed_copper_grate": "Waxed Copper Grate",
+  "block.copperagebackport.waxed_exposed_copper_grate": "Waxed Exposed Copper Grate",
+  "block.copperagebackport.waxed_weathered_copper_grate": "Waxed Weathered Copper Grate",
+  "block.copperagebackport.waxed_oxidized_copper_grate": "Waxed Oxidized Copper Grate",
+
   "subtitles.entity.copper_golem.death": "Copper Golem dies",
   "subtitles.entity.copper_golem.hurt": "Copper Golem hurts",
   "subtitles.entity.copper_golem.step": "Copper Golem steps",

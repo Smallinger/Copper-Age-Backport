@@ -124,6 +124,18 @@ public class ModItems {
     public static Supplier<BlockItem> WAXED_WEATHERED_COPPER_CHAIN_ITEM;
     public static Supplier<BlockItem> WAXED_OXIDIZED_COPPER_CHAIN_ITEM;
     
+    // Copper Grate Items (Weathering)
+    public static Supplier<BlockItem> COPPER_GRATE_ITEM;
+    public static Supplier<BlockItem> EXPOSED_COPPER_GRATE_ITEM;
+    public static Supplier<BlockItem> WEATHERED_COPPER_GRATE_ITEM;
+    public static Supplier<BlockItem> OXIDIZED_COPPER_GRATE_ITEM;
+    
+    // Waxed Copper Grate Items
+    public static Supplier<BlockItem> WAXED_COPPER_GRATE_ITEM;
+    public static Supplier<BlockItem> WAXED_EXPOSED_COPPER_GRATE_ITEM;
+    public static Supplier<BlockItem> WAXED_WEATHERED_COPPER_GRATE_ITEM;
+    public static Supplier<BlockItem> WAXED_OXIDIZED_COPPER_GRATE_ITEM;
+    
     public static void register() {
         Constants.LOG.info("Registering items for {}", Constants.MOD_NAME);
         
@@ -310,6 +322,32 @@ public class ModItems {
         
         WAXED_OXIDIZED_COPPER_CHAIN_ITEM = helper.register(ITEM, "waxed_oxidized_copper_chain",
             () -> new BlockItem(ModBlocks.WAXED_OXIDIZED_COPPER_CHAIN.get(), new Item.Properties()));
+        
+        // Register Copper Grate Items
+        COPPER_GRATE_ITEM = helper.register(ITEM, "copper_grate",
+            () -> new BlockItem(ModBlocks.COPPER_GRATE.get(), new Item.Properties()));
+        
+        EXPOSED_COPPER_GRATE_ITEM = helper.register(ITEM, "exposed_copper_grate",
+            () -> new BlockItem(ModBlocks.EXPOSED_COPPER_GRATE.get(), new Item.Properties()));
+        
+        WEATHERED_COPPER_GRATE_ITEM = helper.register(ITEM, "weathered_copper_grate",
+            () -> new BlockItem(ModBlocks.WEATHERED_COPPER_GRATE.get(), new Item.Properties()));
+        
+        OXIDIZED_COPPER_GRATE_ITEM = helper.register(ITEM, "oxidized_copper_grate",
+            () -> new BlockItem(ModBlocks.OXIDIZED_COPPER_GRATE.get(), new Item.Properties()));
+        
+        // Register Waxed Copper Grate Items
+        WAXED_COPPER_GRATE_ITEM = helper.register(ITEM, "waxed_copper_grate",
+            () -> new BlockItem(ModBlocks.WAXED_COPPER_GRATE.get(), new Item.Properties()));
+        
+        WAXED_EXPOSED_COPPER_GRATE_ITEM = helper.register(ITEM, "waxed_exposed_copper_grate",
+            () -> new BlockItem(ModBlocks.WAXED_EXPOSED_COPPER_GRATE.get(), new Item.Properties()));
+        
+        WAXED_WEATHERED_COPPER_GRATE_ITEM = helper.register(ITEM, "waxed_weathered_copper_grate",
+            () -> new BlockItem(ModBlocks.WAXED_WEATHERED_COPPER_GRATE.get(), new Item.Properties()));
+        
+        WAXED_OXIDIZED_COPPER_GRATE_ITEM = helper.register(ITEM, "waxed_oxidized_copper_grate",
+            () -> new BlockItem(ModBlocks.WAXED_OXIDIZED_COPPER_GRATE.get(), new Item.Properties()));
         
         // Register Copper Tools
         // Copper Axe: 6.0 base + 1.0 material bonus = 7.0 attack damage, -3.2 attack speed
