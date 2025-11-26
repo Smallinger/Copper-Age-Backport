@@ -23,14 +23,20 @@ public final class CommonConfig {
     // Config keys
     private static final String KEY_GOLEM_PRESSES_BUTTONS = "golemPressesButtons";
     private static final String KEY_BUTTON_PRESS_CHANCE = "buttonPressChancePercent";
+    private static final String KEY_WEATHERING_TICK_FROM = "weatheringTickFrom";
+    private static final String KEY_WEATHERING_TICK_TO = "weatheringTickTo";
     
     // Default values
     private static final boolean DEFAULT_GOLEM_PRESSES_BUTTONS = true;
     private static final int DEFAULT_BUTTON_PRESS_CHANCE = 5;
+    private static final int DEFAULT_WEATHERING_TICK_FROM = 504000; // ~7 minecraft days
+    private static final int DEFAULT_WEATHERING_TICK_TO = 552000;   // ~7.7 minecraft days
     
     // Runtime values
     private static boolean golemPressesButtons = DEFAULT_GOLEM_PRESSES_BUTTONS;
     private static int buttonPressChancePercent = DEFAULT_BUTTON_PRESS_CHANCE;
+    private static int weatheringTickFrom = DEFAULT_WEATHERING_TICK_FROM;
+    private static int weatheringTickTo = DEFAULT_WEATHERING_TICK_TO;
     
     // Config file path (set by platform)
     private static Path configPath;
@@ -70,6 +76,30 @@ public final class CommonConfig {
     }
 
     /**
+     * Minimum time in ticks until the Copper Golem starts weathering to the next oxidation level.
+     * Default: 504000 (~7 minecraft days)
+     */
+    public static int weatheringTickFrom() {
+        return weatheringTickFrom;
+    }
+
+    public static void setWeatheringTickFrom(int value) {
+        weatheringTickFrom = Math.max(0, value);
+    }
+
+    /**
+     * Maximum time in ticks until the Copper Golem weathers to the next oxidation level.
+     * Default: 552000 (~7.7 minecraft days)
+     */
+    public static int weatheringTickTo() {
+        return weatheringTickTo;
+    }
+
+    public static void setWeatheringTickTo(int value) {
+        weatheringTickTo = Math.max(weatheringTickFrom, value);
+    }
+
+    /**
      * Load config from disk. Creates default config if not present.
      */
     public static void load() {
@@ -95,9 +125,15 @@ public final class CommonConfig {
             if (json.has(KEY_BUTTON_PRESS_CHANCE)) {
                 buttonPressChancePercent = clamp(json.get(KEY_BUTTON_PRESS_CHANCE).getAsInt(), 0, 100);
             }
+            if (json.has(KEY_WEATHERING_TICK_FROM)) {
+                weatheringTickFrom = Math.max(0, json.get(KEY_WEATHERING_TICK_FROM).getAsInt());
+            }
+            if (json.has(KEY_WEATHERING_TICK_TO)) {
+                weatheringTickTo = Math.max(weatheringTickFrom, json.get(KEY_WEATHERING_TICK_TO).getAsInt());
+            }
 
-            Constants.LOG.info("Loaded config: golemPressesButtons={}, buttonPressChance={}%", 
-                golemPressesButtons, buttonPressChancePercent);
+            Constants.LOG.info("Loaded config: golemPressesButtons={}, buttonPressChance={}%, weatheringTickFrom={}, weatheringTickTo={}", 
+                golemPressesButtons, buttonPressChancePercent, weatheringTickFrom, weatheringTickTo);
         } catch (IOException | IllegalStateException e) {
             Constants.LOG.error("Failed to load config, using defaults", e);
         }
@@ -115,6 +151,8 @@ public final class CommonConfig {
         JsonObject json = new JsonObject();
         json.addProperty(KEY_GOLEM_PRESSES_BUTTONS, golemPressesButtons);
         json.addProperty(KEY_BUTTON_PRESS_CHANCE, buttonPressChancePercent);
+        json.addProperty(KEY_WEATHERING_TICK_FROM, weatheringTickFrom);
+        json.addProperty(KEY_WEATHERING_TICK_TO, weatheringTickTo);
 
         try {
             Files.createDirectories(configPath.getParent());

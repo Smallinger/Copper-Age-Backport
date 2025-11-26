@@ -99,8 +99,15 @@
   "config.copperagebackport.golem_presses_buttons.tooltip": "When enabled, Copper Golems will randomly press nearby copper buttons",
   "config.copperagebackport.button_press_chance": "Button Press Chance",
   "config.copperagebackport.button_press_chance.tooltip": "Chance (0-100%) that a golem will press a button when near one",
+  "config.copperagebackport.group.weathering": "Weathering",
+  "config.copperagebackport.weathering_tick_from": "Min Weathering Time",
+  "config.copperagebackport.weathering_tick_from.tooltip": "Minimum time in ticks before the Copper Golem oxidizes to the next level. Default: 504000 (~21 Minecraft days). Set to 0 to disable oxidation.",
+  "config.copperagebackport.weathering_tick_to": "Max Weathering Time",
+  "config.copperagebackport.weathering_tick_to.tooltip": "Maximum time in ticks before the Copper Golem oxidizes to the next level. Default: 552000 (~23 Minecraft days). Must be greater than or equal to Min Weathering Time.",
   "config.copperagebackport.apply": "Apply",
   "config.copperagebackport.reset": "Reset",
+  "config.copperagebackport.days": "%s Days",
+  "config.copperagebackport.days_decimal": "%s Days",
   "config.copperagebackport.donate": "Buy Me a Coffee!",
   "config.copperagebackport.discord": "Join Mod Discord!"
 }

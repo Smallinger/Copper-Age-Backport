@@ -6,6 +6,9 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 
+#### Config Menu
+- **Copper Golem oxidation time**: The oxidation time of the Copper Golem can now be configured in the mod settings
+
 #### Copper Torch
 - **New light source**: Copper Torch with unique flame particle effects
 - **Wall variant**: Can be placed on walls like regular torches

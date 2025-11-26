@@ -3,6 +3,7 @@ package com.github.smallinger.copperagebackport.entity;
 import com.github.smallinger.copperagebackport.ModSounds;
 import com.github.smallinger.copperagebackport.block.CopperGolemStatueBlock;
 import com.github.smallinger.copperagebackport.block.entity.CopperGolemStatueBlockEntity;
+import com.github.smallinger.copperagebackport.config.CommonConfig;
 import com.github.smallinger.copperagebackport.entity.ai.CopperGolemAi;
 import com.github.smallinger.copperagebackport.registry.ModBlocks;
 import com.mojang.serialization.Dynamic;
@@ -45,8 +46,7 @@ import javax.annotation.Nullable;
 public class CopperGolemEntity extends AbstractGolem implements Shearable, ContainerUser {
     private static final long IGNORE_WEATHERING_TICK = -2L;
     private static final long UNSET_WEATHERING_TICK = -1L;
-    private static final int WEATHERING_TICK_FROM = 504000; // ~7 minecraft days
-    private static final int WEATHERING_TICK_TO = 552000;   // ~7.7 minecraft days
+    // Weathering tick values are now configurable via CommonConfig
     private static final int SPIN_ANIMATION_MIN_COOLDOWN = 200;
     private static final int SPIN_ANIMATION_MAX_COOLDOWN = 240;
     private static final float TURN_TO_STATUE_CHANCE = 0.0058F; // 0.58% chance per tick when oxidized
@@ -231,7 +231,8 @@ public class CopperGolemEntity extends AbstractGolem implements Shearable, Conta
     private void updateWeathering(ServerLevel level, RandomSource random, long dayTime) {
         if (this.nextWeatheringTick != IGNORE_WEATHERING_TICK) {
             if (this.nextWeatheringTick == UNSET_WEATHERING_TICK) {
-                this.nextWeatheringTick = dayTime + random.nextIntBetweenInclusive(WEATHERING_TICK_FROM, WEATHERING_TICK_TO);
+                this.nextWeatheringTick = dayTime + random.nextIntBetweenInclusive(
+                    CommonConfig.weatheringTickFrom(), CommonConfig.weatheringTickTo());
             } else {
                 WeatheringCopper.WeatherState weatherState = this.getWeatherState();
                 boolean isOxidized = weatherState == WeatheringCopper.WeatherState.OXIDIZED;
@@ -241,7 +242,8 @@ public class CopperGolemEntity extends AbstractGolem implements Shearable, Conta
                     boolean willBeOxidized = nextState == WeatheringCopper.WeatherState.OXIDIZED;
                     this.setWeatherState(nextState);
                     this.nextWeatheringTick = willBeOxidized ? 0L : 
-                        this.nextWeatheringTick + random.nextIntBetweenInclusive(WEATHERING_TICK_FROM, WEATHERING_TICK_TO);
+                        this.nextWeatheringTick + random.nextIntBetweenInclusive(
+                            CommonConfig.weatheringTickFrom(), CommonConfig.weatheringTickTo());
                 }
                 
                 // Check if golem should turn into statue when fully oxidized
