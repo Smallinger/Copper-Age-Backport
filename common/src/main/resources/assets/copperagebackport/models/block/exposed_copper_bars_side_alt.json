@@ -1,0 +1,7 @@
+{
+  "parent": "copperagebackport:block/template_bars_side_alt",
+  "textures": {
+    "bars": "copperagebackport:block/exposed_copper_bars",
+    "edge": "copperagebackport:block/exposed_copper_bars"
+  }
+}
