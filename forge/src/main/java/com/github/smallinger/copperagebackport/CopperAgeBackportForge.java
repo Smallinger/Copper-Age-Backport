@@ -41,9 +41,11 @@ public class CopperAgeBackportForge {
         modEventBus.addListener(this::commonSetup);
         
         // Register config screen only on client
-        DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> 
-            com.github.smallinger.copperagebackport.client.CopperAgeBackportForgeClient.registerConfigScreen()
-        );
+        DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> {
+            com.github.smallinger.copperagebackport.client.CopperAgeBackportForgeClient.registerConfigScreen();
+            // Register render layers in FMLClientSetupEvent instead
+            modEventBus.addListener(com.github.smallinger.copperagebackport.client.CopperAgeBackportForgeClient::onClientSetup);
+        });
     }
     
     private void commonSetup(FMLCommonSetupEvent event) {
@@ -125,6 +127,15 @@ public class CopperAgeBackportForge {
             event.accept(ModItems.WAXED_EXPOSED_COPPER_LANTERN_ITEM.get());
             event.accept(ModItems.WAXED_WEATHERED_COPPER_LANTERN_ITEM.get());
             event.accept(ModItems.WAXED_OXIDIZED_COPPER_LANTERN_ITEM.get());
+            // Copper Chains
+            event.accept(ModItems.COPPER_CHAIN_ITEM.get());
+            event.accept(ModItems.EXPOSED_COPPER_CHAIN_ITEM.get());
+            event.accept(ModItems.WEATHERED_COPPER_CHAIN_ITEM.get());
+            event.accept(ModItems.OXIDIZED_COPPER_CHAIN_ITEM.get());
+            event.accept(ModItems.WAXED_COPPER_CHAIN_ITEM.get());
+            event.accept(ModItems.WAXED_EXPOSED_COPPER_CHAIN_ITEM.get());
+            event.accept(ModItems.WAXED_WEATHERED_COPPER_CHAIN_ITEM.get());
+            event.accept(ModItems.WAXED_OXIDIZED_COPPER_CHAIN_ITEM.get());
         }
         
         // Add copper tools to tools tab

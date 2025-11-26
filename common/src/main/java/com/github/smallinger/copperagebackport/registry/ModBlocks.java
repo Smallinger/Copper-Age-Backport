@@ -86,6 +86,18 @@ public class ModBlocks {
     public static Supplier<CopperLanternBlock> WAXED_WEATHERED_COPPER_LANTERN;
     public static Supplier<CopperLanternBlock> WAXED_OXIDIZED_COPPER_LANTERN;
     
+    // Copper Chain Blocks (Weathering)
+    public static Supplier<WeatheringCopperChainBlock> COPPER_CHAIN;
+    public static Supplier<WeatheringCopperChainBlock> EXPOSED_COPPER_CHAIN;
+    public static Supplier<WeatheringCopperChainBlock> WEATHERED_COPPER_CHAIN;
+    public static Supplier<WeatheringCopperChainBlock> OXIDIZED_COPPER_CHAIN;
+    
+    // Waxed Copper Chain Blocks
+    public static Supplier<CopperChainBlock> WAXED_COPPER_CHAIN;
+    public static Supplier<CopperChainBlock> WAXED_EXPOSED_COPPER_CHAIN;
+    public static Supplier<CopperChainBlock> WAXED_WEATHERED_COPPER_CHAIN;
+    public static Supplier<CopperChainBlock> WAXED_OXIDIZED_COPPER_CHAIN;
+    
     public static void register() {
         Constants.LOG.info("Registering blocks for {}", Constants.MOD_NAME);
         
@@ -435,6 +447,92 @@ public class ModBlocks {
                     .lightLevel(p -> 15)
                     .noOcclusion()
                     .pushReaction(PushReaction.DESTROY)));
+        
+        // Register Copper Chain Blocks
+        COPPER_CHAIN = helper.register(BLOCK, "copper_chain",
+            () -> new WeatheringCopperChainBlock(
+                WeatheringCopper.WeatherState.UNAFFECTED,
+                BlockBehaviour.Properties.of()
+                    .forceSolidOn()
+                    .requiresCorrectToolForDrops()
+                    .strength(5.0F, 6.0F)
+                    .sound(SoundType.CHAIN)
+                    .noOcclusion()
+                    .randomTicks()));
+        
+        EXPOSED_COPPER_CHAIN = helper.register(BLOCK, "exposed_copper_chain",
+            () -> new WeatheringCopperChainBlock(
+                WeatheringCopper.WeatherState.EXPOSED,
+                BlockBehaviour.Properties.of()
+                    .forceSolidOn()
+                    .requiresCorrectToolForDrops()
+                    .strength(5.0F, 6.0F)
+                    .sound(SoundType.CHAIN)
+                    .noOcclusion()
+                    .randomTicks()));
+        
+        WEATHERED_COPPER_CHAIN = helper.register(BLOCK, "weathered_copper_chain",
+            () -> new WeatheringCopperChainBlock(
+                WeatheringCopper.WeatherState.WEATHERED,
+                BlockBehaviour.Properties.of()
+                    .forceSolidOn()
+                    .requiresCorrectToolForDrops()
+                    .strength(5.0F, 6.0F)
+                    .sound(SoundType.CHAIN)
+                    .noOcclusion()
+                    .randomTicks()));
+        
+        OXIDIZED_COPPER_CHAIN = helper.register(BLOCK, "oxidized_copper_chain",
+            () -> new WeatheringCopperChainBlock(
+                WeatheringCopper.WeatherState.OXIDIZED,
+                BlockBehaviour.Properties.of()
+                    .forceSolidOn()
+                    .requiresCorrectToolForDrops()
+                    .strength(5.0F, 6.0F)
+                    .sound(SoundType.CHAIN)
+                    .noOcclusion()
+                    .randomTicks()));
+        
+        // Register Waxed Copper Chain Blocks
+        WAXED_COPPER_CHAIN = helper.register(BLOCK, "waxed_copper_chain",
+            () -> new CopperChainBlock(
+                WeatheringCopper.WeatherState.UNAFFECTED,
+                BlockBehaviour.Properties.of()
+                    .forceSolidOn()
+                    .requiresCorrectToolForDrops()
+                    .strength(5.0F, 6.0F)
+                    .sound(SoundType.CHAIN)
+                    .noOcclusion()));
+        
+        WAXED_EXPOSED_COPPER_CHAIN = helper.register(BLOCK, "waxed_exposed_copper_chain",
+            () -> new CopperChainBlock(
+                WeatheringCopper.WeatherState.EXPOSED,
+                BlockBehaviour.Properties.of()
+                    .forceSolidOn()
+                    .requiresCorrectToolForDrops()
+                    .strength(5.0F, 6.0F)
+                    .sound(SoundType.CHAIN)
+                    .noOcclusion()));
+        
+        WAXED_WEATHERED_COPPER_CHAIN = helper.register(BLOCK, "waxed_weathered_copper_chain",
+            () -> new CopperChainBlock(
+                WeatheringCopper.WeatherState.WEATHERED,
+                BlockBehaviour.Properties.of()
+                    .forceSolidOn()
+                    .requiresCorrectToolForDrops()
+                    .strength(5.0F, 6.0F)
+                    .sound(SoundType.CHAIN)
+                    .noOcclusion()));
+        
+        WAXED_OXIDIZED_COPPER_CHAIN = helper.register(BLOCK, "waxed_oxidized_copper_chain",
+            () -> new CopperChainBlock(
+                WeatheringCopper.WeatherState.OXIDIZED,
+                BlockBehaviour.Properties.of()
+                    .forceSolidOn()
+                    .requiresCorrectToolForDrops()
+                    .strength(5.0F, 6.0F)
+                    .sound(SoundType.CHAIN)
+                    .noOcclusion()));
         
         // Setup button references after registration
         helper.onRegisterComplete(() -> {

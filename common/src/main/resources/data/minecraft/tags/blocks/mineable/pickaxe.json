@@ -24,7 +24,15 @@
     "copperagebackport:waxed_copper_lantern",
     "copperagebackport:waxed_exposed_copper_lantern",
     "copperagebackport:waxed_weathered_copper_lantern",
-    "copperagebackport:waxed_oxidized_copper_lantern"
+    "copperagebackport:waxed_oxidized_copper_lantern",
+    "copperagebackport:copper_chain",
+    "copperagebackport:exposed_copper_chain",
+    "copperagebackport:weathered_copper_chain",
+    "copperagebackport:oxidized_copper_chain",
+    "copperagebackport:waxed_copper_chain",
+    "copperagebackport:waxed_exposed_copper_chain",
+    "copperagebackport:waxed_weathered_copper_chain",
+    "copperagebackport:waxed_oxidized_copper_chain"
   ]
 }
 

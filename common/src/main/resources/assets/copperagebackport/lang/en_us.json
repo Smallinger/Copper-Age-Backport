@@ -60,6 +60,15 @@
   "block.copperagebackport.waxed_weathered_copper_lantern": "Waxed Weathered Copper Lantern",
   "block.copperagebackport.waxed_oxidized_copper_lantern": "Waxed Oxidized Copper Lantern",
 
+  "block.copperagebackport.copper_chain": "Copper Chain",
+  "block.copperagebackport.exposed_copper_chain": "Exposed Copper Chain",
+  "block.copperagebackport.weathered_copper_chain": "Weathered Copper Chain",
+  "block.copperagebackport.oxidized_copper_chain": "Oxidized Copper Chain",
+  "block.copperagebackport.waxed_copper_chain": "Waxed Copper Chain",
+  "block.copperagebackport.waxed_exposed_copper_chain": "Waxed Exposed Copper Chain",
+  "block.copperagebackport.waxed_weathered_copper_chain": "Waxed Weathered Copper Chain",
+  "block.copperagebackport.waxed_oxidized_copper_chain": "Waxed Oxidized Copper Chain",
+
   "subtitles.entity.copper_golem.death": "Copper Golem dies",
   "subtitles.entity.copper_golem.hurt": "Copper Golem hurts",
   "subtitles.entity.copper_golem.step": "Copper Golem steps",

@@ -18,6 +18,14 @@ All notable changes to this project will be documented in this file.
 - **Hanging variant**: Can be placed on ceilings or standing on blocks
 - **Light level 15**: Provides maximum light output
 
+#### Copper Chain
+- **8 variants**: Copper, Exposed, Weathered, Oxidized + Waxed versions
+- **Oxidation system**: Chains weather over time like other copper blocks
+- **Waxing support**: Use honeycomb to prevent oxidation
+- **Axe scraping**: Remove wax or reduce oxidation with an axe
+- **Rotatable**: Can be placed along any axis (X, Y, Z)
+- **Waterloggable**: Can be placed in water
+
 ## [1.20.1] - 0.1.0 - 25.11.2025 - Copper Age Backport
 
 ### Added

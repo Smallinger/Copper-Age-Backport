@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/chain",
+  "textures": {
+    "all": "copperagebackport:block/copper_chain",
+    "particle": "copperagebackport:block/copper_chain"
+  }
+}

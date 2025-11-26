@@ -148,6 +148,15 @@ public class CopperAgeBackportFabric implements ModInitializer {
             content.accept(ModItems.WAXED_EXPOSED_COPPER_LANTERN_ITEM.get());
             content.accept(ModItems.WAXED_WEATHERED_COPPER_LANTERN_ITEM.get());
             content.accept(ModItems.WAXED_OXIDIZED_COPPER_LANTERN_ITEM.get());
+            // Copper Chains
+            content.accept(ModItems.COPPER_CHAIN_ITEM.get());
+            content.accept(ModItems.EXPOSED_COPPER_CHAIN_ITEM.get());
+            content.accept(ModItems.WEATHERED_COPPER_CHAIN_ITEM.get());
+            content.accept(ModItems.OXIDIZED_COPPER_CHAIN_ITEM.get());
+            content.accept(ModItems.WAXED_COPPER_CHAIN_ITEM.get());
+            content.accept(ModItems.WAXED_EXPOSED_COPPER_CHAIN_ITEM.get());
+            content.accept(ModItems.WAXED_WEATHERED_COPPER_CHAIN_ITEM.get());
+            content.accept(ModItems.WAXED_OXIDIZED_COPPER_CHAIN_ITEM.get());
         });
         
         // Add copper tools to tools tab

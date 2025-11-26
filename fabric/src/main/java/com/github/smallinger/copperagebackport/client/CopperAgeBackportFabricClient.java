@@ -87,7 +87,16 @@ public class CopperAgeBackportFabricClient implements ClientModInitializer {
             ModBlocks.WAXED_COPPER_LANTERN.get(),
             ModBlocks.WAXED_EXPOSED_COPPER_LANTERN.get(),
             ModBlocks.WAXED_WEATHERED_COPPER_LANTERN.get(),
-            ModBlocks.WAXED_OXIDIZED_COPPER_LANTERN.get());
+            ModBlocks.WAXED_OXIDIZED_COPPER_LANTERN.get(),
+            // Copper Chains
+            ModBlocks.COPPER_CHAIN.get(),
+            ModBlocks.EXPOSED_COPPER_CHAIN.get(),
+            ModBlocks.WEATHERED_COPPER_CHAIN.get(),
+            ModBlocks.OXIDIZED_COPPER_CHAIN.get(),
+            ModBlocks.WAXED_COPPER_CHAIN.get(),
+            ModBlocks.WAXED_EXPOSED_COPPER_CHAIN.get(),
+            ModBlocks.WAXED_WEATHERED_COPPER_CHAIN.get(),
+            ModBlocks.WAXED_OXIDIZED_COPPER_CHAIN.get());
     }
 }
 
