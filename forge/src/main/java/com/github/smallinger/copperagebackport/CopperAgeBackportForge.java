@@ -14,7 +14,9 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.fml.loading.FMLPaths;
+import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
+import net.minecraft.world.item.Items;
 
 @Mod(Constants.MOD_ID)
 public class CopperAgeBackportForge {
@@ -147,26 +149,28 @@ public class CopperAgeBackportForge {
             event.accept(ModItems.WAXED_OXIDIZED_COPPER_GRATE_ITEM.get());
         }
         
-        // Add copper tools to tools tab
+        // Add copper tools after stone tools
         if (event.getTabKey() == CreativeModeTabs.TOOLS_AND_UTILITIES) {
-            event.accept(ModItems.COPPER_SHOVEL.get());
-            event.accept(ModItems.COPPER_PICKAXE.get());
-            event.accept(ModItems.COPPER_AXE.get());
-            event.accept(ModItems.COPPER_HOE.get());
+            var entries = event.getEntries();
+            entries.putAfter(Items.STONE_HOE.getDefaultInstance(), ModItems.COPPER_SHOVEL.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            entries.putAfter(ModItems.COPPER_SHOVEL.get().getDefaultInstance(), ModItems.COPPER_PICKAXE.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            entries.putAfter(ModItems.COPPER_PICKAXE.get().getDefaultInstance(), ModItems.COPPER_AXE.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            entries.putAfter(ModItems.COPPER_AXE.get().getDefaultInstance(), ModItems.COPPER_HOE.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
         }
         
-        // Add copper sword to combat tab
+        // Add copper sword after stone sword, copper armor after chainmail armor
         if (event.getTabKey() == CreativeModeTabs.COMBAT) {
-            event.accept(ModItems.COPPER_SWORD.get());
-            event.accept(ModItems.COPPER_HELMET.get());
-            event.accept(ModItems.COPPER_CHESTPLATE.get());
-            event.accept(ModItems.COPPER_LEGGINGS.get());
-            event.accept(ModItems.COPPER_BOOTS.get());
+            var entries = event.getEntries();
+            entries.putAfter(Items.STONE_SWORD.getDefaultInstance(), ModItems.COPPER_SWORD.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            entries.putAfter(Items.CHAINMAIL_BOOTS.getDefaultInstance(), ModItems.COPPER_HELMET.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            entries.putAfter(ModItems.COPPER_HELMET.get().getDefaultInstance(), ModItems.COPPER_CHESTPLATE.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            entries.putAfter(ModItems.COPPER_CHESTPLATE.get().getDefaultInstance(), ModItems.COPPER_LEGGINGS.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            entries.putAfter(ModItems.COPPER_LEGGINGS.get().getDefaultInstance(), ModItems.COPPER_BOOTS.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
         }
         
-        // Add copper nugget to ingredients tab
+        // Add copper nugget after iron nugget
         if (event.getTabKey() == CreativeModeTabs.INGREDIENTS) {
-            event.accept(ModItems.COPPER_NUGGET.get());
+            event.getEntries().putAfter(Items.IRON_NUGGET.getDefaultInstance(), ModItems.COPPER_NUGGET.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
         }
     }
     

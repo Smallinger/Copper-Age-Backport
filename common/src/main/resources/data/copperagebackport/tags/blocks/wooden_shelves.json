@@ -12,6 +12,9 @@
     "copperagebackport:bamboo_shelf",
     "copperagebackport:crimson_shelf",
     "copperagebackport:warped_shelf",
-    "copperagebackport:pale_oak_shelf"
+    {
+      "id": "copperagebackport:pale_oak_shelf",
+      "required": false
+    }
   ]
 }
