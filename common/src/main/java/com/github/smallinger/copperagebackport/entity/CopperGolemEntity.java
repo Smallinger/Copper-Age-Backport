@@ -27,6 +27,7 @@ import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.ai.Brain;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.ai.behavior.BehaviorUtils;
 import net.minecraft.world.entity.animal.AbstractGolem;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -50,7 +51,10 @@ public class CopperGolemEntity extends AbstractGolem implements Shearable, Conta
     private static final int SPIN_ANIMATION_MIN_COOLDOWN = 200;
     private static final int SPIN_ANIMATION_MAX_COOLDOWN = 240;
     private static final float TURN_TO_STATUE_CHANCE = 0.0058F; // 0.58% chance per tick when oxidized
-    private static final double CONTAINER_INTERACTION_RANGE = 4.0;
+    private static final double CONTAINER_INTERACTION_RANGE = 3.0;
+    // In vanilla 1.21.10, this is EquipmentSlot.SADDLE - a new slot added specifically for Copper Golem's antenna.
+    // Since SADDLE doesn't exist in 1.20.1 (or 1.21.1), we use HEAD as a fallback slot for the antenna item.
+    public static final EquipmentSlot EQUIPMENT_SLOT_ANTENNA = EquipmentSlot.HEAD;
     
     private static final EntityDataAccessor<Integer> DATA_WEATHER_STATE = 
         SynchedEntityData.defineId(CopperGolemEntity.class, EntityDataSerializers.INT);
@@ -60,6 +64,8 @@ public class CopperGolemEntity extends AbstractGolem implements Shearable, Conta
     private long nextWeatheringTick = UNSET_WEATHERING_TICK;
     @Nullable
     private BlockPos openedChestPos;
+    @Nullable
+    private java.util.UUID lastLightningBoltUUID;
     private int idleAnimationStartTick = 0;
     
     // Helper methods for WeatherState navigation (not in 1.21.1 API)
@@ -81,7 +87,10 @@ public class CopperGolemEntity extends AbstractGolem implements Shearable, Conta
         };
     }
     
-    // Animation states für Client
+    // Animation states for client-side rendering
+    // In vanilla 1.21.10, these are private final with getter methods.
+    // We use public final here because the client renderer (CopperGolemModel) accesses them directly.
+    // This is functionally equivalent since they are final and cannot be reassigned.
     public final AnimationState idleAnimationState = new AnimationState();
     public final AnimationState interactionGetItemAnimationState = new AnimationState();
     public final AnimationState interactionGetNoItemAnimationState = new AnimationState();
@@ -91,9 +100,14 @@ public class CopperGolemEntity extends AbstractGolem implements Shearable, Conta
 
     public CopperGolemEntity(EntityType<? extends AbstractGolem> entityType, Level level) {
         super(entityType, level);
+        // Step height of 1.0 to match vanilla CopperGolem (1.21.10)
+        // In 1.20.1 this is set via setMaxUpStep(), in 1.21+ it's an attribute
+        this.setMaxUpStep(1.0F);
         // Navigation-Einstellungen für bessere Pfadsuche
         this.getNavigation().setMaxVisitedNodesMultiplier(3.0F);
         this.setPersistenceRequired();
+        // Explicitly set initial state to IDLE (matches vanilla CopperGolem constructor)
+        this.setState(CopperGolemState.IDLE);
         // Benötigt für Türöffnung mit Brain-based AI
         this.setCanPickUpLoot(true);
         // Pathfinding-Malus: Meidet Feuer-Gefahren
@@ -104,9 +118,15 @@ public class CopperGolemEntity extends AbstractGolem implements Shearable, Conta
         this.setPathfindingMalus(net.minecraft.world.level.pathfinder.BlockPathTypes.DOOR_WOOD_CLOSED, 0.0F);
         this.setPathfindingMalus(net.minecraft.world.level.pathfinder.BlockPathTypes.DOOR_OPEN, 0.0F);
         this.setPathfindingMalus(net.minecraft.world.level.pathfinder.BlockPathTypes.DOOR_IRON_CLOSED, -1.0F);
+        // Initialize transport cooldown with random delay (60-100 ticks) to prevent immediate item transport after spawn
+        // Matches vanilla CopperGolem (1.21.10) behavior
+        this.getBrain().setMemory(com.github.smallinger.copperagebackport.ModMemoryTypes.TRANSPORT_ITEMS_COOLDOWN_TICKS.get(), this.getRandom().nextInt(60, 100));
     }
 
     public static AttributeSupplier.Builder createAttributes() {
+        // Note: STEP_HEIGHT attribute doesn't exist in 1.20.1 vanilla (added in 1.21+)
+        // The default step height for mobs is 0.6, which is fine for the Copper Golem
+        // In 1.21.1+ we use Attributes.STEP_HEIGHT = 1.0 to match vanilla CopperGolem
         return Mob.createMobAttributes()
             .add(Attributes.MAX_HEALTH, 12.0)
             .add(Attributes.MOVEMENT_SPEED, 0.2F)
@@ -138,6 +158,12 @@ public class CopperGolemEntity extends AbstractGolem implements Shearable, Conta
         navigation.setCanPassDoors(true);  // Kann durch Türen gehen
         navigation.setRequiredPathLength(48.0F);  // Längere Pfade = bessere Navigation, weniger Blockieren
         return navigation;
+    }
+
+    // Prevent Copper Golem from picking up items from the ground
+    @Override
+    public boolean wantsToPickUp(ItemStack stack) {
+        return false;
     }
 
     @Override
@@ -176,9 +202,26 @@ public class CopperGolemEntity extends AbstractGolem implements Shearable, Conta
     }
 
     // ContainerUser implementation
+    // Matches vanilla CopperGolem (1.21.10) behavior:
+    // Supports double chests by checking both the opened chest position AND the connected chest position.
+    // This prevents issues where opening one half of a double chest wouldn't properly track the other half.
     @Override
     public boolean hasContainerOpen(ContainerOpenersCounter openCounter, BlockPos pos) {
-        return this.openedChestPos != null && this.openedChestPos.equals(pos);
+        if (this.openedChestPos == null) {
+            return false;
+        }
+        // Check if it's the same position or a connected double chest
+        if (this.openedChestPos.equals(pos)) {
+            return true;
+        }
+        // Double chest support
+        net.minecraft.world.level.block.state.BlockState blockstate = this.level().getBlockState(this.openedChestPos);
+        if (blockstate.getBlock() instanceof net.minecraft.world.level.block.ChestBlock
+                && blockstate.getValue(net.minecraft.world.level.block.ChestBlock.TYPE) != net.minecraft.world.level.block.state.properties.ChestType.SINGLE) {
+            net.minecraft.core.Direction connectedDirection = net.minecraft.world.level.block.ChestBlock.getConnectedDirection(blockstate);
+            return this.openedChestPos.relative(connectedDirection).equals(pos);
+        }
+        return false;
     }
 
     @Override
@@ -277,22 +320,21 @@ public class CopperGolemEntity extends AbstractGolem implements Shearable, Conta
         
         if (level.getBlockEntity(blockPos) instanceof CopperGolemStatueBlockEntity statueEntity) {
             statueEntity.createStatue(this);
+            this.dropPreservedEquipment();
+            // Matches vanilla order: discard entity first, then play sound
+            this.discard();
             this.playSound(ModSounds.COPPER_GOLEM_BECOME_STATUE.get());
-            level.playSound(null, blockPos, ModSounds.COPPER_GOLEM_BECOME_STATUE.get(), SoundSource.BLOCKS, 1.0F, 1.0F);
-
-            // Drop held item if any
-            ItemStack heldItem = this.getItemBySlot(EquipmentSlot.MAINHAND);
-            if (!heldItem.isEmpty()) {
-                this.spawnAtLocation(heldItem);
-                this.setItemSlot(EquipmentSlot.MAINHAND, ItemStack.EMPTY);
-            }
             
             // Drop leash if leashed
+            // In vanilla 1.21.10, this uses dropLeash() and removeLeash() separately.
+            // Since removeLeash() doesn't exist in 1.21.1/1.20.1, we use dropLeash(broadcast, dropItem) for both cases.
             if (this.isLeashed()) {
-                this.dropLeash(true, level.getGameRules().getBoolean(GameRules.RULE_DOENTITYDROPS));
+                if (level.getGameRules().getBoolean(GameRules.RULE_DOENTITYDROPS)) {
+                    this.dropLeash(true, true);  // broadcast and drop item
+                } else {
+                    this.dropLeash(true, false); // broadcast but don't drop item
+                }
             }
-            
-            this.discard();
         }
     }
 
@@ -369,10 +411,21 @@ public class CopperGolemEntity extends AbstractGolem implements Shearable, Conta
         ItemStack itemstack = player.getItemInHand(hand);
         Level level = this.level();
 
+        // Empty hand - throw held item to player
+        if (itemstack.isEmpty() && !this.getMainHandItem().isEmpty()) {
+            if (!level.isClientSide()) {
+                ItemStack heldItem = this.getMainHandItem();
+                BehaviorUtils.throwItem(this, heldItem, player.position());
+                this.setItemInHand(InteractionHand.MAIN_HAND, ItemStack.EMPTY);
+            }
+            return InteractionResult.SUCCESS;
+        }
+
         // Shears interaction
         if (itemstack.is(Items.SHEARS) && this.readyForShearing()) {
             if (level instanceof ServerLevel serverLevel) {
                 this.shear(SoundSource.PLAYERS);
+                this.gameEvent(net.minecraft.world.level.gameevent.GameEvent.SHEAR, player);
                 itemstack.hurtAndBreak(1, player, (p) -> p.broadcastBreakEvent(hand));
             }
             return InteractionResult.sidedSuccess(level.isClientSide());
@@ -463,20 +516,52 @@ public class CopperGolemEntity extends AbstractGolem implements Shearable, Conta
         return new Vec3(0.0, 0.75 * this.getEyeHeight(), 0.0);
     }
 
+    // Custom implementation for 1.20.1 since dropPreservedEquipment() doesn't exist
+    // This method drops all equipment items (main hand, off hand, armor) without random chance
+    private void dropPreservedEquipment() {
+        for (EquipmentSlot slot : EquipmentSlot.values()) {
+            ItemStack itemStack = this.getItemBySlot(slot);
+            if (!itemStack.isEmpty()) {
+                this.spawnAtLocation(itemStack);
+                this.setItemSlot(slot, ItemStack.EMPTY);
+            }
+        }
+    }
+
     @Override
     public void shear(SoundSource source) {
-        this.level().playSound(null, this, SoundEvents.SHEEP_SHEAR, source, 1.0F, 1.0F);
+        this.level().playSound(null, this, ModSounds.COPPER_GOLEM_SHEAR.get(), source, 1.0F, 1.0F);
         // Remove antenna item if implemented
-        ItemStack antennaItem = this.getItemBySlot(EquipmentSlot.HEAD);
+        ItemStack antennaItem = this.getItemBySlot(EQUIPMENT_SLOT_ANTENNA);
         if (!antennaItem.isEmpty()) {
-            this.setItemSlot(EquipmentSlot.HEAD, ItemStack.EMPTY);
+            this.setItemSlot(EQUIPMENT_SLOT_ANTENNA, ItemStack.EMPTY);
             this.spawnAtLocation(antennaItem, 1.5F);
         }
     }
 
     @Override
     public boolean readyForShearing() {
-        return this.isAlive() && !this.getItemBySlot(EquipmentSlot.HEAD).isEmpty();
+        // In vanilla 1.21.10, this checks ItemTags.SHEARABLE_FROM_COPPER_GOLEM which only contains poppy.
+        // We check directly for poppy since the tag doesn't exist in older versions.
+        return this.isAlive() && this.getItemBySlot(EQUIPMENT_SLOT_ANTENNA).is(Items.POPPY);
+    }
+
+    /**
+     * Called when the Copper Golem is spawned from building the structure (pumpkin + copper block).
+     * Sets the weather state based on the copper block used and plays the spawn sound.
+     * Matches vanilla CopperGolem (1.21.10) behavior.
+     */
+    public void spawn(WeatheringCopper.WeatherState weatherState) {
+        this.setWeatherState(weatherState);
+        this.playSpawnSound();
+    }
+
+    /**
+     * Plays the spawn sound for the Copper Golem.
+     * Called both when spawning from structure and from spawn egg.
+     */
+    public void playSpawnSound() {
+        this.playSound(ModSounds.COPPER_GOLEM_SPAWN.get());
     }
 
     @Nullable
@@ -488,36 +573,41 @@ public class CopperGolemEntity extends AbstractGolem implements Shearable, Conta
         @Nullable SpawnGroupData spawnData,
         @Nullable CompoundTag dataTag
     ) {
-        this.playSound(SoundEvents.IRON_GOLEM_REPAIR); // Placeholder for spawn sound
+        this.playSpawnSound();
         return super.finalizeSpawn(level, difficulty, spawnType, spawnData, dataTag);
     }
 
     @Override
     public void thunderHit(ServerLevel level, LightningBolt lightning) {
         super.thunderHit(level, lightning);
-        // Lightning removes one oxidation level
-        WeatheringCopper.WeatherState weatherState = this.getWeatherState();
-        if (weatherState != WeatheringCopper.WeatherState.UNAFFECTED) {
-            this.nextWeatheringTick = UNSET_WEATHERING_TICK;
-            this.setWeatherState(getPreviousWeatherState(weatherState));
+        java.util.UUID uuid = lightning.getUUID();
+        // Only process once per lightning bolt
+        if (!uuid.equals(this.lastLightningBoltUUID)) {
+            this.lastLightningBoltUUID = uuid;
+            // Lightning removes one oxidation level
+            WeatheringCopper.WeatherState weatherState = this.getWeatherState();
+            if (weatherState != WeatheringCopper.WeatherState.UNAFFECTED) {
+                this.nextWeatheringTick = UNSET_WEATHERING_TICK;
+                this.setWeatherState(getPreviousWeatherState(weatherState));
+            }
         }
     }
 
+    // change hurt() to actuallyHurt() to reset state to IDLE
     @Override
-    public boolean hurt(DamageSource source, float amount) {
-        boolean result = super.hurt(source, amount);
-        if (result) {
-            this.setState(CopperGolemState.IDLE);
-        }
-        return result;
+    protected void actuallyHurt(DamageSource source, float amount) {
+        super.actuallyHurt(source, amount);
+        this.setState(CopperGolemState.IDLE);
     }
 
+    // Copper ingot drops are handled by the entity loot table at:
+    // data/copperagebackport/loot_tables/entities/copper_golem.json
+    // Drops 1-3 copper ingots with looting enchantment bonus (vanilla behavior)
+
     @Override
-    protected void dropCustomDeathLoot(DamageSource damageSource, int looting, boolean hitByPlayer) {
-        super.dropCustomDeathLoot(damageSource, looting, hitByPlayer);
-        // Drop 3 copper ingots when killed
-        ItemStack copperIngots = new ItemStack(Items.COPPER_INGOT, 3);
-        this.spawnAtLocation(copperIngots);
+    protected void dropEquipment() {
+        super.dropEquipment();
+        this.dropPreservedEquipment();
     }
 }
 

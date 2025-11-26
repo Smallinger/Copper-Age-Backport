@@ -36,6 +36,7 @@ public class ModSounds {
     // Copper Golem sounds - General
     public static Supplier<SoundEvent> COPPER_GOLEM_SPAWN;
     public static Supplier<SoundEvent> COPPER_GOLEM_BECOME_STATUE;
+    public static Supplier<SoundEvent> COPPER_GOLEM_SHEAR;
     
     // Copper Golem sounds - Item Interaction
     public static Supplier<SoundEvent> COPPER_GOLEM_ITEM_DROP;
@@ -96,6 +97,7 @@ public class ModSounds {
         // Register Copper Golem sounds - General
         COPPER_GOLEM_SPAWN = registerSound(helper, "entity.copper_golem.spawn");
         COPPER_GOLEM_BECOME_STATUE = registerSound(helper, "entity.copper_golem.become_statue");
+        COPPER_GOLEM_SHEAR = registerSound(helper, "entity.copper_golem.shear");
         
         // Register Copper Golem sounds - Item Interaction
         COPPER_GOLEM_ITEM_DROP = registerSound(helper, "entity.copper_golem.item_drop");

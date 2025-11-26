@@ -51,9 +51,29 @@ All notable changes to this project will be documented in this file.
 
 ### Fixed
 - **Copper Tools & Armor**: Fixed stackability - all copper tools and armor are now correctly unstackable (max stack size 1)
-- **Copper Nugget Compatibility**: Added tag support for cross-mod compatibility (forge:nuggets/copper, c:copper_nuggets) - now works with Create and other mods on both Forge and Fabric
+- **Copper Nugget Compatibility**: Added tag support for cross-mod compatibility (c:nuggets/copper, c:copper_nuggets) - now works with other mods on both Forge and Fabric
 - **Copper Golem Crash**: Fixed server crash when Copper Golem tried to evaluate item pickups (missing ATTACK_DAMAGE attribute)
 - **Creative Tab Sorting**: Copper tools, armor, and nuggets now appear after their vanilla counterparts (stone tools, chainmail armor, iron nugget) instead of at the bottom of tabs
+- **Copper Bars Textures**: Fixed black/purple texture rendering for Copper Bars (missing template models)
+
+#### Copper Golem Improvements
+- **Lightning protection**: Fixed duplicate oxidation removal when struck by lightning
+- **Spawn sound**: Copper Golem now plays correct spawn sound instead of Iron Golem repair sound
+- **Item throwing**: Items are now thrown towards the player when retrieved with empty hand (like in 1.21.10)
+- **Equipment drops**: Improved equipment drop behavior on death and when turning to statue
+- **Damage handling**: State reset now only triggers when actually taking damage
+- **Shear sound**: Added custom shear sound for removing antenna items
+- **Container interaction range**: Reduced from 4.0 to 3.0 to match vanilla behavior
+- **Double chest support**: Fixed container tracking for double chests
+- **Equipment slot constant**: Added EQUIPMENT_SLOT_ANTENNA constant for consistency
+- **Step height**: Added step height of 1.0 (Copper Golem can now step up 1 block)
+- **Block spawn particles**: Both pumpkin AND copper block now show break particles when spawning
+- **Spawn method**: Added spawn(WeatherState) method matching vanilla CopperGolem API
+- **Initial state**: Copper Golem now correctly initializes to IDLE state on construction
+- **Sculk sensor detection**: Shearing the Copper Golem now triggers GameEvent.SHEAR
+- **Statue transformation**: Fixed execution order - entity is now discarded before playing sound
+- **Leash handling**: Leash is now properly dropped when turning to statue
+- **Entity loot table**: Drops are now handled via loot table (1-3 copper ingots with looting bonus)
 
 ## [1.20.1] - 0.1.0 - 25.11.2025 - Copper Age Backport
 

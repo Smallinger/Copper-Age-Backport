@@ -169,6 +169,12 @@
       "copperagebackport:entity/copper_golem/spawn"
     ]
   },
+  "entity.copper_golem.shear": {
+    "subtitle": "subtitles.item.shears.shear",
+    "sounds": [
+      "minecraft:mob/sheep/shear"
+    ]
+  },
   "block.copper_chest.close": {
     "subtitle": "subtitles.block.copper_chest.close",
     "sounds": [

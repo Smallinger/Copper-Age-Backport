@@ -50,6 +50,11 @@ public final class CopperGolemSpawnLogic {
             // Use opposite direction to face the player (180 degrees)
             Direction direction = playerDirection.getOpposite();
             
+            // Play break particles for both blocks (matching vanilla CopperGolem 1.21.10 behavior)
+            // This shows the block break particles before removing the blocks
+            level.levelEvent(2001, pumpkinPos, Block.getId(Blocks.CARVED_PUMPKIN.defaultBlockState()));
+            level.levelEvent(2001, copperPos, Block.getId(copperState));
+            
             // Remove the pumpkin
             level.setBlock(pumpkinPos, Blocks.AIR.defaultBlockState(), 2);
             
@@ -57,9 +62,6 @@ public final class CopperGolemSpawnLogic {
             Block copperBlock = copperState.getBlock();
             BlockState chestState = CopperChestBlock.getFromCopperBlock(copperBlock, direction, level, copperPos);
             level.setBlock(copperPos, chestState, 2);
-            
-            // Play break particle for pumpkin
-            level.levelEvent(2001, pumpkinPos, Block.getId(Blocks.CARVED_PUMPKIN.defaultBlockState()));
             
             // Spawn the Copper Golem
             CopperGolemEntity copperGolem = ModEntities.COPPER_GOLEM.get().create(level);
@@ -83,9 +85,12 @@ public final class CopperGolemSpawnLogic {
                 copperGolem.setYHeadRot(yaw);
                 copperGolem.yHeadRotO = yaw;
                 
-                // Set the oxidation state based on the copper block type
+                // Get the weather state from the copper block
                 WeatheringCopper.WeatherState weatherState = getWeatherStateFromBlock(copperState.getBlock());
-                copperGolem.setWeatherState(weatherState);
+                
+                // Use the spawn() method to set weather state and play spawn sound
+                // This matches vanilla CopperGolem (1.21.10) behavior
+                copperGolem.spawn(weatherState);
                 
                 // Set initial transport cooldown (140 ticks = 7 seconds)
                 // This prevents the golem from immediately trying to interact with the spawn chest
