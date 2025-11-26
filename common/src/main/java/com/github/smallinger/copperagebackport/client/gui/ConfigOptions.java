@@ -66,7 +66,7 @@ public class ConfigOptions {
         Option<Integer> weatheringTickFrom = OptionImpl.<Integer>builder(Integer.class)
             .name("config.copperagebackport.weathering_tick_from")
             .tooltip("config.copperagebackport.weathering_tick_from.tooltip")
-            .control(opt -> new IntegerFieldControl(opt, 0, 10000000, IntegerFieldControl.ValueFormatter.minecraftDays()))
+            .control(opt -> new IntegerFieldControl(opt, 0, 10000000, IntegerFieldControl.ValueFormatter.realMinutes()))
             .binding(
                 CommonConfig::weatheringTickFrom,
                 CommonConfig::setWeatheringTickFrom
@@ -78,7 +78,7 @@ public class ConfigOptions {
         Option<Integer> weatheringTickTo = OptionImpl.<Integer>builder(Integer.class)
             .name("config.copperagebackport.weathering_tick_to")
             .tooltip("config.copperagebackport.weathering_tick_to.tooltip")
-            .control(opt -> new IntegerFieldControl(opt, weatheringTickFrom::getValue, 10000000, IntegerFieldControl.ValueFormatter.minecraftDays()))
+            .control(opt -> new IntegerFieldControl(opt, weatheringTickFrom::getValue, 10000000, IntegerFieldControl.ValueFormatter.realMinutes()))
             .binding(
                 CommonConfig::weatheringTickTo,
                 CommonConfig::setWeatheringTickTo

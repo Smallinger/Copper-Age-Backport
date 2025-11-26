@@ -18,6 +18,7 @@ import net.minecraft.world.item.SwordItem;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.HorseArmorItem;
 import net.minecraft.core.Direction;
+import net.minecraft.resources.ResourceLocation;
 import com.github.smallinger.copperagebackport.platform.Services;
 
 import java.util.function.Supplier;
@@ -391,7 +392,10 @@ public class ModItems {
             () -> new ArmorItem(com.github.smallinger.copperagebackport.item.armor.CopperArmorMaterial.COPPER, ArmorItem.Type.BOOTS, new Item.Properties().stacksTo(1)));
         
         // Copper Horse Armor: 4 protection (between leather 3 and iron 5)
+        // 1.20.1 uses custom CopperHorseArmorItem because vanilla HorseArmorItem only supports minecraft namespace
+        // -> overrides getTexture() to return: copperagebackport:textures/entity/horse/armor/horse_armor_copper.png
+        // Note: 1.21.1 uses AnimalArmorItem which derives texture from ArmorMaterial key automatically
         COPPER_HORSE_ARMOR = helper.register(ITEM, "copper_horse_armor",
-            () -> new HorseArmorItem(4, "copper", new Item.Properties().stacksTo(1)));
+            () -> new com.github.smallinger.copperagebackport.item.CopperHorseArmorItem(4, new Item.Properties().stacksTo(1)));
     }
 }

@@ -68,15 +68,15 @@ public class IntegerFieldControl implements Control<Integer> {
         Component format(int value);
 
         /**
-         * Formats ticks as Minecraft days.
+         * Formats ticks as real-world minutes.
          */
-        static ValueFormatter minecraftDays() {
+        static ValueFormatter realMinutes() {
             return value -> {
-                float days = value / 24000f;
-                if (days == (int) days) {
-                    return Component.translatable("config.copperagebackport.days", (int) days);
+                float minutes = value / 1200f;
+                if (minutes == (int) minutes) {
+                    return Component.translatable("config.copperagebackport.minutes", (int) minutes);
                 }
-                return Component.translatable("config.copperagebackport.days_decimal", String.format("%.1f", days));
+                return Component.translatable("config.copperagebackport.minutes_decimal", String.format("%.1f", minutes));
             };
         }
 

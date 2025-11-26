@@ -93,6 +93,9 @@ public final class CommonConfig {
     /**
      * Minimum time in ticks until the Copper Golem starts weathering to the next oxidation level.
      * Default: 504000 (~7 minecraft days)
+     * 
+     * Note: This setting only affects newly spawned Copper Golems.
+     * Existing golems keep their already calculated oxidation time.
      */
     public static int weatheringTickFrom() {
         return weatheringTickFrom;
@@ -105,6 +108,9 @@ public final class CommonConfig {
     /**
      * Maximum time in ticks until the Copper Golem weathers to the next oxidation level.
      * Default: 552000 (~7.7 minecraft days)
+     * 
+     * Note: This setting only affects newly spawned Copper Golems.
+     * Existing golems keep their already calculated oxidation time.
      */
     public static int weatheringTickTo() {
         return weatheringTickTo;
