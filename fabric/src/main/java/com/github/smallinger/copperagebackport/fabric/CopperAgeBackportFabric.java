@@ -101,14 +101,9 @@ public class CopperAgeBackportFabric implements ModInitializer {
         );
 
         ItemGroupEvents.modifyEntriesEvent(CreativeModeTabs.FUNCTIONAL_BLOCKS).register(entries -> {
-            entries.accept(ModItems.COPPER_CHEST_ITEM.get());
-            entries.accept(ModItems.EXPOSED_COPPER_CHEST_ITEM.get());
-            entries.accept(ModItems.WEATHERED_COPPER_CHEST_ITEM.get());
-            entries.accept(ModItems.OXIDIZED_COPPER_CHEST_ITEM.get());
-            entries.accept(ModItems.WAXED_COPPER_CHEST_ITEM.get());
-            entries.accept(ModItems.WAXED_EXPOSED_COPPER_CHEST_ITEM.get());
-            entries.accept(ModItems.WAXED_WEATHERED_COPPER_CHEST_ITEM.get());
-            entries.accept(ModItems.WAXED_OXIDIZED_COPPER_CHEST_ITEM.get());
+            // Copper Chests after normal chest
+            entries.addAfter(Items.CHEST, ModItems.COPPER_CHEST_ITEM.get(), ModItems.EXPOSED_COPPER_CHEST_ITEM.get(), ModItems.WEATHERED_COPPER_CHEST_ITEM.get(), ModItems.OXIDIZED_COPPER_CHEST_ITEM.get(), ModItems.WAXED_COPPER_CHEST_ITEM.get(), ModItems.WAXED_EXPOSED_COPPER_CHEST_ITEM.get(), ModItems.WAXED_WEATHERED_COPPER_CHEST_ITEM.get(), ModItems.WAXED_OXIDIZED_COPPER_CHEST_ITEM.get());
+            // Copper Golem Statues (keep at end)
             entries.accept(ModItems.COPPER_GOLEM_STATUE_ITEM.get());
             entries.accept(ModItems.EXPOSED_COPPER_GOLEM_STATUE_ITEM.get());
             entries.accept(ModItems.WEATHERED_COPPER_GOLEM_STATUE_ITEM.get());
@@ -117,53 +112,21 @@ public class CopperAgeBackportFabric implements ModInitializer {
             entries.accept(ModItems.WAXED_EXPOSED_COPPER_GOLEM_STATUE_ITEM.get());
             entries.accept(ModItems.WAXED_WEATHERED_COPPER_GOLEM_STATUE_ITEM.get());
             entries.accept(ModItems.WAXED_OXIDIZED_COPPER_GOLEM_STATUE_ITEM.get());
-            // Copper Lanterns
-            entries.accept(ModItems.COPPER_LANTERN_ITEM.get());
-            entries.accept(ModItems.EXPOSED_COPPER_LANTERN_ITEM.get());
-            entries.accept(ModItems.WEATHERED_COPPER_LANTERN_ITEM.get());
-            entries.accept(ModItems.OXIDIZED_COPPER_LANTERN_ITEM.get());
-            entries.accept(ModItems.WAXED_COPPER_LANTERN_ITEM.get());
-            entries.accept(ModItems.WAXED_EXPOSED_COPPER_LANTERN_ITEM.get());
-            entries.accept(ModItems.WAXED_WEATHERED_COPPER_LANTERN_ITEM.get());
-            entries.accept(ModItems.WAXED_OXIDIZED_COPPER_LANTERN_ITEM.get());
-            // Copper Chains
-            entries.accept(ModItems.COPPER_CHAIN_ITEM.get());
-            entries.accept(ModItems.EXPOSED_COPPER_CHAIN_ITEM.get());
-            entries.accept(ModItems.WEATHERED_COPPER_CHAIN_ITEM.get());
-            entries.accept(ModItems.OXIDIZED_COPPER_CHAIN_ITEM.get());
-            entries.accept(ModItems.WAXED_COPPER_CHAIN_ITEM.get());
-            entries.accept(ModItems.WAXED_EXPOSED_COPPER_CHAIN_ITEM.get());
-            entries.accept(ModItems.WAXED_WEATHERED_COPPER_CHAIN_ITEM.get());
-            entries.accept(ModItems.WAXED_OXIDIZED_COPPER_CHAIN_ITEM.get());
-            // Shelves
-            entries.accept(ModItems.OAK_SHELF_ITEM.get());
-            entries.accept(ModItems.BIRCH_SHELF_ITEM.get());
-            entries.accept(ModItems.SPRUCE_SHELF_ITEM.get());
-            entries.accept(ModItems.JUNGLE_SHELF_ITEM.get());
-            entries.accept(ModItems.ACACIA_SHELF_ITEM.get());
-            entries.accept(ModItems.DARK_OAK_SHELF_ITEM.get());
-            entries.accept(ModItems.MANGROVE_SHELF_ITEM.get());
-            entries.accept(ModItems.CHERRY_SHELF_ITEM.get());
-            entries.accept(ModItems.BAMBOO_SHELF_ITEM.get());
-            entries.accept(ModItems.CRIMSON_SHELF_ITEM.get());
-            entries.accept(ModItems.WARPED_SHELF_ITEM.get());
+            // Copper Lanterns after soul lantern
+            entries.addAfter(Items.SOUL_LANTERN, ModItems.COPPER_LANTERN_ITEM.get(), ModItems.EXPOSED_COPPER_LANTERN_ITEM.get(), ModItems.WEATHERED_COPPER_LANTERN_ITEM.get(), ModItems.OXIDIZED_COPPER_LANTERN_ITEM.get(), ModItems.WAXED_COPPER_LANTERN_ITEM.get(), ModItems.WAXED_EXPOSED_COPPER_LANTERN_ITEM.get(), ModItems.WAXED_WEATHERED_COPPER_LANTERN_ITEM.get(), ModItems.WAXED_OXIDIZED_COPPER_LANTERN_ITEM.get());
+            // Copper Torch after soul torch
+            entries.addAfter(Items.SOUL_TORCH, ModItems.COPPER_TORCH_ITEM.get());
+            // Shelves after chiseled bookshelf
+            entries.addAfter(Items.CHISELED_BOOKSHELF, ModItems.OAK_SHELF_ITEM.get(), ModItems.SPRUCE_SHELF_ITEM.get(), ModItems.BIRCH_SHELF_ITEM.get(), ModItems.JUNGLE_SHELF_ITEM.get(), ModItems.ACACIA_SHELF_ITEM.get(), ModItems.DARK_OAK_SHELF_ITEM.get(), ModItems.MANGROVE_SHELF_ITEM.get(), ModItems.CHERRY_SHELF_ITEM.get(), ModItems.BAMBOO_SHELF_ITEM.get(), ModItems.CRIMSON_SHELF_ITEM.get(), ModItems.WARPED_SHELF_ITEM.get());
             // Pale Oak Shelf - only if VanillaBackport is loaded
             if (ModItems.PALE_OAK_SHELF_ITEM != null) {
-                entries.accept(ModItems.PALE_OAK_SHELF_ITEM.get());
+                entries.addAfter(ModItems.WARPED_SHELF_ITEM.get(), ModItems.PALE_OAK_SHELF_ITEM.get());
             }
         });
 
         ItemGroupEvents.modifyEntriesEvent(CreativeModeTabs.REDSTONE_BLOCKS).register(entries -> {
-            entries.accept(ModItems.COPPER_BUTTON_ITEM.get());
-            entries.accept(ModItems.EXPOSED_COPPER_BUTTON_ITEM.get());
-            entries.accept(ModItems.WEATHERED_COPPER_BUTTON_ITEM.get());
-            entries.accept(ModItems.OXIDIZED_COPPER_BUTTON_ITEM.get());
-            entries.accept(ModItems.WAXED_COPPER_BUTTON_ITEM.get());
-            entries.accept(ModItems.WAXED_EXPOSED_COPPER_BUTTON_ITEM.get());
-            entries.accept(ModItems.WAXED_WEATHERED_COPPER_BUTTON_ITEM.get());
-            entries.accept(ModItems.WAXED_OXIDIZED_COPPER_BUTTON_ITEM.get());
-            // Copper Torch
-            entries.accept(ModItems.COPPER_TORCH_ITEM.get());
+            // Copper Buttons after stone button
+            entries.addAfter(Items.STONE_BUTTON, ModItems.COPPER_BUTTON_ITEM.get(), ModItems.EXPOSED_COPPER_BUTTON_ITEM.get(), ModItems.WEATHERED_COPPER_BUTTON_ITEM.get(), ModItems.OXIDIZED_COPPER_BUTTON_ITEM.get(), ModItems.WAXED_COPPER_BUTTON_ITEM.get(), ModItems.WAXED_EXPOSED_COPPER_BUTTON_ITEM.get(), ModItems.WAXED_WEATHERED_COPPER_BUTTON_ITEM.get(), ModItems.WAXED_OXIDIZED_COPPER_BUTTON_ITEM.get());
         });
         
         // Add copper tools after stone tools
@@ -182,6 +145,26 @@ public class CopperAgeBackportFabric implements ModInitializer {
         // Add copper nugget after iron nugget
         ItemGroupEvents.modifyEntriesEvent(CreativeModeTabs.INGREDIENTS).register(entries -> {
             entries.addAfter(Items.IRON_NUGGET, ModItems.COPPER_NUGGET.get());
+        });
+        
+        // Add copper bars and chains after cut copper slabs in building blocks
+        ItemGroupEvents.modifyEntriesEvent(CreativeModeTabs.BUILDING_BLOCKS).register(entries -> {
+            // After cut copper slab
+            entries.addAfter(Items.CUT_COPPER_SLAB, ModItems.COPPER_BARS_ITEM.get(), ModItems.COPPER_CHAIN_ITEM.get());
+            // After exposed cut copper slab
+            entries.addAfter(Items.EXPOSED_CUT_COPPER_SLAB, ModItems.EXPOSED_COPPER_BARS_ITEM.get(), ModItems.EXPOSED_COPPER_CHAIN_ITEM.get());
+            // After weathered cut copper slab
+            entries.addAfter(Items.WEATHERED_CUT_COPPER_SLAB, ModItems.WEATHERED_COPPER_BARS_ITEM.get(), ModItems.WEATHERED_COPPER_CHAIN_ITEM.get());
+            // After oxidized cut copper slab
+            entries.addAfter(Items.OXIDIZED_CUT_COPPER_SLAB, ModItems.OXIDIZED_COPPER_BARS_ITEM.get(), ModItems.OXIDIZED_COPPER_CHAIN_ITEM.get());
+            // After waxed cut copper slab
+            entries.addAfter(Items.WAXED_CUT_COPPER_SLAB, ModItems.WAXED_COPPER_BARS_ITEM.get(), ModItems.WAXED_COPPER_CHAIN_ITEM.get());
+            // After waxed exposed cut copper slab
+            entries.addAfter(Items.WAXED_EXPOSED_CUT_COPPER_SLAB, ModItems.WAXED_EXPOSED_COPPER_BARS_ITEM.get(), ModItems.WAXED_EXPOSED_COPPER_CHAIN_ITEM.get());
+            // After waxed weathered cut copper slab
+            entries.addAfter(Items.WAXED_WEATHERED_CUT_COPPER_SLAB, ModItems.WAXED_WEATHERED_COPPER_BARS_ITEM.get(), ModItems.WAXED_WEATHERED_COPPER_CHAIN_ITEM.get());
+            // After waxed oxidized cut copper slab
+            entries.addAfter(Items.WAXED_OXIDIZED_CUT_COPPER_SLAB, ModItems.WAXED_OXIDIZED_COPPER_BARS_ITEM.get(), ModItems.WAXED_OXIDIZED_COPPER_CHAIN_ITEM.get());
         });
     }
 }

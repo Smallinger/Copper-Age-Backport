@@ -61,6 +61,24 @@
   "block.copperagebackport.waxed_weathered_copper_lantern": "Waxed Weathered Copper Lantern",
   "block.copperagebackport.waxed_oxidized_copper_lantern": "Waxed Oxidized Copper Lantern",
 
+  "block.copperagebackport.copper_chain": "Copper Chain",
+  "block.copperagebackport.exposed_copper_chain": "Exposed Copper Chain",
+  "block.copperagebackport.weathered_copper_chain": "Weathered Copper Chain",
+  "block.copperagebackport.oxidized_copper_chain": "Oxidized Copper Chain",
+  "block.copperagebackport.waxed_copper_chain": "Waxed Copper Chain",
+  "block.copperagebackport.waxed_exposed_copper_chain": "Waxed Exposed Copper Chain",
+  "block.copperagebackport.waxed_weathered_copper_chain": "Waxed Weathered Copper Chain",
+  "block.copperagebackport.waxed_oxidized_copper_chain": "Waxed Oxidized Copper Chain",
+
+  "block.copperagebackport.copper_bars": "Copper Bars",
+  "block.copperagebackport.exposed_copper_bars": "Exposed Copper Bars",
+  "block.copperagebackport.weathered_copper_bars": "Weathered Copper Bars",
+  "block.copperagebackport.oxidized_copper_bars": "Oxidized Copper Bars",
+  "block.copperagebackport.waxed_copper_bars": "Waxed Copper Bars",
+  "block.copperagebackport.waxed_exposed_copper_bars": "Waxed Exposed Copper Bars",
+  "block.copperagebackport.waxed_weathered_copper_bars": "Waxed Weathered Copper Bars",
+  "block.copperagebackport.waxed_oxidized_copper_bars": "Waxed Oxidized Copper Bars",
+
   "subtitles.entity.copper_golem.death": "Copper Golem dies",
   "subtitles.entity.copper_golem.hurt": "Copper Golem hurts",
   "subtitles.entity.copper_golem.step": "Copper Golem steps",
@@ -86,6 +104,7 @@
   "config.copperagebackport.title": "Copper Age Backport Settings",
   "config.copperagebackport.search": "Search...",
   "config.copperagebackport.page.golem": "Copper Golem",
+  "config.copperagebackport.group.transport": "Transport",
   "config.copperagebackport.group.behavior": "Behavior",
   "config.copperagebackport.golem_presses_buttons": "Golem Presses Buttons",
   "config.copperagebackport.golem_presses_buttons.tooltip": "When enabled, Copper Golems will randomly press nearby copper buttons",
@@ -103,14 +122,5 @@
   "config.copperagebackport.days": "%s Days",
   "config.copperagebackport.days_decimal": "%s Days",
   "config.copperagebackport.donate": "Buy Me a Coffee!",
-  "config.copperagebackport.discord": "Join Mod Discord!",
-  
-  "block.copperagebackport.copper_chain": "Copper Chain",
-  "block.copperagebackport.exposed_copper_chain": "Exposed Copper Chain",
-  "block.copperagebackport.weathered_copper_chain": "Weathered Copper Chain",
-  "block.copperagebackport.oxidized_copper_chain": "Oxidized Copper Chain",
-  "block.copperagebackport.waxed_copper_chain": "Waxed Copper Chain",
-  "block.copperagebackport.waxed_exposed_copper_chain": "Waxed Exposed Copper Chain",
-  "block.copperagebackport.waxed_weathered_copper_chain": "Waxed Weathered Copper Chain",
-  "block.copperagebackport.waxed_oxidized_copper_chain": "Waxed Oxidized Copper Chain"
+  "config.copperagebackport.discord": "Join Mod Discord!"
 }

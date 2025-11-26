@@ -76,14 +76,16 @@ public class CopperAgeBackportNeoForge {
         }
 
         if (event.getTabKey() == CreativeModeTabs.FUNCTIONAL_BLOCKS) {
-            event.accept(ModItems.COPPER_CHEST_ITEM.get());
-            event.accept(ModItems.EXPOSED_COPPER_CHEST_ITEM.get());
-            event.accept(ModItems.WEATHERED_COPPER_CHEST_ITEM.get());
-            event.accept(ModItems.OXIDIZED_COPPER_CHEST_ITEM.get());
-            event.accept(ModItems.WAXED_COPPER_CHEST_ITEM.get());
-            event.accept(ModItems.WAXED_EXPOSED_COPPER_CHEST_ITEM.get());
-            event.accept(ModItems.WAXED_WEATHERED_COPPER_CHEST_ITEM.get());
-            event.accept(ModItems.WAXED_OXIDIZED_COPPER_CHEST_ITEM.get());
+            // Copper Chests after normal chest
+            event.insertAfter(Items.CHEST.getDefaultInstance(), ModItems.COPPER_CHEST_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            event.insertAfter(ModItems.COPPER_CHEST_ITEM.get().getDefaultInstance(), ModItems.EXPOSED_COPPER_CHEST_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            event.insertAfter(ModItems.EXPOSED_COPPER_CHEST_ITEM.get().getDefaultInstance(), ModItems.WEATHERED_COPPER_CHEST_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            event.insertAfter(ModItems.WEATHERED_COPPER_CHEST_ITEM.get().getDefaultInstance(), ModItems.OXIDIZED_COPPER_CHEST_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            event.insertAfter(ModItems.OXIDIZED_COPPER_CHEST_ITEM.get().getDefaultInstance(), ModItems.WAXED_COPPER_CHEST_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            event.insertAfter(ModItems.WAXED_COPPER_CHEST_ITEM.get().getDefaultInstance(), ModItems.WAXED_EXPOSED_COPPER_CHEST_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            event.insertAfter(ModItems.WAXED_EXPOSED_COPPER_CHEST_ITEM.get().getDefaultInstance(), ModItems.WAXED_WEATHERED_COPPER_CHEST_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            event.insertAfter(ModItems.WAXED_WEATHERED_COPPER_CHEST_ITEM.get().getDefaultInstance(), ModItems.WAXED_OXIDIZED_COPPER_CHEST_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            // Copper Golem Statues (keep at end)
             event.accept(ModItems.COPPER_GOLEM_STATUE_ITEM.get());
             event.accept(ModItems.EXPOSED_COPPER_GOLEM_STATUE_ITEM.get());
             event.accept(ModItems.WEATHERED_COPPER_GOLEM_STATUE_ITEM.get());
@@ -92,53 +94,45 @@ public class CopperAgeBackportNeoForge {
             event.accept(ModItems.WAXED_EXPOSED_COPPER_GOLEM_STATUE_ITEM.get());
             event.accept(ModItems.WAXED_WEATHERED_COPPER_GOLEM_STATUE_ITEM.get());
             event.accept(ModItems.WAXED_OXIDIZED_COPPER_GOLEM_STATUE_ITEM.get());
-            // Copper Lanterns
-            event.accept(ModItems.COPPER_LANTERN_ITEM.get());
-            event.accept(ModItems.EXPOSED_COPPER_LANTERN_ITEM.get());
-            event.accept(ModItems.WEATHERED_COPPER_LANTERN_ITEM.get());
-            event.accept(ModItems.OXIDIZED_COPPER_LANTERN_ITEM.get());
-            event.accept(ModItems.WAXED_COPPER_LANTERN_ITEM.get());
-            event.accept(ModItems.WAXED_EXPOSED_COPPER_LANTERN_ITEM.get());
-            event.accept(ModItems.WAXED_WEATHERED_COPPER_LANTERN_ITEM.get());
-            event.accept(ModItems.WAXED_OXIDIZED_COPPER_LANTERN_ITEM.get());
-            // Copper Chains
-            event.accept(ModItems.COPPER_CHAIN_ITEM.get());
-            event.accept(ModItems.EXPOSED_COPPER_CHAIN_ITEM.get());
-            event.accept(ModItems.WEATHERED_COPPER_CHAIN_ITEM.get());
-            event.accept(ModItems.OXIDIZED_COPPER_CHAIN_ITEM.get());
-            event.accept(ModItems.WAXED_COPPER_CHAIN_ITEM.get());
-            event.accept(ModItems.WAXED_EXPOSED_COPPER_CHAIN_ITEM.get());
-            event.accept(ModItems.WAXED_WEATHERED_COPPER_CHAIN_ITEM.get());
-            event.accept(ModItems.WAXED_OXIDIZED_COPPER_CHAIN_ITEM.get());
-            // Shelves
-            event.accept(ModItems.OAK_SHELF_ITEM.get());
-            event.accept(ModItems.BIRCH_SHELF_ITEM.get());
-            event.accept(ModItems.SPRUCE_SHELF_ITEM.get());
-            event.accept(ModItems.JUNGLE_SHELF_ITEM.get());
-            event.accept(ModItems.ACACIA_SHELF_ITEM.get());
-            event.accept(ModItems.DARK_OAK_SHELF_ITEM.get());
-            event.accept(ModItems.MANGROVE_SHELF_ITEM.get());
-            event.accept(ModItems.CHERRY_SHELF_ITEM.get());
-            event.accept(ModItems.BAMBOO_SHELF_ITEM.get());
-            event.accept(ModItems.CRIMSON_SHELF_ITEM.get());
-            event.accept(ModItems.WARPED_SHELF_ITEM.get());
+            // Copper Lanterns after soul lantern
+            event.insertAfter(Items.SOUL_LANTERN.getDefaultInstance(), ModItems.COPPER_LANTERN_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            event.insertAfter(ModItems.COPPER_LANTERN_ITEM.get().getDefaultInstance(), ModItems.EXPOSED_COPPER_LANTERN_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            event.insertAfter(ModItems.EXPOSED_COPPER_LANTERN_ITEM.get().getDefaultInstance(), ModItems.WEATHERED_COPPER_LANTERN_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            event.insertAfter(ModItems.WEATHERED_COPPER_LANTERN_ITEM.get().getDefaultInstance(), ModItems.OXIDIZED_COPPER_LANTERN_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            event.insertAfter(ModItems.OXIDIZED_COPPER_LANTERN_ITEM.get().getDefaultInstance(), ModItems.WAXED_COPPER_LANTERN_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            event.insertAfter(ModItems.WAXED_COPPER_LANTERN_ITEM.get().getDefaultInstance(), ModItems.WAXED_EXPOSED_COPPER_LANTERN_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            event.insertAfter(ModItems.WAXED_EXPOSED_COPPER_LANTERN_ITEM.get().getDefaultInstance(), ModItems.WAXED_WEATHERED_COPPER_LANTERN_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            event.insertAfter(ModItems.WAXED_WEATHERED_COPPER_LANTERN_ITEM.get().getDefaultInstance(), ModItems.WAXED_OXIDIZED_COPPER_LANTERN_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            // Copper Torch after soul torch
+            event.insertAfter(Items.SOUL_TORCH.getDefaultInstance(), ModItems.COPPER_TORCH_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            // Shelves after chiseled bookshelf
+            event.insertAfter(Items.CHISELED_BOOKSHELF.getDefaultInstance(), ModItems.OAK_SHELF_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            event.insertAfter(ModItems.OAK_SHELF_ITEM.get().getDefaultInstance(), ModItems.SPRUCE_SHELF_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            event.insertAfter(ModItems.SPRUCE_SHELF_ITEM.get().getDefaultInstance(), ModItems.BIRCH_SHELF_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            event.insertAfter(ModItems.BIRCH_SHELF_ITEM.get().getDefaultInstance(), ModItems.JUNGLE_SHELF_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            event.insertAfter(ModItems.JUNGLE_SHELF_ITEM.get().getDefaultInstance(), ModItems.ACACIA_SHELF_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            event.insertAfter(ModItems.ACACIA_SHELF_ITEM.get().getDefaultInstance(), ModItems.DARK_OAK_SHELF_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            event.insertAfter(ModItems.DARK_OAK_SHELF_ITEM.get().getDefaultInstance(), ModItems.MANGROVE_SHELF_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            event.insertAfter(ModItems.MANGROVE_SHELF_ITEM.get().getDefaultInstance(), ModItems.CHERRY_SHELF_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            event.insertAfter(ModItems.CHERRY_SHELF_ITEM.get().getDefaultInstance(), ModItems.BAMBOO_SHELF_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            event.insertAfter(ModItems.BAMBOO_SHELF_ITEM.get().getDefaultInstance(), ModItems.CRIMSON_SHELF_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            event.insertAfter(ModItems.CRIMSON_SHELF_ITEM.get().getDefaultInstance(), ModItems.WARPED_SHELF_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
             // Pale Oak Shelf - only if VanillaBackport is loaded
             if (ModItems.PALE_OAK_SHELF_ITEM != null) {
-                event.accept(ModItems.PALE_OAK_SHELF_ITEM.get());
+                event.insertAfter(ModItems.WARPED_SHELF_ITEM.get().getDefaultInstance(), ModItems.PALE_OAK_SHELF_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
             }
         }
 
         if (event.getTabKey() == CreativeModeTabs.REDSTONE_BLOCKS) {
-            event.accept(ModItems.COPPER_BUTTON_ITEM.get());
-            event.accept(ModItems.EXPOSED_COPPER_BUTTON_ITEM.get());
-            event.accept(ModItems.WEATHERED_COPPER_BUTTON_ITEM.get());
-            event.accept(ModItems.OXIDIZED_COPPER_BUTTON_ITEM.get());
-            event.accept(ModItems.WAXED_COPPER_BUTTON_ITEM.get());
-            event.accept(ModItems.WAXED_EXPOSED_COPPER_BUTTON_ITEM.get());
-            event.accept(ModItems.WAXED_WEATHERED_COPPER_BUTTON_ITEM.get());
-            event.accept(ModItems.WAXED_OXIDIZED_COPPER_BUTTON_ITEM.get());
-            // Copper Torch
-            event.accept(ModItems.COPPER_TORCH_ITEM.get());
+            // Copper Buttons after stone button
+            event.insertAfter(Items.STONE_BUTTON.getDefaultInstance(), ModItems.COPPER_BUTTON_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            event.insertAfter(ModItems.COPPER_BUTTON_ITEM.get().getDefaultInstance(), ModItems.EXPOSED_COPPER_BUTTON_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            event.insertAfter(ModItems.EXPOSED_COPPER_BUTTON_ITEM.get().getDefaultInstance(), ModItems.WEATHERED_COPPER_BUTTON_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            event.insertAfter(ModItems.WEATHERED_COPPER_BUTTON_ITEM.get().getDefaultInstance(), ModItems.OXIDIZED_COPPER_BUTTON_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            event.insertAfter(ModItems.OXIDIZED_COPPER_BUTTON_ITEM.get().getDefaultInstance(), ModItems.WAXED_COPPER_BUTTON_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            event.insertAfter(ModItems.WAXED_COPPER_BUTTON_ITEM.get().getDefaultInstance(), ModItems.WAXED_EXPOSED_COPPER_BUTTON_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            event.insertAfter(ModItems.WAXED_EXPOSED_COPPER_BUTTON_ITEM.get().getDefaultInstance(), ModItems.WAXED_WEATHERED_COPPER_BUTTON_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            event.insertAfter(ModItems.WAXED_WEATHERED_COPPER_BUTTON_ITEM.get().getDefaultInstance(), ModItems.WAXED_OXIDIZED_COPPER_BUTTON_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
         }
         
         // Add copper tools after stone tools
@@ -163,6 +157,34 @@ public class CopperAgeBackportNeoForge {
         // Add copper nugget after iron nugget
         if (event.getTabKey() == CreativeModeTabs.INGREDIENTS) {
             event.insertAfter(Items.IRON_NUGGET.getDefaultInstance(), ModItems.COPPER_NUGGET.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+        }
+        
+        // Add copper bars and chains after cut copper slabs in building blocks
+        if (event.getTabKey() == CreativeModeTabs.BUILDING_BLOCKS) {
+            // After cut copper slab
+            event.insertAfter(Items.CUT_COPPER_SLAB.getDefaultInstance(), ModItems.COPPER_BARS_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            event.insertAfter(ModItems.COPPER_BARS_ITEM.get().getDefaultInstance(), ModItems.COPPER_CHAIN_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            // After exposed cut copper slab
+            event.insertAfter(Items.EXPOSED_CUT_COPPER_SLAB.getDefaultInstance(), ModItems.EXPOSED_COPPER_BARS_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            event.insertAfter(ModItems.EXPOSED_COPPER_BARS_ITEM.get().getDefaultInstance(), ModItems.EXPOSED_COPPER_CHAIN_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            // After weathered cut copper slab
+            event.insertAfter(Items.WEATHERED_CUT_COPPER_SLAB.getDefaultInstance(), ModItems.WEATHERED_COPPER_BARS_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            event.insertAfter(ModItems.WEATHERED_COPPER_BARS_ITEM.get().getDefaultInstance(), ModItems.WEATHERED_COPPER_CHAIN_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            // After oxidized cut copper slab
+            event.insertAfter(Items.OXIDIZED_CUT_COPPER_SLAB.getDefaultInstance(), ModItems.OXIDIZED_COPPER_BARS_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            event.insertAfter(ModItems.OXIDIZED_COPPER_BARS_ITEM.get().getDefaultInstance(), ModItems.OXIDIZED_COPPER_CHAIN_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            // After waxed cut copper slab
+            event.insertAfter(Items.WAXED_CUT_COPPER_SLAB.getDefaultInstance(), ModItems.WAXED_COPPER_BARS_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            event.insertAfter(ModItems.WAXED_COPPER_BARS_ITEM.get().getDefaultInstance(), ModItems.WAXED_COPPER_CHAIN_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            // After waxed exposed cut copper slab
+            event.insertAfter(Items.WAXED_EXPOSED_CUT_COPPER_SLAB.getDefaultInstance(), ModItems.WAXED_EXPOSED_COPPER_BARS_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            event.insertAfter(ModItems.WAXED_EXPOSED_COPPER_BARS_ITEM.get().getDefaultInstance(), ModItems.WAXED_EXPOSED_COPPER_CHAIN_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            // After waxed weathered cut copper slab
+            event.insertAfter(Items.WAXED_WEATHERED_CUT_COPPER_SLAB.getDefaultInstance(), ModItems.WAXED_WEATHERED_COPPER_BARS_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            event.insertAfter(ModItems.WAXED_WEATHERED_COPPER_BARS_ITEM.get().getDefaultInstance(), ModItems.WAXED_WEATHERED_COPPER_CHAIN_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            // After waxed oxidized cut copper slab
+            event.insertAfter(Items.WAXED_OXIDIZED_CUT_COPPER_SLAB.getDefaultInstance(), ModItems.WAXED_OXIDIZED_COPPER_BARS_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            event.insertAfter(ModItems.WAXED_OXIDIZED_COPPER_BARS_ITEM.get().getDefaultInstance(), ModItems.WAXED_OXIDIZED_COPPER_CHAIN_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
         }
     }
 

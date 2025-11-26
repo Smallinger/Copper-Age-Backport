@@ -98,6 +98,18 @@ public class ModBlocks {
     public static Supplier<CopperChainBlock> WAXED_WEATHERED_COPPER_CHAIN;
     public static Supplier<CopperChainBlock> WAXED_OXIDIZED_COPPER_CHAIN;
     
+    // Copper Bars Blocks (Weathering)
+    public static Supplier<WeatheringCopperBarsBlock> COPPER_BARS;
+    public static Supplier<WeatheringCopperBarsBlock> EXPOSED_COPPER_BARS;
+    public static Supplier<WeatheringCopperBarsBlock> WEATHERED_COPPER_BARS;
+    public static Supplier<WeatheringCopperBarsBlock> OXIDIZED_COPPER_BARS;
+    
+    // Waxed Copper Bars Blocks
+    public static Supplier<CopperBarsBlock> WAXED_COPPER_BARS;
+    public static Supplier<CopperBarsBlock> WAXED_EXPOSED_COPPER_BARS;
+    public static Supplier<CopperBarsBlock> WAXED_WEATHERED_COPPER_BARS;
+    public static Supplier<CopperBarsBlock> WAXED_OXIDIZED_COPPER_BARS;
+    
     public static void register() {
         Constants.LOG.info("Registering blocks for {}", Constants.MOD_NAME);
         
@@ -531,6 +543,83 @@ public class ModBlocks {
                     .noOcclusion()
                     .requiresCorrectToolForDrops()
                     .forceSolidOn()));
+        
+        // Register Copper Bars Blocks (Weathering)
+        COPPER_BARS = helper.register(BLOCK, "copper_bars",
+            () -> new WeatheringCopperBarsBlock(
+                WeatheringCopper.WeatherState.UNAFFECTED,
+                BlockBehaviour.Properties.of()
+                    .strength(5.0F, 6.0F)
+                    .sound(SoundType.COPPER)
+                    .noOcclusion()
+                    .requiresCorrectToolForDrops()
+                    .randomTicks()));
+        
+        EXPOSED_COPPER_BARS = helper.register(BLOCK, "exposed_copper_bars",
+            () -> new WeatheringCopperBarsBlock(
+                WeatheringCopper.WeatherState.EXPOSED,
+                BlockBehaviour.Properties.of()
+                    .strength(5.0F, 6.0F)
+                    .sound(SoundType.COPPER)
+                    .noOcclusion()
+                    .requiresCorrectToolForDrops()
+                    .randomTicks()));
+        
+        WEATHERED_COPPER_BARS = helper.register(BLOCK, "weathered_copper_bars",
+            () -> new WeatheringCopperBarsBlock(
+                WeatheringCopper.WeatherState.WEATHERED,
+                BlockBehaviour.Properties.of()
+                    .strength(5.0F, 6.0F)
+                    .sound(SoundType.COPPER)
+                    .noOcclusion()
+                    .requiresCorrectToolForDrops()
+                    .randomTicks()));
+        
+        OXIDIZED_COPPER_BARS = helper.register(BLOCK, "oxidized_copper_bars",
+            () -> new WeatheringCopperBarsBlock(
+                WeatheringCopper.WeatherState.OXIDIZED,
+                BlockBehaviour.Properties.of()
+                    .strength(5.0F, 6.0F)
+                    .sound(SoundType.COPPER)
+                    .noOcclusion()
+                    .requiresCorrectToolForDrops()));
+        
+        // Register Waxed Copper Bars Blocks
+        WAXED_COPPER_BARS = helper.register(BLOCK, "waxed_copper_bars",
+            () -> new CopperBarsBlock(
+                WeatheringCopper.WeatherState.UNAFFECTED,
+                BlockBehaviour.Properties.of()
+                    .strength(5.0F, 6.0F)
+                    .sound(SoundType.COPPER)
+                    .noOcclusion()
+                    .requiresCorrectToolForDrops()));
+        
+        WAXED_EXPOSED_COPPER_BARS = helper.register(BLOCK, "waxed_exposed_copper_bars",
+            () -> new CopperBarsBlock(
+                WeatheringCopper.WeatherState.EXPOSED,
+                BlockBehaviour.Properties.of()
+                    .strength(5.0F, 6.0F)
+                    .sound(SoundType.COPPER)
+                    .noOcclusion()
+                    .requiresCorrectToolForDrops()));
+        
+        WAXED_WEATHERED_COPPER_BARS = helper.register(BLOCK, "waxed_weathered_copper_bars",
+            () -> new CopperBarsBlock(
+                WeatheringCopper.WeatherState.WEATHERED,
+                BlockBehaviour.Properties.of()
+                    .strength(5.0F, 6.0F)
+                    .sound(SoundType.COPPER)
+                    .noOcclusion()
+                    .requiresCorrectToolForDrops()));
+        
+        WAXED_OXIDIZED_COPPER_BARS = helper.register(BLOCK, "waxed_oxidized_copper_bars",
+            () -> new CopperBarsBlock(
+                WeatheringCopper.WeatherState.OXIDIZED,
+                BlockBehaviour.Properties.of()
+                    .strength(5.0F, 6.0F)
+                    .sound(SoundType.COPPER)
+                    .noOcclusion()
+                    .requiresCorrectToolForDrops()));
         
         // Setup button references after registration
         helper.onRegisterComplete(() -> {

@@ -1,0 +1,7 @@
+{
+  "parent": "copperagebackport:block/template_bars_post_ends",
+  "textures": {
+    "bars": "copperagebackport:block/weathered_copper_bars",
+    "edge": "copperagebackport:block/weathered_copper_bars"
+  }
+}

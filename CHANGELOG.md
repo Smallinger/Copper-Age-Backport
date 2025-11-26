@@ -41,6 +41,14 @@ All notable changes to this project will be documented in this file.
 - **Rotatable**: Can be placed along any axis (X, Y, Z)
 - **Waterloggable**: Can be placed in water
 
+#### Copper Bars
+- **8 variants**: Copper, Exposed, Weathered, Oxidized + Waxed versions
+- **Oxidation system**: Bars weather over time like other copper blocks
+- **Waxing support**: Use honeycomb to prevent oxidation
+- **Axe scraping**: Remove wax or reduce oxidation with an axe
+- **Connecting**: Connects to adjacent bars and solid blocks
+- **Waterloggable**: Can be placed in water
+
 ### Fixed
 - **Copper Tools & Armor**: Fixed stackability - all copper tools and armor are now correctly unstackable (max stack size 1)
 - **Copper Nugget Compatibility**: Added tag support for cross-mod compatibility (c:nuggets/copper, c:copper_nuggets) - now works with other mods on both NeoForge and Fabric

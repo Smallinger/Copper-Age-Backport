@@ -16,6 +16,14 @@
     "copperagebackport:waxed_copper_golem_statue",
     "copperagebackport:waxed_exposed_copper_golem_statue",
     "copperagebackport:waxed_weathered_copper_golem_statue",
-    "copperagebackport:waxed_oxidized_copper_golem_statue"
+    "copperagebackport:waxed_oxidized_copper_golem_statue",
+    "copperagebackport:copper_bars",
+    "copperagebackport:exposed_copper_bars",
+    "copperagebackport:weathered_copper_bars",
+    "copperagebackport:oxidized_copper_bars",
+    "copperagebackport:waxed_copper_bars",
+    "copperagebackport:waxed_exposed_copper_bars",
+    "copperagebackport:waxed_weathered_copper_bars",
+    "copperagebackport:waxed_oxidized_copper_bars"
   ]
 }

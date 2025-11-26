@@ -87,11 +87,15 @@ public class ConfigOptions {
             .build();
 
         // Create groups
+        OptionGroup transportGroup = OptionGroup.builder()
+            .name("config.copperagebackport.group.transport")
+            .add(golemTransportStackSize)
+            .build();
+
         OptionGroup behaviorGroup = OptionGroup.builder()
             .name("config.copperagebackport.group.behavior")
             .add(golemPressesButtons)
             .add(buttonPressChance)
-            .add(golemTransportStackSize)
             .build();
 
         OptionGroup weatheringGroup = OptionGroup.builder()
@@ -102,6 +106,7 @@ public class ConfigOptions {
 
         return OptionPage.builder()
             .name("config.copperagebackport.page.golem")
+            .add(transportGroup)
             .add(behaviorGroup)
             .add(weatheringGroup)
             .build();
