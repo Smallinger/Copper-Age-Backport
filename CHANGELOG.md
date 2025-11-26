@@ -29,6 +29,11 @@ All notable changes to this project will be documented in this file.
 - **Rotatable**: Can be placed along any axis (X, Y, Z)
 - **Waterloggable**: Can be placed in water
 
+### Fixed
+- **Copper Tools & Armor**: Fixed stackability - all copper tools and armor are now correctly unstackable (max stack size 1)
+- **Copper Nugget Compatibility**: Added tag support for cross-mod compatibility (c:nuggets/copper, c:copper_nuggets) - now works with other mods on both NeoForge and Fabric
+- **Copper Golem Crash**: Fixed server crash when Copper Golem tried to evaluate item pickups (missing ATTACK_DAMAGE attribute)
+
 ## [1.21.1] - 0.1.0 - 25.11.2025 Copper Age Backport
 
 ### Added

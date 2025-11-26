@@ -107,7 +107,8 @@ public class CopperGolemEntity extends AbstractGolem implements Shearable, Conta
         return Mob.createMobAttributes()
             .add(Attributes.MAX_HEALTH, 12.0)
             .add(Attributes.MOVEMENT_SPEED, 0.2F)
-            .add(Attributes.STEP_HEIGHT, 1.0);
+            .add(Attributes.STEP_HEIGHT, 1.0)
+            .add(Attributes.ATTACK_DAMAGE, 1.0);  // Required for item pickup evaluation
     }
 
     // Brain-based AI statt Goal-based AI

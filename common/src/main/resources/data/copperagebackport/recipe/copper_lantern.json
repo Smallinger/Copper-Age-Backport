@@ -10,9 +10,10 @@
     "#": {
       "item": "copperagebackport:copper_torch"
     },
-    "X": {
-      "item": "copperagebackport:copper_nugget"
-    }
+    "X": [
+      { "tag": "c:nuggets/copper" },
+      { "tag": "c:copper_nuggets" }
+    ]
   },
   "result": {
     "id": "copperagebackport:copper_lantern",

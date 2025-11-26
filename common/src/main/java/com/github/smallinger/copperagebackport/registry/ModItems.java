@@ -309,23 +309,23 @@ public class ModItems {
         // Register Copper Tools
         // Copper Axe: 7.0 base attack damage + 1.0 material bonus = 8 total, -3.2 attack speed
         COPPER_AXE = helper.register(ITEM, "copper_axe",
-            () -> new AxeItem(CopperTier.INSTANCE, new Item.Properties().attributes(AxeItem.createAttributes(CopperTier.INSTANCE, 7.0F, -3.2F))));
+            () -> new AxeItem(CopperTier.INSTANCE, new Item.Properties().stacksTo(1).attributes(AxeItem.createAttributes(CopperTier.INSTANCE, 7.0F, -3.2F))));
         
         // Copper Pickaxe: 1.0 base attack damage, -2.8 attack speed
         COPPER_PICKAXE = helper.register(ITEM, "copper_pickaxe",
-            () -> new PickaxeItem(CopperTier.INSTANCE, new Item.Properties().attributes(PickaxeItem.createAttributes(CopperTier.INSTANCE, 1.0F, -2.8F))));
+            () -> new PickaxeItem(CopperTier.INSTANCE, new Item.Properties().stacksTo(1).attributes(PickaxeItem.createAttributes(CopperTier.INSTANCE, 1.0F, -2.8F))));
         
         // Copper Shovel: 1.5 base attack damage, -3.0 attack speed
         COPPER_SHOVEL = helper.register(ITEM, "copper_shovel",
-            () -> new ShovelItem(CopperTier.INSTANCE, new Item.Properties().attributes(ShovelItem.createAttributes(CopperTier.INSTANCE, 1.5F, -3.0F))));
+            () -> new ShovelItem(CopperTier.INSTANCE, new Item.Properties().stacksTo(1).attributes(ShovelItem.createAttributes(CopperTier.INSTANCE, 1.5F, -3.0F))));
         
         // Copper Hoe: -2.0 base attack damage, -1.0 attack speed (fast)
         COPPER_HOE = helper.register(ITEM, "copper_hoe",
-            () -> new HoeItem(CopperTier.INSTANCE, new Item.Properties().attributes(HoeItem.createAttributes(CopperTier.INSTANCE, -2.0F, -1.0F))));
+            () -> new HoeItem(CopperTier.INSTANCE, new Item.Properties().stacksTo(1).attributes(HoeItem.createAttributes(CopperTier.INSTANCE, -2.0F, -1.0F))));
         
         // Copper Sword: 3.0 base attack damage, -2.4 attack speed
         COPPER_SWORD = helper.register(ITEM, "copper_sword",
-            () -> new SwordItem(CopperTier.INSTANCE, new Item.Properties().attributes(SwordItem.createAttributes(CopperTier.INSTANCE, 3, -2.4F))));
+            () -> new SwordItem(CopperTier.INSTANCE, new Item.Properties().stacksTo(1).attributes(SwordItem.createAttributes(CopperTier.INSTANCE, 3, -2.4F))));
         
         // Copper Nugget
         COPPER_NUGGET = helper.register(ITEM, "copper_nugget",
@@ -333,15 +333,15 @@ public class ModItems {
         
         // Copper Armor
         COPPER_HELMET = helper.register(ITEM, "copper_helmet",
-            () -> new ArmorItem(com.github.smallinger.copperagebackport.item.armor.CopperArmorMaterial.COPPER.get(), ArmorItem.Type.HELMET, new Item.Properties()));
+            () -> new ArmorItem(com.github.smallinger.copperagebackport.item.armor.CopperArmorMaterial.COPPER.get(), ArmorItem.Type.HELMET, new Item.Properties().stacksTo(1)));
         
         COPPER_CHESTPLATE = helper.register(ITEM, "copper_chestplate",
-            () -> new ArmorItem(com.github.smallinger.copperagebackport.item.armor.CopperArmorMaterial.COPPER.get(), ArmorItem.Type.CHESTPLATE, new Item.Properties()));
+            () -> new ArmorItem(com.github.smallinger.copperagebackport.item.armor.CopperArmorMaterial.COPPER.get(), ArmorItem.Type.CHESTPLATE, new Item.Properties().stacksTo(1)));
         
         COPPER_LEGGINGS = helper.register(ITEM, "copper_leggings",
-            () -> new ArmorItem(com.github.smallinger.copperagebackport.item.armor.CopperArmorMaterial.COPPER.get(), ArmorItem.Type.LEGGINGS, new Item.Properties()));
+            () -> new ArmorItem(com.github.smallinger.copperagebackport.item.armor.CopperArmorMaterial.COPPER.get(), ArmorItem.Type.LEGGINGS, new Item.Properties().stacksTo(1)));
         
         COPPER_BOOTS = helper.register(ITEM, "copper_boots",
-            () -> new ArmorItem(com.github.smallinger.copperagebackport.item.armor.CopperArmorMaterial.COPPER.get(), ArmorItem.Type.BOOTS, new Item.Properties()));
+            () -> new ArmorItem(com.github.smallinger.copperagebackport.item.armor.CopperArmorMaterial.COPPER.get(), ArmorItem.Type.BOOTS, new Item.Properties().stacksTo(1)));
     }
 }
