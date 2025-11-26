@@ -2,6 +2,6 @@
   "parent": "copperagebackport:block/template_copper_chest_right",
   "textures": {
     "particle": "minecraft:block/exposed_copper",
-    "chest": "copperagebackport:entity/chest/exposed_copper_right"
+    "chest": "copperagebackport:entity/chest/copper_exposed_right"
   }
 }
