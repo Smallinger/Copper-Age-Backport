@@ -552,7 +552,7 @@ public class ModBlocks {
                 WeatheringCopper.WeatherState.UNAFFECTED,
                 BlockBehaviour.Properties.of()
                     .strength(3.0F, 6.0F)
-                    .sound(SoundType.COPPER)
+                    .sound(ModSoundTypes.COPPER_GRATE)
                     .requiresCorrectToolForDrops()
                     .noOcclusion()
                     .isValidSpawn((state, level, pos, type) -> false)
@@ -566,7 +566,7 @@ public class ModBlocks {
                 WeatheringCopper.WeatherState.EXPOSED,
                 BlockBehaviour.Properties.of()
                     .strength(3.0F, 6.0F)
-                    .sound(SoundType.COPPER)
+                    .sound(ModSoundTypes.COPPER_GRATE)
                     .requiresCorrectToolForDrops()
                     .noOcclusion()
                     .isValidSpawn((state, level, pos, type) -> false)
@@ -580,7 +580,7 @@ public class ModBlocks {
                 WeatheringCopper.WeatherState.WEATHERED,
                 BlockBehaviour.Properties.of()
                     .strength(3.0F, 6.0F)
-                    .sound(SoundType.COPPER)
+                    .sound(ModSoundTypes.COPPER_GRATE)
                     .requiresCorrectToolForDrops()
                     .noOcclusion()
                     .isValidSpawn((state, level, pos, type) -> false)
@@ -594,7 +594,7 @@ public class ModBlocks {
                 WeatheringCopper.WeatherState.OXIDIZED,
                 BlockBehaviour.Properties.of()
                     .strength(3.0F, 6.0F)
-                    .sound(SoundType.COPPER)
+                    .sound(ModSoundTypes.COPPER_GRATE)
                     .requiresCorrectToolForDrops()
                     .noOcclusion()
                     .isValidSpawn((state, level, pos, type) -> false)
@@ -608,7 +608,7 @@ public class ModBlocks {
             () -> new CopperGrateBlock(
                 BlockBehaviour.Properties.of()
                     .strength(3.0F, 6.0F)
-                    .sound(SoundType.COPPER)
+                    .sound(ModSoundTypes.COPPER_GRATE)
                     .requiresCorrectToolForDrops()
                     .noOcclusion()
                     .isValidSpawn((state, level, pos, type) -> false)
@@ -620,7 +620,7 @@ public class ModBlocks {
             () -> new CopperGrateBlock(
                 BlockBehaviour.Properties.of()
                     .strength(3.0F, 6.0F)
-                    .sound(SoundType.COPPER)
+                    .sound(ModSoundTypes.COPPER_GRATE)
                     .requiresCorrectToolForDrops()
                     .noOcclusion()
                     .isValidSpawn((state, level, pos, type) -> false)
@@ -632,7 +632,7 @@ public class ModBlocks {
             () -> new CopperGrateBlock(
                 BlockBehaviour.Properties.of()
                     .strength(3.0F, 6.0F)
-                    .sound(SoundType.COPPER)
+                    .sound(ModSoundTypes.COPPER_GRATE)
                     .requiresCorrectToolForDrops()
                     .noOcclusion()
                     .isValidSpawn((state, level, pos, type) -> false)
@@ -644,7 +644,7 @@ public class ModBlocks {
             () -> new CopperGrateBlock(
                 BlockBehaviour.Properties.of()
                     .strength(3.0F, 6.0F)
-                    .sound(SoundType.COPPER)
+                    .sound(ModSoundTypes.COPPER_GRATE)
                     .requiresCorrectToolForDrops()
                     .noOcclusion()
                     .isValidSpawn((state, level, pos, type) -> false)

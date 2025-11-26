@@ -3,6 +3,10 @@
   "values": [
     "minecraft:barrel",
     {
+    "id": "#forge:barrels/wooden",
+    "required": false
+    },
+    {
       "id": "sophisticatedstorage:barrel",
       "required": false
     },

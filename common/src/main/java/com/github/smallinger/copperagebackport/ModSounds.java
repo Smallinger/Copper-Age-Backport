@@ -63,6 +63,13 @@ public class ModSounds {
     
     // Armor sounds
     public static Supplier<SoundEvent> ARMOR_EQUIP_COPPER;
+    
+    // Copper Grate sounds
+    public static Supplier<SoundEvent> COPPER_GRATE_BREAK;
+    public static Supplier<SoundEvent> COPPER_GRATE_STEP;
+    public static Supplier<SoundEvent> COPPER_GRATE_PLACE;
+    public static Supplier<SoundEvent> COPPER_GRATE_HIT;
+    public static Supplier<SoundEvent> COPPER_GRATE_FALL;
 
     public static void register() {
         Constants.LOG.info("Registering sounds for {}", Constants.MOD_NAME);
@@ -123,6 +130,13 @@ public class ModSounds {
         
         // Register Armor sounds
         ARMOR_EQUIP_COPPER = registerSound(helper, "item.armor.equip_copper");
+        
+        // Register Copper Grate sounds
+        COPPER_GRATE_BREAK = registerSound(helper, "block.copper_grate.break");
+        COPPER_GRATE_STEP = registerSound(helper, "block.copper_grate.step");
+        COPPER_GRATE_PLACE = registerSound(helper, "block.copper_grate.place");
+        COPPER_GRATE_HIT = registerSound(helper, "block.copper_grate.hit");
+        COPPER_GRATE_FALL = registerSound(helper, "block.copper_grate.fall");
     }
 
     private static Supplier<SoundEvent> registerSound(RegistryHelper helper, String name) {
