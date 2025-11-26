@@ -7,9 +7,10 @@
         "NNN"
     ],
     "key": {
-        "N": {
-            "item": "copperagebackport:copper_nugget"
-        }
+        "N": [
+            { "tag": "forge:nuggets/copper" },
+            { "tag": "c:copper_nuggets" }
+        ]
     },
     "result": {
         "item": "minecraft:copper_ingot",

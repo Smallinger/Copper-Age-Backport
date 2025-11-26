@@ -5,9 +5,10 @@
     "#": {
       "item": "copperagebackport:copper_torch"
     },
-    "X": {
-      "item": "copperagebackport:copper_nugget"
-    }
+    "X": [
+      { "tag": "forge:nuggets/copper" },
+      { "tag": "c:copper_nuggets" }
+    ]
   },
   "pattern": [
     "XXX",

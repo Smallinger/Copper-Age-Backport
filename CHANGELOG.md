@@ -37,6 +37,10 @@ All notable changes to this project will be documented in this file.
 - **Transparent**: See-through decorative block
 - **Waterloggable**: Can be placed in water
 
+### Fixed
+- **Copper Tools & Armor**: Fixed stackability - all copper tools and armor are now correctly unstackable (max stack size 1)
+- **Copper Nugget Compatibility**: Added tag support for cross-mod compatibility (forge:nuggets/copper, c:copper_nuggets) - now works with Create and other mods on both Forge and Fabric
+
 ## [1.20.1] - 0.1.0 - 25.11.2025 - Copper Age Backport
 
 ### Added
