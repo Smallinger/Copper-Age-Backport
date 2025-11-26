@@ -72,7 +72,11 @@ All notable changes to this project will be documented in this file.
 - **Sculk sensor detection**: Shearing the Copper Golem now triggers GameEvent.SHEAR
 - **Statue transformation**: Fixed execution order - entity is now discarded before playing sound
 - **Leash handling**: Leash is now properly dropped when turning to statue
-- **Entity loot table**: Drops are now handled via loot table (1-3 copper ingots with looting bonus)
+- **Entity loot table**: Drops are now handled via loot table (1-3 copper ingots with looting bonus) (like in 1.21.10)
+
+#### Config
+- **Weathering time tooltip**: Added note that weathering config only affects newly spawned golems (existing golems keep their calculated oxidation time)
+- **Fixed tooltip values**: Corrected Minecraft day calculations in config tooltips
 
 ## [1.21.1] - 0.1.0 - 25.11.2025 Copper Age Backport
 

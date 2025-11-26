@@ -385,6 +385,9 @@ public class ModItems {
             () -> new ArmorItem(com.github.smallinger.copperagebackport.item.armor.CopperArmorMaterial.COPPER.get(), ArmorItem.Type.BOOTS, new Item.Properties().stacksTo(1)));
         
         // Copper Horse Armor: 4 protection (between leather 3 and iron 5)
+        // 1.21.1 uses AnimalArmorItem which derives texture path from ArmorMaterial key (copperagebackport:copper)
+        // -> automatically looks for: copperagebackport:textures/entity/horse/armor/horse_armor_copper.png
+        // Note: 1.20.1 uses custom CopperHorseArmorItem class because HorseArmorItem only supports minecraft namespace
         COPPER_HORSE_ARMOR = helper.register(ITEM, "copper_horse_armor",
             () -> new AnimalArmorItem(com.github.smallinger.copperagebackport.item.armor.CopperArmorMaterial.COPPER.get(), AnimalArmorItem.BodyType.EQUESTRIAN, false, new Item.Properties().stacksTo(1)));
     }
