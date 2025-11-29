@@ -24,7 +24,7 @@ import java.util.function.Supplier;
  * - Repair: Copper Ingot
  */
 public enum CopperArmorMaterial implements ArmorMaterial {
-    COPPER("copperagebackport:copper", 11, Util.make(new EnumMap<>(ArmorItem.Type.class), map -> {
+    COPPER("copper", 11, Util.make(new EnumMap<>(ArmorItem.Type.class), map -> {
         map.put(ArmorItem.Type.BOOTS, 1);
         map.put(ArmorItem.Type.LEGGINGS, 3);
         map.put(ArmorItem.Type.CHESTPLATE, 4);

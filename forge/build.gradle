@@ -2,6 +2,7 @@ plugins {
     id 'multiloader-loader'
     id 'net.minecraftforge.gradle'
     id 'org.parchmentmc.librarian.forgegradle'
+    id 'org.spongepowered.mixin' version '0.7.+'
 }
 
 minecraft {
@@ -64,11 +65,41 @@ tasks.withType(Javadoc) {
 
 sourceSets.main.resources.srcDir 'src/generated/resources'
 
+// Override processResources to ensure forge resources take priority over common
+// Forge resources are processed AFTER common, so they overwrite duplicates
+processResources {
+    // Use INCLUDE to keep both, but process forge resources last
+    duplicatesStrategy = DuplicatesStrategy.INCLUDE
+    
+    // Re-add forge resources AFTER common to ensure they take priority
+    from(sourceSets.main.resources.srcDirs) {
+        duplicatesStrategy = DuplicatesStrategy.INCLUDE
+    }
+}
+
+// Also apply to sourcesJar for FastChest compat models
+tasks.named('sourcesJar', Jar) {
+    duplicatesStrategy = DuplicatesStrategy.INCLUDE
+}
+
 dependencies {
     minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
     compileOnly project(":common")
+    
+    // Mixin Annotation Processor
+    annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
+}
+
+mixin {
+    add sourceSets.main, 'copperagebackport.forge.refmap.json'
+    config 'copperagebackport.forge.mixins.json'
 }
 
 jar {
     finalizedBy('reobfJar')
+    manifest {
+        attributes([
+            'MixinConfigs': 'copperagebackport.forge.mixins.json'
+        ])
+    }
 }

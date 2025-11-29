@@ -115,16 +115,25 @@ public class CopperButtonBlock extends ButtonBlock implements WeatheringCopper {
             }
         }
         
-        return InteractionResult.PASS;
+        // Pass to default button behavior (press the button)
+        return super.use(state, level, pos, player, hand, hitResult);
     }
 
     @Override
     public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
+        // Don't oxidize while button is pressed to prevent it getting stuck
+        if (state.getValue(POWERED)) {
+            return;
+        }
         WeatheringHelper.tryWeather(state, level, pos, random, CopperButtonBlock::getNextBlock);
     }
 
     @Override
     public boolean isRandomlyTicking(BlockState state) {
+        // Don't tick while button is pressed
+        if (state.getValue(POWERED)) {
+            return false;
+        }
         return WeatheringHelper.canWeather(state, CopperButtonBlock::getNextBlock);
     }
 }

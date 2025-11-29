@@ -25,6 +25,21 @@ public class FabricRegistryHelper extends RegistryHelper {
 
         return () -> registered;
     }
+    
+    @Override
+    @SuppressWarnings("unchecked")
+    public <T> Supplier<T> registerWithNamespace(ResourceKey<? extends Registry<? super T>> registryKey, String namespace, String name, Supplier<T> supplier) {
+        Registry<T> registry = (Registry<T>) BuiltInRegistries.REGISTRY.get(registryKey.location());
+
+        if (registry == null) {
+            throw new IllegalArgumentException("Unknown registry: " + registryKey.location());
+        }
+
+        ResourceLocation id = new ResourceLocation(namespace, name);
+        T registered = Registry.register(registry, id, supplier.get());
+
+        return () -> registered;
+    }
 
     @Override
     public void fireRegistrationCallbacks() {

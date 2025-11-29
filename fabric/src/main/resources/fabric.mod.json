@@ -1,4 +1,4 @@
-﻿{
+{
     "schemaVersion": 1,
     "id": "copperagebackport",
     "version": "${version}",
@@ -26,8 +26,7 @@
         ]
     },
     "mixins": [
-        "${mod_id}.mixins.json",
-        "${mod_id}.fabric.mixins.json"
+        "copperagebackport.fabric.mixins.json"
     ],
     "depends": {
         "fabricloader": ">=0.14",

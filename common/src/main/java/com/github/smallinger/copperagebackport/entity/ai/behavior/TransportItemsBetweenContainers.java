@@ -1,7 +1,9 @@
 package com.github.smallinger.copperagebackport.entity.ai.behavior;
 
 import com.github.smallinger.copperagebackport.ModMemoryTypes;
+import com.github.smallinger.copperagebackport.compat.ModCompat;
 import com.github.smallinger.copperagebackport.config.CommonConfig;
+import com.github.smallinger.copperagebackport.entity.ai.navigation.CopperGolemNavigation;
 import com.google.common.collect.ImmutableMap;
 import java.util.HashSet;
 import java.util.List;
@@ -27,9 +29,11 @@ import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.ChestBlock;
+import net.minecraft.world.level.block.entity.BarrelBlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.ChestBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.ChestType;
 import net.minecraft.world.level.chunk.LevelChunk;
 import net.minecraft.world.level.pathfinder.Path;
@@ -101,7 +105,10 @@ public class TransportItemsBetweenContainers extends Behavior<PathfinderMob> {
     }
 
     protected void start(ServerLevel level, PathfinderMob mob, long gameTime) {
-        // 1.20.1 doesn't have setCanPathToTargetsBelowSurface
+        // Enable navigation to targets below surface (e.g. stacked chests)
+        if (mob.getNavigation() instanceof CopperGolemNavigation copperGolemNavigation) {
+            copperGolemNavigation.setCanPathToTargetsBelowSurface(true);
+        }
     }
 
     protected boolean checkExtraStartConditions(ServerLevel level, PathfinderMob mob) {
@@ -284,24 +291,42 @@ public class TransportItemsBetweenContainers extends Behavior<PathfinderMob> {
         Set<GlobalPos> set1 = getUnreachablePositions(mob);
         List<ChunkPos> list = ChunkPos.rangeClosed(new ChunkPos(mob.blockPosition()), Math.floorDiv(this.getHorizontalSearchDistance(mob), 16) + 1)
             .toList();
-        TransportItemsBetweenContainers.TransportItemTarget transportitemsbetweencontainers$transportitemtarget = null;
-        double d0 = Float.MAX_VALUE;
-
+        
+        // Collect all BlockEntities and sort by BlockPos.hashCode() to match 1.21.10 iteration order
+        // In 1.21.10, ChunkAccess uses Object2ObjectOpenHashMap which iterates based on hash position
+        // Since 1.20.1 uses HashMap (non-deterministic), we must explicitly sort by hashCode
+        // BlockPos.hashCode() = (Y + Z * 31) * 31 + X - lower Z values (front) come first
+        List<BlockEntity> allBlockEntities = new java.util.ArrayList<>();
+        
         for (ChunkPos chunkpos : list) {
             LevelChunk levelchunk = level.getChunkSource().getChunkNow(chunkpos.x, chunkpos.z);
             if (levelchunk != null) {
-                for (BlockEntity blockentity : levelchunk.getBlockEntities().values()) {
-                    if (blockentity instanceof ChestBlockEntity chestblockentity) {
-                        double d1 = chestblockentity.getBlockPos().distToCenterSqr(mob.position());
-                        if (d1 < d0) {
-                            TransportItemsBetweenContainers.TransportItemTarget transportitemsbetweencontainers$transportitemtarget1 = this.isTargetValidToPick(
-                                mob, level, chestblockentity, set, set1, aabb
-                            );
-                            if (transportitemsbetweencontainers$transportitemtarget1 != null) {
-                                transportitemsbetweencontainers$transportitemtarget = transportitemsbetweencontainers$transportitemtarget1;
-                                d0 = d1;
-                            }
-                        }
+                allBlockEntities.addAll(levelchunk.getBlockEntities().values());
+            }
+        }
+        
+        // Sort by BlockPos.hashCode() DESCENDING to match 1.21.10 Object2ObjectOpenHashMap iteration
+        // Higher hash values (higher Z) come first
+        allBlockEntities.sort(java.util.Comparator.comparingInt((BlockEntity be) -> be.getBlockPos().hashCode()).reversed());
+        
+        // Now iterate using exact 1.21.10 logic
+        TransportItemsBetweenContainers.TransportItemTarget transportitemsbetweencontainers$transportitemtarget = null;
+        double d0 = Float.MAX_VALUE;
+        
+        for (BlockEntity blockentity : allBlockEntities) {
+            // Support Vanilla containers and mod containers (SophisticatedStorage, etc.)
+            BlockState blockState = level.getBlockState(blockentity.getBlockPos());
+            boolean isVanillaContainer = blockentity instanceof ChestBlockEntity || blockentity instanceof BarrelBlockEntity;
+            boolean isModContainer = ModCompat.isValidModContainer(blockState);
+            if (isVanillaContainer || isModContainer) {
+                double d1 = blockentity.getBlockPos().distToCenterSqr(mob.position());
+                if (d1 < d0) {
+                    TransportItemsBetweenContainers.TransportItemTarget transportitemsbetweencontainers$transportitemtarget1 = this.isTargetValidToPick(
+                        mob, level, blockentity, set, set1, aabb
+                    );
+                    if (transportitemsbetweencontainers$transportitemtarget1 != null) {
+                        transportitemsbetweencontainers$transportitemtarget = transportitemsbetweencontainers$transportitemtarget1;
+                        d0 = d1;
                     }
                 }
             }
@@ -387,8 +412,13 @@ public class TransportItemsBetweenContainers extends Behavior<PathfinderMob> {
     private Stream<TransportItemsBetweenContainers.TransportItemTarget> getConnectedTargets(
         TransportItemsBetweenContainers.TransportItemTarget target, Level level
     ) {
+        // Check if block has ChestType property (vanilla chests and mod chests like SophisticatedStorage)
+        if (!target.state.hasProperty(ChestBlock.TYPE)) {
+            return Stream.of(target);
+        }
+        
         if (target.state.getValue(ChestBlock.TYPE) != ChestType.SINGLE) {
-            // 1.20.1 doesn't have ChestBlock.getConnectedBlockPos - calculate manually
+            // Calculate connected chest position
             BlockPos connectedPos = getConnectedChestPos(target.pos, target.state);
             TransportItemsBetweenContainers.TransportItemTarget transportitemsbetweencontainers$transportitemtarget = 
                 TransportItemsBetweenContainers.TransportItemTarget.tryCreatePossibleTarget(connectedPos, level);
@@ -401,8 +431,13 @@ public class TransportItemsBetweenContainers extends Behavior<PathfinderMob> {
     }
 
     private BlockPos getConnectedChestPos(BlockPos pos, BlockState state) {
-        Direction direction = ChestBlock.getConnectedDirection(state);
-        return pos.relative(direction);
+        // Calculate connected direction based on ChestType and FACING
+        // This works for both vanilla ChestBlock and mod chests (like SophisticatedStorage)
+        // that use the same CHEST_TYPE property
+        Direction facing = state.getValue(BlockStateProperties.HORIZONTAL_FACING);
+        ChestType chestType = state.getValue(ChestBlock.TYPE);
+        Direction connectedDir = chestType == ChestType.LEFT ? facing.getClockWise() : facing.getCounterClockWise();
+        return pos.relative(connectedDir);
     }
 
     private AABB getTargetSearchArea(PathfinderMob mob) {
@@ -599,7 +634,10 @@ public class TransportItemsBetweenContainers extends Behavior<PathfinderMob> {
 
     protected void stop(ServerLevel level, PathfinderMob mob, long gameTime) {
         this.onStartTravelling(mob);
-        // 1.20.1 doesn't have setCanPathToTargetsBelowSurface
+        // Disable navigation to targets below surface
+        if (mob.getNavigation() instanceof CopperGolemNavigation copperGolemNavigation) {
+            copperGolemNavigation.setCanPathToTargetsBelowSurface(false);
+        }
     }
 
     private void stopInPlace(PathfinderMob mob) {
@@ -645,11 +683,23 @@ public class TransportItemsBetweenContainers extends Behavior<PathfinderMob> {
 
         @Nullable
         private static Container getBlockEntityContainer(BlockEntity blockEntity, BlockState state, Level level, BlockPos pos) {
+            // Handle vanilla ChestBlock (supports double chests)
             if (state.getBlock() instanceof ChestBlock chestblock) {
                 return ChestBlock.getContainer(chestblock, state, level, pos, false);
-            } else {
-                return blockEntity instanceof Container container ? container : null;
             }
+            
+            // Handle vanilla Container interface (Barrels, etc.)
+            if (blockEntity instanceof Container container) {
+                return container;
+            }
+            
+            // Handle mod containers (SophisticatedStorage, etc.) via ModCompat
+            Container modContainer = ModCompat.getModContainer(blockEntity, level, pos);
+            if (modContainer != null) {
+                return modContainer;
+            }
+            
+            return null;
         }
     }
 }

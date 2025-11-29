@@ -1,0 +1,56 @@
+# Crowdin Configuration for Copper Age Backport 1.20.1
+# Documentation: https://crowdin.github.io/crowdin-cli/
+
+# Project ID
+project_id: "848524"
+
+# API Token via environment variable (for security - don't commit tokens!)
+# Set CROWDIN_PERSONAL_TOKEN in your environment
+api_token_env: CROWDIN_PERSONAL_TOKEN
+
+# Preserve directory hierarchy in Crowdin
+preserve_hierarchy: true
+
+files:
+  # Main language file (English source)
+  - source: /common/src/main/resources/assets/minecraft/lang/en_us.json
+    translation: /common/src/main/resources/assets/minecraft/lang/%locale_with_underscore%.json
+    # Map Crowdin language codes to Minecraft locale codes (lowercase)
+    languages_mapping:
+      locale_with_underscore:
+        de: de_de
+        es-ES: es_es
+        es-MX: es_mx
+        fr: fr_fr
+        it: it_it
+        ja: ja_jp
+        ko: ko_kr
+        nl: nl_nl
+        pl: pl_pl
+        pt-BR: pt_br
+        pt-PT: pt_pt
+        ru: ru_ru
+        zh-CN: zh_cn
+        zh-TW: zh_tw
+        uk: uk_ua
+        sv-SE: sv_se
+        da: da_dk
+        fi: fi_fi
+        nb: nb_no
+        cs: cs_cz
+        hu: hu_hu
+        tr: tr_tr
+        th: th_th
+        vi: vi_vn
+        id: id_id
+        el: el_gr
+        ar: ar_sa
+        he: he_il
+        ro: ro_ro
+        bg: bg_bg
+        sk: sk_sk
+        sl: sl_si
+        hr: hr_hr
+        lt: lt_lt
+        lv: lv_lv
+        et: et_ee

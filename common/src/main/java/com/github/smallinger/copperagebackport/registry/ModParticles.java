@@ -20,7 +20,7 @@ public class ModParticles {
         
         RegistryHelper helper = RegistryHelper.getInstance();
         
-        COPPER_FIRE_FLAME = helper.register(PARTICLE_TYPE, "copper_fire_flame",
+        COPPER_FIRE_FLAME = helper.registerAuto(PARTICLE_TYPE, "copper_fire_flame",
             () -> new SimpleParticleType(false) {});
     }
 }

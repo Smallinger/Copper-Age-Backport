@@ -91,7 +91,9 @@ public class CopperChainBlock extends RotatedPillarBlock implements SimpleWaterl
                 if (!level.isClientSide) {
                     BlockState newState = unwaxedBlock.get().withPropertiesOf(state);
                     level.setBlockAndUpdate(pos, newState);
-                    stack.hurtAndBreak(1, player, p -> p.broadcastBreakEvent(hand));
+                    if (!player.isCreative()) {
+                        stack.hurtAndBreak(1, player, p -> p.broadcastBreakEvent(hand));
+                    }
                 }
                 
                 return InteractionResult.sidedSuccess(level.isClientSide);

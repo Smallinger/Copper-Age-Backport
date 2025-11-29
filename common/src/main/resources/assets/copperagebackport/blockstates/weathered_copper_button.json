@@ -1,4 +1,4 @@
-﻿{
+{
   "variants": {
     "face=ceiling,facing=east,powered=false": {
       "model": "copperagebackport:block/weathered_copper_button",

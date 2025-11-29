@@ -3,8 +3,10 @@ package com.github.smallinger.copperagebackport.client.renderer;
 import com.github.smallinger.copperagebackport.block.CopperGolemStatueBlock;
 import com.github.smallinger.copperagebackport.block.entity.CopperChestBlockEntity;
 import com.github.smallinger.copperagebackport.block.entity.CopperGolemStatueBlockEntity;
+import com.github.smallinger.copperagebackport.platform.Services;
 import com.github.smallinger.copperagebackport.registry.ModBlocks;
 import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.math.Axis;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -39,7 +41,12 @@ public class CopperItemRenderer extends BlockEntityWithoutLevelRenderer {
 
         Block block = blockItem.getBlock();
         if (isChestBlock(block)) {
-            renderChestItem(stack, block, poseStack, bufferSource, packedLight, packedOverlay);
+            // If FastChest is enabled, use static block model rendering instead of BlockEntity rendering
+            if (Services.PLATFORM.isFastChestSimplifiedEnabled()) {
+                renderChestItemAsBlock(block, poseStack, bufferSource, packedLight, packedOverlay);
+            } else {
+                renderChestItem(stack, block, poseStack, bufferSource, packedLight, packedOverlay);
+            }
         } else if (block instanceof CopperGolemStatueBlock statueBlock) {
             renderStatueItem(stack, statueBlock, poseStack, bufferSource, packedLight, packedOverlay);
         }
@@ -54,6 +61,26 @@ public class CopperItemRenderer extends BlockEntityWithoutLevelRenderer {
             block == ModBlocks.WAXED_EXPOSED_COPPER_CHEST.get() ||
             block == ModBlocks.WAXED_WEATHERED_COPPER_CHEST.get() ||
             block == ModBlocks.WAXED_OXIDIZED_COPPER_CHEST.get();
+    }
+
+    /**
+     * Render chest item as a static block model (for FastChest compatibility).
+     * Uses the block's baked model instead of the BlockEntity renderer.
+     * Rotates the model 180 degrees so the front faces the player.
+     */
+    private void renderChestItemAsBlock(Block block, PoseStack poseStack,
+                                        MultiBufferSource bufferSource, int packedLight, int packedOverlay) {
+        BlockState state = block.defaultBlockState();
+        
+        poseStack.pushPose();
+        // Rotate 180 degrees around Y axis to face the player
+        poseStack.translate(0.5, 0, 0.5);
+        poseStack.mulPose(Axis.YP.rotationDegrees(180));
+        poseStack.translate(-0.5, 0, -0.5);
+        
+        Minecraft.getInstance().getBlockRenderer()
+            .renderSingleBlock(state, poseStack, bufferSource, packedLight, packedOverlay);
+        poseStack.popPose();
     }
 
     private void renderChestItem(ItemStack stack, Block block, PoseStack poseStack,

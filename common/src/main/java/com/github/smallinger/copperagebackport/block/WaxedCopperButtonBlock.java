@@ -53,7 +53,8 @@ public class WaxedCopperButtonBlock extends ButtonBlock {
             return level.isClientSide ? InteractionResult.SUCCESS : InteractionResult.CONSUME;
         }
         
-        return InteractionResult.PASS;
+        // Pass to default button behavior (press the button)
+        return super.use(state, level, pos, player, hand, hitResult);
     }
 
-    }
+}

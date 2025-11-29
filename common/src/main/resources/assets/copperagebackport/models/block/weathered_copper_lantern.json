@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:block/template_lantern",
-  "textures": {
-    "lantern": "copperagebackport:block/weathered_copper_lantern"
-  }
-}

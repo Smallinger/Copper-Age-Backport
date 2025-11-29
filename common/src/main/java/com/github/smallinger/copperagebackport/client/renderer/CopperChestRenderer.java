@@ -73,7 +73,7 @@ public class CopperChestRenderer implements BlockEntityRenderer<ChestBlockEntity
     }
 
     private static Material chestMaterial(String name) {
-        return new Material(Sheets.CHEST_SHEET, new ResourceLocation(Constants.MOD_ID, "entity/chest/" + name));
+        return new Material(Sheets.CHEST_SHEET, new ResourceLocation("minecraft", "entity/chest/" + name));
     }
 
     @Override

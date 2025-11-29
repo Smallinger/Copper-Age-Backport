@@ -77,7 +77,9 @@ public class CopperBarsBlock extends IronBarsBlock {
                 if (!level.isClientSide) {
                     BlockState newState = copyBarsState(state, unwaxedBlock.get().defaultBlockState());
                     level.setBlockAndUpdate(pos, newState);
-                    stack.hurtAndBreak(1, player, p -> p.broadcastBreakEvent(hand));
+                    if (!player.isCreative()) {
+                        stack.hurtAndBreak(1, player, p -> p.broadcastBreakEvent(hand));
+                    }
                 }
                 
                 return InteractionResult.sidedSuccess(level.isClientSide);

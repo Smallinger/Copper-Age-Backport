@@ -1,5 +1,9 @@
 package com.github.smallinger.copperagebackport;
 
+import com.github.smallinger.copperagebackport.compat.ModCompat;
+import com.github.smallinger.copperagebackport.compat.modules.FastChestCompat;
+import com.github.smallinger.copperagebackport.compat.modules.IronChestsCompat;
+import com.github.smallinger.copperagebackport.compat.modules.SophisticatedStorageCompat;
 import com.github.smallinger.copperagebackport.entity.CopperGolemEntity;
 import com.github.smallinger.copperagebackport.platform.Services;
 import com.github.smallinger.copperagebackport.registry.*;
@@ -26,6 +30,12 @@ public class CommonClass {
         ModEntities.register();
         ModItems.register();
         
+        // Register mod compatibility modules
+        registerCompatModules();
+        
+        // Initialize mod compatibility
+        ModCompat.init();
+        
         Constants.LOG.info("{} initialized successfully!", Constants.MOD_NAME);
     }
     
@@ -43,5 +53,20 @@ public class CommonClass {
      */
     public static net.minecraft.world.entity.ai.attributes.AttributeSupplier.Builder getCopperGolemAttributes() {
         return CopperGolemEntity.createAttributes();
+    }
+    
+    /**
+     * Register all mod compatibility modules.
+     * Add new compat modules here.
+     */
+    private static void registerCompatModules() {
+        // FastChest - static chest rendering for better performance
+        ModCompat.register(FastChestCompat.MOD_ID, FastChestCompat::new);
+        
+        // SophisticatedStorage - enhanced storage blocks as Copper Golem destinations
+        ModCompat.register(SophisticatedStorageCompat.MOD_ID, SophisticatedStorageCompat::new);
+        
+        // IronChests - metal chest variants as Copper Golem destinations
+        ModCompat.register(IronChestsCompat.MOD_ID, IronChestsCompat::new);
     }
 }

@@ -9,8 +9,6 @@ public class ModTags {
     public static class Blocks {
         public static final TagKey<Block> COPPER = tag("copper");
         public static final TagKey<Block> COPPER_CHESTS = tag("copper_chests");
-        public static final TagKey<Block> GOLEM_TARGET_CHESTS = tag("golem_target_chests");
-        public static final TagKey<Block> GOLEM_TARGET_BARRELS = tag("golem_target_barrels");
         public static final TagKey<Block> WOODEN_SHELVES = tag("wooden_shelves");
 
         private static TagKey<Block> tag(String name) {

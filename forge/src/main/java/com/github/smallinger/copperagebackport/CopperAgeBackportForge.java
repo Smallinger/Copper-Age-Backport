@@ -83,6 +83,14 @@ public class CopperAgeBackportForge {
             entries.putAfter(ModItems.WAXED_COPPER_CHEST_ITEM.get().getDefaultInstance(), ModItems.WAXED_EXPOSED_COPPER_CHEST_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
             entries.putAfter(ModItems.WAXED_EXPOSED_COPPER_CHEST_ITEM.get().getDefaultInstance(), ModItems.WAXED_WEATHERED_COPPER_CHEST_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
             entries.putAfter(ModItems.WAXED_WEATHERED_COPPER_CHEST_ITEM.get().getDefaultInstance(), ModItems.WAXED_OXIDIZED_COPPER_CHEST_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            // Lightning Rods after vanilla lightning rod
+            entries.putAfter(Items.LIGHTNING_ROD.getDefaultInstance(), ModItems.EXPOSED_LIGHTNING_ROD_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            entries.putAfter(ModItems.EXPOSED_LIGHTNING_ROD_ITEM.get().getDefaultInstance(), ModItems.WEATHERED_LIGHTNING_ROD_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            entries.putAfter(ModItems.WEATHERED_LIGHTNING_ROD_ITEM.get().getDefaultInstance(), ModItems.OXIDIZED_LIGHTNING_ROD_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            entries.putAfter(ModItems.OXIDIZED_LIGHTNING_ROD_ITEM.get().getDefaultInstance(), ModItems.WAXED_LIGHTNING_ROD_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            entries.putAfter(ModItems.WAXED_LIGHTNING_ROD_ITEM.get().getDefaultInstance(), ModItems.WAXED_EXPOSED_LIGHTNING_ROD_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            entries.putAfter(ModItems.WAXED_EXPOSED_LIGHTNING_ROD_ITEM.get().getDefaultInstance(), ModItems.WAXED_WEATHERED_LIGHTNING_ROD_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            entries.putAfter(ModItems.WAXED_WEATHERED_LIGHTNING_ROD_ITEM.get().getDefaultInstance(), ModItems.WAXED_OXIDIZED_LIGHTNING_ROD_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
             // Copper Golem Statues (keep at end)
             event.accept(ModItems.COPPER_GOLEM_STATUE_ITEM.get());
             event.accept(ModItems.EXPOSED_COPPER_GOLEM_STATUE_ITEM.get());

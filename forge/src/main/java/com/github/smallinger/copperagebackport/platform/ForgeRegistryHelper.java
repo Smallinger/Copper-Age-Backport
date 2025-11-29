@@ -16,6 +16,8 @@ import java.util.function.Supplier;
 public class ForgeRegistryHelper extends RegistryHelper {
     
     private final Map<ResourceKey<?>, DeferredRegister<?>> registers = new HashMap<>();
+    // Separate map for minecraft namespace registers
+    private final Map<ResourceKey<?>, DeferredRegister<?>> minecraftRegisters = new HashMap<>();
     private final IEventBus modEventBus;
     
     public ForgeRegistryHelper() {
@@ -31,6 +33,27 @@ public class ForgeRegistryHelper extends RegistryHelper {
             DeferredRegister<T> newRegister = DeferredRegister.create(typedKey, Constants.MOD_ID);
             newRegister.register(modEventBus);
             Constants.LOG.debug("Created DeferredRegister for registry: {}", key.location());
+            return newRegister;
+        });
+        
+        RegistryObject<T> registryObject = register.register(name, supplier);
+        return registryObject;
+    }
+    
+    @Override
+    @SuppressWarnings("unchecked")
+    public <T> Supplier<T> registerWithNamespace(ResourceKey<? extends Registry<? super T>> registryKey, String namespace, String name, Supplier<T> supplier) {
+        if (namespace.equals(Constants.MOD_ID)) {
+            return register(registryKey, name, supplier);
+        }
+        
+        // For minecraft namespace or other namespaces
+        String mapKey = namespace + ":" + registryKey.location();
+        DeferredRegister<T> register = (DeferredRegister<T>) minecraftRegisters.computeIfAbsent(registryKey, key -> {
+            ResourceKey<? extends Registry<T>> typedKey = (ResourceKey<? extends Registry<T>>) key;
+            DeferredRegister<T> newRegister = DeferredRegister.create(typedKey, namespace);
+            newRegister.register(modEventBus);
+            Constants.LOG.debug("Created DeferredRegister for registry: {} with namespace: {}", key.location(), namespace);
             return newRegister;
         });
         

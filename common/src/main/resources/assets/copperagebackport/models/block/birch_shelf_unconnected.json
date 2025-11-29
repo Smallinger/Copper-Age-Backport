@@ -1,8 +1,0 @@
-{
-  "parent": "copperagebackport:block/template_shelf_unconnected",
-  "textures": {
-    "all": "copperagebackport:block/birch_shelf",
-    "particle": "minecraft:block/stripped_birch_log"
-  }
-}
-

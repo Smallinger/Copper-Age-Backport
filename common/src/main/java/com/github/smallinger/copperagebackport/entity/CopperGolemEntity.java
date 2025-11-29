@@ -133,6 +133,13 @@ public class CopperGolemEntity extends AbstractGolem implements Shearable, Conta
             .add(Attributes.ATTACK_DAMAGE, 1.0);  // Required for item pickup evaluation
     }
 
+    // Eye height matching vanilla CopperGolem (1.21.10): 0.8125F
+    // In 1.20.1 there's no .eyeHeight() in EntityType.Builder, so we override this method
+    @Override
+    protected float getStandingEyeHeight(Pose pose, EntityDimensions dimensions) {
+        return 0.8125F;
+    }
+
     // Brain-based AI statt Goal-based AI
     @Override
     protected Brain.Provider<CopperGolemEntity> brainProvider() {

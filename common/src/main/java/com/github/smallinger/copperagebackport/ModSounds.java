@@ -1,13 +1,17 @@
 package com.github.smallinger.copperagebackport;
 
 import com.github.smallinger.copperagebackport.registry.RegistryHelper;
-import net.minecraft.core.registries.Registries;
+import net.minecraft.core.Registry;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 
 import java.util.function.Supplier;
 
 public class ModSounds {
+    
+    // Registry key for sound events
+    private static final ResourceKey<Registry<SoundEvent>> SOUND_EVENT = ResourceKey.createRegistryKey(new ResourceLocation("sound_event"));
     
     // Copper Golem sounds - Unaffected (Regular)
     public static Supplier<SoundEvent> COPPER_GOLEM_DEATH_UNAFFECTED;
@@ -128,8 +132,9 @@ public class ModSounds {
     }
 
     private static Supplier<SoundEvent> registerSound(RegistryHelper helper, String name) {
-        ResourceLocation id = new ResourceLocation(Constants.MOD_ID, name);
-        return helper.register(Registries.SOUND_EVENT, name, () -> SoundEvent.createVariableRangeEvent(id));
+        String namespace = RegistryHelper.isVanillaBackport(name) ? RegistryHelper.MINECRAFT_NAMESPACE : Constants.MOD_ID;
+        ResourceLocation id = new ResourceLocation(namespace, name);
+        return helper.registerAuto(SOUND_EVENT, name, () -> SoundEvent.createVariableRangeEvent(id));
     }
 }
 

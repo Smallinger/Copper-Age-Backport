@@ -17,6 +17,7 @@ import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.LanternBlock;
 import net.minecraft.world.level.block.SimpleWaterloggedBlock;
 import net.minecraft.world.level.block.WeatheringCopper;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -38,8 +39,9 @@ import java.util.Optional;
 /**
  * Base Copper Lantern block - similar to vanilla LanternBlock but for copper.
  * This is used for waxed variants that don't oxidize.
+ * Extends LanternBlock for automatic Amendments mod compatibility (wall placement, falling behavior).
  */
-public class CopperLanternBlock extends Block implements SimpleWaterloggedBlock {
+public class CopperLanternBlock extends LanternBlock implements WeatheringCopper {
     public static final BooleanProperty HANGING = BlockStateProperties.HANGING;
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
     
@@ -64,6 +66,11 @@ public class CopperLanternBlock extends Block implements SimpleWaterloggedBlock 
     }
 
     public WeatheringCopper.WeatherState getWeatheringState() {
+        return this.weatheringState;
+    }
+
+    @Override
+    public WeatherState getAge() {
         return this.weatheringState;
     }
     
@@ -98,7 +105,9 @@ public class CopperLanternBlock extends Block implements SimpleWaterloggedBlock 
                 if (!level.isClientSide) {
                     BlockState newState = unwaxedBlock.get().withPropertiesOf(state);
                     level.setBlockAndUpdate(pos, newState);
-                    stack.hurtAndBreak(1, player, p -> p.broadcastBreakEvent(hand));
+                    if (!player.isCreative()) {
+                        stack.hurtAndBreak(1, player, p -> p.broadcastBreakEvent(hand));
+                    }
                 }
                 
                 return InteractionResult.sidedSuccess(level.isClientSide);

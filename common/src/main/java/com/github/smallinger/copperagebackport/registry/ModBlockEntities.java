@@ -29,7 +29,7 @@ public class ModBlockEntities {
         RegistryHelper helper = RegistryHelper.getInstance();
         
         // Register Copper Chest Block Entity
-        COPPER_CHEST_BLOCK_ENTITY = helper.register(BLOCK_ENTITY_TYPE, "copper_chest",
+        COPPER_CHEST_BLOCK_ENTITY = helper.registerAuto(BLOCK_ENTITY_TYPE, "copper_chest",
             () -> Services.BLOCK_ENTITY.createBlockEntityType(
                 CopperChestBlockEntity::new,
                 ModBlocks.COPPER_CHEST.get(),
@@ -43,7 +43,7 @@ public class ModBlockEntities {
             ));
         
         // Register Copper Golem Statue Block Entity
-        COPPER_GOLEM_STATUE_BLOCK_ENTITY = helper.register(BLOCK_ENTITY_TYPE, "copper_golem_statue",
+        COPPER_GOLEM_STATUE_BLOCK_ENTITY = helper.registerAuto(BLOCK_ENTITY_TYPE, "copper_golem_statue",
             () -> Services.BLOCK_ENTITY.createBlockEntityType(
                 CopperGolemStatueBlockEntity::new,
                 ModBlocks.COPPER_GOLEM_STATUE.get(),
@@ -57,7 +57,7 @@ public class ModBlockEntities {
             ));
         
         // Register Shelf Block Entity - dynamically include Pale Oak if VanillaBackport is loaded
-        SHELF_BLOCK_ENTITY = helper.register(BLOCK_ENTITY_TYPE, "shelf",
+        SHELF_BLOCK_ENTITY = helper.registerAuto(BLOCK_ENTITY_TYPE, "shelf",
             () -> {
                 List<Block> shelfBlocks = new ArrayList<>();
                 shelfBlocks.add(ModBlocks.OAK_SHELF.get());

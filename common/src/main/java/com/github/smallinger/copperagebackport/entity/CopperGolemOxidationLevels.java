@@ -13,8 +13,8 @@ public class CopperGolemOxidationLevels {
         ModSounds.COPPER_GOLEM_HURT_UNAFFECTED.get(),
         ModSounds.COPPER_GOLEM_DEATH_UNAFFECTED.get(),
         ModSounds.COPPER_GOLEM_STEP_UNAFFECTED.get(),
-        new ResourceLocation(Constants.MOD_ID, "textures/entity/copper_golem/copper_golem.png"),
-        new ResourceLocation(Constants.MOD_ID, "textures/entity/copper_golem/copper_golem_eyes.png")
+        new ResourceLocation("minecraft", "textures/entity/copper_golem/copper_golem.png"),
+        new ResourceLocation("minecraft", "textures/entity/copper_golem/copper_golem_eyes.png")
     );
     
     private static final CopperGolemOxidationLevel EXPOSED = new CopperGolemOxidationLevel(
@@ -22,8 +22,8 @@ public class CopperGolemOxidationLevels {
         ModSounds.COPPER_GOLEM_HURT_EXPOSED.get(),
         ModSounds.COPPER_GOLEM_DEATH_EXPOSED.get(),
         ModSounds.COPPER_GOLEM_STEP_EXPOSED.get(),
-        new ResourceLocation(Constants.MOD_ID, "textures/entity/copper_golem/exposed_copper_golem.png"),
-        new ResourceLocation(Constants.MOD_ID, "textures/entity/copper_golem/exposed_copper_golem_eyes.png")
+        new ResourceLocation("minecraft", "textures/entity/copper_golem/exposed_copper_golem.png"),
+        new ResourceLocation("minecraft", "textures/entity/copper_golem/exposed_copper_golem_eyes.png")
     );
     
     private static final CopperGolemOxidationLevel WEATHERED = new CopperGolemOxidationLevel(
@@ -31,8 +31,8 @@ public class CopperGolemOxidationLevels {
         ModSounds.COPPER_GOLEM_HURT_WEATHERED.get(),
         ModSounds.COPPER_GOLEM_DEATH_WEATHERED.get(),
         ModSounds.COPPER_GOLEM_STEP_WEATHERED.get(),
-        new ResourceLocation(Constants.MOD_ID, "textures/entity/copper_golem/weathered_copper_golem.png"),
-        new ResourceLocation(Constants.MOD_ID, "textures/entity/copper_golem/weathered_copper_golem_eyes.png")
+        new ResourceLocation("minecraft", "textures/entity/copper_golem/weathered_copper_golem.png"),
+        new ResourceLocation("minecraft", "textures/entity/copper_golem/weathered_copper_golem_eyes.png")
     );
     
     private static final CopperGolemOxidationLevel OXIDIZED = new CopperGolemOxidationLevel(
@@ -40,8 +40,8 @@ public class CopperGolemOxidationLevels {
         ModSounds.COPPER_GOLEM_HURT_OXIDIZED.get(),
         ModSounds.COPPER_GOLEM_DEATH_OXIDIZED.get(),
         ModSounds.COPPER_GOLEM_STEP_OXIDIZED.get(),
-        new ResourceLocation(Constants.MOD_ID, "textures/entity/copper_golem/oxidized_copper_golem.png"),
-        new ResourceLocation(Constants.MOD_ID, "textures/entity/copper_golem/oxidized_copper_golem_eyes.png")
+        new ResourceLocation("minecraft", "textures/entity/copper_golem/oxidized_copper_golem.png"),
+        new ResourceLocation("minecraft", "textures/entity/copper_golem/oxidized_copper_golem_eyes.png")
     );
     
     private static final Map<WeatheringCopper.WeatherState, CopperGolemOxidationLevel> WEATHERED_STATES = Map.of(

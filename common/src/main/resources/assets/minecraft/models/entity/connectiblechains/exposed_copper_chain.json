@@ -1,0 +1,6 @@
+{
+  "textures": {
+    "chain": "minecraft:textures/block/exposed_copper_chain",
+    "knot": "minecraft:textures/item/exposed_copper_chain"
+  }
+}

@@ -22,3 +22,7 @@ build
 eclipse
 run
 runs
+
+# Crowdin CLI (keep jar, ignore rest)
+.crowdin/*
+!.crowdin/crowdin-cli.jar

@@ -21,12 +21,12 @@ public class ModEntities {
         
         RegistryHelper helper = RegistryHelper.getInstance();
         
-        COPPER_GOLEM = helper.register(
+        COPPER_GOLEM = helper.registerAuto(
             Registries.ENTITY_TYPE,
             "copper_golem",
             () -> EntityType.Builder.of(CopperGolemEntity::new, MobCategory.MISC)
-                .sized(0.6F, 1.3F)
-                .clientTrackingRange(8)
+                .sized(0.49F, 0.98F)
+                .clientTrackingRange(10)
                 .build("copper_golem")
         );
     }
