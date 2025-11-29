@@ -2,7 +2,7 @@
   "required": true,
   "package": "com.github.smallinger.copperagebackport.mixin",
   "compatibilityLevel": "JAVA_17",
-  "refmap": "copperagebackport.fabric.refmap.json",
+  "refmap": "copperagebackport.refmap.json",
   "mixins": [
     "EntityRemapMixin",
     "IdRemapMixin",
