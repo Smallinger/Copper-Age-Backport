@@ -43,6 +43,11 @@ All notable changes to this project will be documented in this file.
 - **ConnectibleChains support (Fabric only)**: Copper Chains can be connected between fences and walls like vanilla Iron Chains
   - Note: No NeoForge version available as ConnectibleChains is Fabric-only for 1.21.1
 
+#### Localization Support
+- **Crowdin integration**: Added automatic translation download from Crowdin during build process
+- **Community translations**: Everyone can help translate the mod at https://crowdin.com/project/copper-golem-legacy
+- **Supported languages**: German, Spanish (Spain & Mexico), French, Italian, Japanese, Korean, Dutch, Polish, Portuguese (Brazil & Portugal), Russian, Chinese (Simplified & Traditional), Ukrainian, Swedish, Danish, Finnish, Norwegian, Czech, Hungarian, Turkish, Thai, Vietnamese, Indonesian, Greek, Arabic, Hebrew, Romanian, Bulgarian, Slovak, Slovenian, Croatian, Lithuanian, Latvian, Estonian more can be requested
+
 ### Fixed
 
 #### Copper Golem
@@ -53,6 +58,9 @@ All notable changes to this project will be documented in this file.
 
 #### Copper Button
 - **Oxidation while pressed**: Copper Buttons no longer oxidize while they are pressed, preventing them from getting stuck
+
+#### Build System
+- **BOM detection and removal**: Added automatic UTF-8 BOM detection and removal task for all mod files across all versions. This prevents encoding issues that could cause compilation problems or runtime errors.
 
 
 ## [1.21.1] - 0.1.1 - 26.11.2025
