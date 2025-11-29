@@ -46,6 +46,8 @@ public class CopperAgeBackportFabric implements ModInitializer {
         com.github.smallinger.copperagebackport.fabric.loot.FabricLootTableModifier.register();
 
         RegistryHelper.getInstance().flushRegistrationCallbacks();
+        
+        // Legacy namespace migration is handled by Mixins (IdRemapMixin, PlayerDataRemapMixin)
     }
 
     private void registerEntityAttributes() {
@@ -103,6 +105,8 @@ public class CopperAgeBackportFabric implements ModInitializer {
         ItemGroupEvents.modifyEntriesEvent(CreativeModeTabs.FUNCTIONAL_BLOCKS).register(entries -> {
             // Copper Chests after normal chest
             entries.addAfter(Items.CHEST, ModItems.COPPER_CHEST_ITEM.get(), ModItems.EXPOSED_COPPER_CHEST_ITEM.get(), ModItems.WEATHERED_COPPER_CHEST_ITEM.get(), ModItems.OXIDIZED_COPPER_CHEST_ITEM.get(), ModItems.WAXED_COPPER_CHEST_ITEM.get(), ModItems.WAXED_EXPOSED_COPPER_CHEST_ITEM.get(), ModItems.WAXED_WEATHERED_COPPER_CHEST_ITEM.get(), ModItems.WAXED_OXIDIZED_COPPER_CHEST_ITEM.get());
+            // Lightning Rods after vanilla lightning rod
+            entries.addAfter(Items.LIGHTNING_ROD, ModItems.EXPOSED_LIGHTNING_ROD_ITEM.get(), ModItems.WEATHERED_LIGHTNING_ROD_ITEM.get(), ModItems.OXIDIZED_LIGHTNING_ROD_ITEM.get(), ModItems.WAXED_LIGHTNING_ROD_ITEM.get(), ModItems.WAXED_EXPOSED_LIGHTNING_ROD_ITEM.get(), ModItems.WAXED_WEATHERED_LIGHTNING_ROD_ITEM.get(), ModItems.WAXED_OXIDIZED_LIGHTNING_ROD_ITEM.get());
             // Copper Golem Statues (keep at end)
             entries.accept(ModItems.COPPER_GOLEM_STATUE_ITEM.get());
             entries.accept(ModItems.EXPOSED_COPPER_GOLEM_STATUE_ITEM.get());

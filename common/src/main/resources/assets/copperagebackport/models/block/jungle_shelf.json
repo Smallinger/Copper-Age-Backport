@@ -1,8 +1,0 @@
-{
-  "parent": "copperagebackport:block/template_shelf_body",
-  "textures": {
-    "all": "copperagebackport:block/jungle_shelf",
-    "particle": "minecraft:block/stripped_jungle_log"
-  }
-}
-

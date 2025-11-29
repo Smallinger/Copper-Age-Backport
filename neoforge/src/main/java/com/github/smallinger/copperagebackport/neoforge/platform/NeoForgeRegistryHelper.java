@@ -13,10 +13,11 @@ import java.util.function.Supplier;
 
 /**
  * NeoForge implementation of the registry helper using DeferredRegister.
+ * Supports registering under both minecraft: and copperagebackport: namespaces.
  */
 public class NeoForgeRegistryHelper extends RegistryHelper {
 
-    private final Map<ResourceKey<?>, DeferredRegister<?>> registers = new HashMap<>();
+    private final Map<String, Map<ResourceKey<?>, DeferredRegister<?>>> namespaceRegisters = new HashMap<>();
     private final IEventBus modEventBus;
 
     public NeoForgeRegistryHelper(IEventBus modEventBus) {
@@ -28,10 +29,24 @@ public class NeoForgeRegistryHelper extends RegistryHelper {
     public <T> Supplier<T> register(ResourceKey<? extends Registry<? super T>> registryKey,
                                     String name,
                                     Supplier<T> supplier) {
+        return registerWithNamespace(registryKey, Constants.MOD_ID, name, supplier);
+    }
+    
+    @Override
+    @SuppressWarnings("unchecked")
+    public <T> Supplier<T> registerWithNamespace(ResourceKey<? extends Registry<? super T>> registryKey,
+                                                  String namespace,
+                                                  String name,
+                                                  Supplier<T> supplier) {
+        Map<ResourceKey<?>, DeferredRegister<?>> registers = namespaceRegisters.computeIfAbsent(
+            namespace, k -> new HashMap<>()
+        );
+        
         DeferredRegister<T> register = (DeferredRegister<T>) registers.computeIfAbsent(registryKey, key -> {
             ResourceKey<? extends Registry<T>> typedKey = (ResourceKey<? extends Registry<T>>) key;
-            DeferredRegister<T> newRegister = DeferredRegister.create(typedKey, Constants.MOD_ID);
+            DeferredRegister<T> newRegister = DeferredRegister.create(typedKey, namespace);
             newRegister.register(modEventBus);
+            Constants.LOG.debug("Created DeferredRegister for namespace {} and registry {}", namespace, registryKey);
             return newRegister;
         });
 

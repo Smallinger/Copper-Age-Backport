@@ -1,8 +1,0 @@
-{
-  "parent": "copperagebackport:block/template_shelf_body",
-  "textures": {
-    "all": "copperagebackport:block/cherry_shelf",
-    "particle": "minecraft:block/stripped_cherry_log"
-  }
-}
-

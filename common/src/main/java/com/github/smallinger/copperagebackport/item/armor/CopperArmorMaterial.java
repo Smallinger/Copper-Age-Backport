@@ -42,7 +42,7 @@ public class CopperArmorMaterial {
     public static Supplier<Holder<ArmorMaterial>> COPPER;
     
     private static Holder<ArmorMaterial> createCopper() {
-        ResourceLocation location = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "copper");
+        ResourceLocation location = ResourceLocation.withDefaultNamespace("copper");
         List<ArmorMaterial.Layer> layers = List.of(new ArmorMaterial.Layer(location));
         
         EnumMap<ArmorItem.Type, Integer> enummap = new EnumMap<>(ArmorItem.Type.class);

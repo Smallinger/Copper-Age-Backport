@@ -4,3 +4,107 @@ plugins {
     // see https://projects.neoforged.net/neoforged/moddevgradle for new versions
     id 'net.neoforged.moddev' version '2.0.49-beta' apply false
 }
+
+// ============================================================================
+// Crowdin Translation Download Task
+// Usage: ./gradlew build -PdownloadTranslations
+// Requires: CROWDIN_API_TOKEN and CROWDIN_PROJECT_ID environment variables
+// ============================================================================
+
+def crowdinCliJar = file("${rootDir}/.crowdin/crowdin-cli.jar")
+
+// Task to download translations from Crowdin
+tasks.register("downloadTranslations", Exec) {
+    group = "i18n"
+    description = "Downloads translations from Crowdin (requires CROWDIN_PERSONAL_TOKEN env var)"
+    
+    onlyIf { 
+        project.hasProperty('downloadTranslations') && 
+        (System.getenv('CROWDIN_PERSONAL_TOKEN') != null || project.hasProperty('crowdinToken'))
+    }
+    
+    doFirst {
+        if (!crowdinCliJar.exists()) {
+            throw new GradleException("Crowdin CLI not found at ${crowdinCliJar}. Please copy crowdin-cli.jar to .crowdin/ directory.")
+        }
+        if (System.getenv('CROWDIN_PERSONAL_TOKEN') == null && !project.hasProperty('crowdinToken')) {
+            throw new GradleException("CROWDIN_PERSONAL_TOKEN environment variable is not set!")
+        }
+        println "Downloading translations from Crowdin..."
+    }
+    
+    workingDir rootDir
+    
+    if (System.getProperty('os.name').toLowerCase().contains('windows')) {
+        commandLine 'cmd', '/c', "java -jar \"${crowdinCliJar}\" download"
+    } else {
+        commandLine 'sh', '-c', "java -jar \"${crowdinCliJar}\" download"
+    }
+}
+
+// Task to remove UTF-8 BOM from all mod files
+tasks.register("removeBOM") {
+    group = "build setup"
+    description = "Automatically remove UTF-8 BOM from all mod files"
+
+    doLast {
+        def bom = [0xEF, 0xBB, 0xBF] as byte[]
+        def filesFixed = []
+        def filesScanned = 0
+
+        // All relevant files in the mod project
+        fileTree(projectDir) {
+            include '**/*.json'
+            include '**/*.mcmeta'
+            include '**/*.txt'
+            include '**/*.cfg'
+            include '**/*.properties'
+            include '**/*.js'
+            include '**/*.mcfunction'
+            include '**/*.md'
+            include '**/*.shader'
+            include '**/*.lang'
+        }.files.each { File f ->
+            filesScanned++
+
+            if (f.length() >= 3) {
+                byte[] firstThree = new byte[3]
+                f.withInputStream { it.read(firstThree) }
+
+                if (firstThree == bom) {
+                    filesFixed << f.path
+
+                    // Rewrite file without BOM
+                    byte[] full = f.bytes
+                    byte[] cleaned = full[3..-1] as byte[]
+
+                    f.withOutputStream { it.write(cleaned) }
+                }
+            }
+        }
+
+        // Summary
+        println "\n=== BOM Removal Summary ==="
+        println "Files scanned: ${filesScanned}"
+        if (filesFixed.isEmpty()) {
+            println "No files with BOM found."
+        } else {
+            println "Files fixed (${filesFixed.size()}):"
+            filesFixed.each { println "  - ${it}" }
+        }
+        println "===========================\n"
+    }
+}
+
+// Build automatically depends on BOM removal (for all subprojects)
+// If -PdownloadTranslations is set, also download translations before build
+subprojects {
+    afterEvaluate {
+        tasks.findByName('build')?.dependsOn(rootProject.tasks.named('removeBOM'))
+        
+        // Conditionally depend on downloadTranslations if the property is set
+        if (rootProject.hasProperty('downloadTranslations')) {
+            tasks.findByName('processResources')?.dependsOn(rootProject.tasks.named('downloadTranslations'))
+        }
+    }
+}

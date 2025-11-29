@@ -1,8 +1,0 @@
-{
-  "parent": "copperagebackport:block/template_shelf_unpowered",
-  "textures": {
-    "all": "copperagebackport:block/mangrove_shelf",
-    "particle": "minecraft:block/stripped_mangrove_log"
-  }
-}
-

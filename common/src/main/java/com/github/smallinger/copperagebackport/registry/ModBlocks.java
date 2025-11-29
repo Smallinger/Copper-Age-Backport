@@ -110,13 +110,25 @@ public class ModBlocks {
     public static Supplier<CopperBarsBlock> WAXED_WEATHERED_COPPER_BARS;
     public static Supplier<CopperBarsBlock> WAXED_OXIDIZED_COPPER_BARS;
     
+    // Lightning Rod Blocks (Weathering) - vanilla lightning rod is extended via Mixin (LightningRodBlockMixin)
+    // These are the new oxidized variants that don't exist in vanilla 1.21.1
+    public static Supplier<WeatheringCopperLightningRodBlock> EXPOSED_LIGHTNING_ROD;
+    public static Supplier<WeatheringCopperLightningRodBlock> WEATHERED_LIGHTNING_ROD;
+    public static Supplier<WeatheringCopperLightningRodBlock> OXIDIZED_LIGHTNING_ROD;
+    
+    // Waxed Lightning Rod Blocks
+    public static Supplier<WaxedCopperLightningRodBlock> WAXED_LIGHTNING_ROD;
+    public static Supplier<WaxedCopperLightningRodBlock> WAXED_EXPOSED_LIGHTNING_ROD;
+    public static Supplier<WaxedCopperLightningRodBlock> WAXED_WEATHERED_LIGHTNING_ROD;
+    public static Supplier<WaxedCopperLightningRodBlock> WAXED_OXIDIZED_LIGHTNING_ROD;
+    
     public static void register() {
         Constants.LOG.info("Registering blocks for {}", Constants.MOD_NAME);
         
         RegistryHelper helper = RegistryHelper.getInstance();
         
         // Register Copper Chest Blocks
-        COPPER_CHEST = helper.register(BLOCK, "copper_chest",
+        COPPER_CHEST = helper.registerAuto(BLOCK, "copper_chest",
             () -> new WeatheringCopperChestBlock(
                 WeatheringCopper.WeatherState.UNAFFECTED,
                 BlockBehaviour.Properties.of()
@@ -125,7 +137,7 @@ public class ModBlocks {
                     .requiresCorrectToolForDrops()
                     .randomTicks()));
         
-        EXPOSED_COPPER_CHEST = helper.register(BLOCK, "exposed_copper_chest",
+        EXPOSED_COPPER_CHEST = helper.registerAuto(BLOCK, "exposed_copper_chest",
             () -> new WeatheringCopperChestBlock(
                 WeatheringCopper.WeatherState.EXPOSED,
                 BlockBehaviour.Properties.of()
@@ -134,7 +146,7 @@ public class ModBlocks {
                     .requiresCorrectToolForDrops()
                     .randomTicks()));
         
-        WEATHERED_COPPER_CHEST = helper.register(BLOCK, "weathered_copper_chest",
+        WEATHERED_COPPER_CHEST = helper.registerAuto(BLOCK, "weathered_copper_chest",
             () -> new WeatheringCopperChestBlock(
                 WeatheringCopper.WeatherState.WEATHERED,
                 BlockBehaviour.Properties.of()
@@ -143,7 +155,7 @@ public class ModBlocks {
                     .requiresCorrectToolForDrops()
                     .randomTicks()));
         
-        OXIDIZED_COPPER_CHEST = helper.register(BLOCK, "oxidized_copper_chest",
+        OXIDIZED_COPPER_CHEST = helper.registerAuto(BLOCK, "oxidized_copper_chest",
             () -> new WeatheringCopperChestBlock(
                 WeatheringCopper.WeatherState.OXIDIZED,
                 BlockBehaviour.Properties.of()
@@ -153,7 +165,7 @@ public class ModBlocks {
                     .randomTicks()));
         
         // Register Waxed Copper Chest Blocks
-        WAXED_COPPER_CHEST = helper.register(BLOCK, "waxed_copper_chest",
+        WAXED_COPPER_CHEST = helper.registerAuto(BLOCK, "waxed_copper_chest",
             () -> new CopperChestBlock(
                 WeatheringCopper.WeatherState.UNAFFECTED,
                 BlockBehaviour.Properties.of()
@@ -161,7 +173,7 @@ public class ModBlocks {
                     .sound(SoundType.COPPER)
                     .requiresCorrectToolForDrops()));
         
-        WAXED_EXPOSED_COPPER_CHEST = helper.register(BLOCK, "waxed_exposed_copper_chest",
+        WAXED_EXPOSED_COPPER_CHEST = helper.registerAuto(BLOCK, "waxed_exposed_copper_chest",
             () -> new CopperChestBlock(
                 WeatheringCopper.WeatherState.EXPOSED,
                 BlockBehaviour.Properties.of()
@@ -169,7 +181,7 @@ public class ModBlocks {
                     .sound(SoundType.COPPER)
                     .requiresCorrectToolForDrops()));
         
-        WAXED_WEATHERED_COPPER_CHEST = helper.register(BLOCK, "waxed_weathered_copper_chest",
+        WAXED_WEATHERED_COPPER_CHEST = helper.registerAuto(BLOCK, "waxed_weathered_copper_chest",
             () -> new CopperChestBlock(
                 WeatheringCopper.WeatherState.WEATHERED,
                 BlockBehaviour.Properties.of()
@@ -177,7 +189,7 @@ public class ModBlocks {
                     .sound(SoundType.COPPER)
                     .requiresCorrectToolForDrops()));
         
-        WAXED_OXIDIZED_COPPER_CHEST = helper.register(BLOCK, "waxed_oxidized_copper_chest",
+        WAXED_OXIDIZED_COPPER_CHEST = helper.registerAuto(BLOCK, "waxed_oxidized_copper_chest",
             () -> new CopperChestBlock(
                 WeatheringCopper.WeatherState.OXIDIZED,
                 BlockBehaviour.Properties.of()
@@ -185,7 +197,7 @@ public class ModBlocks {
                     .sound(SoundType.COPPER)
                     .requiresCorrectToolForDrops()));
         
-        // Register Copper Button Blocks
+        // Register Copper Button Blocks (NOT in vanilla - stays at copperagebackport: namespace)
         COPPER_BUTTON = helper.register(BLOCK, "copper_button",
             () -> new CopperButtonBlock(
                 WeatheringCopper.WeatherState.UNAFFECTED,
@@ -218,7 +230,7 @@ public class ModBlocks {
                     .strength(0.5F)
                     .sound(SoundType.COPPER)));
         
-        // Register Waxed Copper Button Blocks
+        // Register Waxed Copper Button Blocks (NOT in vanilla - stays at copperagebackport: namespace)
         WAXED_COPPER_BUTTON = helper.register(BLOCK, "waxed_copper_button",
             () -> new WaxedCopperButtonBlock(
                 WeatheringCopper.WeatherState.UNAFFECTED,
@@ -256,7 +268,7 @@ public class ModBlocks {
                     .sound(SoundType.COPPER)));
         
         // Register Copper Golem Statue Blocks
-        COPPER_GOLEM_STATUE = helper.register(BLOCK, "copper_golem_statue",
+        COPPER_GOLEM_STATUE = helper.registerAuto(BLOCK, "copper_golem_statue",
             () -> new WeatheringCopperGolemStatueBlock(
                 WeatheringCopper.WeatherState.UNAFFECTED,
                 BlockBehaviour.Properties.of()
@@ -266,7 +278,7 @@ public class ModBlocks {
                     .randomTicks()
                     .noOcclusion()));
         
-        EXPOSED_COPPER_GOLEM_STATUE = helper.register(BLOCK, "exposed_copper_golem_statue",
+        EXPOSED_COPPER_GOLEM_STATUE = helper.registerAuto(BLOCK, "exposed_copper_golem_statue",
             () -> new WeatheringCopperGolemStatueBlock(
                 WeatheringCopper.WeatherState.EXPOSED,
                 BlockBehaviour.Properties.of()
@@ -276,7 +288,7 @@ public class ModBlocks {
                     .randomTicks()
                     .noOcclusion()));
         
-        WEATHERED_COPPER_GOLEM_STATUE = helper.register(BLOCK, "weathered_copper_golem_statue",
+        WEATHERED_COPPER_GOLEM_STATUE = helper.registerAuto(BLOCK, "weathered_copper_golem_statue",
             () -> new WeatheringCopperGolemStatueBlock(
                 WeatheringCopper.WeatherState.WEATHERED,
                 BlockBehaviour.Properties.of()
@@ -286,7 +298,7 @@ public class ModBlocks {
                     .randomTicks()
                     .noOcclusion()));
         
-        OXIDIZED_COPPER_GOLEM_STATUE = helper.register(BLOCK, "oxidized_copper_golem_statue",
+        OXIDIZED_COPPER_GOLEM_STATUE = helper.registerAuto(BLOCK, "oxidized_copper_golem_statue",
             () -> new WeatheringCopperGolemStatueBlock(
                 WeatheringCopper.WeatherState.OXIDIZED,
                 BlockBehaviour.Properties.of()
@@ -297,7 +309,7 @@ public class ModBlocks {
                     .noOcclusion()));
         
         // Register Waxed Copper Golem Statue Blocks
-        WAXED_COPPER_GOLEM_STATUE = helper.register(BLOCK, "waxed_copper_golem_statue",
+        WAXED_COPPER_GOLEM_STATUE = helper.registerAuto(BLOCK, "waxed_copper_golem_statue",
             () -> new WaxedCopperGolemStatueBlock(
                 WeatheringCopper.WeatherState.UNAFFECTED,
                 BlockBehaviour.Properties.of()
@@ -306,7 +318,7 @@ public class ModBlocks {
                     .requiresCorrectToolForDrops()
                     .noOcclusion()));
         
-        WAXED_EXPOSED_COPPER_GOLEM_STATUE = helper.register(BLOCK, "waxed_exposed_copper_golem_statue",
+        WAXED_EXPOSED_COPPER_GOLEM_STATUE = helper.registerAuto(BLOCK, "waxed_exposed_copper_golem_statue",
             () -> new WaxedCopperGolemStatueBlock(
                 WeatheringCopper.WeatherState.EXPOSED,
                 BlockBehaviour.Properties.of()
@@ -315,7 +327,7 @@ public class ModBlocks {
                     .requiresCorrectToolForDrops()
                     .noOcclusion()));
         
-        WAXED_WEATHERED_COPPER_GOLEM_STATUE = helper.register(BLOCK, "waxed_weathered_copper_golem_statue",
+        WAXED_WEATHERED_COPPER_GOLEM_STATUE = helper.registerAuto(BLOCK, "waxed_weathered_copper_golem_statue",
             () -> new WaxedCopperGolemStatueBlock(
                 WeatheringCopper.WeatherState.WEATHERED,
                 BlockBehaviour.Properties.of()
@@ -324,7 +336,7 @@ public class ModBlocks {
                     .requiresCorrectToolForDrops()
                     .noOcclusion()));
         
-        WAXED_OXIDIZED_COPPER_GOLEM_STATUE = helper.register(BLOCK, "waxed_oxidized_copper_golem_statue",
+        WAXED_OXIDIZED_COPPER_GOLEM_STATUE = helper.registerAuto(BLOCK, "waxed_oxidized_copper_golem_statue",
             () -> new WaxedCopperGolemStatueBlock(
                 WeatheringCopper.WeatherState.OXIDIZED,
                 BlockBehaviour.Properties.of()
@@ -334,28 +346,21 @@ public class ModBlocks {
                     .noOcclusion()));
         
         // Register Shelf Blocks
-        OAK_SHELF = helper.register(BLOCK, "oak_shelf", () -> new ShelfBlock(shelfProperties()));
-        SPRUCE_SHELF = helper.register(BLOCK, "spruce_shelf", () -> new ShelfBlock(shelfProperties()));
-        BIRCH_SHELF = helper.register(BLOCK, "birch_shelf", () -> new ShelfBlock(shelfProperties()));
-        JUNGLE_SHELF = helper.register(BLOCK, "jungle_shelf", () -> new ShelfBlock(shelfProperties()));
-        ACACIA_SHELF = helper.register(BLOCK, "acacia_shelf", () -> new ShelfBlock(shelfProperties()));
-        DARK_OAK_SHELF = helper.register(BLOCK, "dark_oak_shelf", () -> new ShelfBlock(shelfProperties()));
-        MANGROVE_SHELF = helper.register(BLOCK, "mangrove_shelf", () -> new ShelfBlock(shelfProperties()));
-        CHERRY_SHELF = helper.register(BLOCK, "cherry_shelf", () -> new ShelfBlock(shelfProperties()));
-        BAMBOO_SHELF = helper.register(BLOCK, "bamboo_shelf", () -> new ShelfBlock(shelfProperties()));
-        CRIMSON_SHELF = helper.register(BLOCK, "crimson_shelf", () -> new ShelfBlock(shelfProperties()));
-        WARPED_SHELF = helper.register(BLOCK, "warped_shelf", () -> new ShelfBlock(shelfProperties()));
-        
-        // Pale Oak Shelf - only register if VanillaBackport is loaded
-        if (Services.PLATFORM.isModLoaded("vanillabackport")) {
-            PALE_OAK_SHELF = helper.register(BLOCK, "pale_oak_shelf", () -> new ShelfBlock(shelfProperties()));
-            Constants.LOG.info("VanillaBackport detected - Pale Oak Shelf enabled");
-        } else {
-            Constants.LOG.info("VanillaBackport not found - Pale Oak Shelf disabled");
-        }
+        OAK_SHELF = helper.registerAuto(BLOCK, "oak_shelf", () -> new ShelfBlock(shelfProperties()));
+        SPRUCE_SHELF = helper.registerAuto(BLOCK, "spruce_shelf", () -> new ShelfBlock(shelfProperties()));
+        BIRCH_SHELF = helper.registerAuto(BLOCK, "birch_shelf", () -> new ShelfBlock(shelfProperties()));
+        JUNGLE_SHELF = helper.registerAuto(BLOCK, "jungle_shelf", () -> new ShelfBlock(shelfProperties()));
+        ACACIA_SHELF = helper.registerAuto(BLOCK, "acacia_shelf", () -> new ShelfBlock(shelfProperties()));
+        DARK_OAK_SHELF = helper.registerAuto(BLOCK, "dark_oak_shelf", () -> new ShelfBlock(shelfProperties()));
+        MANGROVE_SHELF = helper.registerAuto(BLOCK, "mangrove_shelf", () -> new ShelfBlock(shelfProperties()));
+        CHERRY_SHELF = helper.registerAuto(BLOCK, "cherry_shelf", () -> new ShelfBlock(shelfProperties()));
+        BAMBOO_SHELF = helper.registerAuto(BLOCK, "bamboo_shelf", () -> new ShelfBlock(shelfProperties()));
+        CRIMSON_SHELF = helper.registerAuto(BLOCK, "crimson_shelf", () -> new ShelfBlock(shelfProperties()));
+        WARPED_SHELF = helper.registerAuto(BLOCK, "warped_shelf", () -> new ShelfBlock(shelfProperties()));
+        PALE_OAK_SHELF = helper.registerAuto(BLOCK, "pale_oak_shelf", () -> new ShelfBlock(shelfProperties()));
         
         // Register Copper Torch Blocks
-        COPPER_TORCH = helper.register(BLOCK, "copper_torch",
+        COPPER_TORCH = helper.registerAuto(BLOCK, "copper_torch",
             () -> new CopperTorchBlock(
                 BlockBehaviour.Properties.of()
                     .noCollission()
@@ -364,7 +369,7 @@ public class ModBlocks {
                     .sound(SoundType.WOOD)
                     .pushReaction(PushReaction.DESTROY)));
         
-        COPPER_WALL_TORCH = helper.register(BLOCK, "copper_wall_torch",
+        COPPER_WALL_TORCH = helper.registerAuto(BLOCK, "copper_wall_torch",
             () -> new CopperWallTorchBlock(
                 BlockBehaviour.Properties.of()
                     .noCollission()
@@ -375,7 +380,7 @@ public class ModBlocks {
                     .dropsLike(COPPER_TORCH.get())));
         
         // Register Copper Lantern Blocks (Weathering)
-        COPPER_LANTERN = helper.register(BLOCK, "copper_lantern",
+        COPPER_LANTERN = helper.registerAuto(BLOCK, "copper_lantern",
             () -> new WeatheringCopperLanternBlock(
                 WeatheringCopper.WeatherState.UNAFFECTED,
                 BlockBehaviour.Properties.of()
@@ -386,7 +391,7 @@ public class ModBlocks {
                     .pushReaction(PushReaction.DESTROY)
                     .randomTicks()));
         
-        EXPOSED_COPPER_LANTERN = helper.register(BLOCK, "exposed_copper_lantern",
+        EXPOSED_COPPER_LANTERN = helper.registerAuto(BLOCK, "exposed_copper_lantern",
             () -> new WeatheringCopperLanternBlock(
                 WeatheringCopper.WeatherState.EXPOSED,
                 BlockBehaviour.Properties.of()
@@ -397,7 +402,7 @@ public class ModBlocks {
                     .pushReaction(PushReaction.DESTROY)
                     .randomTicks()));
         
-        WEATHERED_COPPER_LANTERN = helper.register(BLOCK, "weathered_copper_lantern",
+        WEATHERED_COPPER_LANTERN = helper.registerAuto(BLOCK, "weathered_copper_lantern",
             () -> new WeatheringCopperLanternBlock(
                 WeatheringCopper.WeatherState.WEATHERED,
                 BlockBehaviour.Properties.of()
@@ -408,7 +413,7 @@ public class ModBlocks {
                     .pushReaction(PushReaction.DESTROY)
                     .randomTicks()));
         
-        OXIDIZED_COPPER_LANTERN = helper.register(BLOCK, "oxidized_copper_lantern",
+        OXIDIZED_COPPER_LANTERN = helper.registerAuto(BLOCK, "oxidized_copper_lantern",
             () -> new WeatheringCopperLanternBlock(
                 WeatheringCopper.WeatherState.OXIDIZED,
                 BlockBehaviour.Properties.of()
@@ -419,7 +424,7 @@ public class ModBlocks {
                     .pushReaction(PushReaction.DESTROY)));
         
         // Register Waxed Copper Lantern Blocks
-        WAXED_COPPER_LANTERN = helper.register(BLOCK, "waxed_copper_lantern",
+        WAXED_COPPER_LANTERN = helper.registerAuto(BLOCK, "waxed_copper_lantern",
             () -> new CopperLanternBlock(
                 WeatheringCopper.WeatherState.UNAFFECTED,
                 BlockBehaviour.Properties.of()
@@ -429,7 +434,7 @@ public class ModBlocks {
                     .noOcclusion()
                     .pushReaction(PushReaction.DESTROY)));
         
-        WAXED_EXPOSED_COPPER_LANTERN = helper.register(BLOCK, "waxed_exposed_copper_lantern",
+        WAXED_EXPOSED_COPPER_LANTERN = helper.registerAuto(BLOCK, "waxed_exposed_copper_lantern",
             () -> new CopperLanternBlock(
                 WeatheringCopper.WeatherState.EXPOSED,
                 BlockBehaviour.Properties.of()
@@ -439,7 +444,7 @@ public class ModBlocks {
                     .noOcclusion()
                     .pushReaction(PushReaction.DESTROY)));
         
-        WAXED_WEATHERED_COPPER_LANTERN = helper.register(BLOCK, "waxed_weathered_copper_lantern",
+        WAXED_WEATHERED_COPPER_LANTERN = helper.registerAuto(BLOCK, "waxed_weathered_copper_lantern",
             () -> new CopperLanternBlock(
                 WeatheringCopper.WeatherState.WEATHERED,
                 BlockBehaviour.Properties.of()
@@ -449,7 +454,7 @@ public class ModBlocks {
                     .noOcclusion()
                     .pushReaction(PushReaction.DESTROY)));
         
-        WAXED_OXIDIZED_COPPER_LANTERN = helper.register(BLOCK, "waxed_oxidized_copper_lantern",
+        WAXED_OXIDIZED_COPPER_LANTERN = helper.registerAuto(BLOCK, "waxed_oxidized_copper_lantern",
             () -> new CopperLanternBlock(
                 WeatheringCopper.WeatherState.OXIDIZED,
                 BlockBehaviour.Properties.of()
@@ -460,7 +465,7 @@ public class ModBlocks {
                     .pushReaction(PushReaction.DESTROY)));
         
         // Register Copper Chain Blocks (Weathering)
-        COPPER_CHAIN = helper.register(BLOCK, "copper_chain",
+        COPPER_CHAIN = helper.registerAuto(BLOCK, "copper_chain",
             () -> new WeatheringCopperChainBlock(
                 WeatheringCopper.WeatherState.UNAFFECTED,
                 BlockBehaviour.Properties.of()
@@ -471,7 +476,7 @@ public class ModBlocks {
                     .forceSolidOn()
                     .randomTicks()));
         
-        EXPOSED_COPPER_CHAIN = helper.register(BLOCK, "exposed_copper_chain",
+        EXPOSED_COPPER_CHAIN = helper.registerAuto(BLOCK, "exposed_copper_chain",
             () -> new WeatheringCopperChainBlock(
                 WeatheringCopper.WeatherState.EXPOSED,
                 BlockBehaviour.Properties.of()
@@ -482,7 +487,7 @@ public class ModBlocks {
                     .forceSolidOn()
                     .randomTicks()));
         
-        WEATHERED_COPPER_CHAIN = helper.register(BLOCK, "weathered_copper_chain",
+        WEATHERED_COPPER_CHAIN = helper.registerAuto(BLOCK, "weathered_copper_chain",
             () -> new WeatheringCopperChainBlock(
                 WeatheringCopper.WeatherState.WEATHERED,
                 BlockBehaviour.Properties.of()
@@ -493,7 +498,7 @@ public class ModBlocks {
                     .forceSolidOn()
                     .randomTicks()));
         
-        OXIDIZED_COPPER_CHAIN = helper.register(BLOCK, "oxidized_copper_chain",
+        OXIDIZED_COPPER_CHAIN = helper.registerAuto(BLOCK, "oxidized_copper_chain",
             () -> new WeatheringCopperChainBlock(
                 WeatheringCopper.WeatherState.OXIDIZED,
                 BlockBehaviour.Properties.of()
@@ -504,7 +509,7 @@ public class ModBlocks {
                     .forceSolidOn()));
         
         // Register Waxed Copper Chain Blocks
-        WAXED_COPPER_CHAIN = helper.register(BLOCK, "waxed_copper_chain",
+        WAXED_COPPER_CHAIN = helper.registerAuto(BLOCK, "waxed_copper_chain",
             () -> new CopperChainBlock(
                 WeatheringCopper.WeatherState.UNAFFECTED,
                 BlockBehaviour.Properties.of()
@@ -514,7 +519,7 @@ public class ModBlocks {
                     .requiresCorrectToolForDrops()
                     .forceSolidOn()));
         
-        WAXED_EXPOSED_COPPER_CHAIN = helper.register(BLOCK, "waxed_exposed_copper_chain",
+        WAXED_EXPOSED_COPPER_CHAIN = helper.registerAuto(BLOCK, "waxed_exposed_copper_chain",
             () -> new CopperChainBlock(
                 WeatheringCopper.WeatherState.EXPOSED,
                 BlockBehaviour.Properties.of()
@@ -524,7 +529,7 @@ public class ModBlocks {
                     .requiresCorrectToolForDrops()
                     .forceSolidOn()));
         
-        WAXED_WEATHERED_COPPER_CHAIN = helper.register(BLOCK, "waxed_weathered_copper_chain",
+        WAXED_WEATHERED_COPPER_CHAIN = helper.registerAuto(BLOCK, "waxed_weathered_copper_chain",
             () -> new CopperChainBlock(
                 WeatheringCopper.WeatherState.WEATHERED,
                 BlockBehaviour.Properties.of()
@@ -534,7 +539,7 @@ public class ModBlocks {
                     .requiresCorrectToolForDrops()
                     .forceSolidOn()));
         
-        WAXED_OXIDIZED_COPPER_CHAIN = helper.register(BLOCK, "waxed_oxidized_copper_chain",
+        WAXED_OXIDIZED_COPPER_CHAIN = helper.registerAuto(BLOCK, "waxed_oxidized_copper_chain",
             () -> new CopperChainBlock(
                 WeatheringCopper.WeatherState.OXIDIZED,
                 BlockBehaviour.Properties.of()
@@ -545,7 +550,7 @@ public class ModBlocks {
                     .forceSolidOn()));
         
         // Register Copper Bars Blocks (Weathering)
-        COPPER_BARS = helper.register(BLOCK, "copper_bars",
+        COPPER_BARS = helper.registerAuto(BLOCK, "copper_bars",
             () -> new WeatheringCopperBarsBlock(
                 WeatheringCopper.WeatherState.UNAFFECTED,
                 BlockBehaviour.Properties.of()
@@ -555,7 +560,7 @@ public class ModBlocks {
                     .requiresCorrectToolForDrops()
                     .randomTicks()));
         
-        EXPOSED_COPPER_BARS = helper.register(BLOCK, "exposed_copper_bars",
+        EXPOSED_COPPER_BARS = helper.registerAuto(BLOCK, "exposed_copper_bars",
             () -> new WeatheringCopperBarsBlock(
                 WeatheringCopper.WeatherState.EXPOSED,
                 BlockBehaviour.Properties.of()
@@ -565,7 +570,7 @@ public class ModBlocks {
                     .requiresCorrectToolForDrops()
                     .randomTicks()));
         
-        WEATHERED_COPPER_BARS = helper.register(BLOCK, "weathered_copper_bars",
+        WEATHERED_COPPER_BARS = helper.registerAuto(BLOCK, "weathered_copper_bars",
             () -> new WeatheringCopperBarsBlock(
                 WeatheringCopper.WeatherState.WEATHERED,
                 BlockBehaviour.Properties.of()
@@ -575,7 +580,7 @@ public class ModBlocks {
                     .requiresCorrectToolForDrops()
                     .randomTicks()));
         
-        OXIDIZED_COPPER_BARS = helper.register(BLOCK, "oxidized_copper_bars",
+        OXIDIZED_COPPER_BARS = helper.registerAuto(BLOCK, "oxidized_copper_bars",
             () -> new WeatheringCopperBarsBlock(
                 WeatheringCopper.WeatherState.OXIDIZED,
                 BlockBehaviour.Properties.of()
@@ -585,7 +590,7 @@ public class ModBlocks {
                     .requiresCorrectToolForDrops()));
         
         // Register Waxed Copper Bars Blocks
-        WAXED_COPPER_BARS = helper.register(BLOCK, "waxed_copper_bars",
+        WAXED_COPPER_BARS = helper.registerAuto(BLOCK, "waxed_copper_bars",
             () -> new CopperBarsBlock(
                 WeatheringCopper.WeatherState.UNAFFECTED,
                 BlockBehaviour.Properties.of()
@@ -594,7 +599,7 @@ public class ModBlocks {
                     .noOcclusion()
                     .requiresCorrectToolForDrops()));
         
-        WAXED_EXPOSED_COPPER_BARS = helper.register(BLOCK, "waxed_exposed_copper_bars",
+        WAXED_EXPOSED_COPPER_BARS = helper.registerAuto(BLOCK, "waxed_exposed_copper_bars",
             () -> new CopperBarsBlock(
                 WeatheringCopper.WeatherState.EXPOSED,
                 BlockBehaviour.Properties.of()
@@ -603,7 +608,7 @@ public class ModBlocks {
                     .noOcclusion()
                     .requiresCorrectToolForDrops()));
         
-        WAXED_WEATHERED_COPPER_BARS = helper.register(BLOCK, "waxed_weathered_copper_bars",
+        WAXED_WEATHERED_COPPER_BARS = helper.registerAuto(BLOCK, "waxed_weathered_copper_bars",
             () -> new CopperBarsBlock(
                 WeatheringCopper.WeatherState.WEATHERED,
                 BlockBehaviour.Properties.of()
@@ -612,11 +617,80 @@ public class ModBlocks {
                     .noOcclusion()
                     .requiresCorrectToolForDrops()));
         
-        WAXED_OXIDIZED_COPPER_BARS = helper.register(BLOCK, "waxed_oxidized_copper_bars",
+        WAXED_OXIDIZED_COPPER_BARS = helper.registerAuto(BLOCK, "waxed_oxidized_copper_bars",
             () -> new CopperBarsBlock(
                 WeatheringCopper.WeatherState.OXIDIZED,
                 BlockBehaviour.Properties.of()
                     .strength(5.0F, 6.0F)
+                    .sound(SoundType.COPPER)
+                    .noOcclusion()
+                    .requiresCorrectToolForDrops()));
+        
+        // Register Lightning Rod Blocks (Weathering)
+        // Vanilla minecraft:lightning_rod is extended via Mixin (LightningRodBlockMixin) to add weathering
+        // These new oxidized variants are registered under minecraft: namespace
+        EXPOSED_LIGHTNING_ROD = helper.registerAuto(BLOCK, "exposed_lightning_rod",
+            () -> new WeatheringCopperLightningRodBlock(
+                WeatheringCopper.WeatherState.EXPOSED,
+                BlockBehaviour.Properties.of()
+                    .strength(3.0F, 6.0F)
+                    .sound(SoundType.COPPER)
+                    .noOcclusion()
+                    .requiresCorrectToolForDrops()
+                    .randomTicks()));
+        
+        WEATHERED_LIGHTNING_ROD = helper.registerAuto(BLOCK, "weathered_lightning_rod",
+            () -> new WeatheringCopperLightningRodBlock(
+                WeatheringCopper.WeatherState.WEATHERED,
+                BlockBehaviour.Properties.of()
+                    .strength(3.0F, 6.0F)
+                    .sound(SoundType.COPPER)
+                    .noOcclusion()
+                    .requiresCorrectToolForDrops()
+                    .randomTicks()));
+        
+        OXIDIZED_LIGHTNING_ROD = helper.registerAuto(BLOCK, "oxidized_lightning_rod",
+            () -> new WeatheringCopperLightningRodBlock(
+                WeatheringCopper.WeatherState.OXIDIZED,
+                BlockBehaviour.Properties.of()
+                    .strength(3.0F, 6.0F)
+                    .sound(SoundType.COPPER)
+                    .noOcclusion()
+                    .requiresCorrectToolForDrops()));
+        
+        // Register Waxed Lightning Rod Blocks
+        WAXED_LIGHTNING_ROD = helper.registerAuto(BLOCK, "waxed_lightning_rod",
+            () -> new WaxedCopperLightningRodBlock(
+                WeatheringCopper.WeatherState.UNAFFECTED,
+                BlockBehaviour.Properties.of()
+                    .strength(3.0F, 6.0F)
+                    .sound(SoundType.COPPER)
+                    .noOcclusion()
+                    .requiresCorrectToolForDrops()));
+        
+        WAXED_EXPOSED_LIGHTNING_ROD = helper.registerAuto(BLOCK, "waxed_exposed_lightning_rod",
+            () -> new WaxedCopperLightningRodBlock(
+                WeatheringCopper.WeatherState.EXPOSED,
+                BlockBehaviour.Properties.of()
+                    .strength(3.0F, 6.0F)
+                    .sound(SoundType.COPPER)
+                    .noOcclusion()
+                    .requiresCorrectToolForDrops()));
+        
+        WAXED_WEATHERED_LIGHTNING_ROD = helper.registerAuto(BLOCK, "waxed_weathered_lightning_rod",
+            () -> new WaxedCopperLightningRodBlock(
+                WeatheringCopper.WeatherState.WEATHERED,
+                BlockBehaviour.Properties.of()
+                    .strength(3.0F, 6.0F)
+                    .sound(SoundType.COPPER)
+                    .noOcclusion()
+                    .requiresCorrectToolForDrops()));
+        
+        WAXED_OXIDIZED_LIGHTNING_ROD = helper.registerAuto(BLOCK, "waxed_oxidized_lightning_rod",
+            () -> new WaxedCopperLightningRodBlock(
+                WeatheringCopper.WeatherState.OXIDIZED,
+                BlockBehaviour.Properties.of()
+                    .strength(3.0F, 6.0F)
                     .sound(SoundType.COPPER)
                     .noOcclusion()
                     .requiresCorrectToolForDrops()));

@@ -12,7 +12,7 @@ credits="${credits}"
 authors="${mod_author}"
 description='''${description}'''
 [[mixins]]
-config="${mod_id}.mixins.json"
+config="copperagebackport.neoforge.mixins.json"
 [[dependencies.${mod_id}]]
 modId="neoforge"
 mandatory=true

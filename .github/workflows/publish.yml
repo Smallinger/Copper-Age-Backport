@@ -26,6 +26,11 @@ jobs:
       - name: Make gradlew executable
         run: chmod +x ./gradlew
 
+      - name: Download translations from Crowdin
+        run: ./gradlew downloadTranslations -PdownloadTranslations
+        env:
+          CROWDIN_PERSONAL_TOKEN: ${{ secrets.CROWDIN_PERSONAL_TOKEN }}
+
       - name: Build with Gradle
         run: ./gradlew build
 

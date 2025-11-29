@@ -104,12 +104,14 @@ public class WeatheringCopperBarsBlock extends IronBarsBlock implements Weatheri
             if (waxed.isPresent()) {
                 BlockState newState = copyBarsState(state, waxed.get().defaultBlockState());
                 
-                level.setBlock(pos, newState, 11);
                 level.playSound(player, pos, SoundEvents.HONEYCOMB_WAX_ON, SoundSource.BLOCKS, 1.0F, 1.0F);
                 level.levelEvent(player, 3003, pos, 0); // WAX_ON particles
                 
-                if (!player.isCreative()) {
-                    stack.shrink(1);
+                if (!level.isClientSide) {
+                    level.setBlock(pos, newState, 11);
+                    if (!player.isCreative()) {
+                        stack.shrink(1);
+                    }
                 }
                 
                 return ItemInteractionResult.sidedSuccess(level.isClientSide);
@@ -122,13 +124,14 @@ public class WeatheringCopperBarsBlock extends IronBarsBlock implements Weatheri
             if (previous.isPresent()) {
                 BlockState newState = copyBarsState(state, previous.get().defaultBlockState());
                 
-                level.setBlock(pos, newState, 11);
                 level.playSound(player, pos, SoundEvents.AXE_SCRAPE, SoundSource.BLOCKS, 1.0F, 1.0F);
                 level.levelEvent(player, 3005, pos, 0); // SCRAPE particles
                 
-                // Damage the axe
-                if (!level.isClientSide && !player.isCreative()) {
-                    stack.hurtAndBreak(1, player, player.getEquipmentSlotForItem(stack));
+                if (!level.isClientSide) {
+                    level.setBlock(pos, newState, 11);
+                    if (!player.isCreative()) {
+                        stack.hurtAndBreak(1, player, player.getEquipmentSlotForItem(stack));
+                    }
                 }
                 
                 return ItemInteractionResult.sidedSuccess(level.isClientSide);

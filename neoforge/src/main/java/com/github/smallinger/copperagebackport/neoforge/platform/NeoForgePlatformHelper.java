@@ -1,5 +1,6 @@
 package com.github.smallinger.copperagebackport.neoforge.platform;
 
+import com.github.smallinger.copperagebackport.neoforge.compat.FastChestNeoForgeCompat;
 import com.github.smallinger.copperagebackport.platform.services.IPlatformHelper;
 import net.neoforged.fml.ModList;
 import net.neoforged.fml.loading.FMLLoader;
@@ -22,5 +23,10 @@ public class NeoForgePlatformHelper implements IPlatformHelper {
     @Override
     public boolean isDevelopmentEnvironment() {
         return !FMLLoader.isProduction();
+    }
+    
+    @Override
+    public boolean isFastChestSimplifiedEnabled() {
+        return FastChestNeoForgeCompat.isSimplifiedChestEnabled();
     }
 }

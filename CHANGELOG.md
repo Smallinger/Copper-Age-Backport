@@ -2,6 +2,59 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.21.1] - 0.1.2 - In development
+
+### Changed
+
+#### Namespace Migration (Vanilla Backport Preparation) - 698 file changes
+- **Registry namespace changed**: All vanilla backport features now use `minecraft:` namespace instead of `copperagebackport:`
+- **Affected items**: Copper Tools, Copper Armor, Copper Nugget, Copper Horse Armor, Spawn Egg
+- **Affected blocks**: Copper Chests, Copper Golem Statues, Shelves, Copper Torch, Copper Lanterns, Copper Chains, Copper Bars
+- **Affected entities**: Copper Golem
+- **Copper Buttons**: Remain at `copperagebackport:` as they are not in vanilla Minecraft 1.21.10
+- **Backwards compatibility**: Old worlds with `copperagebackport:` IDs are automatically migrated on load
+- **Resource files**: All recipes, loot tables, tags, models, and textures updated to use `minecraft:` namespace
+
+#### Copper Chest Recipe (Vanilla 1.21.10 Style)
+- **New recipe**: Copper Ingots surrounding a Chest now craft a Copper Chest (matches vanilla 1.21.10)
+- **Removed recipes**: Exposed, Weathered, and Oxidized Copper Chest crafting recipes removed
+- **Oxidation only**: Oxidized chest variants can now only be obtained through natural oxidation over time
+
+### Added
+
+#### Lightning Rod Weathering (Backport from 1.21.10)
+- **Weathering system**: Vanilla Lightning Rod now oxidizes over time like other copper blocks
+- **8 new variants**: Exposed, Weathered, Oxidized + Waxed versions of each
+- **Mixin integration**: Vanilla `minecraft:lightning_rod` is extended to support weathering
+- **Waxing support**: Use honeycomb to prevent oxidation
+- **Scraping support**: Use axe to remove wax or revert oxidation
+- **Full functionality**: All variants retain lightning attraction and redstone output
+
+#### Copper Armor Trims
+- **Smithing Table support**: Copper Armor can now be trimmed in the Smithing Table
+- **Darker trim variant**: Copper Trim on Copper Armor uses a darker color palette for visibility (matches vanilla behavior)
+
+#### Mod Support
+- **Amendments compatibility**: Copper Lanterns now extend LanternBlock for automatic Amendments support (wall placement, falling behavior)
+- **SophisticatedStorage support (NeoForge)**: Copper Golem can now use SophisticatedStorage Chests and Barrels as item destinations (works with all tiers: Wood, Copper, Iron, Gold, Diamond, Netherite)
+  - Chests play opening/closing animations when accessed by Copper Golem
+- **IronChests support (NeoForge)**: Copper Golem can now use Iron Chests containers as item destinations (works with all types: Copper, Iron, Gold, Diamond, Crystal, Obsidian, Dirt + trapped variants)
+  - Chests play opening/closing animations when accessed by Copper Golem
+- **ConnectibleChains support (Fabric only)**: Copper Chains can be connected between fences and walls like vanilla Iron Chains
+  - Note: No NeoForge version available as ConnectibleChains is Fabric-only for 1.21.1
+
+### Fixed
+
+#### Copper Golem
+- **Container selection order**: Fixed Copper Golem selecting containers in wrong order when multiple containers are equidistant. Now correctly matches vanilla 1.21.10 behavior by sorting BlockEntities by `BlockPos.hashCode()` in descending order. This also fixes selection across chunk boundaries.
+
+#### Copper Chest
+- **Loot table behavior**: Fixed Copper Chest to match vanilla behavior - chest contents now drop on the ground when mined instead of being stored in the item (like normal chests, not like Shulker Boxes)
+
+#### Copper Button
+- **Oxidation while pressed**: Copper Buttons no longer oxidize while they are pressed, preventing them from getting stuck
+
+
 ## [1.21.1] - 0.1.1 - 26.11.2025
 
 ### Added

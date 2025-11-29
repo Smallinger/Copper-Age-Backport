@@ -63,7 +63,9 @@ public class CopperAgeBackportNeoForge {
     }
 
     private void commonSetup(FMLCommonSetupEvent event) {
-        event.enqueueWork(() -> RegistryHelper.getInstance().flushRegistrationCallbacks());
+        event.enqueueWork(() -> {
+            RegistryHelper.getInstance().flushRegistrationCallbacks();
+        });
     }
 
     private void registerEntityAttributes(EntityAttributeCreationEvent event) {
@@ -78,6 +80,14 @@ public class CopperAgeBackportNeoForge {
         if (event.getTabKey() == CreativeModeTabs.FUNCTIONAL_BLOCKS) {
             // Copper Chests after normal chest
             event.insertAfter(Items.CHEST.getDefaultInstance(), ModItems.COPPER_CHEST_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            // Lightning Rods after vanilla lightning rod
+            event.insertAfter(Items.LIGHTNING_ROD.getDefaultInstance(), ModItems.EXPOSED_LIGHTNING_ROD_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            event.insertAfter(ModItems.EXPOSED_LIGHTNING_ROD_ITEM.get().getDefaultInstance(), ModItems.WEATHERED_LIGHTNING_ROD_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            event.insertAfter(ModItems.WEATHERED_LIGHTNING_ROD_ITEM.get().getDefaultInstance(), ModItems.OXIDIZED_LIGHTNING_ROD_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            event.insertAfter(ModItems.OXIDIZED_LIGHTNING_ROD_ITEM.get().getDefaultInstance(), ModItems.WAXED_LIGHTNING_ROD_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            event.insertAfter(ModItems.WAXED_LIGHTNING_ROD_ITEM.get().getDefaultInstance(), ModItems.WAXED_EXPOSED_LIGHTNING_ROD_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            event.insertAfter(ModItems.WAXED_EXPOSED_LIGHTNING_ROD_ITEM.get().getDefaultInstance(), ModItems.WAXED_WEATHERED_LIGHTNING_ROD_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            event.insertAfter(ModItems.WAXED_WEATHERED_LIGHTNING_ROD_ITEM.get().getDefaultInstance(), ModItems.WAXED_OXIDIZED_LIGHTNING_ROD_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
             event.insertAfter(ModItems.COPPER_CHEST_ITEM.get().getDefaultInstance(), ModItems.EXPOSED_COPPER_CHEST_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
             event.insertAfter(ModItems.EXPOSED_COPPER_CHEST_ITEM.get().getDefaultInstance(), ModItems.WEATHERED_COPPER_CHEST_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
             event.insertAfter(ModItems.WEATHERED_COPPER_CHEST_ITEM.get().getDefaultInstance(), ModItems.OXIDIZED_COPPER_CHEST_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);

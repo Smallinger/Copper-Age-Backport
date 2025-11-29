@@ -66,13 +66,14 @@ public class CopperBarsBlock extends IronBarsBlock {
             if (unwaxed.isPresent()) {
                 BlockState newState = copyBarsState(state, unwaxed.get().defaultBlockState());
                 
-                level.setBlock(pos, newState, 11);
                 level.playSound(player, pos, SoundEvents.AXE_WAX_OFF, SoundSource.BLOCKS, 1.0F, 1.0F);
                 level.levelEvent(player, 3004, pos, 0); // WAX_OFF particles
                 
-                // Damage the axe
-                if (!level.isClientSide && !player.isCreative()) {
-                    stack.hurtAndBreak(1, player, player.getEquipmentSlotForItem(stack));
+                if (!level.isClientSide) {
+                    level.setBlock(pos, newState, 11);
+                    if (!player.isCreative()) {
+                        stack.hurtAndBreak(1, player, player.getEquipmentSlotForItem(stack));
+                    }
                 }
                 
                 return ItemInteractionResult.sidedSuccess(level.isClientSide);

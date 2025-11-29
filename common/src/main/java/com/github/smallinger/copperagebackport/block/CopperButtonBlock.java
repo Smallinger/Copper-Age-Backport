@@ -143,23 +143,23 @@ public class CopperButtonBlock extends ButtonBlock implements WeatheringCopper {
         return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
     }
 
-    @Override
-    protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult) {
-        // Oxidized buttons cannot be pressed
-        if (this.weatherState == WeatherState.OXIDIZED) {
-            level.playSound(player, pos, SoundEvents.COPPER_HIT, SoundSource.BLOCKS, 1.0F, 1.0F);
-            return InteractionResult.PASS;
-        }
-        return super.useWithoutItem(state, level, pos, player, hitResult);
-    }
+
 
     @Override
     protected void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
+        // Don't oxidize while button is pressed to prevent it getting stuck
+        if (state.getValue(POWERED)) {
+            return;
+        }
         WeatheringHelper.tryWeather(state, level, pos, random, CopperButtonBlock::getNextBlock);
     }
 
     @Override
     protected boolean isRandomlyTicking(BlockState state) {
+        // Don't tick while button is pressed
+        if (state.getValue(POWERED)) {
+            return false;
+        }
         return WeatheringHelper.canWeather(state, CopperButtonBlock::getNextBlock);
     }
 }

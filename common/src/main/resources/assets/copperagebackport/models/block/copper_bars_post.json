@@ -1,7 +1,0 @@
-{
-  "parent": "copperagebackport:block/template_bars_post",
-  "textures": {
-    "bars": "copperagebackport:block/copper_bars",
-    "edge": "copperagebackport:block/copper_bars"
-  }
-}

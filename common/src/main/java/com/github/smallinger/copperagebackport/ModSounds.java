@@ -128,8 +128,9 @@ public class ModSounds {
     }
 
     private static Supplier<SoundEvent> registerSound(RegistryHelper helper, String name) {
-        ResourceLocation id = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, name);
-        return helper.register(Registries.SOUND_EVENT, name, () -> SoundEvent.createVariableRangeEvent(id));
+        // Register sounds under minecraft: namespace since they are vanilla backport features
+        ResourceLocation id = ResourceLocation.withDefaultNamespace(name);
+        return helper.registerAuto(Registries.SOUND_EVENT, name, () -> SoundEvent.createVariableRangeEvent(id));
     }
 }
 

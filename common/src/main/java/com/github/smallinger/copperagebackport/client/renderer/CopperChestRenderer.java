@@ -72,7 +72,7 @@ public class CopperChestRenderer implements BlockEntityRenderer<ChestBlockEntity
     }
 
     private static Material chestMaterial(String name) {
-        return new Material(Sheets.CHEST_SHEET, ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "entity/chest/" + name));
+        return new Material(Sheets.CHEST_SHEET, ResourceLocation.withDefaultNamespace("entity/chest/" + name));
     }
 
     @Override
