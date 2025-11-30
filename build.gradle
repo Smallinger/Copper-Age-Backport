@@ -35,8 +35,10 @@ tasks.register("downloadTranslations", Exec) {
     
     workingDir rootDir
     
-    // Include partially translated files - untranslated strings will use source (English) text
-    def crowdinArgs = "download --skip-untranslated-strings=false --skip-untranslated-files=false --export-only-approved=false"
+    // Download translations - by default includes untranslated strings (filled with source)
+    // Don't use --skip-untranslated-strings, --skip-untranslated-files, or --export-only-approved
+    // as we want ALL strings including untranslated ones
+    def crowdinArgs = "download"
     
     if (System.getProperty('os.name').toLowerCase().contains('windows')) {
         commandLine 'cmd', '/c', "java -jar \"${crowdinCliJar}\" ${crowdinArgs}"
