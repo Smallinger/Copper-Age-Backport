@@ -35,14 +35,10 @@ tasks.register("downloadTranslations", Exec) {
     
     workingDir rootDir
     
-    // Download translations - by default includes untranslated strings (filled with source)
-    // Use --preserve-hierarchy to maintain directory structure
-    def crowdinArgs = "download --preserve-hierarchy"
-    
     if (System.getProperty('os.name').toLowerCase().contains('windows')) {
-        commandLine 'cmd', '/c', "java -jar \"${crowdinCliJar}\" ${crowdinArgs}"
+        commandLine 'cmd', '/c', "java -jar \"${crowdinCliJar}\" download --skip-untranslated-strings=false --skip-untranslated-files=false --export-only-approved=false"
     } else {
-        commandLine 'sh', '-c', "java -jar \"${crowdinCliJar}\" ${crowdinArgs}"
+        commandLine 'sh', '-c', "java -jar \"${crowdinCliJar}\" download --skip-untranslated-strings=false --skip-untranslated-files=false --export-only-approved=false"
     }
 }
 

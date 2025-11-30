@@ -1,12 +1,20 @@
-# Crowdin Configuration for Copper Age Backport 1.20.1
+# Crowdin Configuration for Copper Age Backport 1.21.1
 # Documentation: https://crowdin.github.io/crowdin-cli/
 
-# Project ID
+# Project ID (direct value)
 project_id: "848524"
 
 # API Token via environment variable (for security - don't commit tokens!)
 # Set CROWDIN_PERSONAL_TOKEN in your environment
 api_token_env: CROWDIN_PERSONAL_TOKEN
+
+# Preserve directory hierarchy in Crowdin
+preserve_hierarchy: true
+
+# Download partially translated files and fill missing with source strings
+skip_untranslated_strings: false
+skip_untranslated_files: false
+export_only_approved: false
 
 files:
   # Main language file (English source)
@@ -54,4 +62,4 @@ files:
         et: et_ee
         af: af_za
         ca: ca_es
-        no: no_no
+        "no": no_no
