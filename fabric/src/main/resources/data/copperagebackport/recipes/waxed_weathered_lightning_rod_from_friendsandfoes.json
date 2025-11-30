@@ -1,0 +1,19 @@
+{
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:all_mods_loaded",
+      "values": ["friendsandfoes"]
+    }
+  ],
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "friendsandfoes:waxed_weathered_lightning_rod"
+    }
+  ],
+  "result": {
+    "item": "minecraft:waxed_weathered_lightning_rod",
+    "count": 1
+  }
+}

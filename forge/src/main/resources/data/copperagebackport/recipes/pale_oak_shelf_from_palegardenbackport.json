@@ -1,0 +1,31 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "palegardenbackport"
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shaped",
+        "category": "building",
+        "pattern": [
+          "###",
+          "   ",
+          "###"
+        ],
+        "key": {
+          "#": {
+            "item": "palegardenbackport:stripped_pale_oak_log"
+          }
+        },
+        "result": {
+          "item": "minecraft:pale_oak_shelf",
+          "count": 6
+        }
+      }
+    }
+  ]
+}

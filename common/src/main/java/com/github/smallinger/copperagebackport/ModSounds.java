@@ -68,6 +68,13 @@ public class ModSounds {
     
     // Armor sounds
     public static Supplier<SoundEvent> ARMOR_EQUIP_COPPER;
+    
+    // Copper Trapdoor sounds (from 1.21.10)
+    public static Supplier<SoundEvent> COPPER_TRAPDOOR_CLOSE;
+    public static Supplier<SoundEvent> COPPER_TRAPDOOR_OPEN;
+    
+    // End Flash sounds (from 1.21.10)
+    public static Supplier<SoundEvent> WEATHER_END_FLASH;
 
     public static void register() {
         Constants.LOG.info("Registering sounds for {}", Constants.MOD_NAME);
@@ -129,6 +136,13 @@ public class ModSounds {
         
         // Register Armor sounds
         ARMOR_EQUIP_COPPER = registerSound(helper, "item.armor.equip_copper");
+        
+        // Register Copper Trapdoor sounds (from 1.21.10)
+        COPPER_TRAPDOOR_CLOSE = registerSound(helper, "block.copper_trapdoor.close");
+        COPPER_TRAPDOOR_OPEN = registerSound(helper, "block.copper_trapdoor.open");
+        
+        // Register End Flash sounds (from 1.21.10)
+        WEATHER_END_FLASH = registerSound(helper, "weather.end_flash");
     }
 
     private static Supplier<SoundEvent> registerSound(RegistryHelper helper, String name) {

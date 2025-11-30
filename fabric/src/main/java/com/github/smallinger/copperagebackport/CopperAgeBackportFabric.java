@@ -125,6 +125,8 @@ public class CopperAgeBackportFabric implements ModInitializer {
         // Add copper buttons after stone button
         ItemGroupEvents.modifyEntriesEvent(CreativeModeTabs.REDSTONE_BLOCKS).register(content -> {
             content.addAfter(Items.STONE_BUTTON, ModItems.COPPER_BUTTON_ITEM.get(), ModItems.EXPOSED_COPPER_BUTTON_ITEM.get(), ModItems.WEATHERED_COPPER_BUTTON_ITEM.get(), ModItems.OXIDIZED_COPPER_BUTTON_ITEM.get(), ModItems.WAXED_COPPER_BUTTON_ITEM.get(), ModItems.WAXED_EXPOSED_COPPER_BUTTON_ITEM.get(), ModItems.WAXED_WEATHERED_COPPER_BUTTON_ITEM.get(), ModItems.WAXED_OXIDIZED_COPPER_BUTTON_ITEM.get());
+            // Add copper trapdoors after iron trapdoor
+            content.addAfter(Items.IRON_TRAPDOOR, ModItems.COPPER_TRAPDOOR_ITEM.get(), ModItems.EXPOSED_COPPER_TRAPDOOR_ITEM.get(), ModItems.WEATHERED_COPPER_TRAPDOOR_ITEM.get(), ModItems.OXIDIZED_COPPER_TRAPDOOR_ITEM.get(), ModItems.WAXED_COPPER_TRAPDOOR_ITEM.get(), ModItems.WAXED_EXPOSED_COPPER_TRAPDOOR_ITEM.get(), ModItems.WAXED_WEATHERED_COPPER_TRAPDOOR_ITEM.get(), ModItems.WAXED_OXIDIZED_COPPER_TRAPDOOR_ITEM.get());
         });
         
         // Add copper tools after stone tools

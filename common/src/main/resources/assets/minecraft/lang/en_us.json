@@ -79,6 +79,15 @@
   "block.minecraft.waxed_weathered_copper_bars": "Waxed Weathered Copper Bars",
   "block.minecraft.waxed_oxidized_copper_bars": "Waxed Oxidized Copper Bars",
 
+  "block.minecraft.copper_trapdoor": "Copper Trapdoor",
+  "block.minecraft.exposed_copper_trapdoor": "Exposed Copper Trapdoor",
+  "block.minecraft.weathered_copper_trapdoor": "Weathered Copper Trapdoor",
+  "block.minecraft.oxidized_copper_trapdoor": "Oxidized Copper Trapdoor",
+  "block.minecraft.waxed_copper_trapdoor": "Waxed Copper Trapdoor",
+  "block.minecraft.waxed_exposed_copper_trapdoor": "Waxed Exposed Copper Trapdoor",
+  "block.minecraft.waxed_weathered_copper_trapdoor": "Waxed Weathered Copper Trapdoor",
+  "block.minecraft.waxed_oxidized_copper_trapdoor": "Waxed Oxidized Copper Trapdoor",
+
   "block.minecraft.exposed_lightning_rod": "Exposed Lightning Rod",
   "block.minecraft.weathered_lightning_rod": "Weathered Lightning Rod",
   "block.minecraft.oxidized_lightning_rod": "Oxidized Lightning Rod",
@@ -108,6 +117,7 @@
   "subtitles.block.shelf.place_item": "Item placed in shelf",
   "subtitles.block.shelf.take_item": "Item taken from shelf",
   "subtitles.block.shelf.swap": "Items swapped in shelf",
+  "subtitles.weather.end_flash": "End flashes",
 
   "config.copperagebackport.title": "Copper Age Backport Settings",
   "config.copperagebackport.search": "Search...",

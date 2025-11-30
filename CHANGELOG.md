@@ -4,6 +4,26 @@ All notable changes to this project will be documented in this file.
 
 ## [1.20.1] - 0.1.3 - 30.11.2025
 
+### Added
+
+#### Copper Trapdoor (Backport from 1.21.10)
+- **New block**: Copper Trapdoor with full copper weathering system
+- **8 variants**: Unaffected, Exposed, Weathered, Oxidized + Waxed versions of each
+- **Weathering**: Copper Trapdoors oxidize over time like other copper blocks
+- **Waxing support**: Use honeycomb to prevent oxidation
+- **Scraping support**: Use axe to remove wax or revert oxidation
+- **Hand-openable**: Unlike iron trapdoors, copper trapdoors can be opened by hand
+- **Custom sounds**: Unique copper trapdoor open/close sounds (ported from 1.21.10)
+
+#### End Flash Effect
+- **End dimension lighting**: Ported the End Flash visual effect from Minecraft 1.21.10
+  - Periodic sky flashes that illuminate the End dimension with a purple tint
+  - Directional flash source visible in the sky with additive blending
+  - Spatial audio that plays from the flash direction
+  - Complete lightmap system that applies purple sky lighting and block brightness boost during flashes
+  - Dragon fog compatibility: Flash intensity reduced by 1/3 during boss fight
+  - Respects "Hide Lightning Flashes" accessibility option
+
 ### Fixed
 
 #### Fabric Disconnect Crash

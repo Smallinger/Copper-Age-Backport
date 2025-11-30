@@ -150,6 +150,18 @@ public class ModItems {
     public static Supplier<BlockItem> WAXED_EXPOSED_LIGHTNING_ROD_ITEM;
     public static Supplier<BlockItem> WAXED_WEATHERED_LIGHTNING_ROD_ITEM;
     public static Supplier<BlockItem> WAXED_OXIDIZED_LIGHTNING_ROD_ITEM;
+    
+    // Copper Trapdoor Items (Weathering)
+    public static Supplier<BlockItem> COPPER_TRAPDOOR_ITEM;
+    public static Supplier<BlockItem> EXPOSED_COPPER_TRAPDOOR_ITEM;
+    public static Supplier<BlockItem> WEATHERED_COPPER_TRAPDOOR_ITEM;
+    public static Supplier<BlockItem> OXIDIZED_COPPER_TRAPDOOR_ITEM;
+    
+    // Waxed Copper Trapdoor Items
+    public static Supplier<BlockItem> WAXED_COPPER_TRAPDOOR_ITEM;
+    public static Supplier<BlockItem> WAXED_EXPOSED_COPPER_TRAPDOOR_ITEM;
+    public static Supplier<BlockItem> WAXED_WEATHERED_COPPER_TRAPDOOR_ITEM;
+    public static Supplier<BlockItem> WAXED_OXIDIZED_COPPER_TRAPDOOR_ITEM;
 
     public static void register(){
         Constants.LOG.info("Registering items for {}", Constants.MOD_NAME);
@@ -383,6 +395,32 @@ public class ModItems {
         
         WAXED_OXIDIZED_LIGHTNING_ROD_ITEM = helper.registerAuto(ITEM, "waxed_oxidized_lightning_rod",
             () -> new BlockItem(ModBlocks.WAXED_OXIDIZED_LIGHTNING_ROD.get(), new Item.Properties()));
+        
+        // Register Copper Trapdoor Items (Weathering)
+        COPPER_TRAPDOOR_ITEM = helper.registerAuto(ITEM, "copper_trapdoor",
+            () -> new BlockItem(ModBlocks.COPPER_TRAPDOOR.get(), new Item.Properties()));
+        
+        EXPOSED_COPPER_TRAPDOOR_ITEM = helper.registerAuto(ITEM, "exposed_copper_trapdoor",
+            () -> new BlockItem(ModBlocks.EXPOSED_COPPER_TRAPDOOR.get(), new Item.Properties()));
+        
+        WEATHERED_COPPER_TRAPDOOR_ITEM = helper.registerAuto(ITEM, "weathered_copper_trapdoor",
+            () -> new BlockItem(ModBlocks.WEATHERED_COPPER_TRAPDOOR.get(), new Item.Properties()));
+        
+        OXIDIZED_COPPER_TRAPDOOR_ITEM = helper.registerAuto(ITEM, "oxidized_copper_trapdoor",
+            () -> new BlockItem(ModBlocks.OXIDIZED_COPPER_TRAPDOOR.get(), new Item.Properties()));
+        
+        // Register Waxed Copper Trapdoor Items
+        WAXED_COPPER_TRAPDOOR_ITEM = helper.registerAuto(ITEM, "waxed_copper_trapdoor",
+            () -> new BlockItem(ModBlocks.WAXED_COPPER_TRAPDOOR.get(), new Item.Properties()));
+        
+        WAXED_EXPOSED_COPPER_TRAPDOOR_ITEM = helper.registerAuto(ITEM, "waxed_exposed_copper_trapdoor",
+            () -> new BlockItem(ModBlocks.WAXED_EXPOSED_COPPER_TRAPDOOR.get(), new Item.Properties()));
+        
+        WAXED_WEATHERED_COPPER_TRAPDOOR_ITEM = helper.registerAuto(ITEM, "waxed_weathered_copper_trapdoor",
+            () -> new BlockItem(ModBlocks.WAXED_WEATHERED_COPPER_TRAPDOOR.get(), new Item.Properties()));
+        
+        WAXED_OXIDIZED_COPPER_TRAPDOOR_ITEM = helper.registerAuto(ITEM, "waxed_oxidized_copper_trapdoor",
+            () -> new BlockItem(ModBlocks.WAXED_OXIDIZED_COPPER_TRAPDOOR.get(), new Item.Properties()));
 
         // Register Copper Tools
         // Copper Axe: 7.0 base + 1.0 material bonus + 1 player base = 9 attack damage, -3.2 attack speed (official MC 1.21.10 values)

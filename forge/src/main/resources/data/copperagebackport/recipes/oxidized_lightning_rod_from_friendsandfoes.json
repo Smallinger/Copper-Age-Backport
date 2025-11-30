@@ -1,0 +1,26 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "friendsandfoes"
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shapeless",
+        "category": "misc",
+        "ingredients": [
+          {
+            "item": "friendsandfoes:oxidized_lightning_rod"
+          }
+        ],
+        "result": {
+          "item": "minecraft:oxidized_lightning_rod",
+          "count": 1
+        }
+      }
+    }
+  ]
+}

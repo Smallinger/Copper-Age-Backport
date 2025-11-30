@@ -122,6 +122,18 @@ public class ModBlocks {
     public static Supplier<WaxedCopperLightningRodBlock> WAXED_WEATHERED_LIGHTNING_ROD;
     public static Supplier<WaxedCopperLightningRodBlock> WAXED_OXIDIZED_LIGHTNING_ROD;
     
+    // Copper Trapdoor Blocks (Weathering)
+    public static Supplier<WeatheringCopperTrapDoorBlock> COPPER_TRAPDOOR;
+    public static Supplier<WeatheringCopperTrapDoorBlock> EXPOSED_COPPER_TRAPDOOR;
+    public static Supplier<WeatheringCopperTrapDoorBlock> WEATHERED_COPPER_TRAPDOOR;
+    public static Supplier<WeatheringCopperTrapDoorBlock> OXIDIZED_COPPER_TRAPDOOR;
+    
+    // Waxed Copper Trapdoor Blocks
+    public static Supplier<WaxedCopperTrapDoorBlock> WAXED_COPPER_TRAPDOOR;
+    public static Supplier<WaxedCopperTrapDoorBlock> WAXED_EXPOSED_COPPER_TRAPDOOR;
+    public static Supplier<WaxedCopperTrapDoorBlock> WAXED_WEATHERED_COPPER_TRAPDOOR;
+    public static Supplier<WaxedCopperTrapDoorBlock> WAXED_OXIDIZED_COPPER_TRAPDOOR;
+    
     public static void register() {
         Constants.LOG.info("Registering blocks for {}", Constants.MOD_NAME);
         
@@ -696,12 +708,99 @@ public class ModBlocks {
                     .sound(SoundType.COPPER)
                     .noOcclusion()));
         
+        // Register Copper Trapdoor Blocks (Weathering)
+        COPPER_TRAPDOOR = helper.registerAuto(BLOCK, "copper_trapdoor",
+            () -> new WeatheringCopperTrapDoorBlock(
+                WeatheringCopper.WeatherState.UNAFFECTED,
+                BlockBehaviour.Properties.of()
+                    .requiresCorrectToolForDrops()
+                    .strength(3.0F, 6.0F)
+                    .sound(SoundType.COPPER)
+                    .noOcclusion()
+                    .randomTicks()));
+        
+        EXPOSED_COPPER_TRAPDOOR = helper.registerAuto(BLOCK, "exposed_copper_trapdoor",
+            () -> new WeatheringCopperTrapDoorBlock(
+                WeatheringCopper.WeatherState.EXPOSED,
+                BlockBehaviour.Properties.of()
+                    .requiresCorrectToolForDrops()
+                    .strength(3.0F, 6.0F)
+                    .sound(SoundType.COPPER)
+                    .noOcclusion()
+                    .randomTicks()));
+        
+        WEATHERED_COPPER_TRAPDOOR = helper.registerAuto(BLOCK, "weathered_copper_trapdoor",
+            () -> new WeatheringCopperTrapDoorBlock(
+                WeatheringCopper.WeatherState.WEATHERED,
+                BlockBehaviour.Properties.of()
+                    .requiresCorrectToolForDrops()
+                    .strength(3.0F, 6.0F)
+                    .sound(SoundType.COPPER)
+                    .noOcclusion()
+                    .randomTicks()));
+        
+        OXIDIZED_COPPER_TRAPDOOR = helper.registerAuto(BLOCK, "oxidized_copper_trapdoor",
+            () -> new WeatheringCopperTrapDoorBlock(
+                WeatheringCopper.WeatherState.OXIDIZED,
+                BlockBehaviour.Properties.of()
+                    .requiresCorrectToolForDrops()
+                    .strength(3.0F, 6.0F)
+                    .sound(SoundType.COPPER)
+                    .noOcclusion()));
+        
+        // Register Waxed Copper Trapdoor Blocks
+        WAXED_COPPER_TRAPDOOR = helper.registerAuto(BLOCK, "waxed_copper_trapdoor",
+            () -> new WaxedCopperTrapDoorBlock(
+                WeatheringCopper.WeatherState.UNAFFECTED,
+                COPPER_TRAPDOOR,
+                BlockBehaviour.Properties.of()
+                    .requiresCorrectToolForDrops()
+                    .strength(3.0F, 6.0F)
+                    .sound(SoundType.COPPER)
+                    .noOcclusion()));
+        
+        WAXED_EXPOSED_COPPER_TRAPDOOR = helper.registerAuto(BLOCK, "waxed_exposed_copper_trapdoor",
+            () -> new WaxedCopperTrapDoorBlock(
+                WeatheringCopper.WeatherState.EXPOSED,
+                EXPOSED_COPPER_TRAPDOOR,
+                BlockBehaviour.Properties.of()
+                    .requiresCorrectToolForDrops()
+                    .strength(3.0F, 6.0F)
+                    .sound(SoundType.COPPER)
+                    .noOcclusion()));
+        
+        WAXED_WEATHERED_COPPER_TRAPDOOR = helper.registerAuto(BLOCK, "waxed_weathered_copper_trapdoor",
+            () -> new WaxedCopperTrapDoorBlock(
+                WeatheringCopper.WeatherState.WEATHERED,
+                WEATHERED_COPPER_TRAPDOOR,
+                BlockBehaviour.Properties.of()
+                    .requiresCorrectToolForDrops()
+                    .strength(3.0F, 6.0F)
+                    .sound(SoundType.COPPER)
+                    .noOcclusion()));
+        
+        WAXED_OXIDIZED_COPPER_TRAPDOOR = helper.registerAuto(BLOCK, "waxed_oxidized_copper_trapdoor",
+            () -> new WaxedCopperTrapDoorBlock(
+                WeatheringCopper.WeatherState.OXIDIZED,
+                OXIDIZED_COPPER_TRAPDOOR,
+                BlockBehaviour.Properties.of()
+                    .requiresCorrectToolForDrops()
+                    .strength(3.0F, 6.0F)
+                    .sound(SoundType.COPPER)
+                    .noOcclusion()));
+        
         // Setup button references after registration
         helper.onRegisterComplete(() -> {
             COPPER_BUTTON.get().setWaxedButton(WAXED_COPPER_BUTTON);
             EXPOSED_COPPER_BUTTON.get().setWaxedButton(WAXED_EXPOSED_COPPER_BUTTON);
             WEATHERED_COPPER_BUTTON.get().setWaxedButton(WAXED_WEATHERED_COPPER_BUTTON);
             OXIDIZED_COPPER_BUTTON.get().setWaxedButton(WAXED_OXIDIZED_COPPER_BUTTON);
+            
+            // Setup trapdoor references
+            COPPER_TRAPDOOR.get().setWaxedTrapdoor(WAXED_COPPER_TRAPDOOR);
+            EXPOSED_COPPER_TRAPDOOR.get().setWaxedTrapdoor(WAXED_EXPOSED_COPPER_TRAPDOOR);
+            WEATHERED_COPPER_TRAPDOOR.get().setWaxedTrapdoor(WAXED_WEATHERED_COPPER_TRAPDOOR);
+            OXIDIZED_COPPER_TRAPDOOR.get().setWaxedTrapdoor(WAXED_OXIDIZED_COPPER_TRAPDOOR);
         });
     }
     

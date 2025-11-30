@@ -129,6 +129,15 @@ public class CopperAgeBackportForge {
             entries.putAfter(ModItems.WAXED_COPPER_BUTTON_ITEM.get().getDefaultInstance(), ModItems.WAXED_EXPOSED_COPPER_BUTTON_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
             entries.putAfter(ModItems.WAXED_EXPOSED_COPPER_BUTTON_ITEM.get().getDefaultInstance(), ModItems.WAXED_WEATHERED_COPPER_BUTTON_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
             entries.putAfter(ModItems.WAXED_WEATHERED_COPPER_BUTTON_ITEM.get().getDefaultInstance(), ModItems.WAXED_OXIDIZED_COPPER_BUTTON_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            // Add copper trapdoors after iron trapdoor
+            entries.putAfter(Items.IRON_TRAPDOOR.getDefaultInstance(), ModItems.COPPER_TRAPDOOR_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            entries.putAfter(ModItems.COPPER_TRAPDOOR_ITEM.get().getDefaultInstance(), ModItems.EXPOSED_COPPER_TRAPDOOR_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            entries.putAfter(ModItems.EXPOSED_COPPER_TRAPDOOR_ITEM.get().getDefaultInstance(), ModItems.WEATHERED_COPPER_TRAPDOOR_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            entries.putAfter(ModItems.WEATHERED_COPPER_TRAPDOOR_ITEM.get().getDefaultInstance(), ModItems.OXIDIZED_COPPER_TRAPDOOR_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            entries.putAfter(ModItems.OXIDIZED_COPPER_TRAPDOOR_ITEM.get().getDefaultInstance(), ModItems.WAXED_COPPER_TRAPDOOR_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            entries.putAfter(ModItems.WAXED_COPPER_TRAPDOOR_ITEM.get().getDefaultInstance(), ModItems.WAXED_EXPOSED_COPPER_TRAPDOOR_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            entries.putAfter(ModItems.WAXED_EXPOSED_COPPER_TRAPDOOR_ITEM.get().getDefaultInstance(), ModItems.WAXED_WEATHERED_COPPER_TRAPDOOR_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            entries.putAfter(ModItems.WAXED_WEATHERED_COPPER_TRAPDOOR_ITEM.get().getDefaultInstance(), ModItems.WAXED_OXIDIZED_COPPER_TRAPDOOR_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
         }
         
         // Add copper lanterns after soul lantern, copper torch at end

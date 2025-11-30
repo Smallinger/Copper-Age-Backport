@@ -1,0 +1,24 @@
+{
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:all_mods_loaded",
+      "values": ["palegardenbackport"]
+    }
+  ],
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "pattern": [
+    "###",
+    "   ",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "palegardenbackport:stripped_pale_oak_log"
+    }
+  },
+  "result": {
+    "item": "minecraft:pale_oak_shelf",
+    "count": 6
+  }
+}

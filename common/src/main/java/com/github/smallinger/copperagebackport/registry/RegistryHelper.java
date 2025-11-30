@@ -99,6 +99,16 @@ public abstract class RegistryHelper {
         VANILLA_BACKPORT_IDS.add("waxed_weathered_lightning_rod");
         VANILLA_BACKPORT_IDS.add("waxed_oxidized_lightning_rod");
         
+        // Copper Trapdoor
+        VANILLA_BACKPORT_IDS.add("copper_trapdoor");
+        VANILLA_BACKPORT_IDS.add("exposed_copper_trapdoor");
+        VANILLA_BACKPORT_IDS.add("weathered_copper_trapdoor");
+        VANILLA_BACKPORT_IDS.add("oxidized_copper_trapdoor");
+        VANILLA_BACKPORT_IDS.add("waxed_copper_trapdoor");
+        VANILLA_BACKPORT_IDS.add("waxed_exposed_copper_trapdoor");
+        VANILLA_BACKPORT_IDS.add("waxed_weathered_copper_trapdoor");
+        VANILLA_BACKPORT_IDS.add("waxed_oxidized_copper_trapdoor");
+        
         // Copper Torch
         VANILLA_BACKPORT_IDS.add("copper_torch");
         VANILLA_BACKPORT_IDS.add("copper_wall_torch");
@@ -173,6 +183,10 @@ public abstract class RegistryHelper {
         VANILLA_BACKPORT_IDS.add("block.copper_chest.close");
         VANILLA_BACKPORT_IDS.add("block.copper_chest.open");
         
+        // Sound Events - Copper Trapdoor
+        VANILLA_BACKPORT_IDS.add("block.copper_trapdoor.close");
+        VANILLA_BACKPORT_IDS.add("block.copper_trapdoor.open");
+        
         // Sound Events - Copper Statue
         VANILLA_BACKPORT_IDS.add("block.copper_statue.break");
         VANILLA_BACKPORT_IDS.add("block.copper_statue.place");
@@ -189,6 +203,9 @@ public abstract class RegistryHelper {
         
         // Sound Events - Armor
         VANILLA_BACKPORT_IDS.add("item.armor.equip_copper");
+        
+        // Sound Events - Weather (End Flash from 1.21.10)
+        VANILLA_BACKPORT_IDS.add("weather.end_flash");
         
         // Particles
         VANILLA_BACKPORT_IDS.add("copper_fire_flame");
