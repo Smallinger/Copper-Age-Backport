@@ -14,6 +14,8 @@ All notable changes to this project will be documented in this file.
   - Complete lightmap system that applies purple sky lighting and block brightness boost during flashes
   - Dragon fog compatibility: Flash intensity reduced by 1/3 during boss fight
   - Respects "Hide Lightning Flashes" accessibility option
+  - Works not with shaders, becouse End Flash doesn’t exist in 1.20.1; it was only added in 1.21.4.
+  - Iris/OptiFine only provide the endFlashIntensity uniform on 1.21.4+
 
 ### Fixed
 
