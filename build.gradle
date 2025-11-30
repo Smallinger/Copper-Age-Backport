@@ -36,9 +36,9 @@ tasks.register("downloadTranslations", Exec) {
     workingDir rootDir
     
     if (System.getProperty('os.name').toLowerCase().contains('windows')) {
-        commandLine 'cmd', '/c', "java -jar \"${crowdinCliJar}\" download"
+        commandLine 'cmd', '/c', "java -jar \"${crowdinCliJar}\" download --skip-untranslated-strings=false --skip-untranslated-files=false --export-only-approved=false"
     } else {
-        commandLine 'sh', '-c', "java -jar \"${crowdinCliJar}\" download"
+        commandLine 'sh', '-c', "java -jar \"${crowdinCliJar}\" download --skip-untranslated-strings=false --skip-untranslated-files=false --export-only-approved=false"
     }
 }
 
