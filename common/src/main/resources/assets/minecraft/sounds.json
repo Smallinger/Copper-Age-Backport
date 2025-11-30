@@ -331,5 +331,18 @@
       "minecraft:item/armor/equip_copper/equip_copper4",
       "minecraft:item/armor/equip_copper/equip_copper5"
     ]
+  },
+  "weather.end_flash": {
+    "subtitle": "subtitles.weather.end_flash",
+    "sounds": [
+      "minecraft:ambient/weather/end_flash1",
+      "minecraft:ambient/weather/end_flash2",
+      "minecraft:ambient/weather/end_flash3",
+      "minecraft:ambient/weather/end_flash4",
+      "minecraft:ambient/weather/end_flash5",
+      "minecraft:ambient/weather/end_flash6",
+      "minecraft:ambient/weather/end_flash7",
+      "minecraft:ambient/weather/end_flash8"
+    ]
   }
 }

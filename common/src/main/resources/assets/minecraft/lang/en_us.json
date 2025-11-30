@@ -109,6 +109,7 @@
   "subtitles.block.shelf.place_item": "Item placed in shelf",
   "subtitles.block.shelf.take_item": "Item taken from shelf",
   "subtitles.block.shelf.swap": "Items swapped in shelf",
+  "subtitles.weather.end_flash": "End flashes",
 
   "config.copperagebackport.title": "Copper Age Backport Settings",
   "config.copperagebackport.search": "Search...",

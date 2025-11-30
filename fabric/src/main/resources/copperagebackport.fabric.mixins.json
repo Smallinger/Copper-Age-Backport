@@ -9,6 +9,11 @@
     "LightningRodBlockMixin",
     "PlayerDataRemapMixin"
   ],
+  "client": [
+    "client.ClientLevelMixin",
+    "client.LightTextureMixin",
+    "client.LevelRendererMixin"
+  ],
   "injectors": {
     "defaultRequire": 1
   },

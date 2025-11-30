@@ -4,6 +4,17 @@ All notable changes to this project will be documented in this file.
 
 ## [1.21.1] - 0.1.3 - 30.11.2025
 
+### Added
+
+#### End Flash Effect
+- **End dimension lighting**: Ported the End Flash visual effect from Minecraft 1.21.10
+  - Periodic sky flashes that illuminate the End dimension with a purple tint
+  - Directional flash source visible in the sky with additive blending
+  - Spatial audio that plays from the flash direction
+  - Complete lightmap system that applies purple sky lighting and block brightness boost during flashes
+  - Dragon fog compatibility: Flash intensity reduced by 1/3 during boss fight
+  - Respects "Hide Lightning Flashes" accessibility option
+
 ### Fixed
 
 #### Fabric Disconnect Crash

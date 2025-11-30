@@ -64,6 +64,9 @@ public class ModSounds {
     
     // Armor sounds
     public static Supplier<SoundEvent> ARMOR_EQUIP_COPPER;
+    
+    // Weather sounds (End Flash)
+    public static Supplier<SoundEvent> WEATHER_END_FLASH;
 
     public static void register() {
         Constants.LOG.info("Registering sounds for {}", Constants.MOD_NAME);
@@ -125,6 +128,9 @@ public class ModSounds {
         
         // Register Armor sounds
         ARMOR_EQUIP_COPPER = registerSound(helper, "item.armor.equip_copper");
+        
+        // Register Weather sounds (End Flash)
+        WEATHER_END_FLASH = registerSound(helper, "weather.end_flash");
     }
 
     private static Supplier<SoundEvent> registerSound(RegistryHelper helper, String name) {
