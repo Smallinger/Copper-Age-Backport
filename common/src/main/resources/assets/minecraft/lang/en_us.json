@@ -131,5 +131,9 @@
   "config.copperagebackport.minutes": "%s Minutes",
   "config.copperagebackport.minutes_decimal": "%s Minutes",
   "config.copperagebackport.donate": "Buy Me a Coffee!",
-  "config.copperagebackport.discord": "Join Mod Discord!"
+  "config.copperagebackport.discord": "Join Mod Discord!",
+  "config.copperagebackport.page.compatibility": "Compatibility",
+  "config.copperagebackport.group.lightning_rod": "Lightning Rod",
+  "config.copperagebackport.lightning_rod_oxidation": "Lightning Rod Oxidation",
+  "config.copperagebackport.lightning_rod_oxidation.tooltip": "When enabled, vanilla Lightning Rods will oxidize over time. Disable this if using another mod that handles Lightning Rod oxidation (e.g., Friends and Foes)."
 }

@@ -1,5 +1,6 @@
 package com.github.smallinger.copperagebackport.mixin;
 
+import com.github.smallinger.copperagebackport.config.CommonConfig;
 import com.github.smallinger.copperagebackport.registry.ModBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
@@ -51,16 +52,21 @@ public abstract class LightningRodBlockMixin extends RodBlock implements Weather
 
     @Override
     protected boolean isRandomlyTicking(BlockState state) {
-        return true;
+        return CommonConfig.lightningRodOxidation();
     }
 
     @Override
     protected void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
-        this.changeOverTime(state, level, pos, random);
+        if (CommonConfig.lightningRodOxidation()) {
+            this.changeOverTime(state, level, pos, random);
+        }
     }
 
     @Override
     public Optional<BlockState> getNext(BlockState state) {
+        if (!CommonConfig.lightningRodOxidation()) {
+            return Optional.empty();
+        }
         return copperagebackport$getNextBlock().map(block -> block.withPropertiesOf(state));
     }
 

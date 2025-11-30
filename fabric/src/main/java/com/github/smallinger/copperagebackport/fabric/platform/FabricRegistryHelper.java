@@ -2,6 +2,8 @@ package com.github.smallinger.copperagebackport.fabric.platform;
 
 import com.github.smallinger.copperagebackport.Constants;
 import com.github.smallinger.copperagebackport.registry.RegistryHelper;
+import net.fabricmc.fabric.api.event.registry.RegistryAttribute;
+import net.fabricmc.fabric.api.event.registry.RegistryAttributeHolder;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceKey;
@@ -33,6 +35,9 @@ public class FabricRegistryHelper extends RegistryHelper {
         if (registry == null) {
             throw new IllegalArgumentException("Unknown registry: " + registryKey.location());
         }
+
+        // Ensure Fabric knows this registry was touched by a mod so disconnect remapping stays consistent
+        RegistryAttributeHolder.get(registryKey).addAttribute(RegistryAttribute.MODDED);
 
         ResourceLocation id = ResourceLocation.fromNamespaceAndPath(namespace, name);
         T registered = net.minecraft.core.Registry.register(registry, id, supplier.get());

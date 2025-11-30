@@ -2,6 +2,37 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.21.1] - 0.1.3 - 30.11.2025
+
+### Fixed
+
+#### Fabric Disconnect Crash
+- **Registry sync crash**: Fixed client crash when disconnecting from a server on Fabric
+  - Root cause: Fabric Registry Sync attempted to restore vanilla registries without knowing the mod had added entries under `minecraft:` namespace
+  - Solution: Registries are now explicitly marked as modded via `RegistryAttributeHolder` before registering vanilla-namespaced entries
+
+#### Data Load Errors
+- **Tag references**: Fixed `golem_target_chests` tag referencing old `copperagebackport:` IDs instead of `minecraft:`
+- **Recipe syntax**: Fixed `copper_chest.json` recipe using incorrect key format (raw string instead of `{ "item": … }` object)
+- **Conditional recipe**: Added Fabric/NeoForge load conditions to `pale_oak_shelf.json` so it only loads when VanillaBackport is present
+
+### Added
+
+#### Copper Golem Statue Comparator Support
+- **Comparator output**: Copper Golem Statues now emit a redstone signal when read by a Comparator
+- **Signal strength**: Returns 1-4 based on the statue's pose (Standing=1, Running=2, Sitting=3, Star=4)
+- **Through-block reading**: Comparators can read the statue's signal through a solid block (matches vanilla 1.21.10 behavior)
+
+#### Mod Compatibility
+- **Friends and Foes support**: Added conversion recipes to convert Friends and Foes Lightning Rods to CopperAgeBackport Lightning Rods
+  - Converts all 7 variants: Exposed, Weathered, Oxidized, and their Waxed versions
+- **Lightning Rod Oxidation config**: Added config option to disable Lightning Rod oxidation for compatibility with mods like Friends and Foes
+  - Found in Config Menu under "Compatibility" → "Lightning Rod"
+- **Amendments support**: Copper Torch now works with Amendments "Torch Holding" animation
+  - `CopperTorchBlock` now extends `TorchBlock` for proper mod detection
+
+---
+
 ## [1.21.1] - 0.1.2 - 29.11.2025
 
 ### Changed
