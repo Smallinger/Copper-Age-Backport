@@ -8,9 +8,6 @@ project_id: "848524"
 # Set CROWDIN_PERSONAL_TOKEN in your environment
 api_token_env: CROWDIN_PERSONAL_TOKEN
 
-# Preserve directory hierarchy in Crowdin
-preserve_hierarchy: true
-
 files:
   # Main language file (English source)
   - source: /common/src/main/resources/assets/minecraft/lang/en_us.json
