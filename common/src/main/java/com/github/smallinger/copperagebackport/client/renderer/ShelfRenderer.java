@@ -10,6 +10,7 @@ import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.renderer.entity.ItemRenderer;
 import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;
+import net.minecraft.world.item.BannerItem;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 
@@ -17,6 +18,11 @@ public class ShelfRenderer implements BlockEntityRenderer<ShelfBlockEntity> {
     private static final float ITEM_SIZE = 0.25F;
     private static final float SLOT_OFFSET = 0.3125F;
     private static final float ALIGN_ITEMS_TO_BOTTOM_OFFSET = -0.25F;
+    
+    // Special values for oversized items (to match 1.21.10 ON_SHELF behavior)
+    private static final float BANNER_SCALE = 0.5F;      // Banners need larger display
+    private static final float BANNER_Y_OFFSET = -0.1F;   // Y offset for banners
+    
     private final ItemRenderer itemRenderer;
 
     public ShelfRenderer(BlockEntityRendererProvider.Context context) {
@@ -58,8 +64,14 @@ public class ShelfRenderer implements BlockEntityRenderer<ShelfBlockEntity> {
             // Rotate items 180° so they face the player (forward) instead of backward
             poseStack.mulPose(Axis.YP.rotationDegrees(180.0F));
             
-            // Scale items
-            poseStack.scale(ITEM_SIZE, ITEM_SIZE, ITEM_SIZE);
+            // Get scale factor and Y offset for this item type
+            // In 1.21.10, ON_SHELF display context handles this via model transforms
+            // In 1.20.1, we need to manually adjust special items
+            float scale = getItemScale(itemStack);
+            float yOffset = getItemYOffset(itemStack);
+            
+            poseStack.translate(0.0F, yOffset, 0.0F);
+            poseStack.scale(scale, scale, scale);
             
             // Render
             this.itemRenderer.renderStatic(
@@ -75,5 +87,29 @@ public class ShelfRenderer implements BlockEntityRenderer<ShelfBlockEntity> {
             
             poseStack.popPose();
         }
+    }
+    
+    /**
+     * Get the scale factor for a specific item type.
+     * Items with special models (banners) need larger scales
+     * to match the 1.21.10 ON_SHELF display context behavior.
+     */
+    private float getItemScale(ItemStack itemStack) {
+        if (itemStack.getItem() instanceof BannerItem) {
+            return BANNER_SCALE;
+        }
+        return ITEM_SIZE;
+    }
+    
+    /**
+     * Get the Y offset for a specific item type.
+     * Items with special models (banners) need vertical adjustment
+     * to match the 1.21.10 ON_SHELF display context behavior.
+     */
+    private float getItemYOffset(ItemStack itemStack) {
+        if (itemStack.getItem() instanceof BannerItem) {
+            return BANNER_Y_OFFSET;
+        }
+        return 0.0F;
     }
 }

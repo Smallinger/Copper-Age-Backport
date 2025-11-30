@@ -26,6 +26,9 @@ All notable changes to this project will be documented in this file.
 
 ### Fixed
 
+#### Shelf Rendering
+- **Banner display**: Banners on shelves are now displayed larger with correct positioning
+
 #### Fabric Disconnect Crash
 - **Registry sync crash**: Fixed client crash when disconnecting from a server on Fabric
   - Root cause: Fabric Registry Sync attempted to restore vanilla registries without knowing the mod had added entries under `minecraft:` namespace
