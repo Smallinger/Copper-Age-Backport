@@ -19,6 +19,7 @@ public class ConfigOptions {
         List<OptionPage> pages = new ArrayList<>();
         
         pages.add(createGolemPage());
+        pages.add(createCompatibilityPage());
         // Add more pages here as needed
         
         return pages;
@@ -109,6 +110,31 @@ public class ConfigOptions {
             .add(transportGroup)
             .add(behaviorGroup)
             .add(weatheringGroup)
+            .build();
+    }
+
+    private static OptionPage createCompatibilityPage() {
+        // Lightning Rod oxidation option
+        Option<Boolean> lightningRodOxidation = OptionImpl.<Boolean>builder(Boolean.class)
+            .name("config.copperagebackport.lightning_rod_oxidation")
+            .tooltip("config.copperagebackport.lightning_rod_oxidation.tooltip")
+            .control(TickBoxControl::new)
+            .binding(
+                CommonConfig::lightningRodOxidation,
+                CommonConfig::setLightningRodOxidation
+            )
+            .defaultValue(true)
+            .build();
+
+        // Create group
+        OptionGroup lightningRodGroup = OptionGroup.builder()
+            .name("config.copperagebackport.group.lightning_rod")
+            .add(lightningRodOxidation)
+            .build();
+
+        return OptionPage.builder()
+            .name("config.copperagebackport.page.compatibility")
+            .add(lightningRodGroup)
             .build();
     }
 }

@@ -214,6 +214,8 @@ public class CopperGolemStatueBlock extends BaseEntityBlock implements SimpleWat
                 level.setBlock(pos, state.setValue(POSE, nextPose), Block.UPDATE_ALL);
                 level.playSound(null, pos, ModSounds.COPPER_STATUE_HIT.get(), SoundSource.BLOCKS, 1.0F, 1.0F);
                 level.gameEvent(player, GameEvent.BLOCK_CHANGE, pos);
+                // Notify comparators about the changed output signal
+                level.updateNeighbourForOutputSignal(pos, this);
             }
             return InteractionResult.SUCCESS;
         }
@@ -253,6 +255,17 @@ public class CopperGolemStatueBlock extends BaseEntityBlock implements SimpleWat
     @Override
     public boolean isRandomlyTicking(BlockState state) {
         return WeatheringHelper.canWeather(state, CopperGolemStatueBlock::getNextBlock);
+    }
+
+    @Override
+    public boolean hasAnalogOutputSignal(BlockState state) {
+        return true;
+    }
+
+    @Override
+    public int getAnalogOutputSignal(BlockState state, Level level, BlockPos pos) {
+        // Returns 1-4 based on pose (STANDING=1, RUNNING=2, SITTING=3, STAR=4)
+        return state.getValue(POSE).ordinal() + 1;
     }
 
     public enum Pose implements StringRepresentable {

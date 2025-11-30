@@ -2,6 +2,42 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.20.1] - 0.1.3 - 30.11.2025
+
+### Fixed
+
+#### Fabric Disconnect Crash
+- **Registry sync crash**: Fixed client crash when disconnecting from a server on Fabric
+  - Root cause: Fabric Registry Sync attempted to restore vanilla registries without knowing the mod had added entries under `minecraft:` namespace
+  - Solution: Registries are now explicitly marked as modded via `RegistryAttributeHolder` before registering vanilla-namespaced entries
+
+#### Data Load Errors
+- **Conditional recipe**: Added Fabric/Forge load conditions to `pale_oak_shelf.json` so it only loads when VanillaBackport is present
+- **Recipe filename**: Fixed `waxed_copper_lantern_from_honeycomb_from_honeycomb.json` duplicate naming
+
+### Added
+
+#### Copper Golem Statue Comparator Support
+- **Comparator output**: Copper Golem Statues now emit a redstone signal when read by a Comparator
+- **Signal strength**: Returns 1-4 based on the statue's pose (Standing=1, Running=2, Sitting=3, Star=4)
+- **Through-block reading**: Comparators can read the statue's signal through a solid block (matches vanilla 1.21.10 behavior)
+
+#### Mod Compatibility
+- **PaleGardenBackport support**: Added `pale_oak_shelf` recipe using `palegardenbackport:stripped_pale_oak_log` when PaleGardenBackport mod is installed
+- **Friends and Foes support**: Added conversion recipes to convert Friends and Foes Lightning Rods to CopperAgeBackport Lightning Rods
+  - Converts all 7 variants: Exposed, Weathered, Oxidized, and their Waxed versions
+- **Lightning Rod Oxidation config**: Added config option to disable Lightning Rod oxidation for compatibility with mods like Friends and Foes
+  - Found in Config Menu under "Compatibility" → "Lightning Rod"
+- **Amendments support**: Copper Torch now works with Amendments "Torch Holding" animation
+  - `CopperTorchBlock` now extends `TorchBlock` for proper mod detection
+- **Quark support** (Forge only): Copper Golem can now deposit items into Quark variant chests
+  - Quark is only officially available for Forge 1.20.1
+  - Supports all wood variant chests (Oak, Spruce, Birch, etc.)
+  - Supports special variant chests (Nether Brick, Purpur, Prismarine)
+  - Supports both regular and trapped chest variants
+
+---
+
 ## [1.20.1] - 0.1.2 - 29.11.2025
 
 ### Changed

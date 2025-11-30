@@ -3,6 +3,7 @@ package com.github.smallinger.copperagebackport;
 import com.github.smallinger.copperagebackport.compat.ModCompat;
 import com.github.smallinger.copperagebackport.compat.modules.FastChestCompat;
 import com.github.smallinger.copperagebackport.compat.modules.IronChestsCompat;
+import com.github.smallinger.copperagebackport.compat.modules.QuarkCompat;
 import com.github.smallinger.copperagebackport.compat.modules.SophisticatedStorageCompat;
 import com.github.smallinger.copperagebackport.entity.CopperGolemEntity;
 import com.github.smallinger.copperagebackport.platform.Services;
@@ -68,5 +69,8 @@ public class CommonClass {
         
         // IronChests - metal chest variants as Copper Golem destinations
         ModCompat.register(IronChestsCompat.MOD_ID, IronChestsCompat::new);
+        
+        // Quark - variant wood chests as Copper Golem destinations
+        ModCompat.register(QuarkCompat.MOD_ID, QuarkCompat::new);
     }
 }

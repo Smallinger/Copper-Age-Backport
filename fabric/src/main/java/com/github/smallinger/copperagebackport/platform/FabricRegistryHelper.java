@@ -2,6 +2,8 @@ package com.github.smallinger.copperagebackport.platform;
 
 import com.github.smallinger.copperagebackport.Constants;
 import com.github.smallinger.copperagebackport.registry.RegistryHelper;
+import net.fabricmc.fabric.api.event.registry.RegistryAttribute;
+import net.fabricmc.fabric.api.event.registry.RegistryAttributeHolder;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceKey;
@@ -9,21 +11,16 @@ import net.minecraft.resources.ResourceLocation;
 
 import java.util.function.Supplier;
 
+/**
+ * Fabric implementation of the shared RegistryHelper.
+ * Fabric registers content immediately against the built-in registries.
+ */
 public class FabricRegistryHelper extends RegistryHelper {
 
     @Override
     @SuppressWarnings("unchecked")
     public <T> Supplier<T> register(ResourceKey<? extends Registry<? super T>> registryKey, String name, Supplier<T> supplier) {
-        Registry<T> registry = (Registry<T>) BuiltInRegistries.REGISTRY.get(registryKey.location());
-
-        if (registry == null) {
-            throw new IllegalArgumentException("Unknown registry: " + registryKey.location());
-        }
-
-        ResourceLocation id = id(name);
-        T registered = Registry.register(registry, id, supplier.get());
-
-        return () -> registered;
+        return registerWithNamespace(registryKey, Constants.MOD_ID, name, supplier);
     }
     
     @Override
@@ -35,8 +32,13 @@ public class FabricRegistryHelper extends RegistryHelper {
             throw new IllegalArgumentException("Unknown registry: " + registryKey.location());
         }
 
+        // Ensure Fabric knows this registry was touched by a mod so disconnect remapping stays consistent
+        RegistryAttributeHolder.get(registryKey).addAttribute(RegistryAttribute.MODDED);
+
         ResourceLocation id = new ResourceLocation(namespace, name);
         T registered = Registry.register(registry, id, supplier.get());
+        
+        Constants.LOG.debug("Registered {} under namespace {}", name, namespace);
 
         return () -> registered;
     }

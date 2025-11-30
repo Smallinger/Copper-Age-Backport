@@ -26,6 +26,7 @@ public final class CommonConfig {
     private static final String KEY_GOLEM_TRANSPORT_STACK_SIZE = "golemTransportStackSize";
     private static final String KEY_WEATHERING_TICK_FROM = "weatheringTickFrom";
     private static final String KEY_WEATHERING_TICK_TO = "weatheringTickTo";
+    private static final String KEY_LIGHTNING_ROD_OXIDATION = "lightningRodOxidation";
     
     // Default values
     private static final boolean DEFAULT_GOLEM_PRESSES_BUTTONS = true;
@@ -33,6 +34,7 @@ public final class CommonConfig {
     private static final int DEFAULT_GOLEM_TRANSPORT_STACK_SIZE = 16;
     private static final int DEFAULT_WEATHERING_TICK_FROM = 504000; // ~7 minecraft days
     private static final int DEFAULT_WEATHERING_TICK_TO = 552000;   // ~7.7 minecraft days
+    private static final boolean DEFAULT_LIGHTNING_ROD_OXIDATION = true;
     
     // Runtime values
     private static boolean golemPressesButtons = DEFAULT_GOLEM_PRESSES_BUTTONS;
@@ -40,6 +42,7 @@ public final class CommonConfig {
     private static int golemTransportStackSize = DEFAULT_GOLEM_TRANSPORT_STACK_SIZE;
     private static int weatheringTickFrom = DEFAULT_WEATHERING_TICK_FROM;
     private static int weatheringTickTo = DEFAULT_WEATHERING_TICK_TO;
+    private static boolean lightningRodOxidation = DEFAULT_LIGHTNING_ROD_OXIDATION;
     
     // Config file path (set by platform)
     private static Path configPath;
@@ -121,6 +124,19 @@ public final class CommonConfig {
     }
 
     /**
+     * Should Lightning Rods oxidize over time?
+     * Disable this if using another mod that handles Lightning Rod oxidation (e.g., Friends and Foes).
+     * Default: true
+     */
+    public static boolean lightningRodOxidation() {
+        return lightningRodOxidation;
+    }
+
+    public static void setLightningRodOxidation(boolean value) {
+        lightningRodOxidation = value;
+    }
+
+    /**
      * Load config from disk. Creates default config if not present.
      */
     public static void load() {
@@ -155,9 +171,12 @@ public final class CommonConfig {
             if (json.has(KEY_WEATHERING_TICK_TO)) {
                 weatheringTickTo = Math.max(weatheringTickFrom, json.get(KEY_WEATHERING_TICK_TO).getAsInt());
             }
+            if (json.has(KEY_LIGHTNING_ROD_OXIDATION)) {
+                lightningRodOxidation = json.get(KEY_LIGHTNING_ROD_OXIDATION).getAsBoolean();
+            }
 
-            Constants.LOG.info("Loaded config: golemPressesButtons={}, buttonPressChance={}%, golemTransportStackSize={}, weatheringTickFrom={}, weatheringTickTo={}", 
-                golemPressesButtons, buttonPressChancePercent, golemTransportStackSize, weatheringTickFrom, weatheringTickTo);
+            Constants.LOG.info("Loaded config: golemPressesButtons={}, buttonPressChance={}%, golemTransportStackSize={}, weatheringTickFrom={}, weatheringTickTo={}, lightningRodOxidation={}", 
+                golemPressesButtons, buttonPressChancePercent, golemTransportStackSize, weatheringTickFrom, weatheringTickTo, lightningRodOxidation);
         } catch (IOException | IllegalStateException e) {
             Constants.LOG.error("Failed to load config, using defaults", e);
         }
@@ -178,6 +197,7 @@ public final class CommonConfig {
         json.addProperty(KEY_GOLEM_TRANSPORT_STACK_SIZE, golemTransportStackSize);
         json.addProperty(KEY_WEATHERING_TICK_FROM, weatheringTickFrom);
         json.addProperty(KEY_WEATHERING_TICK_TO, weatheringTickTo);
+        json.addProperty(KEY_LIGHTNING_ROD_OXIDATION, lightningRodOxidation);
 
         try {
             Files.createDirectories(configPath.getParent());

@@ -4,14 +4,14 @@
     {
       "condition": "fabric:all_mods_loaded",
       "values": [
-        "vanillabackports"
+        "palegardenbackport"
       ]
     }
   ],
   "forge:conditions": [
     {
       "type": "forge:mod_loaded",
-      "modid": "vanillabackports"
+      "modid": "palegardenbackport"
     }
   ],
   "category": "building",
@@ -22,7 +22,7 @@
   ],
   "key": {
     "#": {
-      "item": "minecraft:stripped_pale_oak_log"
+      "item": "palegardenbackport:stripped_pale_oak_log"
     }
   },
   "result": {
