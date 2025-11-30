@@ -11,9 +11,6 @@ api_token_env: CROWDIN_PERSONAL_TOKEN
 # Preserve directory hierarchy in Crowdin
 preserve_hierarchy: true
 
-# Note: Export settings (skip_untranslated_strings, skip_untranslated_files, export_only_approved)
-# are passed via command-line arguments in build.gradle to avoid YAML boolean parsing issues
-
 files:
   # Main language file (English source)
   - source: /common/src/main/resources/assets/minecraft/lang/en_us.json
