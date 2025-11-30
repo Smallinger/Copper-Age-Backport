@@ -37,7 +37,7 @@ public abstract class RegistryHelper {
         VANILLA_BACKPORT_IDS.add("waxed_exposed_copper_chest");
         VANILLA_BACKPORT_IDS.add("waxed_weathered_copper_chest");
         VANILLA_BACKPORT_IDS.add("waxed_oxidized_copper_chest");
-        
+
         // Copper Golem Statues
         VANILLA_BACKPORT_IDS.add("copper_golem_statue");
         VANILLA_BACKPORT_IDS.add("exposed_copper_golem_statue");
@@ -181,6 +181,9 @@ public abstract class RegistryHelper {
         // Sound Events - Armor
         VANILLA_BACKPORT_IDS.add("item.armor.equip_copper");
         
+        // Sound Events - Weather (End Flash)
+        VANILLA_BACKPORT_IDS.add("weather.end_flash");
+        
         // Particles
         VANILLA_BACKPORT_IDS.add("copper_fire_flame");
     }
@@ -212,13 +215,10 @@ public abstract class RegistryHelper {
     public abstract <T> Supplier<T> registerWithNamespace(ResourceKey<? extends Registry<? super T>> registry, String namespace, String name, Supplier<T> supplier);
     
     /**
-     * Register under minecraft: namespace if it's a vanilla backport, otherwise use mod namespace
+     * Register a backported entry under the minecraft: namespace.
      */
     public <T> Supplier<T> registerAuto(ResourceKey<? extends Registry<? super T>> registry, String name, Supplier<T> supplier) {
-        if (VANILLA_BACKPORT_IDS.contains(name)) {
-            return registerWithNamespace(registry, MINECRAFT_NAMESPACE, name, supplier);
-        }
-        return register(registry, name, supplier);
+        return registerWithNamespace(registry, MINECRAFT_NAMESPACE, name, supplier);
     }
     
     public void onRegisterComplete(Runnable callback) {
@@ -237,7 +237,15 @@ public abstract class RegistryHelper {
         registrationCallbacks.forEach(Runnable::run);
         Constants.LOG.info("Fired {} registration callbacks", registrationCallbacks.size());
     }
-    
+
+    /**
+     * Fabric overrides this to rebuild minecraft: entries after Fabric's registry sync unmaps them.
+     * Other loaders keep the default no-op implementation.
+     */
+    public void restoreVanillaNamespaceEntries() {
+        // no-op
+    }
+
     protected ResourceLocation id(String name) {
         return ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, name);
     }
@@ -252,4 +260,5 @@ public abstract class RegistryHelper {
     public static boolean isVanillaBackport(String name) {
         return VANILLA_BACKPORT_IDS.contains(name);
     }
+
 }

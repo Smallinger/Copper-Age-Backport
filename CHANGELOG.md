@@ -21,9 +21,9 @@ All notable changes to this project will be documented in this file.
 - **Banner display**: Banners on shelves are now displayed larger with correct positioning
 
 #### Fabric Disconnect Crash
-- **Registry sync crash**: Fixed client crash when disconnecting from a server on Fabric
-  - Root cause: Fabric Registry Sync attempted to restore vanilla registries without knowing the mod had added entries under `minecraft:` namespace
-  - Solution: Registries are now explicitly marked as modded via `RegistryAttributeHolder` before registering vanilla-namespaced entries
+- **Registry sync crash**: Fixed client crash (NullPointerException in Screen.tick) when disconnecting from a multiplayer server on Fabric
+  - Root cause: Fabric's RegistrySyncManager unmaps `minecraft:` namespace entries on disconnect, leaving null references
+  - Solution: Cache all `minecraft:` namespace entries during registration and restore them before Fabric's cleanup via Mixin and event hooks
 
 #### Data Load Errors
 - **Tag references**: Fixed `golem_target_chests` tag referencing old `copperagebackport:` IDs instead of `minecraft:`

@@ -387,11 +387,15 @@ public class ConfigScreen extends Screen {
     }
 
     private void openDonatePage() {
-        Util.getPlatform().openUri("https://ko-fi.com/smallinger");
+        if (Util.getPlatform() != null) {
+            Util.getPlatform().openUri("https://ko-fi.com/smallinger");
+        }
     }
 
     private void openDiscordPage() {
-        Util.getPlatform().openUri("https://discord.gg/hGrWUW9vSb");
+        if (Util.getPlatform() != null) {
+            Util.getPlatform().openUri("https://discord.gg/hGrWUW9vSb");
+        }
     }
 
     private void closeScreen() {

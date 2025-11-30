@@ -11,12 +11,15 @@ import com.github.smallinger.copperagebackport.registry.ModBlocks;
 import com.github.smallinger.copperagebackport.registry.ModEntities;
 import com.github.smallinger.copperagebackport.registry.ModItems;
 import com.github.smallinger.copperagebackport.registry.ModParticles;
+import com.github.smallinger.copperagebackport.registry.RegistryHelper;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
+import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientLifecycleEvents;
 import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.BuiltinItemRendererRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayConnectionEvents;
 import net.minecraft.client.particle.FlameParticle;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
@@ -33,6 +36,7 @@ public class CopperAgeBackportFabricClient implements ClientModInitializer {
         registerRenderers();
         register3DItemRenderers();
         registerBlockRenderLayers();
+        hookRegistryRestoration();
     }
     
     private void registerParticles() {
@@ -110,5 +114,14 @@ public class CopperAgeBackportFabricClient implements ClientModInitializer {
             ModBlocks.WAXED_EXPOSED_COPPER_BARS.get(),
             ModBlocks.WAXED_WEATHERED_COPPER_BARS.get(),
             ModBlocks.WAXED_OXIDIZED_COPPER_BARS.get());
+    }
+
+    private void hookRegistryRestoration() {
+        ClientPlayConnectionEvents.DISCONNECT.register((handler, client) -> restoreMinecraftEntries());
+        ClientLifecycleEvents.CLIENT_STOPPING.register(client -> restoreMinecraftEntries());
+    }
+
+    private static void restoreMinecraftEntries() {
+        RegistryHelper.getInstance().restoreVanillaNamespaceEntries();
     }
 }

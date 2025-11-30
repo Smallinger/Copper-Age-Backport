@@ -11,6 +11,11 @@ api_token_env: CROWDIN_PERSONAL_TOKEN
 # Preserve directory hierarchy in Crowdin
 preserve_hierarchy: true
 
+# Export settings - include partially translated files with source strings for untranslated entries
+skip_untranslated_strings: false   # Keep untranslated strings (filled with source)
+skip_untranslated_files: false     # Export files even if not 100% translated
+export_only_approved: false        # Include non-approved translations
+
 files:
   # Main language file (English source)
   - source: /common/src/main/resources/assets/minecraft/lang/en_us.json
@@ -18,6 +23,7 @@ files:
     # Map Crowdin language codes to Minecraft locale codes (lowercase)
     languages_mapping:
       locale_with_underscore:
+        en: en_us
         de: de_de
         es-ES: es_es
         es-MX: es_mx
@@ -54,3 +60,6 @@ files:
         lt: lt_lt
         lv: lv_lv
         et: et_ee
+        af: af_za
+        ca: ca_es
+        no: no_no
