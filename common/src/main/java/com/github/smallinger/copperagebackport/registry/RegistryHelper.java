@@ -277,4 +277,13 @@ public abstract class RegistryHelper {
     protected ResourceLocation minecraftId(String name) {
         return new ResourceLocation(MINECRAFT_NAMESPACE, name);
     }
+    
+    /**
+     * Called before Fabric's registry sync unmaps entries on disconnect.
+     * Default implementation is a no-op; FabricRegistryHelper overrides this
+     * to restore minecraft: namespace entries that Fabric would otherwise remove.
+     */
+    public void restoreVanillaNamespaceEntries() {
+        // no-op by default - Fabric implementation overrides this
+    }
 }

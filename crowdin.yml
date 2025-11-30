@@ -18,6 +18,7 @@ files:
     # Map Crowdin language codes to Minecraft locale codes (lowercase)
     languages_mapping:
       locale_with_underscore:
+        en: en_us
         de: de_de
         es-ES: es_es
         es-MX: es_mx
@@ -54,3 +55,6 @@ files:
         lt: lt_lt
         lv: lv_lv
         et: et_ee
+        af: af_za
+        ca: ca_es
+        no: no_no

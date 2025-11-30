@@ -11,7 +11,9 @@
   "item.minecraft.copper_leggings": "Copper Leggings",
   "item.minecraft.copper_boots": "Copper Boots",
   "item.minecraft.copper_horse_armor": "Copper Horse Armor",
+
   "entity.minecraft.copper_golem": "Copper Golem",
+  
   "block.minecraft.copper_chest": "Copper Chest",
   "block.minecraft.exposed_copper_chest": "Exposed Copper Chest",
   "block.minecraft.weathered_copper_chest": "Weathered Copper Chest",
@@ -20,6 +22,7 @@
   "block.minecraft.waxed_exposed_copper_chest": "Waxed Exposed Copper Chest",
   "block.minecraft.waxed_weathered_copper_chest": "Waxed Weathered Copper Chest",
   "block.minecraft.waxed_oxidized_copper_chest": "Waxed Oxidized Copper Chest",
+
   "block.copperagebackport.copper_button": "Copper Button",
   "block.copperagebackport.exposed_copper_button": "Exposed Copper Button",
   "block.copperagebackport.weathered_copper_button": "Weathered Copper Button",
@@ -28,6 +31,7 @@
   "block.copperagebackport.waxed_exposed_copper_button": "Waxed Exposed Copper Button",
   "block.copperagebackport.waxed_weathered_copper_button": "Waxed Weathered Copper Button",
   "block.copperagebackport.waxed_oxidized_copper_button": "Waxed Oxidized Copper Button",
+
   "block.minecraft.copper_golem_statue": "Copper Golem Statue",
   "block.minecraft.exposed_copper_golem_statue": "Exposed Copper Golem Statue",
   "block.minecraft.weathered_copper_golem_statue": "Weathered Copper Golem Statue",
@@ -49,10 +53,11 @@
   "block.minecraft.crimson_shelf": "Crimson Shelf",
   "block.minecraft.warped_shelf": "Warped Shelf",
   "block.minecraft.pale_oak_shelf": "Pale Oak Shelf",
-  
-  "block.minecraft.copper_torch": "Copper Torch",
 
+  "block.minecraft.copper_torch": "Copper Torch",
+  
   "block.minecraft.copper_lantern": "Copper Lantern",
+
   "block.minecraft.exposed_copper_lantern": "Exposed Copper Lantern",
   "block.minecraft.weathered_copper_lantern": "Weathered Copper Lantern",
   "block.minecraft.oxidized_copper_lantern": "Oxidized Copper Lantern",

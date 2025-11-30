@@ -11,8 +11,11 @@ import com.github.smallinger.copperagebackport.registry.ModBlocks;
 import com.github.smallinger.copperagebackport.registry.ModEntities;
 import com.github.smallinger.copperagebackport.registry.ModItems;
 import com.github.smallinger.copperagebackport.registry.ModParticles;
+import com.github.smallinger.copperagebackport.registry.RegistryHelper;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
+import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientLifecycleEvents;
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayConnectionEvents;
 import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.BuiltinItemRendererRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
@@ -73,6 +76,9 @@ public class CopperAgeBackportFabricClient implements ClientModInitializer {
         BuiltinItemRendererRegistry.INSTANCE.register(ModItems.WAXED_EXPOSED_COPPER_GOLEM_STATUE_ITEM.get(), renderer);
         BuiltinItemRendererRegistry.INSTANCE.register(ModItems.WAXED_WEATHERED_COPPER_GOLEM_STATUE_ITEM.get(), renderer);
         BuiltinItemRendererRegistry.INSTANCE.register(ModItems.WAXED_OXIDIZED_COPPER_GOLEM_STATUE_ITEM.get(), renderer);
+
+        // Hook registry restoration for disconnect handling
+        hookRegistryRestoration();
     }
 
     private void registerBlockRenderLayers() {
@@ -115,6 +121,19 @@ public class CopperAgeBackportFabricClient implements ClientModInitializer {
             ModBlocks.WAXED_EXPOSED_COPPER_TRAPDOOR.get(),
             ModBlocks.WAXED_WEATHERED_COPPER_TRAPDOOR.get(),
             ModBlocks.WAXED_OXIDIZED_COPPER_TRAPDOOR.get());
+    }
+
+    /**
+     * Hooks Fabric events to restore minecraft: namespace entries before
+     * Fabric's registry sync unmaps them on disconnect.
+     */
+    private void hookRegistryRestoration() {
+        ClientPlayConnectionEvents.DISCONNECT.register((handler, client) -> restoreMinecraftEntries());
+        ClientLifecycleEvents.CLIENT_STOPPING.register(client -> restoreMinecraftEntries());
+    }
+
+    private static void restoreMinecraftEntries() {
+        RegistryHelper.getInstance().restoreVanillaNamespaceEntries();
     }
 }
 

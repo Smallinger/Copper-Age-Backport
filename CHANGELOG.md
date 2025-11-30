@@ -30,13 +30,18 @@ All notable changes to this project will be documented in this file.
 - **Banner display**: Banners on shelves are now displayed larger with correct positioning
 
 #### Fabric Disconnect Crash
-- **Registry sync crash**: Fixed client crash when disconnecting from a server on Fabric
-  - Root cause: Fabric Registry Sync attempted to restore vanilla registries without knowing the mod had added entries under `minecraft:` namespace
-  - Solution: Registries are now explicitly marked as modded via `RegistryAttributeHolder` before registering vanilla-namespaced entries
+- **Registry sync crash**: Fixed client crash (NullPointerException in Screen.tick) when disconnecting from a multiplayer server on Fabric
+  - Root cause: Fabric's RegistrySyncManager unmaps `minecraft:` namespace entries on disconnect, leaving null references
+  - Solution: Cache all `minecraft:` namespace entries during registration and restore them before Fabric's cleanup via Mixin and event hooks
 
 #### Data Load Errors
 - **Conditional recipe**: Added Fabric/Forge load conditions to `pale_oak_shelf.json` so it only loads when VanillaBackport is present
 - **Recipe filename**: Fixed `waxed_copper_lantern_from_honeycomb_from_honeycomb.json` duplicate naming
+
+#### Copper Horse Armor
+- **Texture not loading**: Fixed Copper Horse Armor entity texture not displaying on horses
+  - Root cause: Texture path was incorrectly using `copperagebackport:` namespace instead of `minecraft:`
+  - Solution: Changed texture lookup to use `minecraft:textures/entity/horse/armor/horse_armor_copper.png`
 
 ### Added
 
