@@ -3,9 +3,9 @@ package com.github.smallinger.copperagebackport.client.gui;
 import com.github.smallinger.copperagebackport.client.gui.options.*;
 import com.github.smallinger.copperagebackport.client.gui.options.control.IntegerFieldControl;
 import com.github.smallinger.copperagebackport.client.gui.options.control.SliderControl;
+import com.github.smallinger.copperagebackport.client.gui.options.control.TextBoxControl;
 import com.github.smallinger.copperagebackport.client.gui.options.control.TickBoxControl;
 import com.github.smallinger.copperagebackport.config.CommonConfig;
-import net.minecraft.network.chat.Component;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -114,22 +114,21 @@ public class ConfigOptions {
     }
 
     private static OptionPage createCompatibilityPage() {
-        // Lightning Rod oxidation option
-        Option<Boolean> lightningRodOxidation = OptionImpl.<Boolean>builder(Boolean.class)
+        // Lightning Rod oxidation info - always enabled, just informational
+        Option<String> lightningRodInfo = OptionImpl.<String>builder(String.class)
             .name("config.copperagebackport.lightning_rod_oxidation")
-            .tooltip("config.copperagebackport.lightning_rod_oxidation.tooltip")
-            .control(TickBoxControl::new)
+            .control(TextBoxControl::new)
             .binding(
-                CommonConfig::lightningRodOxidation,
-                CommonConfig::setLightningRodOxidation
+                () -> "config.copperagebackport.lightning_rod_oxidation.text",
+                (v) -> {} // Read-only
             )
-            .defaultValue(true)
+            .defaultValue("config.copperagebackport.lightning_rod_oxidation.text")
             .build();
 
         // Create group
         OptionGroup lightningRodGroup = OptionGroup.builder()
             .name("config.copperagebackport.group.lightning_rod")
-            .add(lightningRodOxidation)
+            .add(lightningRodInfo)
             .build();
 
         return OptionPage.builder()

@@ -149,5 +149,5 @@
   "config.copperagebackport.page.compatibility": "Compatibility",
   "config.copperagebackport.group.lightning_rod": "Lightning Rod",
   "config.copperagebackport.lightning_rod_oxidation": "Lightning Rod Oxidation",
-  "config.copperagebackport.lightning_rod_oxidation.tooltip": "When enabled, vanilla Lightning Rods will oxidize over time. Disable this if using another mod that handles Lightning Rod oxidation (e.g., Friends and Foes)."
+  "config.copperagebackport.lightning_rod_oxidation.text": "This feature is always active.\n\nDue to how Minecraft mixins work, we cannot defer to other mods. Our blocks use the minecraft: namespace for compatibility with future vanilla versions.\n\nA conversion recipe exists to convert Friends & Foes lightning rods to Copper Age Backport variants (1:1 in crafting table)."
 }

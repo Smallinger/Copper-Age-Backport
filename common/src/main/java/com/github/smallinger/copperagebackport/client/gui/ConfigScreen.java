@@ -29,9 +29,12 @@ public class ConfigScreen extends Screen {
     private static final int SIDEBAR_WIDTH = 110;
     private static final int OPTION_WIDTH = 240;
     private static final int SCROLLBAR_WIDTH = 8;
+    private static final int GROUP_HEADER_HEIGHT = 16;
+    private static final int GROUP_HEADER_COLOR = 0xFFFFFFFF;
 
     private final List<OptionPage> pages = new ArrayList<>();
     private final List<ControlElement<?>> controls = new ArrayList<>();
+    private final List<GroupHeader> groupHeaders = new ArrayList<>();
 
     private final Screen prevScreen;
 
@@ -185,9 +188,15 @@ public class ConfigScreen extends Screen {
         int y = contentY - this.scrollOffset;
         int optionWidth = this.width - x - SCROLLBAR_WIDTH - 16;
         
-        // First pass - calculate total height
+        // Clear group headers
+        this.groupHeaders.clear();
+        
+        // First pass - calculate total height (including group headers)
         int calcY = 0;
         for (OptionGroup group : this.currentPage.getGroups()) {
+            boolean hasVisibleOptions = false;
+            
+            // Check if group has any visible options
             for (Option<?> option : group.getOptions()) {
                 if (!this.searchQuery.isEmpty()) {
                     String optionName = option.getName().getString().toLowerCase(Locale.ROOT);
@@ -195,14 +204,51 @@ public class ConfigScreen extends Screen {
                         continue;
                     }
                 }
-                calcY += 18;
+                hasVisibleOptions = true;
+                break;
+            }
+            
+            // Add group header height if group has visible options and has a name
+            if (hasVisibleOptions && group.getName() != null && !group.getName().getString().isEmpty()) {
+                calcY += GROUP_HEADER_HEIGHT;
+            }
+            
+            for (Option<?> option : group.getOptions()) {
+                if (!this.searchQuery.isEmpty()) {
+                    String optionName = option.getName().getString().toLowerCase(Locale.ROOT);
+                    if (!optionName.contains(this.searchQuery)) {
+                        continue;
+                    }
+                }
+                var control = option.getControl();
+                calcY += control.getHeight(optionWidth);
             }
             calcY += 4;
         }
         this.totalContentHeight = calcY;
 
-        // Second pass - create controls
+        // Second pass - create controls and record group header positions
         for (OptionGroup group : this.currentPage.getGroups()) {
+            boolean hasVisibleOptions = false;
+            
+            // Check if group has any visible options
+            for (Option<?> option : group.getOptions()) {
+                if (!this.searchQuery.isEmpty()) {
+                    String optionName = option.getName().getString().toLowerCase(Locale.ROOT);
+                    if (!optionName.contains(this.searchQuery)) {
+                        continue;
+                    }
+                }
+                hasVisibleOptions = true;
+                break;
+            }
+            
+            // Add group header if group has visible options and has a name
+            if (hasVisibleOptions && group.getName() != null && !group.getName().getString().isEmpty()) {
+                this.groupHeaders.add(new GroupHeader(group.getName(), y));
+                y += GROUP_HEADER_HEIGHT;
+            }
+            
             for (Option<?> option : group.getOptions()) {
                 if (!this.searchQuery.isEmpty()) {
                     String optionName = option.getName().getString().toLowerCase(Locale.ROOT);
@@ -212,12 +258,13 @@ public class ConfigScreen extends Screen {
                 }
 
                 var control = option.getControl();
-                ControlElement<?> element = control.createElement(new Dim2i(x, y, optionWidth, 18));
+                int controlHeight = control.getHeight(optionWidth);
+                ControlElement<?> element = control.createElement(new Dim2i(x, y, optionWidth, controlHeight));
 
                 this.addRenderableWidget(element);
                 this.controls.add(element);
 
-                y += 18;
+                y += controlHeight;
             }
             y += 4;
         }
@@ -243,7 +290,32 @@ public class ConfigScreen extends Screen {
         int optionWidth = this.width - x - SCROLLBAR_WIDTH - 16;
         
         int controlIndex = 0;
+        int headerIndex = 0;
+        
         for (OptionGroup group : this.currentPage.getGroups()) {
+            boolean hasVisibleOptions = false;
+            
+            // Check if group has any visible options
+            for (Option<?> option : group.getOptions()) {
+                if (!this.searchQuery.isEmpty()) {
+                    String optionName = option.getName().getString().toLowerCase(Locale.ROOT);
+                    if (!optionName.contains(this.searchQuery)) {
+                        continue;
+                    }
+                }
+                hasVisibleOptions = true;
+                break;
+            }
+            
+            // Update group header position
+            if (hasVisibleOptions && group.getName() != null && !group.getName().getString().isEmpty()) {
+                if (headerIndex < this.groupHeaders.size()) {
+                    this.groupHeaders.get(headerIndex).y = y;
+                    headerIndex++;
+                }
+                y += GROUP_HEADER_HEIGHT;
+            }
+            
             for (Option<?> option : group.getOptions()) {
                 if (!this.searchQuery.isEmpty()) {
                     String optionName = option.getName().getString().toLowerCase(Locale.ROOT);
@@ -252,13 +324,16 @@ public class ConfigScreen extends Screen {
                     }
                 }
                 
+                var control = option.getControl();
+                int controlHeight = control.getHeight(optionWidth);
+                
                 if (controlIndex < this.controls.size()) {
-                    ControlElement<?> control = this.controls.get(controlIndex);
-                    control.setDim(new Dim2i(x, y, optionWidth, 18));
+                    ControlElement<?> controlElement = this.controls.get(controlIndex);
+                    controlElement.setDim(new Dim2i(x, y, optionWidth, controlHeight));
                     controlIndex++;
                 }
                 
-                y += 18;
+                y += controlHeight;
             }
             y += 4;
         }
@@ -281,7 +356,14 @@ public class ConfigScreen extends Screen {
             
             graphics.enableScissor(scissorX, scissorY, scissorX + scissorWidth, scissorY + scissorHeight);
             
-            // Render controls again (will be clipped) - this overdraws but ensures proper clipping
+            // Render group headers
+            for (GroupHeader header : this.groupHeaders) {
+                int headerX = SIDEBAR_WIDTH + 16;
+                // Left-aligned header text
+                graphics.drawString(this.font, header.name, headerX, header.y + 4, GROUP_HEADER_COLOR, false);
+            }
+            
+            // Render controls (will be clipped)
             for (ControlElement<?> control : this.controls) {
                 control.render(graphics, mouseX, mouseY, delta);
             }
@@ -418,5 +500,18 @@ public class ConfigScreen extends Screen {
             return true;
         }
         return super.mouseScrolled(mouseX, mouseY, scrollDelta);
+    }
+    
+    /**
+     * Helper class to store group header information for rendering
+     */
+    private static class GroupHeader {
+        final Component name;
+        int y;
+        
+        GroupHeader(Component name, int y) {
+            this.name = name;
+            this.y = y;
+        }
     }
 }
