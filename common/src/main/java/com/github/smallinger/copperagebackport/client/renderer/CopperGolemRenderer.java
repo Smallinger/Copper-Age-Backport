@@ -1,6 +1,7 @@
 package com.github.smallinger.copperagebackport.client.renderer;
 
 import com.github.smallinger.copperagebackport.client.model.CopperGolemModel;
+import com.github.smallinger.copperagebackport.client.renderer.layers.CopperGolemAntennaLayer;
 import com.github.smallinger.copperagebackport.client.renderer.layers.CopperGolemEyesLayer;
 import com.github.smallinger.copperagebackport.entity.CopperGolemEntity;
 import com.github.smallinger.copperagebackport.entity.CopperGolemOxidationLevels;
@@ -20,6 +21,9 @@ public class CopperGolemRenderer extends MobRenderer<CopperGolemEntity, CopperGo
         
         // Add item in hand layer for rendering items
         this.addLayer(new ItemInHandLayer<>(this, context.getItemInHandRenderer()));
+        
+        // Add antenna layer for rendering flowers/blocks on the antenna (Iron Golem gift feature)
+        this.addLayer(new CopperGolemAntennaLayer(this));
     }
 
     @Override

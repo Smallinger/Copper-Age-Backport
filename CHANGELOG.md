@@ -6,6 +6,13 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 
+#### Iron Golem Flower Gift (Backport from 1.21.10)
+- **Flower Offering**: Iron Golems can now offer flowers to Copper Golems (like they do to Villagers)
+- **5-Second Timer**: Iron Golem looks at Copper Golem for 5 seconds before giving the flower
+- **Antenna Display**: Poppy is displayed on the Copper Golem's antenna
+- **Shear Removal**: Use shears on the Copper Golem to remove the flower
+- **Guaranteed Drop**: Flower drops when Copper Golem dies
+
 #### Copper Door (Backport from 1.21.10)
 - **All 8 Variants**: Copper Door, Exposed, Weathered, Oxidized + Waxed versions
 - **Synchronized Oxidation**: Both door halves oxidize together (only lower half triggers weathering)
