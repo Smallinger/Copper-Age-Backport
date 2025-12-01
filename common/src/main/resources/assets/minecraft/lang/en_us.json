@@ -11,7 +11,9 @@
   "item.minecraft.copper_leggings": "Copper Leggings",
   "item.minecraft.copper_boots": "Copper Boots",
   "item.minecraft.copper_horse_armor": "Copper Horse Armor",
+
   "entity.minecraft.copper_golem": "Copper Golem",
+  
   "block.minecraft.copper_chest": "Copper Chest",
   "block.minecraft.exposed_copper_chest": "Exposed Copper Chest",
   "block.minecraft.weathered_copper_chest": "Weathered Copper Chest",
@@ -20,6 +22,7 @@
   "block.minecraft.waxed_exposed_copper_chest": "Waxed Exposed Copper Chest",
   "block.minecraft.waxed_weathered_copper_chest": "Waxed Weathered Copper Chest",
   "block.minecraft.waxed_oxidized_copper_chest": "Waxed Oxidized Copper Chest",
+
   "block.copperagebackport.copper_button": "Copper Button",
   "block.copperagebackport.exposed_copper_button": "Exposed Copper Button",
   "block.copperagebackport.weathered_copper_button": "Weathered Copper Button",
@@ -28,6 +31,7 @@
   "block.copperagebackport.waxed_exposed_copper_button": "Waxed Exposed Copper Button",
   "block.copperagebackport.waxed_weathered_copper_button": "Waxed Weathered Copper Button",
   "block.copperagebackport.waxed_oxidized_copper_button": "Waxed Oxidized Copper Button",
+
   "block.minecraft.copper_golem_statue": "Copper Golem Statue",
   "block.minecraft.exposed_copper_golem_statue": "Exposed Copper Golem Statue",
   "block.minecraft.weathered_copper_golem_statue": "Weathered Copper Golem Statue",
@@ -36,6 +40,7 @@
   "block.minecraft.waxed_exposed_copper_golem_statue": "Waxed Exposed Copper Golem Statue",
   "block.minecraft.waxed_weathered_copper_golem_statue": "Waxed Weathered Copper Golem Statue",
   "block.minecraft.waxed_oxidized_copper_golem_statue": "Waxed Oxidized Copper Golem Statue",
+
   "block.minecraft.oak_shelf": "Oak Shelf",
   "block.minecraft.birch_shelf": "Birch Shelf",
   "block.minecraft.spruce_shelf": "Spruce Shelf",
@@ -48,8 +53,11 @@
   "block.minecraft.crimson_shelf": "Crimson Shelf",
   "block.minecraft.warped_shelf": "Warped Shelf",
   "block.minecraft.pale_oak_shelf": "Pale Oak Shelf",
+
   "block.minecraft.copper_torch": "Copper Torch",
+  
   "block.minecraft.copper_lantern": "Copper Lantern",
+
   "block.minecraft.exposed_copper_lantern": "Exposed Copper Lantern",
   "block.minecraft.weathered_copper_lantern": "Weathered Copper Lantern",
   "block.minecraft.oxidized_copper_lantern": "Oxidized Copper Lantern",
@@ -57,6 +65,7 @@
   "block.minecraft.waxed_exposed_copper_lantern": "Waxed Exposed Copper Lantern",
   "block.minecraft.waxed_weathered_copper_lantern": "Waxed Weathered Copper Lantern",
   "block.minecraft.waxed_oxidized_copper_lantern": "Waxed Oxidized Copper Lantern",
+
   "block.minecraft.copper_chain": "Copper Chain",
   "block.minecraft.exposed_copper_chain": "Exposed Copper Chain",
   "block.minecraft.weathered_copper_chain": "Weathered Copper Chain",
@@ -65,6 +74,7 @@
   "block.minecraft.waxed_exposed_copper_chain": "Waxed Exposed Copper Chain",
   "block.minecraft.waxed_weathered_copper_chain": "Waxed Weathered Copper Chain",
   "block.minecraft.waxed_oxidized_copper_chain": "Waxed Oxidized Copper Chain",
+
   "block.minecraft.copper_bars": "Copper Bars",
   "block.minecraft.exposed_copper_bars": "Exposed Copper Bars",
   "block.minecraft.weathered_copper_bars": "Weathered Copper Bars",
@@ -73,6 +83,7 @@
   "block.minecraft.waxed_exposed_copper_bars": "Waxed Exposed Copper Bars",
   "block.minecraft.waxed_weathered_copper_bars": "Waxed Weathered Copper Bars",
   "block.minecraft.waxed_oxidized_copper_bars": "Waxed Oxidized Copper Bars",
+
   "block.minecraft.copper_trapdoor": "Copper Trapdoor",
   "block.minecraft.exposed_copper_trapdoor": "Exposed Copper Trapdoor",
   "block.minecraft.weathered_copper_trapdoor": "Weathered Copper Trapdoor",
@@ -81,6 +92,7 @@
   "block.minecraft.waxed_exposed_copper_trapdoor": "Waxed Exposed Copper Trapdoor",
   "block.minecraft.waxed_weathered_copper_trapdoor": "Waxed Weathered Copper Trapdoor",
   "block.minecraft.waxed_oxidized_copper_trapdoor": "Waxed Oxidized Copper Trapdoor",
+
   "block.minecraft.exposed_lightning_rod": "Exposed Lightning Rod",
   "block.minecraft.weathered_lightning_rod": "Weathered Lightning Rod",
   "block.minecraft.oxidized_lightning_rod": "Oxidized Lightning Rod",
@@ -88,6 +100,43 @@
   "block.minecraft.waxed_exposed_lightning_rod": "Waxed Exposed Lightning Rod",
   "block.minecraft.waxed_weathered_lightning_rod": "Waxed Weathered Lightning Rod",
   "block.minecraft.waxed_oxidized_lightning_rod": "Waxed Oxidized Lightning Rod",
+
+  "block.minecraft.copper_bulb": "Copper Bulb",
+  "block.minecraft.exposed_copper_bulb": "Exposed Copper Bulb",
+  "block.minecraft.weathered_copper_bulb": "Weathered Copper Bulb",
+  "block.minecraft.oxidized_copper_bulb": "Oxidized Copper Bulb",
+  "block.minecraft.waxed_copper_bulb": "Waxed Copper Bulb",
+  "block.minecraft.waxed_exposed_copper_bulb": "Waxed Exposed Copper Bulb",
+  "block.minecraft.waxed_weathered_copper_bulb": "Waxed Weathered Copper Bulb",
+  "block.minecraft.waxed_oxidized_copper_bulb": "Waxed Oxidized Copper Bulb",
+
+  "block.minecraft.copper_grate": "Copper Grate",
+  "block.minecraft.exposed_copper_grate": "Exposed Copper Grate",
+  "block.minecraft.weathered_copper_grate": "Weathered Copper Grate",
+  "block.minecraft.oxidized_copper_grate": "Oxidized Copper Grate",
+  "block.minecraft.waxed_copper_grate": "Waxed Copper Grate",
+  "block.minecraft.waxed_exposed_copper_grate": "Waxed Exposed Copper Grate",
+  "block.minecraft.waxed_weathered_copper_grate": "Waxed Weathered Copper Grate",
+  "block.minecraft.waxed_oxidized_copper_grate": "Waxed Oxidized Copper Grate",
+
+  "block.minecraft.chiseled_copper": "Chiseled Copper",
+  "block.minecraft.exposed_chiseled_copper": "Exposed Chiseled Copper",
+  "block.minecraft.weathered_chiseled_copper": "Weathered Chiseled Copper",
+  "block.minecraft.oxidized_chiseled_copper": "Oxidized Chiseled Copper",
+  "block.minecraft.waxed_chiseled_copper": "Waxed Chiseled Copper",
+  "block.minecraft.waxed_exposed_chiseled_copper": "Waxed Exposed Chiseled Copper",
+  "block.minecraft.waxed_weathered_chiseled_copper": "Waxed Weathered Chiseled Copper",
+  "block.minecraft.waxed_oxidized_chiseled_copper": "Waxed Oxidized Chiseled Copper",
+
+  "block.minecraft.copper_door": "Copper Door",
+  "block.minecraft.exposed_copper_door": "Exposed Copper Door",
+  "block.minecraft.weathered_copper_door": "Weathered Copper Door",
+  "block.minecraft.oxidized_copper_door": "Oxidized Copper Door",
+  "block.minecraft.waxed_copper_door": "Waxed Copper Door",
+  "block.minecraft.waxed_exposed_copper_door": "Waxed Exposed Copper Door",
+  "block.minecraft.waxed_weathered_copper_door": "Waxed Weathered Copper Door",
+  "block.minecraft.waxed_oxidized_copper_door": "Waxed Oxidized Copper Door",
+
   "subtitles.entity.copper_golem.death": "Copper Golem dies",
   "subtitles.entity.copper_golem.hurt": "Copper Golem hurts",
   "subtitles.entity.copper_golem.step": "Copper Golem steps",
@@ -109,7 +158,10 @@
   "subtitles.block.shelf.place_item": "Item placed in shelf",
   "subtitles.block.shelf.take_item": "Item taken from shelf",
   "subtitles.block.shelf.swap": "Items swapped in shelf",
+  "subtitles.block.copper_bulb.turn_on": "Copper Bulb turns on",
+  "subtitles.block.copper_bulb.turn_off": "Copper Bulb turns off",
   "subtitles.weather.end_flash": "End flashes",
+
   "config.copperagebackport.title": "Copper Age Backport Settings",
   "config.copperagebackport.search": "Search...",
   "config.copperagebackport.page.golem": "Copper Golem",
@@ -141,5 +193,5 @@
   "config.copperagebackport.page.visual": "Visual Effects",
   "config.copperagebackport.group.end": "End Dimension",
   "config.copperagebackport.end_flash_enabled": "End Sky Flashes",
-  "config.copperagebackport.end_flash_enabled.tooltip": "Enable or disable the white sky flashing effect in the End dimension. This is a new feature from Minecraft 1.21.10. Disable if you find it distracting or have photosensitivity. Requires world rejoin to take effect."
+  "config.copperagebackport.end_flash_enabled.tooltip": "Enable or disable the pruple sky flashing effect in the End dimension.\nThis is a new feature from Minecraft 1.21.10. Disable if you find it distracting or have photosensitivity.\nRequires world rejoin to take effect."
 }
