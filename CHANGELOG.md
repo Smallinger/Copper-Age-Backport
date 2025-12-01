@@ -2,6 +2,37 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.21.1] - 0.1.4 - In Development
+
+### Added
+
+#### Missing Loot Tables
+- **Copper Chain**: Added loot tables for all 8 copper chain variants
+- **Copper Trapdoor**: Added loot tables for all 8 copper trapdoor variants
+- **Waxed Trapdoor Recipes**: Added honeycomb waxing recipes for all copper trapdoor variants
+
+#### Missing Recipes
+- **Combined Smelting/Blasting**: Replaced 10 individual copper tool/armor smelting recipes with 2 combined recipes
+  - `copper_nugget_from_smelting.json` - All copper equipment in one recipe
+  - `copper_nugget_from_blasting.json` - Faster blasting variant
+
+### Fixed
+
+#### Block Mining Tags
+- **needs_stone_tool**: Added missing entries for copper lanterns, chains, and trapdoors
+- **mineable/pickaxe**: Added copper trapdoors to pickaxe mineable list
+- **mineable/axe**: Added pale_oak_shelf (optional) for VanillaBackport compatibility
+
+### Improved
+
+#### Copper Golem Mod Compatibility
+- **Extended container support**: Copper Golem now recognizes all containers that extend `ChestBlock` or `BarrelBlock`
+  - Supports Woodworks closets, Quark chests, and any other mod that extends vanilla container classes
+  - Previously only recognized exact vanilla chest/barrel blocks by ID
+- **Better detection logic**: Changed from `state.is(Blocks.CHEST)` to `instanceof ChestBlock` for proper inheritance support
+
+---
+
 ## [1.21.1] - 0.1.3 - 30.11.2025
 
 ### Added

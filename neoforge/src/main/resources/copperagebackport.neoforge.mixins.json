@@ -11,8 +11,8 @@
   ],
   "client": [
     "client.ClientLevelMixin",
-    "client.LightTextureMixin",
-    "client.LevelRendererMixin"
+    "client.LevelRendererMixin",
+    "client.LightTextureMixin"
   ],
   "injectors": {
     "defaultRequire": 1

@@ -11,6 +11,10 @@
     "minecraft:cherry_shelf",
     "minecraft:bamboo_shelf",
     "minecraft:crimson_shelf",
-    "minecraft:warped_shelf"
+    "minecraft:warped_shelf",
+    {
+      "id": "minecraft:pale_oak_shelf",
+      "required": false
+    }
   ]
 }
