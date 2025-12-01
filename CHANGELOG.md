@@ -2,6 +2,47 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.20.1] - 0.1.4 - In Development
+
+### Added
+
+#### Missing Loot Tables
+- **Copper Chain**: Added loot tables for all 8 copper chain variants
+- **Copper Bars**: Added loot tables for all 8 copper bars variants
+- **Copper Lantern**: Added loot tables for all 8 copper lantern variants
+- **Lightning Rod**: Added base lightning_rod loot table
+
+#### Missing Recipes
+- **Pale Oak Shelf**: Added recipe with Forge/Fabric load conditions for VanillaBackport compatibility
+
+#### Missing Tags
+- **blocks/copper.json**: Tag for copper blocks
+- **blocks/copper_chests.json**: Tag for copper chest variants
+- **blocks/lightning_rods.json**: Tag for lightning rod variants
+- **blocks/wooden_shelves.json**: Tag for wooden shelf variants
+- **items/lightning_rods.json**: Item tag for lightning rods
+- **items/stripped_pale_oak_log.json**: Item tag for VanillaBackport compatibility
+
+### Fixed
+
+#### Block Mining Tags
+- **needs_stone_tool**: Added missing entries for lightning rods, copper lanterns, chains, and trapdoors
+- **mineable/pickaxe**: Added copper trapdoors to pickaxe mineable list
+- **mineable/axe**: Added pale_oak_shelf (optional) for VanillaBackport compatibility
+
+#### End Flash Consistency
+- **LightTextureMixin**: Synchronized End Flash implementation with 1.21.1 version for identical behavior
+
+### Improved
+
+#### Copper Golem Mod Compatibility
+- **Extended container support**: Copper Golem now recognizes all containers that extend `ChestBlock` or `BarrelBlock`
+  - Supports Woodworks closets, Quark chests, and any other mod that extends vanilla container classes
+  - Previously only recognized exact vanilla chest/barrel blocks by ID
+- **Better detection logic**: Changed from `state.is(Blocks.CHEST)` to `instanceof ChestBlock` for proper inheritance support
+
+---
+
 ## [1.20.1] - 0.1.3 - 30.11.2025
 
 ### Added

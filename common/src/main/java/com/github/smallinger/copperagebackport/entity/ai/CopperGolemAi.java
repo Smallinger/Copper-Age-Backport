@@ -1,5 +1,6 @@
 package com.github.smallinger.copperagebackport.entity.ai;
 
+import com.github.smallinger.copperagebackport.Constants;
 import com.github.smallinger.copperagebackport.ModMemoryTypes;
 import com.github.smallinger.copperagebackport.ModSounds;
 import com.github.smallinger.copperagebackport.ModTags;
@@ -28,7 +29,9 @@ import net.minecraft.world.entity.ai.sensing.Sensor;
 import net.minecraft.world.entity.ai.sensing.SensorType;
 import net.minecraft.world.entity.schedule.Activity;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.BarrelBlock;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.ChestBlock;
 import net.minecraft.world.level.block.state.BlockState;
 
 import javax.annotation.Nullable;
@@ -228,26 +231,41 @@ public class CopperGolemAi {
         if (blockState.is(ModTags.Blocks.COPPER_CHESTS)) {
             // Copper Chest Sound
             soundEvent = open ? ModSounds.COPPER_CHEST_OPEN.get() : ModSounds.COPPER_CHEST_CLOSE.get();
-        } else if (blockState.is(Blocks.BARREL)) {
-            // Barrel Sound
+        } else if (blockState.getBlock() instanceof BarrelBlock) {
+            // Barrel Sound (vanilla + mods extending BarrelBlock)
             soundEvent = open ? SoundEvents.BARREL_OPEN : SoundEvents.BARREL_CLOSE;
         } else {
-            // Regular Chest Sound (default)
+            // Regular Chest Sound (default for ChestBlock and other containers)
             soundEvent = open ? SoundEvents.CHEST_OPEN : SoundEvents.CHEST_CLOSE;
         }
         
         level.playSound(null, pos, soundEvent, SoundSource.BLOCKS, 0.5F, level.random.nextFloat() * 0.1F + 0.9F);
         
-        // Trigger container animation
-        net.minecraft.world.level.block.entity.BlockEntity blockEntity = level.getBlockEntity(pos);
-        if (blockEntity != null) {
-            if (blockState.is(Blocks.BARREL)) {
-                // Barrels use BlockState property for animation
-                level.setBlock(pos, blockState.setValue(net.minecraft.world.level.block.BarrelBlock.OPEN, open), 3);
-            } else {
-                // Try blockEvent for chest-like containers (vanilla chests)
-                level.blockEvent(pos, blockState.getBlock(), 1, open ? 1 : 0);
+        // Trigger container animation safely (wrapped in try-catch for mod compatibility)
+        // Some mods extend ChestBlock/BarrelBlock but override properties or behavior
+        try {
+            net.minecraft.world.level.block.entity.BlockEntity blockEntity = level.getBlockEntity(pos);
+            if (blockEntity != null) {
+                // Try BarrelBlock animation via OPEN property
+                if (blockState.getBlock() instanceof BarrelBlock) {
+                    // Check if the block has the OPEN property before setting it
+                    if (blockState.hasProperty(net.minecraft.world.level.block.BarrelBlock.OPEN)) {
+                        level.setBlock(pos, blockState.setValue(net.minecraft.world.level.block.BarrelBlock.OPEN, open), 3);
+                    }
+                }
+                // Try ChestBlock animation via blockEvent
+                else if (blockState.getBlock() instanceof ChestBlock) {
+                    level.blockEvent(pos, blockState.getBlock(), 1, open ? 1 : 0);
+                }
+                // Fallback for other containers: try blockEvent (safe, won't crash if not implemented)
+                else {
+                    level.blockEvent(pos, blockState.getBlock(), 1, open ? 1 : 0);
+                }
             }
+        } catch (Exception e) {
+            // Silently ignore animation errors - the item transfer still works
+            // This can happen with modded containers that have non-standard implementations
+            Constants.LOG.debug("Failed to animate container at {}: {}", pos, e.getMessage());
         }
         
         // GameEvent for other systems
@@ -284,13 +302,25 @@ public class CopperGolemAi {
     /**
      * Prüft ob ein BlockState ein gültiges Ziel für Item-Transport ist.
      * Unterstützt Vanilla Chests, Barrels und mod-kompatible Container.
+     * Auch Mod-Chests die von ChestBlock erben (z.B. Woodworks, Quark) werden erkannt.
+     * WICHTIG: Copper Chests sind ausgeschlossen (sind nur Source, nicht Destination)!
      */
     private static boolean isValidDestinationContainer(BlockState state) {
-        // Vanilla containers
-        if (state.is(Blocks.CHEST) || state.is(Blocks.TRAPPED_CHEST) || state.is(Blocks.BARREL)) {
+        // WICHTIG: Copper Chests sind keine gültigen Ziele (nur Quellen)!
+        // Sonst würde der Golem Items zwischen Copper Chests hin und her schieben
+        if (state.is(ModTags.Blocks.COPPER_CHESTS)) {
+            return false;
+        }
+        
+        // Check if block extends ChestBlock (covers Vanilla + Woodworks + Quark + other mods)
+        if (state.getBlock() instanceof ChestBlock) {
             return true;
         }
-        // ModCompat containers (SophisticatedStorage, etc.)
+        // Check if block extends BarrelBlock (covers Vanilla + mods)
+        if (state.getBlock() instanceof BarrelBlock) {
+            return true;
+        }
+        // ModCompat containers (SophisticatedStorage, IronChests, etc. that don't extend ChestBlock)
         return ModCompat.isValidModContainer(state);
     }
     
