@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.20.1] - 0.1.5 - In Development
+
+### Added
+
+#### Config Options
+- **End Flash Toggle**: New config option to enable/disable the End sky flash effect
+  - Found in the new "Visual Effects" config page
+  - Disables the flash texture, purple tint, and sound when turned off
+  - Useful for players with photosensitivity
+  - Requires world rejoin to take effect
+
 ## [1.20.1] - 0.1.4 - 01.12.2025
 
 ### Added

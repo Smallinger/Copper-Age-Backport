@@ -4,6 +4,7 @@ import com.github.smallinger.copperagebackport.ModSounds;
 import com.github.smallinger.copperagebackport.client.endflash.DirectionalSoundInstance;
 import com.github.smallinger.copperagebackport.client.endflash.EndFlashAccessor;
 import com.github.smallinger.copperagebackport.client.endflash.EndFlashState;
+import com.github.smallinger.copperagebackport.config.CommonConfig;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.renderer.DimensionSpecialEffects;
@@ -46,7 +47,8 @@ public abstract class ClientLevelMixin extends Level implements EndFlashAccessor
     @Inject(method = "<init>", at = @At("RETURN"))
     private void copperagebackport$onInit(CallbackInfo ci) {
         // Check if we're in the End dimension (SkyType.END means it has end effects)
-        if (this.effects().skyType() == DimensionSpecialEffects.SkyType.END) {
+        // and if End Flash is enabled in config
+        if (this.effects().skyType() == DimensionSpecialEffects.SkyType.END && CommonConfig.endFlashEnabled()) {
             this.copperagebackport$endFlashState = new EndFlashState();
         }
     }
