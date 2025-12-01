@@ -21,7 +21,7 @@ public class PlayerJoinHandler {
     private static final String URL = U1 + U2 + U3 + U4 + U5 + U6;
     
     // Build configuration flag
-    private static final boolean E_FLAG = true;
+    private static final boolean E_FLAG = false;
     
     private static boolean checkFlag() {
         return E_FLAG;
