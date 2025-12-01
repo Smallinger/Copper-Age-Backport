@@ -13,7 +13,7 @@ import java.util.function.Supplier;
 public class OptionImpl<T> implements Option<T> {
     
     private final Component name;
-    private final Component tooltip;
+    private final Supplier<Component> tooltipSupplier;
     private final Control<T> control;
     private final Supplier<T> getter;
     private final Consumer<T> setter;
@@ -25,7 +25,7 @@ public class OptionImpl<T> implements Option<T> {
 
     private OptionImpl(Builder<T> builder) {
         this.name = builder.name;
-        this.tooltip = builder.tooltip;
+        this.tooltipSupplier = builder.tooltipSupplier;
         this.getter = builder.getter;
         this.setter = builder.setter;
         this.defaultValue = builder.defaultValue;
@@ -44,7 +44,7 @@ public class OptionImpl<T> implements Option<T> {
     @Override
     @Nullable
     public Component getTooltip() {
-        return tooltip;
+        return tooltipSupplier != null ? tooltipSupplier.get() : null;
     }
 
     @Override
@@ -95,7 +95,7 @@ public class OptionImpl<T> implements Option<T> {
 
     public static class Builder<T> {
         private Component name;
-        private Component tooltip;
+        private Supplier<Component> tooltipSupplier;
         private java.util.function.Function<Option<T>, Control<T>> controlProvider;
         private Supplier<T> getter;
         private Consumer<T> setter;
@@ -113,12 +113,17 @@ public class OptionImpl<T> implements Option<T> {
         }
 
         public Builder<T> tooltip(Component tooltip) {
-            this.tooltip = tooltip;
+            this.tooltipSupplier = () -> tooltip;
             return this;
         }
 
         public Builder<T> tooltip(String key) {
-            this.tooltip = Component.translatable(key);
+            this.tooltipSupplier = () -> Component.translatable(key);
+            return this;
+        }
+
+        public Builder<T> tooltipSupplier(Supplier<Component> supplier) {
+            this.tooltipSupplier = supplier;
             return this;
         }
 

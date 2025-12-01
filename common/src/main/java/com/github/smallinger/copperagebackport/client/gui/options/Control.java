@@ -26,4 +26,13 @@ public interface Control<T> {
      * @return The width in pixels
      */
     int getMaxWidth();
+    
+    /**
+     * Gets the height needed for this control.
+     * @param availableWidth The available width for the control
+     * @return The height in pixels (default 18)
+     */
+    default int getHeight(int availableWidth) {
+        return 18;
+    }
 }

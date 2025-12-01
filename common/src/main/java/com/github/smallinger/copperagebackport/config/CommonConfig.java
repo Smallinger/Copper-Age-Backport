@@ -125,7 +125,14 @@ public final class CommonConfig {
 
     /**
      * Should Lightning Rods oxidize over time?
-     * Disable this if using another mod that handles Lightning Rod oxidation (e.g., Friends and Foes).
+     * 
+     * This setting controls whether Copper Age Backport adds oxidation to vanilla Lightning Rods.
+     * 
+     * Compatibility with Friends and Foes:
+     * - If FnF is loaded AND has oxidation enabled: This setting is ignored, FnF handles it
+     * - If FnF is loaded AND has oxidation disabled: This setting takes effect
+     * - If FnF is not loaded: This setting takes effect
+     * 
      * Default: true
      */
     public static boolean lightningRodOxidation() {

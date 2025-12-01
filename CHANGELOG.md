@@ -23,7 +23,23 @@ All notable changes to this project will be documented in this file.
 - **mineable/pickaxe**: Added copper trapdoors to pickaxe mineable list
 - **mineable/axe**: Added pale_oak_shelf (optional) for VanillaBackport compatibility
 
+#### Friends and Foes Compatibility
+- **Lightning Rod Oxidation**: Fixed conflict with Friends and Foes mod
+  - Lightning Rod now always oxidizes to Copper Age Backport blocks, not F&F blocks
+  - Bypasses static WeatheringCopper maps that F&F overrides via DataMapHooks
+  - Direct block setting in randomTick() ensures our oxidation chain is used
+  - Added conversion recipe: F&F lightning rods → CAB variants (1:1 crafting)
+  - Config screen now shows informational text explaining the mixin situation
+
 ### Improved
+
+#### Config Screen UI
+- **Group Headers**: Option groups now display their names as headers above the options
+- **TextBox Control**: New multi-line text display for informational messages
+  - Supports paragraph breaks with proper spacing
+  - Dynamic height calculation based on text content
+  - Background extends to cover entire text area
+- **Compatibility Page**: Added new page explaining mod compatibility details
 
 #### Copper Golem Mod Compatibility
 - **Extended container support**: Copper Golem now recognizes all containers that extend `ChestBlock` or `BarrelBlock`
