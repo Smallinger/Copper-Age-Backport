@@ -134,6 +134,54 @@ public class ModBlocks {
     public static Supplier<WaxedCopperTrapDoorBlock> WAXED_WEATHERED_COPPER_TRAPDOOR;
     public static Supplier<WaxedCopperTrapDoorBlock> WAXED_OXIDIZED_COPPER_TRAPDOOR;
     
+    // Copper Bulb Blocks (Weathering)
+    public static Supplier<WeatheringCopperBulbBlock> COPPER_BULB;
+    public static Supplier<WeatheringCopperBulbBlock> EXPOSED_COPPER_BULB;
+    public static Supplier<WeatheringCopperBulbBlock> WEATHERED_COPPER_BULB;
+    public static Supplier<CopperBulbBlock> OXIDIZED_COPPER_BULB;
+    
+    // Waxed Copper Bulb Blocks
+    public static Supplier<WaxedCopperBulbBlock> WAXED_COPPER_BULB;
+    public static Supplier<WaxedCopperBulbBlock> WAXED_EXPOSED_COPPER_BULB;
+    public static Supplier<WaxedCopperBulbBlock> WAXED_WEATHERED_COPPER_BULB;
+    public static Supplier<WaxedCopperBulbBlock> WAXED_OXIDIZED_COPPER_BULB;
+    
+    // Copper Grate Blocks (Weathering)
+    public static Supplier<Block> COPPER_GRATE;
+    public static Supplier<Block> EXPOSED_COPPER_GRATE;
+    public static Supplier<Block> WEATHERED_COPPER_GRATE;
+    public static Supplier<Block> OXIDIZED_COPPER_GRATE;
+    
+    // Waxed Copper Grate Blocks
+    public static Supplier<Block> WAXED_COPPER_GRATE;
+    public static Supplier<Block> WAXED_EXPOSED_COPPER_GRATE;
+    public static Supplier<Block> WAXED_WEATHERED_COPPER_GRATE;
+    public static Supplier<Block> WAXED_OXIDIZED_COPPER_GRATE;
+    
+    // Chiseled Copper Blocks (Weathering)
+    public static Supplier<Block> CHISELED_COPPER;
+    public static Supplier<Block> EXPOSED_CHISELED_COPPER;
+    public static Supplier<Block> WEATHERED_CHISELED_COPPER;
+    public static Supplier<Block> OXIDIZED_CHISELED_COPPER;
+    
+    // Waxed Chiseled Copper Blocks
+    public static Supplier<Block> WAXED_CHISELED_COPPER;
+    public static Supplier<Block> WAXED_EXPOSED_CHISELED_COPPER;
+    public static Supplier<Block> WAXED_WEATHERED_CHISELED_COPPER;
+    public static Supplier<Block> WAXED_OXIDIZED_CHISELED_COPPER;
+    
+    // Copper Door Blocks (Weathering)
+    public static Supplier<WeatheringCopperDoorBlock> COPPER_DOOR;
+    public static Supplier<WeatheringCopperDoorBlock> EXPOSED_COPPER_DOOR;
+    public static Supplier<WeatheringCopperDoorBlock> WEATHERED_COPPER_DOOR;
+    public static Supplier<WeatheringCopperDoorBlock> OXIDIZED_COPPER_DOOR;
+    
+    // Waxed Copper Door Blocks
+    public static Supplier<CopperDoorBlock> WAXED_COPPER_DOOR;
+    public static Supplier<CopperDoorBlock> WAXED_EXPOSED_COPPER_DOOR;
+    public static Supplier<CopperDoorBlock> WAXED_WEATHERED_COPPER_DOOR;
+    public static Supplier<CopperDoorBlock> WAXED_OXIDIZED_COPPER_DOOR;
+    
     public static void register() {
         Constants.LOG.info("Registering blocks for {}", Constants.MOD_NAME);
         
@@ -789,6 +837,306 @@ public class ModBlocks {
                     .sound(SoundType.COPPER)
                     .noOcclusion()));
         
+        // Register Copper Bulb Blocks (Weathering)
+        COPPER_BULB = helper.registerAuto(BLOCK, "copper_bulb",
+            () -> new WeatheringCopperBulbBlock(
+                WeatheringCopper.WeatherState.UNAFFECTED,
+                BlockBehaviour.Properties.of()
+                    .requiresCorrectToolForDrops()
+                    .strength(3.0F, 6.0F)
+                    .sound(SoundType.COPPER)
+                    .lightLevel(CopperBulbBlock::getLightLevelUnaffected)
+                    .randomTicks()));
+        
+        EXPOSED_COPPER_BULB = helper.registerAuto(BLOCK, "exposed_copper_bulb",
+            () -> new WeatheringCopperBulbBlock(
+                WeatheringCopper.WeatherState.EXPOSED,
+                BlockBehaviour.Properties.of()
+                    .requiresCorrectToolForDrops()
+                    .strength(3.0F, 6.0F)
+                    .sound(SoundType.COPPER)
+                    .lightLevel(CopperBulbBlock::getLightLevelExposed)
+                    .randomTicks()));
+        
+        WEATHERED_COPPER_BULB = helper.registerAuto(BLOCK, "weathered_copper_bulb",
+            () -> new WeatheringCopperBulbBlock(
+                WeatheringCopper.WeatherState.WEATHERED,
+                BlockBehaviour.Properties.of()
+                    .requiresCorrectToolForDrops()
+                    .strength(3.0F, 6.0F)
+                    .sound(SoundType.COPPER)
+                    .lightLevel(CopperBulbBlock::getLightLevelWeathered)
+                    .randomTicks()));
+        
+        OXIDIZED_COPPER_BULB = helper.registerAuto(BLOCK, "oxidized_copper_bulb",
+            () -> new CopperBulbBlock(
+                WeatheringCopper.WeatherState.OXIDIZED,
+                BlockBehaviour.Properties.of()
+                    .requiresCorrectToolForDrops()
+                    .strength(3.0F, 6.0F)
+                    .sound(SoundType.COPPER)
+                    .lightLevel(CopperBulbBlock::getLightLevelOxidized)));
+        
+        // Register Waxed Copper Bulb Blocks
+        WAXED_COPPER_BULB = helper.registerAuto(BLOCK, "waxed_copper_bulb",
+            () -> new WaxedCopperBulbBlock(
+                WeatheringCopper.WeatherState.UNAFFECTED,
+                COPPER_BULB,
+                BlockBehaviour.Properties.of()
+                    .requiresCorrectToolForDrops()
+                    .strength(3.0F, 6.0F)
+                    .sound(SoundType.COPPER)
+                    .lightLevel(CopperBulbBlock::getLightLevelUnaffected)));
+        
+        WAXED_EXPOSED_COPPER_BULB = helper.registerAuto(BLOCK, "waxed_exposed_copper_bulb",
+            () -> new WaxedCopperBulbBlock(
+                WeatheringCopper.WeatherState.EXPOSED,
+                EXPOSED_COPPER_BULB,
+                BlockBehaviour.Properties.of()
+                    .requiresCorrectToolForDrops()
+                    .strength(3.0F, 6.0F)
+                    .sound(SoundType.COPPER)
+                    .lightLevel(CopperBulbBlock::getLightLevelExposed)));
+        
+        WAXED_WEATHERED_COPPER_BULB = helper.registerAuto(BLOCK, "waxed_weathered_copper_bulb",
+            () -> new WaxedCopperBulbBlock(
+                WeatheringCopper.WeatherState.WEATHERED,
+                WEATHERED_COPPER_BULB,
+                BlockBehaviour.Properties.of()
+                    .requiresCorrectToolForDrops()
+                    .strength(3.0F, 6.0F)
+                    .sound(SoundType.COPPER)
+                    .lightLevel(CopperBulbBlock::getLightLevelWeathered)));
+        
+        WAXED_OXIDIZED_COPPER_BULB = helper.registerAuto(BLOCK, "waxed_oxidized_copper_bulb",
+            () -> new WaxedCopperBulbBlock(
+                WeatheringCopper.WeatherState.OXIDIZED,
+                OXIDIZED_COPPER_BULB,
+                BlockBehaviour.Properties.of()
+                    .requiresCorrectToolForDrops()
+                    .strength(3.0F, 6.0F)
+                    .sound(SoundType.COPPER)
+                    .lightLevel(CopperBulbBlock::getLightLevelOxidized)));
+        
+        // Register Copper Grate Blocks (Weathering)
+        COPPER_GRATE = helper.registerAuto(BLOCK, "copper_grate",
+            () -> new WeatheringCopperGrateBlock(
+                WeatheringCopper.WeatherState.UNAFFECTED,
+                BlockBehaviour.Properties.of()
+                    .requiresCorrectToolForDrops()
+                    .strength(3.0F, 6.0F)
+                    .sound(ModSoundTypes.COPPER_GRATE)
+                    .noOcclusion()
+                    .randomTicks()));
+        
+        EXPOSED_COPPER_GRATE = helper.registerAuto(BLOCK, "exposed_copper_grate",
+            () -> new WeatheringCopperGrateBlock(
+                WeatheringCopper.WeatherState.EXPOSED,
+                BlockBehaviour.Properties.of()
+                    .requiresCorrectToolForDrops()
+                    .strength(3.0F, 6.0F)
+                    .sound(ModSoundTypes.COPPER_GRATE)
+                    .noOcclusion()
+                    .randomTicks()));
+        
+        WEATHERED_COPPER_GRATE = helper.registerAuto(BLOCK, "weathered_copper_grate",
+            () -> new WeatheringCopperGrateBlock(
+                WeatheringCopper.WeatherState.WEATHERED,
+                BlockBehaviour.Properties.of()
+                    .requiresCorrectToolForDrops()
+                    .strength(3.0F, 6.0F)
+                    .sound(ModSoundTypes.COPPER_GRATE)
+                    .noOcclusion()
+                    .randomTicks()));
+        
+        OXIDIZED_COPPER_GRATE = helper.registerAuto(BLOCK, "oxidized_copper_grate",
+            () -> new CopperGrateBlock(
+                WeatheringCopper.WeatherState.OXIDIZED,
+                BlockBehaviour.Properties.of()
+                    .requiresCorrectToolForDrops()
+                    .strength(3.0F, 6.0F)
+                    .sound(ModSoundTypes.COPPER_GRATE)
+                    .noOcclusion()));
+        
+        // Register Waxed Copper Grate Blocks
+        WAXED_COPPER_GRATE = helper.registerAuto(BLOCK, "waxed_copper_grate",
+            () -> new CopperGrateBlock(
+                WeatheringCopper.WeatherState.UNAFFECTED,
+                BlockBehaviour.Properties.of()
+                    .requiresCorrectToolForDrops()
+                    .strength(3.0F, 6.0F)
+                    .sound(ModSoundTypes.COPPER_GRATE)
+                    .noOcclusion()));
+        
+        WAXED_EXPOSED_COPPER_GRATE = helper.registerAuto(BLOCK, "waxed_exposed_copper_grate",
+            () -> new CopperGrateBlock(
+                WeatheringCopper.WeatherState.EXPOSED,
+                BlockBehaviour.Properties.of()
+                    .requiresCorrectToolForDrops()
+                    .strength(3.0F, 6.0F)
+                    .sound(ModSoundTypes.COPPER_GRATE)
+                    .noOcclusion()));
+        
+        WAXED_WEATHERED_COPPER_GRATE = helper.registerAuto(BLOCK, "waxed_weathered_copper_grate",
+            () -> new CopperGrateBlock(
+                WeatheringCopper.WeatherState.WEATHERED,
+                BlockBehaviour.Properties.of()
+                    .requiresCorrectToolForDrops()
+                    .strength(3.0F, 6.0F)
+                    .sound(ModSoundTypes.COPPER_GRATE)
+                    .noOcclusion()));
+        
+        WAXED_OXIDIZED_COPPER_GRATE = helper.registerAuto(BLOCK, "waxed_oxidized_copper_grate",
+            () -> new CopperGrateBlock(
+                WeatheringCopper.WeatherState.OXIDIZED,
+                BlockBehaviour.Properties.of()
+                    .requiresCorrectToolForDrops()
+                    .strength(3.0F, 6.0F)
+                    .sound(ModSoundTypes.COPPER_GRATE)
+                    .noOcclusion()));
+        
+        // Register Chiseled Copper Blocks (Weathering)
+        CHISELED_COPPER = helper.registerAuto(BLOCK, "chiseled_copper",
+            () -> new WeatheringChiseledCopperBlock(
+                WeatheringCopper.WeatherState.UNAFFECTED,
+                BlockBehaviour.Properties.of()
+                    .requiresCorrectToolForDrops()
+                    .strength(3.0F, 6.0F)
+                    .sound(SoundType.COPPER)
+                    .randomTicks()));
+        
+        EXPOSED_CHISELED_COPPER = helper.registerAuto(BLOCK, "exposed_chiseled_copper",
+            () -> new WeatheringChiseledCopperBlock(
+                WeatheringCopper.WeatherState.EXPOSED,
+                BlockBehaviour.Properties.of()
+                    .requiresCorrectToolForDrops()
+                    .strength(3.0F, 6.0F)
+                    .sound(SoundType.COPPER)
+                    .randomTicks()));
+        
+        WEATHERED_CHISELED_COPPER = helper.registerAuto(BLOCK, "weathered_chiseled_copper",
+            () -> new WeatheringChiseledCopperBlock(
+                WeatheringCopper.WeatherState.WEATHERED,
+                BlockBehaviour.Properties.of()
+                    .requiresCorrectToolForDrops()
+                    .strength(3.0F, 6.0F)
+                    .sound(SoundType.COPPER)
+                    .randomTicks()));
+        
+        OXIDIZED_CHISELED_COPPER = helper.registerAuto(BLOCK, "oxidized_chiseled_copper",
+            () -> new ChiseledCopperBlock(
+                WeatheringCopper.WeatherState.OXIDIZED,
+                BlockBehaviour.Properties.of()
+                    .requiresCorrectToolForDrops()
+                    .strength(3.0F, 6.0F)
+                    .sound(SoundType.COPPER)));
+        
+        // Register Waxed Chiseled Copper Blocks
+        WAXED_CHISELED_COPPER = helper.registerAuto(BLOCK, "waxed_chiseled_copper",
+            () -> new ChiseledCopperBlock(
+                WeatheringCopper.WeatherState.UNAFFECTED,
+                BlockBehaviour.Properties.of()
+                    .requiresCorrectToolForDrops()
+                    .strength(3.0F, 6.0F)
+                    .sound(SoundType.COPPER)));
+        
+        WAXED_EXPOSED_CHISELED_COPPER = helper.registerAuto(BLOCK, "waxed_exposed_chiseled_copper",
+            () -> new ChiseledCopperBlock(
+                WeatheringCopper.WeatherState.EXPOSED,
+                BlockBehaviour.Properties.of()
+                    .requiresCorrectToolForDrops()
+                    .strength(3.0F, 6.0F)
+                    .sound(SoundType.COPPER)));
+        
+        WAXED_WEATHERED_CHISELED_COPPER = helper.registerAuto(BLOCK, "waxed_weathered_chiseled_copper",
+            () -> new ChiseledCopperBlock(
+                WeatheringCopper.WeatherState.WEATHERED,
+                BlockBehaviour.Properties.of()
+                    .requiresCorrectToolForDrops()
+                    .strength(3.0F, 6.0F)
+                    .sound(SoundType.COPPER)));
+        
+        WAXED_OXIDIZED_CHISELED_COPPER = helper.registerAuto(BLOCK, "waxed_oxidized_chiseled_copper",
+            () -> new ChiseledCopperBlock(
+                WeatheringCopper.WeatherState.OXIDIZED,
+                BlockBehaviour.Properties.of()
+                    .requiresCorrectToolForDrops()
+                    .strength(3.0F, 6.0F)
+                    .sound(SoundType.COPPER)));
+        
+        // Register Copper Door Blocks
+        COPPER_DOOR = helper.registerAuto(BLOCK, "copper_door",
+            () -> new WeatheringCopperDoorBlock(
+                WeatheringCopper.WeatherState.UNAFFECTED,
+                BlockBehaviour.Properties.of()
+                    .strength(3.0F, 6.0F)
+                    .noOcclusion()
+                    .pushReaction(PushReaction.DESTROY)
+                    .randomTicks()));
+        
+        EXPOSED_COPPER_DOOR = helper.registerAuto(BLOCK, "exposed_copper_door",
+            () -> new WeatheringCopperDoorBlock(
+                WeatheringCopper.WeatherState.EXPOSED,
+                BlockBehaviour.Properties.of()
+                    .strength(3.0F, 6.0F)
+                    .noOcclusion()
+                    .pushReaction(PushReaction.DESTROY)
+                    .randomTicks()));
+        
+        WEATHERED_COPPER_DOOR = helper.registerAuto(BLOCK, "weathered_copper_door",
+            () -> new WeatheringCopperDoorBlock(
+                WeatheringCopper.WeatherState.WEATHERED,
+                BlockBehaviour.Properties.of()
+                    .strength(3.0F, 6.0F)
+                    .noOcclusion()
+                    .pushReaction(PushReaction.DESTROY)
+                    .randomTicks()));
+        
+        OXIDIZED_COPPER_DOOR = helper.registerAuto(BLOCK, "oxidized_copper_door",
+            () -> new WeatheringCopperDoorBlock(
+                WeatheringCopper.WeatherState.OXIDIZED,
+                BlockBehaviour.Properties.of()
+                    .strength(3.0F, 6.0F)
+                    .noOcclusion()
+                    .pushReaction(PushReaction.DESTROY)));
+        
+        // Register Waxed Copper Door Blocks
+        WAXED_COPPER_DOOR = helper.registerAuto(BLOCK, "waxed_copper_door",
+            () -> new CopperDoorBlock(
+                WeatheringCopper.WeatherState.UNAFFECTED,
+                COPPER_DOOR,
+                BlockBehaviour.Properties.of()
+                    .strength(3.0F, 6.0F)
+                    .noOcclusion()
+                    .pushReaction(PushReaction.DESTROY)));
+        
+        WAXED_EXPOSED_COPPER_DOOR = helper.registerAuto(BLOCK, "waxed_exposed_copper_door",
+            () -> new CopperDoorBlock(
+                WeatheringCopper.WeatherState.EXPOSED,
+                EXPOSED_COPPER_DOOR,
+                BlockBehaviour.Properties.of()
+                    .strength(3.0F, 6.0F)
+                    .noOcclusion()
+                    .pushReaction(PushReaction.DESTROY)));
+        
+        WAXED_WEATHERED_COPPER_DOOR = helper.registerAuto(BLOCK, "waxed_weathered_copper_door",
+            () -> new CopperDoorBlock(
+                WeatheringCopper.WeatherState.WEATHERED,
+                WEATHERED_COPPER_DOOR,
+                BlockBehaviour.Properties.of()
+                    .strength(3.0F, 6.0F)
+                    .noOcclusion()
+                    .pushReaction(PushReaction.DESTROY)));
+        
+        WAXED_OXIDIZED_COPPER_DOOR = helper.registerAuto(BLOCK, "waxed_oxidized_copper_door",
+            () -> new CopperDoorBlock(
+                WeatheringCopper.WeatherState.OXIDIZED,
+                OXIDIZED_COPPER_DOOR,
+                BlockBehaviour.Properties.of()
+                    .strength(3.0F, 6.0F)
+                    .noOcclusion()
+                    .pushReaction(PushReaction.DESTROY)));
+        
         // Setup button references after registration
         helper.onRegisterComplete(() -> {
             COPPER_BUTTON.get().setWaxedButton(WAXED_COPPER_BUTTON);
@@ -801,6 +1149,18 @@ public class ModBlocks {
             EXPOSED_COPPER_TRAPDOOR.get().setWaxedTrapdoor(WAXED_EXPOSED_COPPER_TRAPDOOR);
             WEATHERED_COPPER_TRAPDOOR.get().setWaxedTrapdoor(WAXED_WEATHERED_COPPER_TRAPDOOR);
             OXIDIZED_COPPER_TRAPDOOR.get().setWaxedTrapdoor(WAXED_OXIDIZED_COPPER_TRAPDOOR);
+            
+            // Setup bulb references
+            COPPER_BULB.get().setWaxedBulb(WAXED_COPPER_BULB);
+            EXPOSED_COPPER_BULB.get().setWaxedBulb(WAXED_EXPOSED_COPPER_BULB);
+            WEATHERED_COPPER_BULB.get().setWaxedBulb(WAXED_WEATHERED_COPPER_BULB);
+            OXIDIZED_COPPER_BULB.get().setWaxedBulb(WAXED_OXIDIZED_COPPER_BULB);
+            
+            // Setup door references
+            COPPER_DOOR.get().setWaxedDoor(WAXED_COPPER_DOOR);
+            EXPOSED_COPPER_DOOR.get().setWaxedDoor(WAXED_EXPOSED_COPPER_DOOR);
+            WEATHERED_COPPER_DOOR.get().setWaxedDoor(WAXED_WEATHERED_COPPER_DOOR);
+            OXIDIZED_COPPER_DOOR.get().setWaxedDoor(WAXED_OXIDIZED_COPPER_DOOR);
         });
     }
     

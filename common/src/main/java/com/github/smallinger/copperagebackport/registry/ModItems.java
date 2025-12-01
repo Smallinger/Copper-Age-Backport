@@ -9,6 +9,7 @@ import com.github.smallinger.copperagebackport.item.tools.CopperSwordItem;
 import com.github.smallinger.copperagebackport.item.tools.CopperTier;
 import net.minecraft.world.item.AxeItem;
 import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.DoubleHighBlockItem;
 import net.minecraft.world.item.HoeItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.PickaxeItem;
@@ -127,6 +128,42 @@ public class ModItems {
     public static Supplier<BlockItem> WAXED_WEATHERED_COPPER_CHAIN_ITEM;
     public static Supplier<BlockItem> WAXED_OXIDIZED_COPPER_CHAIN_ITEM;
     
+    // Copper Grate Items
+    public static Supplier<BlockItem> COPPER_GRATE_ITEM;
+    public static Supplier<BlockItem> EXPOSED_COPPER_GRATE_ITEM;
+    public static Supplier<BlockItem> WEATHERED_COPPER_GRATE_ITEM;
+    public static Supplier<BlockItem> OXIDIZED_COPPER_GRATE_ITEM;
+    
+    // Waxed Copper Grate Items
+    public static Supplier<BlockItem> WAXED_COPPER_GRATE_ITEM;
+    public static Supplier<BlockItem> WAXED_EXPOSED_COPPER_GRATE_ITEM;
+    public static Supplier<BlockItem> WAXED_WEATHERED_COPPER_GRATE_ITEM;
+    public static Supplier<BlockItem> WAXED_OXIDIZED_COPPER_GRATE_ITEM;
+    
+    // Chiseled Copper Items (Weathering)
+    public static Supplier<BlockItem> CHISELED_COPPER_ITEM;
+    public static Supplier<BlockItem> EXPOSED_CHISELED_COPPER_ITEM;
+    public static Supplier<BlockItem> WEATHERED_CHISELED_COPPER_ITEM;
+    public static Supplier<BlockItem> OXIDIZED_CHISELED_COPPER_ITEM;
+    
+    // Waxed Chiseled Copper Items
+    public static Supplier<BlockItem> WAXED_CHISELED_COPPER_ITEM;
+    public static Supplier<BlockItem> WAXED_EXPOSED_CHISELED_COPPER_ITEM;
+    public static Supplier<BlockItem> WAXED_WEATHERED_CHISELED_COPPER_ITEM;
+    public static Supplier<BlockItem> WAXED_OXIDIZED_CHISELED_COPPER_ITEM;
+    
+    // Copper Door Items (Weathering)
+    public static Supplier<Item> COPPER_DOOR_ITEM;
+    public static Supplier<Item> EXPOSED_COPPER_DOOR_ITEM;
+    public static Supplier<Item> WEATHERED_COPPER_DOOR_ITEM;
+    public static Supplier<Item> OXIDIZED_COPPER_DOOR_ITEM;
+    
+    // Waxed Copper Door Items
+    public static Supplier<Item> WAXED_COPPER_DOOR_ITEM;
+    public static Supplier<Item> WAXED_EXPOSED_COPPER_DOOR_ITEM;
+    public static Supplier<Item> WAXED_WEATHERED_COPPER_DOOR_ITEM;
+    public static Supplier<Item> WAXED_OXIDIZED_COPPER_DOOR_ITEM;
+    
     // Copper Bars Items (Weathering)
     public static Supplier<BlockItem> COPPER_BARS_ITEM;
     public static Supplier<BlockItem> EXPOSED_COPPER_BARS_ITEM;
@@ -162,6 +199,18 @@ public class ModItems {
     public static Supplier<BlockItem> WAXED_EXPOSED_COPPER_TRAPDOOR_ITEM;
     public static Supplier<BlockItem> WAXED_WEATHERED_COPPER_TRAPDOOR_ITEM;
     public static Supplier<BlockItem> WAXED_OXIDIZED_COPPER_TRAPDOOR_ITEM;
+    
+    // Copper Bulb Items (Weathering)
+    public static Supplier<BlockItem> COPPER_BULB_ITEM;
+    public static Supplier<BlockItem> EXPOSED_COPPER_BULB_ITEM;
+    public static Supplier<BlockItem> WEATHERED_COPPER_BULB_ITEM;
+    public static Supplier<BlockItem> OXIDIZED_COPPER_BULB_ITEM;
+    
+    // Waxed Copper Bulb Items
+    public static Supplier<BlockItem> WAXED_COPPER_BULB_ITEM;
+    public static Supplier<BlockItem> WAXED_EXPOSED_COPPER_BULB_ITEM;
+    public static Supplier<BlockItem> WAXED_WEATHERED_COPPER_BULB_ITEM;
+    public static Supplier<BlockItem> WAXED_OXIDIZED_COPPER_BULB_ITEM;
 
     public static void register(){
         Constants.LOG.info("Registering items for {}", Constants.MOD_NAME);
@@ -346,6 +395,84 @@ public class ModItems {
         WAXED_OXIDIZED_COPPER_CHAIN_ITEM = helper.registerAuto(ITEM, "waxed_oxidized_copper_chain",
             () -> new BlockItem(ModBlocks.WAXED_OXIDIZED_COPPER_CHAIN.get(), new Item.Properties()));
         
+        // Register Copper Grate Items
+        COPPER_GRATE_ITEM = helper.registerAuto(ITEM, "copper_grate",
+            () -> new BlockItem(ModBlocks.COPPER_GRATE.get(), new Item.Properties()));
+        
+        EXPOSED_COPPER_GRATE_ITEM = helper.registerAuto(ITEM, "exposed_copper_grate",
+            () -> new BlockItem(ModBlocks.EXPOSED_COPPER_GRATE.get(), new Item.Properties()));
+        
+        WEATHERED_COPPER_GRATE_ITEM = helper.registerAuto(ITEM, "weathered_copper_grate",
+            () -> new BlockItem(ModBlocks.WEATHERED_COPPER_GRATE.get(), new Item.Properties()));
+        
+        OXIDIZED_COPPER_GRATE_ITEM = helper.registerAuto(ITEM, "oxidized_copper_grate",
+            () -> new BlockItem(ModBlocks.OXIDIZED_COPPER_GRATE.get(), new Item.Properties()));
+        
+        // Register Waxed Copper Grate Items
+        WAXED_COPPER_GRATE_ITEM = helper.registerAuto(ITEM, "waxed_copper_grate",
+            () -> new BlockItem(ModBlocks.WAXED_COPPER_GRATE.get(), new Item.Properties()));
+        
+        WAXED_EXPOSED_COPPER_GRATE_ITEM = helper.registerAuto(ITEM, "waxed_exposed_copper_grate",
+            () -> new BlockItem(ModBlocks.WAXED_EXPOSED_COPPER_GRATE.get(), new Item.Properties()));
+        
+        WAXED_WEATHERED_COPPER_GRATE_ITEM = helper.registerAuto(ITEM, "waxed_weathered_copper_grate",
+            () -> new BlockItem(ModBlocks.WAXED_WEATHERED_COPPER_GRATE.get(), new Item.Properties()));
+        
+        WAXED_OXIDIZED_COPPER_GRATE_ITEM = helper.registerAuto(ITEM, "waxed_oxidized_copper_grate",
+            () -> new BlockItem(ModBlocks.WAXED_OXIDIZED_COPPER_GRATE.get(), new Item.Properties()));
+        
+        // Register Chiseled Copper Items (Weathering)
+        CHISELED_COPPER_ITEM = helper.registerAuto(ITEM, "chiseled_copper",
+            () -> new BlockItem(ModBlocks.CHISELED_COPPER.get(), new Item.Properties()));
+        
+        EXPOSED_CHISELED_COPPER_ITEM = helper.registerAuto(ITEM, "exposed_chiseled_copper",
+            () -> new BlockItem(ModBlocks.EXPOSED_CHISELED_COPPER.get(), new Item.Properties()));
+        
+        WEATHERED_CHISELED_COPPER_ITEM = helper.registerAuto(ITEM, "weathered_chiseled_copper",
+            () -> new BlockItem(ModBlocks.WEATHERED_CHISELED_COPPER.get(), new Item.Properties()));
+        
+        OXIDIZED_CHISELED_COPPER_ITEM = helper.registerAuto(ITEM, "oxidized_chiseled_copper",
+            () -> new BlockItem(ModBlocks.OXIDIZED_CHISELED_COPPER.get(), new Item.Properties()));
+        
+        // Register Waxed Chiseled Copper Items
+        WAXED_CHISELED_COPPER_ITEM = helper.registerAuto(ITEM, "waxed_chiseled_copper",
+            () -> new BlockItem(ModBlocks.WAXED_CHISELED_COPPER.get(), new Item.Properties()));
+        
+        WAXED_EXPOSED_CHISELED_COPPER_ITEM = helper.registerAuto(ITEM, "waxed_exposed_chiseled_copper",
+            () -> new BlockItem(ModBlocks.WAXED_EXPOSED_CHISELED_COPPER.get(), new Item.Properties()));
+        
+        WAXED_WEATHERED_CHISELED_COPPER_ITEM = helper.registerAuto(ITEM, "waxed_weathered_chiseled_copper",
+            () -> new BlockItem(ModBlocks.WAXED_WEATHERED_CHISELED_COPPER.get(), new Item.Properties()));
+        
+        WAXED_OXIDIZED_CHISELED_COPPER_ITEM = helper.registerAuto(ITEM, "waxed_oxidized_chiseled_copper",
+            () -> new BlockItem(ModBlocks.WAXED_OXIDIZED_CHISELED_COPPER.get(), new Item.Properties()));
+        
+        // Register Copper Door Items (Weathering)
+        COPPER_DOOR_ITEM = helper.registerAuto(ITEM, "copper_door",
+            () -> new DoubleHighBlockItem(ModBlocks.COPPER_DOOR.get(), new Item.Properties()));
+        
+        EXPOSED_COPPER_DOOR_ITEM = helper.registerAuto(ITEM, "exposed_copper_door",
+            () -> new DoubleHighBlockItem(ModBlocks.EXPOSED_COPPER_DOOR.get(), new Item.Properties()));
+        
+        WEATHERED_COPPER_DOOR_ITEM = helper.registerAuto(ITEM, "weathered_copper_door",
+            () -> new DoubleHighBlockItem(ModBlocks.WEATHERED_COPPER_DOOR.get(), new Item.Properties()));
+        
+        OXIDIZED_COPPER_DOOR_ITEM = helper.registerAuto(ITEM, "oxidized_copper_door",
+            () -> new DoubleHighBlockItem(ModBlocks.OXIDIZED_COPPER_DOOR.get(), new Item.Properties()));
+        
+        // Register Waxed Copper Door Items
+        WAXED_COPPER_DOOR_ITEM = helper.registerAuto(ITEM, "waxed_copper_door",
+            () -> new DoubleHighBlockItem(ModBlocks.WAXED_COPPER_DOOR.get(), new Item.Properties()));
+        
+        WAXED_EXPOSED_COPPER_DOOR_ITEM = helper.registerAuto(ITEM, "waxed_exposed_copper_door",
+            () -> new DoubleHighBlockItem(ModBlocks.WAXED_EXPOSED_COPPER_DOOR.get(), new Item.Properties()));
+        
+        WAXED_WEATHERED_COPPER_DOOR_ITEM = helper.registerAuto(ITEM, "waxed_weathered_copper_door",
+            () -> new DoubleHighBlockItem(ModBlocks.WAXED_WEATHERED_COPPER_DOOR.get(), new Item.Properties()));
+        
+        WAXED_OXIDIZED_COPPER_DOOR_ITEM = helper.registerAuto(ITEM, "waxed_oxidized_copper_door",
+            () -> new DoubleHighBlockItem(ModBlocks.WAXED_OXIDIZED_COPPER_DOOR.get(), new Item.Properties()));
+        
         // Register Copper Bars Items (Weathering)
         COPPER_BARS_ITEM = helper.registerAuto(ITEM, "copper_bars",
             () -> new BlockItem(ModBlocks.COPPER_BARS.get(), new Item.Properties()));
@@ -421,6 +548,32 @@ public class ModItems {
         
         WAXED_OXIDIZED_COPPER_TRAPDOOR_ITEM = helper.registerAuto(ITEM, "waxed_oxidized_copper_trapdoor",
             () -> new BlockItem(ModBlocks.WAXED_OXIDIZED_COPPER_TRAPDOOR.get(), new Item.Properties()));
+
+        // Register Copper Bulb Items (Weathering)
+        COPPER_BULB_ITEM = helper.registerAuto(ITEM, "copper_bulb",
+            () -> new BlockItem(ModBlocks.COPPER_BULB.get(), new Item.Properties()));
+        
+        EXPOSED_COPPER_BULB_ITEM = helper.registerAuto(ITEM, "exposed_copper_bulb",
+            () -> new BlockItem(ModBlocks.EXPOSED_COPPER_BULB.get(), new Item.Properties()));
+        
+        WEATHERED_COPPER_BULB_ITEM = helper.registerAuto(ITEM, "weathered_copper_bulb",
+            () -> new BlockItem(ModBlocks.WEATHERED_COPPER_BULB.get(), new Item.Properties()));
+        
+        OXIDIZED_COPPER_BULB_ITEM = helper.registerAuto(ITEM, "oxidized_copper_bulb",
+            () -> new BlockItem(ModBlocks.OXIDIZED_COPPER_BULB.get(), new Item.Properties()));
+        
+        // Register Waxed Copper Bulb Items
+        WAXED_COPPER_BULB_ITEM = helper.registerAuto(ITEM, "waxed_copper_bulb",
+            () -> new BlockItem(ModBlocks.WAXED_COPPER_BULB.get(), new Item.Properties()));
+        
+        WAXED_EXPOSED_COPPER_BULB_ITEM = helper.registerAuto(ITEM, "waxed_exposed_copper_bulb",
+            () -> new BlockItem(ModBlocks.WAXED_EXPOSED_COPPER_BULB.get(), new Item.Properties()));
+        
+        WAXED_WEATHERED_COPPER_BULB_ITEM = helper.registerAuto(ITEM, "waxed_weathered_copper_bulb",
+            () -> new BlockItem(ModBlocks.WAXED_WEATHERED_COPPER_BULB.get(), new Item.Properties()));
+        
+        WAXED_OXIDIZED_COPPER_BULB_ITEM = helper.registerAuto(ITEM, "waxed_oxidized_copper_bulb",
+            () -> new BlockItem(ModBlocks.WAXED_OXIDIZED_COPPER_BULB.get(), new Item.Properties()));
 
         // Register Copper Tools
         // Copper Axe: 7.0 base + 1.0 material bonus + 1 player base = 9 attack damage, -3.2 attack speed (official MC 1.21.10 values)

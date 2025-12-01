@@ -26,6 +26,18 @@ public class ConfigOptions {
     }
 
     private static OptionPage createGolemPage() {
+        // Golem build spawning option
+        Option<Boolean> golemBuildSpawning = OptionImpl.<Boolean>builder(Boolean.class)
+            .name("config.copperagebackport.golem_build_spawning")
+            .tooltip("config.copperagebackport.golem_build_spawning.tooltip")
+            .control(TickBoxControl::new)
+            .binding(
+                CommonConfig::golemBuildSpawning,
+                CommonConfig::setGolemBuildSpawning
+            )
+            .defaultValue(true)
+            .build();
+
         // Golem behavior option
         Option<Boolean> golemPressesButtons = OptionImpl.<Boolean>builder(Boolean.class)
             .name("config.copperagebackport.golem_presses_buttons")
@@ -95,6 +107,7 @@ public class ConfigOptions {
 
         OptionGroup behaviorGroup = OptionGroup.builder()
             .name("config.copperagebackport.group.behavior")
+            .add(golemBuildSpawning)
             .add(golemPressesButtons)
             .add(buttonPressChance)
             .build();

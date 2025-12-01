@@ -345,6 +345,22 @@
       "minecraft:ambient/weather/end_flash8"
     ]
   },
+  "block.copper_door.close": {
+    "subtitle": "subtitles.block.door.close",
+    "sounds": [
+      "minecraft:block/copper_door/toggle1",
+      "minecraft:block/copper_door/toggle2",
+      "minecraft:block/copper_door/toggle3"
+    ]
+  },
+  "block.copper_door.open": {
+    "subtitle": "subtitles.block.door.open",
+    "sounds": [
+      "minecraft:block/copper_door/toggle1",
+      "minecraft:block/copper_door/toggle2",
+      "minecraft:block/copper_door/toggle3"
+    ]
+  },
   "block.copper_trapdoor.close": {
     "subtitle": "subtitles.block.trapdoor.close",
     "sounds": [
@@ -362,6 +378,80 @@
       "minecraft:block/copper_trapdoor/toggle3",
       "minecraft:block/copper_trapdoor/toggle4"
     ]
+  },
+  "block.copper_bulb.turn_off": {
+    "sounds": [
+      {
+        "attenuation_distance": 6,
+        "name": "minecraft:block/copper_bulb/toggle",
+        "pitch": 0.75
+      }
+    ],
+    "subtitle": "subtitles.block.copper_bulb.turn_off"
+  },
+  "block.copper_bulb.turn_on": {
+    "sounds": [
+      {
+        "attenuation_distance": 6,
+        "name": "minecraft:block/copper_bulb/toggle"
+      }
+    ],
+    "subtitle": "subtitles.block.copper_bulb.turn_on"
+  },
+  "block.copper_grate.break": {
+    "sounds": [
+      "minecraft:block/copper_grate/break1",
+      "minecraft:block/copper_grate/break2",
+      "minecraft:block/copper_grate/break3",
+      "minecraft:block/copper_grate/break4"
+    ],
+    "subtitle": "subtitles.block.generic.break"
+  },
+  "block.copper_grate.fall": {
+    "sounds": [
+      "minecraft:block/copper_grate/step1",
+      "minecraft:block/copper_grate/step2",
+      "minecraft:block/copper_grate/step3",
+      "minecraft:block/copper_grate/step4",
+      "minecraft:block/copper_grate/step5",
+      "minecraft:block/copper_grate/step6"
+    ],
+    "subtitle": "subtitles.block.generic.fall"
+  },
+  "block.copper_grate.hit": {
+    "sounds": [
+      "minecraft:block/copper_grate/step1",
+      "minecraft:block/copper_grate/step2",
+      "minecraft:block/copper_grate/step3",
+      "minecraft:block/copper_grate/step4",
+      "minecraft:block/copper_grate/step5",
+      "minecraft:block/copper_grate/step6"
+    ],
+    "subtitle": "subtitles.block.generic.hit"
+  },
+  "block.copper_grate.place": {
+    "sounds": [
+      "minecraft:block/copper_grate/break1",
+      {
+        "name": "minecraft:block/copper_grate/break1",
+        "pitch": 0.95
+      },
+      "minecraft:block/copper_grate/break2",
+      "minecraft:block/copper_grate/break3",
+      "minecraft:block/copper_grate/break4"
+    ],
+    "subtitle": "subtitles.block.generic.place"
+  },
+  "block.copper_grate.step": {
+    "sounds": [
+      "minecraft:block/copper_grate/step1",
+      "minecraft:block/copper_grate/step2",
+      "minecraft:block/copper_grate/step3",
+      "minecraft:block/copper_grate/step4",
+      "minecraft:block/copper_grate/step5",
+      "minecraft:block/copper_grate/step6"
+    ],
+    "subtitle": "subtitles.block.generic.footsteps"
   }
 }
 

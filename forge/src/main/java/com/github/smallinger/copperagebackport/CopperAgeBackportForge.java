@@ -118,9 +118,15 @@ public class CopperAgeBackportForge {
             }
         }
         
-        // Add copper buttons after stone button
+        // Add copper buttons after stone button - following 1.21.10 order
         if (event.getTabKey() == CreativeModeTabs.REDSTONE_BLOCKS) {
             var entries = event.getEntries();
+            // After Target: Waxed Copper Bulbs
+            entries.putAfter(Items.TARGET.getDefaultInstance(), ModItems.WAXED_COPPER_BULB_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            entries.putAfter(ModItems.WAXED_COPPER_BULB_ITEM.get().getDefaultInstance(), ModItems.WAXED_EXPOSED_COPPER_BULB_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            entries.putAfter(ModItems.WAXED_EXPOSED_COPPER_BULB_ITEM.get().getDefaultInstance(), ModItems.WAXED_WEATHERED_COPPER_BULB_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            entries.putAfter(ModItems.WAXED_WEATHERED_COPPER_BULB_ITEM.get().getDefaultInstance(), ModItems.WAXED_OXIDIZED_COPPER_BULB_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            // After stone button: Copper Buttons
             entries.putAfter(Items.STONE_BUTTON.getDefaultInstance(), ModItems.COPPER_BUTTON_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
             entries.putAfter(ModItems.COPPER_BUTTON_ITEM.get().getDefaultInstance(), ModItems.EXPOSED_COPPER_BUTTON_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
             entries.putAfter(ModItems.EXPOSED_COPPER_BUTTON_ITEM.get().getDefaultInstance(), ModItems.WEATHERED_COPPER_BUTTON_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
@@ -129,20 +135,19 @@ public class CopperAgeBackportForge {
             entries.putAfter(ModItems.WAXED_COPPER_BUTTON_ITEM.get().getDefaultInstance(), ModItems.WAXED_EXPOSED_COPPER_BUTTON_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
             entries.putAfter(ModItems.WAXED_EXPOSED_COPPER_BUTTON_ITEM.get().getDefaultInstance(), ModItems.WAXED_WEATHERED_COPPER_BUTTON_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
             entries.putAfter(ModItems.WAXED_WEATHERED_COPPER_BUTTON_ITEM.get().getDefaultInstance(), ModItems.WAXED_OXIDIZED_COPPER_BUTTON_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
-            // Add copper trapdoors after iron trapdoor
-            entries.putAfter(Items.IRON_TRAPDOOR.getDefaultInstance(), ModItems.COPPER_TRAPDOOR_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
-            entries.putAfter(ModItems.COPPER_TRAPDOOR_ITEM.get().getDefaultInstance(), ModItems.EXPOSED_COPPER_TRAPDOOR_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
-            entries.putAfter(ModItems.EXPOSED_COPPER_TRAPDOOR_ITEM.get().getDefaultInstance(), ModItems.WEATHERED_COPPER_TRAPDOOR_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
-            entries.putAfter(ModItems.WEATHERED_COPPER_TRAPDOOR_ITEM.get().getDefaultInstance(), ModItems.OXIDIZED_COPPER_TRAPDOOR_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
-            entries.putAfter(ModItems.OXIDIZED_COPPER_TRAPDOOR_ITEM.get().getDefaultInstance(), ModItems.WAXED_COPPER_TRAPDOOR_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
-            entries.putAfter(ModItems.WAXED_COPPER_TRAPDOOR_ITEM.get().getDefaultInstance(), ModItems.WAXED_EXPOSED_COPPER_TRAPDOOR_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
-            entries.putAfter(ModItems.WAXED_EXPOSED_COPPER_TRAPDOOR_ITEM.get().getDefaultInstance(), ModItems.WAXED_WEATHERED_COPPER_TRAPDOOR_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
-            entries.putAfter(ModItems.WAXED_WEATHERED_COPPER_TRAPDOOR_ITEM.get().getDefaultInstance(), ModItems.WAXED_OXIDIZED_COPPER_TRAPDOOR_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            // Waxed Lightning Rod after daylight detector
+            entries.putAfter(Items.DAYLIGHT_DETECTOR.getDefaultInstance(), ModItems.WAXED_LIGHTNING_ROD_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            // Waxed Copper Chest after chest
+            entries.putAfter(Items.CHEST.getDefaultInstance(), ModItems.WAXED_COPPER_CHEST_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
         }
         
         // Add copper lanterns after soul lantern, copper torch at end
+        // FUNCTIONAL_BLOCKS - following 1.21.10 order
         if (event.getTabKey() == CreativeModeTabs.FUNCTIONAL_BLOCKS) {
             var entries = event.getEntries();
+            // Soul Torch -> Copper Torch
+            entries.putAfter(Items.SOUL_TORCH.getDefaultInstance(), ModItems.COPPER_TORCH_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            // Soul Lantern -> All Copper Lanterns (all oxidation states)
             entries.putAfter(Items.SOUL_LANTERN.getDefaultInstance(), ModItems.COPPER_LANTERN_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
             entries.putAfter(ModItems.COPPER_LANTERN_ITEM.get().getDefaultInstance(), ModItems.EXPOSED_COPPER_LANTERN_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
             entries.putAfter(ModItems.EXPOSED_COPPER_LANTERN_ITEM.get().getDefaultInstance(), ModItems.WEATHERED_COPPER_LANTERN_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
@@ -151,8 +156,26 @@ public class CopperAgeBackportForge {
             entries.putAfter(ModItems.WAXED_COPPER_LANTERN_ITEM.get().getDefaultInstance(), ModItems.WAXED_EXPOSED_COPPER_LANTERN_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
             entries.putAfter(ModItems.WAXED_EXPOSED_COPPER_LANTERN_ITEM.get().getDefaultInstance(), ModItems.WAXED_WEATHERED_COPPER_LANTERN_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
             entries.putAfter(ModItems.WAXED_WEATHERED_COPPER_LANTERN_ITEM.get().getDefaultInstance(), ModItems.WAXED_OXIDIZED_COPPER_LANTERN_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
-            // Copper Torch after soul torch
-            entries.putAfter(Items.SOUL_TORCH.getDefaultInstance(), ModItems.COPPER_TORCH_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            // Iron Chain -> All Copper Chains (all oxidation states)
+            entries.putAfter(Items.CHAIN.getDefaultInstance(), ModItems.COPPER_CHAIN_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            entries.putAfter(ModItems.COPPER_CHAIN_ITEM.get().getDefaultInstance(), ModItems.EXPOSED_COPPER_CHAIN_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            entries.putAfter(ModItems.EXPOSED_COPPER_CHAIN_ITEM.get().getDefaultInstance(), ModItems.WEATHERED_COPPER_CHAIN_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            entries.putAfter(ModItems.WEATHERED_COPPER_CHAIN_ITEM.get().getDefaultInstance(), ModItems.OXIDIZED_COPPER_CHAIN_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            entries.putAfter(ModItems.OXIDIZED_COPPER_CHAIN_ITEM.get().getDefaultInstance(), ModItems.WAXED_COPPER_CHAIN_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            entries.putAfter(ModItems.WAXED_COPPER_CHAIN_ITEM.get().getDefaultInstance(), ModItems.WAXED_EXPOSED_COPPER_CHAIN_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            entries.putAfter(ModItems.WAXED_EXPOSED_COPPER_CHAIN_ITEM.get().getDefaultInstance(), ModItems.WAXED_WEATHERED_COPPER_CHAIN_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            entries.putAfter(ModItems.WAXED_WEATHERED_COPPER_CHAIN_ITEM.get().getDefaultInstance(), ModItems.WAXED_OXIDIZED_COPPER_CHAIN_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            // Redstone Lamp -> All Copper Bulbs (all oxidation states)
+            entries.putAfter(Items.REDSTONE_LAMP.getDefaultInstance(), ModItems.COPPER_BULB_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            entries.putAfter(ModItems.COPPER_BULB_ITEM.get().getDefaultInstance(), ModItems.EXPOSED_COPPER_BULB_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            entries.putAfter(ModItems.EXPOSED_COPPER_BULB_ITEM.get().getDefaultInstance(), ModItems.WEATHERED_COPPER_BULB_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            entries.putAfter(ModItems.WEATHERED_COPPER_BULB_ITEM.get().getDefaultInstance(), ModItems.OXIDIZED_COPPER_BULB_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            entries.putAfter(ModItems.OXIDIZED_COPPER_BULB_ITEM.get().getDefaultInstance(), ModItems.WAXED_COPPER_BULB_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            entries.putAfter(ModItems.WAXED_COPPER_BULB_ITEM.get().getDefaultInstance(), ModItems.WAXED_EXPOSED_COPPER_BULB_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            entries.putAfter(ModItems.WAXED_EXPOSED_COPPER_BULB_ITEM.get().getDefaultInstance(), ModItems.WAXED_WEATHERED_COPPER_BULB_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            entries.putAfter(ModItems.WAXED_WEATHERED_COPPER_BULB_ITEM.get().getDefaultInstance(), ModItems.WAXED_OXIDIZED_COPPER_BULB_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            // Lightning Rod -> Waxed Lightning Rod (only the waxed variant in functional, lightning rod is vanilla)
+            entries.putAfter(Items.LIGHTNING_ROD.getDefaultInstance(), ModItems.WAXED_LIGHTNING_ROD_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
         }
         
         // Add copper tools after stone tools
@@ -181,33 +204,89 @@ public class CopperAgeBackportForge {
             event.getEntries().putAfter(Items.IRON_NUGGET.getDefaultInstance(), ModItems.COPPER_NUGGET.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
         }
         
-        // Add copper bars and chains after cut copper slabs in building blocks
+        // Add copper items in building blocks - following 1.21.10 order
         if (event.getTabKey() == CreativeModeTabs.BUILDING_BLOCKS) {
             var entries = event.getEntries();
-            // After cut copper slab
+            
+            // Copper Block -> Chiseled Copper -> Copper Grate
+            entries.putAfter(Items.COPPER_BLOCK.getDefaultInstance(), ModItems.CHISELED_COPPER_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            entries.putAfter(ModItems.CHISELED_COPPER_ITEM.get().getDefaultInstance(), ModItems.COPPER_GRATE_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            // Cut Copper Slab -> Copper Bars -> Copper Door -> Copper Trapdoor -> Copper Bulb -> Copper Chain
             entries.putAfter(Items.CUT_COPPER_SLAB.getDefaultInstance(), ModItems.COPPER_BARS_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
-            entries.putAfter(ModItems.COPPER_BARS_ITEM.get().getDefaultInstance(), ModItems.COPPER_CHAIN_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
-            // After exposed cut copper slab
+            entries.putAfter(ModItems.COPPER_BARS_ITEM.get().getDefaultInstance(), ModItems.COPPER_DOOR_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            entries.putAfter(ModItems.COPPER_DOOR_ITEM.get().getDefaultInstance(), ModItems.COPPER_TRAPDOOR_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            entries.putAfter(ModItems.COPPER_TRAPDOOR_ITEM.get().getDefaultInstance(), ModItems.COPPER_BULB_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            entries.putAfter(ModItems.COPPER_BULB_ITEM.get().getDefaultInstance(), ModItems.COPPER_CHAIN_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            
+            // Exposed Copper -> Exposed Chiseled Copper -> Exposed Copper Grate
+            entries.putAfter(Items.EXPOSED_COPPER.getDefaultInstance(), ModItems.EXPOSED_CHISELED_COPPER_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            entries.putAfter(ModItems.EXPOSED_CHISELED_COPPER_ITEM.get().getDefaultInstance(), ModItems.EXPOSED_COPPER_GRATE_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            // Exposed Cut Copper Slab -> Exposed Copper Bars -> Exposed Copper Door -> Exposed Copper Trapdoor -> Exposed Copper Bulb -> Exposed Copper Chain
             entries.putAfter(Items.EXPOSED_CUT_COPPER_SLAB.getDefaultInstance(), ModItems.EXPOSED_COPPER_BARS_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
-            entries.putAfter(ModItems.EXPOSED_COPPER_BARS_ITEM.get().getDefaultInstance(), ModItems.EXPOSED_COPPER_CHAIN_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
-            // After weathered cut copper slab
+            entries.putAfter(ModItems.EXPOSED_COPPER_BARS_ITEM.get().getDefaultInstance(), ModItems.EXPOSED_COPPER_DOOR_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            entries.putAfter(ModItems.EXPOSED_COPPER_DOOR_ITEM.get().getDefaultInstance(), ModItems.EXPOSED_COPPER_TRAPDOOR_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            entries.putAfter(ModItems.EXPOSED_COPPER_TRAPDOOR_ITEM.get().getDefaultInstance(), ModItems.EXPOSED_COPPER_BULB_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            entries.putAfter(ModItems.EXPOSED_COPPER_BULB_ITEM.get().getDefaultInstance(), ModItems.EXPOSED_COPPER_CHAIN_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            
+            // Weathered Copper -> Weathered Chiseled Copper -> Weathered Copper Grate
+            entries.putAfter(Items.WEATHERED_COPPER.getDefaultInstance(), ModItems.WEATHERED_CHISELED_COPPER_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            entries.putAfter(ModItems.WEATHERED_CHISELED_COPPER_ITEM.get().getDefaultInstance(), ModItems.WEATHERED_COPPER_GRATE_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            // Weathered Cut Copper Slab -> Weathered Copper Bars -> Weathered Copper Door -> Weathered Copper Trapdoor -> Weathered Copper Bulb -> Weathered Copper Chain
             entries.putAfter(Items.WEATHERED_CUT_COPPER_SLAB.getDefaultInstance(), ModItems.WEATHERED_COPPER_BARS_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
-            entries.putAfter(ModItems.WEATHERED_COPPER_BARS_ITEM.get().getDefaultInstance(), ModItems.WEATHERED_COPPER_CHAIN_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
-            // After oxidized cut copper slab
+            entries.putAfter(ModItems.WEATHERED_COPPER_BARS_ITEM.get().getDefaultInstance(), ModItems.WEATHERED_COPPER_DOOR_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            entries.putAfter(ModItems.WEATHERED_COPPER_DOOR_ITEM.get().getDefaultInstance(), ModItems.WEATHERED_COPPER_TRAPDOOR_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            entries.putAfter(ModItems.WEATHERED_COPPER_TRAPDOOR_ITEM.get().getDefaultInstance(), ModItems.WEATHERED_COPPER_BULB_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            entries.putAfter(ModItems.WEATHERED_COPPER_BULB_ITEM.get().getDefaultInstance(), ModItems.WEATHERED_COPPER_CHAIN_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            
+            // Oxidized Copper -> Oxidized Chiseled Copper -> Oxidized Copper Grate
+            entries.putAfter(Items.OXIDIZED_COPPER.getDefaultInstance(), ModItems.OXIDIZED_CHISELED_COPPER_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            entries.putAfter(ModItems.OXIDIZED_CHISELED_COPPER_ITEM.get().getDefaultInstance(), ModItems.OXIDIZED_COPPER_GRATE_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            // Oxidized Cut Copper Slab -> Oxidized Copper Bars -> Oxidized Copper Door -> Oxidized Copper Trapdoor -> Oxidized Copper Bulb -> Oxidized Copper Chain
             entries.putAfter(Items.OXIDIZED_CUT_COPPER_SLAB.getDefaultInstance(), ModItems.OXIDIZED_COPPER_BARS_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
-            entries.putAfter(ModItems.OXIDIZED_COPPER_BARS_ITEM.get().getDefaultInstance(), ModItems.OXIDIZED_COPPER_CHAIN_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
-            // After waxed cut copper slab
+            entries.putAfter(ModItems.OXIDIZED_COPPER_BARS_ITEM.get().getDefaultInstance(), ModItems.OXIDIZED_COPPER_DOOR_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            entries.putAfter(ModItems.OXIDIZED_COPPER_DOOR_ITEM.get().getDefaultInstance(), ModItems.OXIDIZED_COPPER_TRAPDOOR_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            entries.putAfter(ModItems.OXIDIZED_COPPER_TRAPDOOR_ITEM.get().getDefaultInstance(), ModItems.OXIDIZED_COPPER_BULB_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            entries.putAfter(ModItems.OXIDIZED_COPPER_BULB_ITEM.get().getDefaultInstance(), ModItems.OXIDIZED_COPPER_CHAIN_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            
+            // Waxed Copper Block -> Waxed Chiseled Copper -> Waxed Copper Grate
+            entries.putAfter(Items.WAXED_COPPER_BLOCK.getDefaultInstance(), ModItems.WAXED_CHISELED_COPPER_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            entries.putAfter(ModItems.WAXED_CHISELED_COPPER_ITEM.get().getDefaultInstance(), ModItems.WAXED_COPPER_GRATE_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            // Waxed Cut Copper Slab -> Waxed Copper Bars -> Waxed Copper Door -> Waxed Copper Trapdoor -> Waxed Copper Bulb -> Waxed Copper Chain
             entries.putAfter(Items.WAXED_CUT_COPPER_SLAB.getDefaultInstance(), ModItems.WAXED_COPPER_BARS_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
-            entries.putAfter(ModItems.WAXED_COPPER_BARS_ITEM.get().getDefaultInstance(), ModItems.WAXED_COPPER_CHAIN_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
-            // After waxed exposed cut copper slab
+            entries.putAfter(ModItems.WAXED_COPPER_BARS_ITEM.get().getDefaultInstance(), ModItems.WAXED_COPPER_DOOR_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            entries.putAfter(ModItems.WAXED_COPPER_DOOR_ITEM.get().getDefaultInstance(), ModItems.WAXED_COPPER_TRAPDOOR_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            entries.putAfter(ModItems.WAXED_COPPER_TRAPDOOR_ITEM.get().getDefaultInstance(), ModItems.WAXED_COPPER_BULB_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            entries.putAfter(ModItems.WAXED_COPPER_BULB_ITEM.get().getDefaultInstance(), ModItems.WAXED_COPPER_CHAIN_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            
+            // Waxed Exposed Copper -> Waxed Exposed Chiseled Copper -> Waxed Exposed Copper Grate
+            entries.putAfter(Items.WAXED_EXPOSED_COPPER.getDefaultInstance(), ModItems.WAXED_EXPOSED_CHISELED_COPPER_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            entries.putAfter(ModItems.WAXED_EXPOSED_CHISELED_COPPER_ITEM.get().getDefaultInstance(), ModItems.WAXED_EXPOSED_COPPER_GRATE_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            // Waxed Exposed Cut Copper Slab -> Waxed Exposed Copper Bars -> Waxed Exposed Copper Door -> Waxed Exposed Copper Trapdoor -> Waxed Exposed Copper Bulb -> Waxed Exposed Copper Chain
             entries.putAfter(Items.WAXED_EXPOSED_CUT_COPPER_SLAB.getDefaultInstance(), ModItems.WAXED_EXPOSED_COPPER_BARS_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
-            entries.putAfter(ModItems.WAXED_EXPOSED_COPPER_BARS_ITEM.get().getDefaultInstance(), ModItems.WAXED_EXPOSED_COPPER_CHAIN_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
-            // After waxed weathered cut copper slab
+            entries.putAfter(ModItems.WAXED_EXPOSED_COPPER_BARS_ITEM.get().getDefaultInstance(), ModItems.WAXED_EXPOSED_COPPER_DOOR_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            entries.putAfter(ModItems.WAXED_EXPOSED_COPPER_DOOR_ITEM.get().getDefaultInstance(), ModItems.WAXED_EXPOSED_COPPER_TRAPDOOR_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            entries.putAfter(ModItems.WAXED_EXPOSED_COPPER_TRAPDOOR_ITEM.get().getDefaultInstance(), ModItems.WAXED_EXPOSED_COPPER_BULB_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            entries.putAfter(ModItems.WAXED_EXPOSED_COPPER_BULB_ITEM.get().getDefaultInstance(), ModItems.WAXED_EXPOSED_COPPER_CHAIN_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            
+            // Waxed Weathered Copper -> Waxed Weathered Chiseled Copper -> Waxed Weathered Copper Grate
+            entries.putAfter(Items.WAXED_WEATHERED_COPPER.getDefaultInstance(), ModItems.WAXED_WEATHERED_CHISELED_COPPER_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            entries.putAfter(ModItems.WAXED_WEATHERED_CHISELED_COPPER_ITEM.get().getDefaultInstance(), ModItems.WAXED_WEATHERED_COPPER_GRATE_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            // Waxed Weathered Cut Copper Slab -> Waxed Weathered Copper Bars -> Waxed Weathered Copper Door -> Waxed Weathered Copper Trapdoor -> Waxed Weathered Copper Bulb -> Waxed Weathered Copper Chain
             entries.putAfter(Items.WAXED_WEATHERED_CUT_COPPER_SLAB.getDefaultInstance(), ModItems.WAXED_WEATHERED_COPPER_BARS_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
-            entries.putAfter(ModItems.WAXED_WEATHERED_COPPER_BARS_ITEM.get().getDefaultInstance(), ModItems.WAXED_WEATHERED_COPPER_CHAIN_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
-            // After waxed oxidized cut copper slab
+            entries.putAfter(ModItems.WAXED_WEATHERED_COPPER_BARS_ITEM.get().getDefaultInstance(), ModItems.WAXED_WEATHERED_COPPER_DOOR_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            entries.putAfter(ModItems.WAXED_WEATHERED_COPPER_DOOR_ITEM.get().getDefaultInstance(), ModItems.WAXED_WEATHERED_COPPER_TRAPDOOR_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            entries.putAfter(ModItems.WAXED_WEATHERED_COPPER_TRAPDOOR_ITEM.get().getDefaultInstance(), ModItems.WAXED_WEATHERED_COPPER_BULB_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            entries.putAfter(ModItems.WAXED_WEATHERED_COPPER_BULB_ITEM.get().getDefaultInstance(), ModItems.WAXED_WEATHERED_COPPER_CHAIN_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            
+            // Waxed Oxidized Copper -> Waxed Oxidized Chiseled Copper -> Waxed Oxidized Copper Grate
+            entries.putAfter(Items.WAXED_OXIDIZED_COPPER.getDefaultInstance(), ModItems.WAXED_OXIDIZED_CHISELED_COPPER_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            entries.putAfter(ModItems.WAXED_OXIDIZED_CHISELED_COPPER_ITEM.get().getDefaultInstance(), ModItems.WAXED_OXIDIZED_COPPER_GRATE_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            // Waxed Oxidized Cut Copper Slab -> Waxed Oxidized Copper Bars -> Waxed Oxidized Copper Door -> Waxed Oxidized Copper Trapdoor -> Waxed Oxidized Copper Bulb -> Waxed Oxidized Copper Chain
             entries.putAfter(Items.WAXED_OXIDIZED_CUT_COPPER_SLAB.getDefaultInstance(), ModItems.WAXED_OXIDIZED_COPPER_BARS_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
-            entries.putAfter(ModItems.WAXED_OXIDIZED_COPPER_BARS_ITEM.get().getDefaultInstance(), ModItems.WAXED_OXIDIZED_COPPER_CHAIN_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            entries.putAfter(ModItems.WAXED_OXIDIZED_COPPER_BARS_ITEM.get().getDefaultInstance(), ModItems.WAXED_OXIDIZED_COPPER_DOOR_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            entries.putAfter(ModItems.WAXED_OXIDIZED_COPPER_DOOR_ITEM.get().getDefaultInstance(), ModItems.WAXED_OXIDIZED_COPPER_TRAPDOOR_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            entries.putAfter(ModItems.WAXED_OXIDIZED_COPPER_TRAPDOOR_ITEM.get().getDefaultInstance(), ModItems.WAXED_OXIDIZED_COPPER_BULB_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            entries.putAfter(ModItems.WAXED_OXIDIZED_COPPER_BULB_ITEM.get().getDefaultInstance(), ModItems.WAXED_OXIDIZED_COPPER_CHAIN_ITEM.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
         }
     }
     

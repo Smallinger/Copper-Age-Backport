@@ -53,4 +53,18 @@ public class WeatheringHelper {
     public static boolean canWeather(BlockState state, Function<Block, Optional<Block>> getNextBlock) {
         return getNextBlock.apply(state.getBlock()).isPresent();
     }
+    
+    /**
+     * Checks if weathering should occur (with vanilla probability).
+     * Use this when you need to handle the state change yourself (e.g., for multi-block structures).
+     * 
+     * @param state Current block state
+     * @param level Server level
+     * @param pos Block position
+     * @param random Random source
+     * @return true if weathering should occur
+     */
+    public static boolean shouldWeather(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
+        return random.nextFloat() < OXIDATION_CHANCE;
+    }
 }

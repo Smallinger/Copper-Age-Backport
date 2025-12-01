@@ -16,6 +16,8 @@ import net.minecraft.world.level.block.state.properties.BlockSetType;
 public class ModBlockSetTypes {
     
     // Create SoundEvents directly without registry - works as long as sounds.json has the definitions
+    private static final SoundEvent COPPER_DOOR_CLOSE_SOUND = SoundEvent.createVariableRangeEvent(new ResourceLocation("minecraft", "block.copper_door.close"));
+    private static final SoundEvent COPPER_DOOR_OPEN_SOUND = SoundEvent.createVariableRangeEvent(new ResourceLocation("minecraft", "block.copper_door.open"));
     private static final SoundEvent COPPER_TRAPDOOR_CLOSE_SOUND = SoundEvent.createVariableRangeEvent(new ResourceLocation("minecraft", "block.copper_trapdoor.close"));
     private static final SoundEvent COPPER_TRAPDOOR_OPEN_SOUND = SoundEvent.createVariableRangeEvent(new ResourceLocation("minecraft", "block.copper_trapdoor.open"));
     
@@ -23,14 +25,14 @@ public class ModBlockSetTypes {
      * BlockSetType for copper blocks (trapdoors, doors, buttons, etc.)
      * - canOpenByHand: true (unlike IRON which is false)
      * - Uses COPPER sound type
-     * - Uses our custom copper trapdoor sounds
+     * - Uses our custom copper door and trapdoor sounds
      */
     public static final BlockSetType COPPER = new BlockSetType(
         "copper",
         true, // canOpenByHand - copper can be opened by hand, unlike iron
         SoundType.COPPER, // soundType
-        SoundEvents.IRON_DOOR_CLOSE, // doorClose (will be overridden when we add copper doors)
-        SoundEvents.IRON_DOOR_OPEN,  // doorOpen
+        COPPER_DOOR_CLOSE_SOUND, // doorClose - our custom copper door sound
+        COPPER_DOOR_OPEN_SOUND,  // doorOpen - our custom copper door sound
         COPPER_TRAPDOOR_CLOSE_SOUND, // trapdoorClose - our custom copper trapdoor sound
         COPPER_TRAPDOOR_OPEN_SOUND,  // trapdoorOpen - our custom copper trapdoor sound
         SoundEvents.METAL_PRESSURE_PLATE_CLICK_OFF, // pressurePlateClickOff

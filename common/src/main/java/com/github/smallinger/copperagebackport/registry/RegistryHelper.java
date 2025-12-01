@@ -109,6 +109,46 @@ public abstract class RegistryHelper {
         VANILLA_BACKPORT_IDS.add("waxed_weathered_copper_trapdoor");
         VANILLA_BACKPORT_IDS.add("waxed_oxidized_copper_trapdoor");
         
+        // Copper Bulb
+        VANILLA_BACKPORT_IDS.add("copper_bulb");
+        VANILLA_BACKPORT_IDS.add("exposed_copper_bulb");
+        VANILLA_BACKPORT_IDS.add("weathered_copper_bulb");
+        VANILLA_BACKPORT_IDS.add("oxidized_copper_bulb");
+        VANILLA_BACKPORT_IDS.add("waxed_copper_bulb");
+        VANILLA_BACKPORT_IDS.add("waxed_exposed_copper_bulb");
+        VANILLA_BACKPORT_IDS.add("waxed_weathered_copper_bulb");
+        VANILLA_BACKPORT_IDS.add("waxed_oxidized_copper_bulb");
+        
+        // Copper Grate
+        VANILLA_BACKPORT_IDS.add("copper_grate");
+        VANILLA_BACKPORT_IDS.add("exposed_copper_grate");
+        VANILLA_BACKPORT_IDS.add("weathered_copper_grate");
+        VANILLA_BACKPORT_IDS.add("oxidized_copper_grate");
+        VANILLA_BACKPORT_IDS.add("waxed_copper_grate");
+        VANILLA_BACKPORT_IDS.add("waxed_exposed_copper_grate");
+        VANILLA_BACKPORT_IDS.add("waxed_weathered_copper_grate");
+        VANILLA_BACKPORT_IDS.add("waxed_oxidized_copper_grate");
+        
+        // Chiseled Copper
+        VANILLA_BACKPORT_IDS.add("chiseled_copper");
+        VANILLA_BACKPORT_IDS.add("exposed_chiseled_copper");
+        VANILLA_BACKPORT_IDS.add("weathered_chiseled_copper");
+        VANILLA_BACKPORT_IDS.add("oxidized_chiseled_copper");
+        VANILLA_BACKPORT_IDS.add("waxed_chiseled_copper");
+        VANILLA_BACKPORT_IDS.add("waxed_exposed_chiseled_copper");
+        VANILLA_BACKPORT_IDS.add("waxed_weathered_chiseled_copper");
+        VANILLA_BACKPORT_IDS.add("waxed_oxidized_chiseled_copper");
+        
+        // Copper Door
+        VANILLA_BACKPORT_IDS.add("copper_door");
+        VANILLA_BACKPORT_IDS.add("exposed_copper_door");
+        VANILLA_BACKPORT_IDS.add("weathered_copper_door");
+        VANILLA_BACKPORT_IDS.add("oxidized_copper_door");
+        VANILLA_BACKPORT_IDS.add("waxed_copper_door");
+        VANILLA_BACKPORT_IDS.add("waxed_exposed_copper_door");
+        VANILLA_BACKPORT_IDS.add("waxed_weathered_copper_door");
+        VANILLA_BACKPORT_IDS.add("waxed_oxidized_copper_door");
+        
         // Copper Torch
         VANILLA_BACKPORT_IDS.add("copper_torch");
         VANILLA_BACKPORT_IDS.add("copper_wall_torch");
@@ -186,6 +226,17 @@ public abstract class RegistryHelper {
         // Sound Events - Copper Trapdoor
         VANILLA_BACKPORT_IDS.add("block.copper_trapdoor.close");
         VANILLA_BACKPORT_IDS.add("block.copper_trapdoor.open");
+        
+        // Sound Events - Copper Bulb
+        VANILLA_BACKPORT_IDS.add("block.copper_bulb.turn_on");
+        VANILLA_BACKPORT_IDS.add("block.copper_bulb.turn_off");
+        
+        // Sound Events - Copper Grate
+        VANILLA_BACKPORT_IDS.add("block.copper_grate.break");
+        VANILLA_BACKPORT_IDS.add("block.copper_grate.step");
+        VANILLA_BACKPORT_IDS.add("block.copper_grate.place");
+        VANILLA_BACKPORT_IDS.add("block.copper_grate.hit");
+        VANILLA_BACKPORT_IDS.add("block.copper_grate.fall");
         
         // Sound Events - Copper Statue
         VANILLA_BACKPORT_IDS.add("block.copper_statue.break");

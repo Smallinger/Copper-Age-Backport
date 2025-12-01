@@ -6,6 +6,63 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 
+#### Copper Door (Backport from 1.21.10)
+- **All 8 Variants**: Copper Door, Exposed, Weathered, Oxidized + Waxed versions
+- **Synchronized Oxidation**: Both door halves oxidize together (only lower half triggers weathering)
+- **Hand-Openable**: Unlike iron doors, copper doors can be opened by hand
+- **Custom Sounds**: Unique copper door open/close sounds (ported from 1.21.10)
+- **Waxing/Scraping**: Use honeycomb to wax, axe to scrape (same as other copper blocks)
+- **Natural Oxidation**: Unwaxed variants oxidize over time
+- **Recipes**: 
+  - Crafting recipe (6 copper ingots in door pattern = 3 doors)
+  - Waxing recipes with honeycomb
+  - Stonecutting recipes
+- **Tags**: Added to mineable/pickaxe, needs_stone_tool, and doors tag
+- **Creative Tab**: Appears after Copper Bars in Building Blocks tab (following 1.21.10 order)
+
+#### Chiseled Copper (Backport from 1.21.10)
+- **All 8 Variants**: Chiseled Copper, Exposed, Weathered, Oxidized + Waxed versions
+- **Decorative Block**: Crafted from copper blocks for building
+- **Waxing/Scraping**: Use honeycomb to wax, axe to scrape (same as other copper blocks)
+- **Natural Oxidation**: Unwaxed variants oxidize over time
+- **Sounds**: Uses standard copper block sounds
+- **Recipes**: 
+  - Crafting recipe (4 cut copper slabs in 2x2 pattern = 4 chiseled copper)
+  - Waxing recipes with honeycomb
+  - Stonecutting recipes (1 copper block = 4 chiseled copper)
+- **Tags**: Added to mineable/pickaxe and needs_stone_tool
+- **Creative Tab**: Appears after Copper Block, before Copper Grate (following 1.21.10 order)
+
+#### Copper Grate (Backport from 1.21.10)
+- **All 8 Variants**: Copper Grate, Exposed, Weathered, Oxidized + Waxed versions
+- **Transparent Block**: Uses CUTOUT render type for see-through grate texture
+- **Waterlogging Support**: Can be placed in water
+- **Waxing/Scraping**: Use honeycomb to wax, axe to scrape (same as other copper blocks)
+- **Natural Oxidation**: Unwaxed variants oxidize over time
+- **Sounds**: Orginal copper grate break, step, place, hit, fall sounds
+- **Recipes**: 
+  - Crafting recipe (4 copper blocks in cross pattern = 4 grates)
+  - Waxing recipes with honeycomb
+  - Stonecutting recipes (1 copper block = 4 grates)
+- **Tags**: Added to mineable/pickaxe and needs_stone_tool
+- **Creative Tab**: Appears after Copper Chain in Building Blocks tab
+
+#### Copper Bulb (Backport from 1.21.10)
+- **All 8 Variants**: Copper Bulb, Exposed, Weathered, Oxidized + Waxed versions
+- **Redstone T-Flip-Flop Behavior**: Toggles light on rising edge of redstone signal
+- **Variable Light Levels by Oxidation**:
+  - Copper Bulb: 15 (full brightness)
+  - Exposed: 12
+  - Weathered: 8
+  - Oxidized: 4
+- **Comparator Output**: 15 when lit, 0 when not
+- **Powered Indicator**: Red dot shows when block receives redstone signal
+- **Waxing/Scraping**: Use honeycomb to wax, axe to scrape (same as other copper blocks)
+- **Natural Oxidation**: Unwaxed variants oxidize over time
+- **Sounds**: Turn on/off sounds with proper pitch variation
+- **Recipes**: Crafting recipe (copper block + blaze rod + redstone) and waxing recipes
+- **Tags**: Added to mineable/pickaxe and needs_stone_tool
+
 #### Missing Loot Tables
 - **Copper Chain**: Added loot tables for all 8 copper chain variants
 - **Copper Bars**: Added loot tables for all 8 copper bars variants
@@ -15,6 +72,9 @@ All notable changes to this project will be documented in this file.
 #### Missing Recipes
 - **Pale Oak Shelf**: Added recipe with Forge/Fabric load conditions for VanillaBackport compatibility
 
+#### Config Options
+- **Build Spawning**: New config option to enable/disable Copper Golem spawning via copper block + carved pumpkin
+
 #### Missing Tags
 - **blocks/copper.json**: Tag for copper blocks
 - **blocks/copper_chests.json**: Tag for copper chest variants
@@ -22,6 +82,22 @@ All notable changes to this project will be documented in this file.
 - **blocks/wooden_shelves.json**: Tag for wooden shelf variants
 - **items/lightning_rods.json**: Item tag for lightning rods
 - **items/stripped_pale_oak_log.json**: Item tag for VanillaBackport compatibility
+
+### Changed
+
+#### Creative Tab Ordering (Match 1.21.10 Vanilla)
+- **Building Blocks Tab**: Restructured to match vanilla 1.21.10 layout
+  - Per oxidation state: Block → Chiseled → Grate → Cut → Stairs → Slab → Bars → Door → Trapdoor → Bulb → Chain
+- **Redstone Tab**: 
+  - Waxed Copper Bulbs now appear after Target block
+  - Copper Buttons remain after Stone Button
+  - Waxed Lightning Rod after Daylight Detector
+- **Functional Blocks Tab**:
+  - Soul Torch → Copper Torch
+  - Soul Lantern → All Copper Lanterns
+  - Iron Chain → All Copper Chains
+  - Redstone Lamp → All Copper Bulbs
+  - Lightning Rod → All Lightning Rod variants
 
 ### Fixed
 

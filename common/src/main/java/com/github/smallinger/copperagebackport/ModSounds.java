@@ -73,6 +73,17 @@ public class ModSounds {
     public static Supplier<SoundEvent> COPPER_TRAPDOOR_CLOSE;
     public static Supplier<SoundEvent> COPPER_TRAPDOOR_OPEN;
     
+    // Copper Bulb sounds (from 1.21.10)
+    public static Supplier<SoundEvent> COPPER_BULB_TURN_ON;
+    public static Supplier<SoundEvent> COPPER_BULB_TURN_OFF;
+    
+    // Copper Grate sounds (from 1.21.10)
+    public static Supplier<SoundEvent> COPPER_GRATE_BREAK;
+    public static Supplier<SoundEvent> COPPER_GRATE_FALL;
+    public static Supplier<SoundEvent> COPPER_GRATE_HIT;
+    public static Supplier<SoundEvent> COPPER_GRATE_PLACE;
+    public static Supplier<SoundEvent> COPPER_GRATE_STEP;
+    
     // End Flash sounds (from 1.21.10)
     public static Supplier<SoundEvent> WEATHER_END_FLASH;
 
@@ -140,6 +151,17 @@ public class ModSounds {
         // Register Copper Trapdoor sounds (from 1.21.10)
         COPPER_TRAPDOOR_CLOSE = registerSound(helper, "block.copper_trapdoor.close");
         COPPER_TRAPDOOR_OPEN = registerSound(helper, "block.copper_trapdoor.open");
+        
+        // Register Copper Bulb sounds (from 1.21.10)
+        COPPER_BULB_TURN_ON = registerSound(helper, "block.copper_bulb.turn_on");
+        COPPER_BULB_TURN_OFF = registerSound(helper, "block.copper_bulb.turn_off");
+        
+        // Register Copper Grate sounds (from 1.21.10)
+        COPPER_GRATE_BREAK = registerSound(helper, "block.copper_grate.break");
+        COPPER_GRATE_FALL = registerSound(helper, "block.copper_grate.fall");
+        COPPER_GRATE_HIT = registerSound(helper, "block.copper_grate.hit");
+        COPPER_GRATE_PLACE = registerSound(helper, "block.copper_grate.place");
+        COPPER_GRATE_STEP = registerSound(helper, "block.copper_grate.step");
         
         // Register End Flash sounds (from 1.21.10)
         WEATHER_END_FLASH = registerSound(helper, "weather.end_flash");

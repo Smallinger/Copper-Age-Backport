@@ -94,6 +94,15 @@ public class CopperAgeBackportFabricClient implements ClientModInitializer {
             ModBlocks.WAXED_EXPOSED_COPPER_LANTERN.get(),
             ModBlocks.WAXED_WEATHERED_COPPER_LANTERN.get(),
             ModBlocks.WAXED_OXIDIZED_COPPER_LANTERN.get(),
+            // Copper Doors
+            ModBlocks.COPPER_DOOR.get(),
+            ModBlocks.EXPOSED_COPPER_DOOR.get(),
+            ModBlocks.WEATHERED_COPPER_DOOR.get(),
+            ModBlocks.OXIDIZED_COPPER_DOOR.get(),
+            ModBlocks.WAXED_COPPER_DOOR.get(),
+            ModBlocks.WAXED_EXPOSED_COPPER_DOOR.get(),
+            ModBlocks.WAXED_WEATHERED_COPPER_DOOR.get(),
+            ModBlocks.WAXED_OXIDIZED_COPPER_DOOR.get(),
             // Copper Chains
             ModBlocks.COPPER_CHAIN.get(),
             ModBlocks.EXPOSED_COPPER_CHAIN.get(),
@@ -120,7 +129,16 @@ public class CopperAgeBackportFabricClient implements ClientModInitializer {
             ModBlocks.WAXED_COPPER_TRAPDOOR.get(),
             ModBlocks.WAXED_EXPOSED_COPPER_TRAPDOOR.get(),
             ModBlocks.WAXED_WEATHERED_COPPER_TRAPDOOR.get(),
-            ModBlocks.WAXED_OXIDIZED_COPPER_TRAPDOOR.get());
+            ModBlocks.WAXED_OXIDIZED_COPPER_TRAPDOOR.get(),
+            // Copper Grates
+            ModBlocks.COPPER_GRATE.get(),
+            ModBlocks.EXPOSED_COPPER_GRATE.get(),
+            ModBlocks.WEATHERED_COPPER_GRATE.get(),
+            ModBlocks.OXIDIZED_COPPER_GRATE.get(),
+            ModBlocks.WAXED_COPPER_GRATE.get(),
+            ModBlocks.WAXED_EXPOSED_COPPER_GRATE.get(),
+            ModBlocks.WAXED_WEATHERED_COPPER_GRATE.get(),
+            ModBlocks.WAXED_OXIDIZED_COPPER_GRATE.get());
     }
 
     /**
