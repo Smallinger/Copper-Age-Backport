@@ -21,28 +21,28 @@ public final class CommonConfig {
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
     
     // Config keys
+    private static final String KEY_GOLEM_BUILD_SPAWNING = "golemBuildSpawning";
     private static final String KEY_GOLEM_PRESSES_BUTTONS = "golemPressesButtons";
     private static final String KEY_BUTTON_PRESS_CHANCE = "buttonPressChancePercent";
     private static final String KEY_GOLEM_TRANSPORT_STACK_SIZE = "golemTransportStackSize";
     private static final String KEY_WEATHERING_TICK_FROM = "weatheringTickFrom";
     private static final String KEY_WEATHERING_TICK_TO = "weatheringTickTo";
-    private static final String KEY_LIGHTNING_ROD_OXIDATION = "lightningRodOxidation";
     
     // Default values
+    private static final boolean DEFAULT_GOLEM_BUILD_SPAWNING = true;
     private static final boolean DEFAULT_GOLEM_PRESSES_BUTTONS = true;
     private static final int DEFAULT_BUTTON_PRESS_CHANCE = 5;
     private static final int DEFAULT_GOLEM_TRANSPORT_STACK_SIZE = 16;
     private static final int DEFAULT_WEATHERING_TICK_FROM = 504000; // ~7 minecraft days
     private static final int DEFAULT_WEATHERING_TICK_TO = 552000;   // ~7.7 minecraft days
-    private static final boolean DEFAULT_LIGHTNING_ROD_OXIDATION = true;
     
     // Runtime values
+    private static boolean golemBuildSpawning = DEFAULT_GOLEM_BUILD_SPAWNING;
     private static boolean golemPressesButtons = DEFAULT_GOLEM_PRESSES_BUTTONS;
     private static int buttonPressChancePercent = DEFAULT_BUTTON_PRESS_CHANCE;
     private static int golemTransportStackSize = DEFAULT_GOLEM_TRANSPORT_STACK_SIZE;
     private static int weatheringTickFrom = DEFAULT_WEATHERING_TICK_FROM;
     private static int weatheringTickTo = DEFAULT_WEATHERING_TICK_TO;
-    private static boolean lightningRodOxidation = DEFAULT_LIGHTNING_ROD_OXIDATION;
     
     // Config file path (set by platform)
     private static Path configPath;
@@ -57,6 +57,18 @@ public final class CommonConfig {
     public static void init(Path configDir) {
         configPath = configDir.resolve("copperagebackport.json");
         load();
+    }
+
+    /**
+     * Can Copper Golems be spawned by building with copper block + carved pumpkin?
+     * Default: true
+     */
+    public static boolean golemBuildSpawning() {
+        return golemBuildSpawning;
+    }
+
+    public static void setGolemBuildSpawning(boolean value) {
+        golemBuildSpawning = value;
     }
 
     /**
@@ -124,26 +136,6 @@ public final class CommonConfig {
     }
 
     /**
-     * Should Lightning Rods oxidize over time?
-     * 
-     * This setting controls whether Copper Age Backport adds oxidation to vanilla Lightning Rods.
-     * 
-     * Compatibility with Friends and Foes:
-     * - If FnF is loaded AND has oxidation enabled: This setting is ignored, FnF handles it
-     * - If FnF is loaded AND has oxidation disabled: This setting takes effect
-     * - If FnF is not loaded: This setting takes effect
-     * 
-     * Default: true
-     */
-    public static boolean lightningRodOxidation() {
-        return lightningRodOxidation;
-    }
-
-    public static void setLightningRodOxidation(boolean value) {
-        lightningRodOxidation = value;
-    }
-
-    /**
      * Load config from disk. Creates default config if not present.
      */
     public static void load() {
@@ -163,6 +155,9 @@ public final class CommonConfig {
                 return;
             }
 
+            if (json.has(KEY_GOLEM_BUILD_SPAWNING)) {
+                golemBuildSpawning = json.get(KEY_GOLEM_BUILD_SPAWNING).getAsBoolean();
+            }
             if (json.has(KEY_GOLEM_PRESSES_BUTTONS)) {
                 golemPressesButtons = json.get(KEY_GOLEM_PRESSES_BUTTONS).getAsBoolean();
             }
@@ -178,12 +173,9 @@ public final class CommonConfig {
             if (json.has(KEY_WEATHERING_TICK_TO)) {
                 weatheringTickTo = Math.max(weatheringTickFrom, json.get(KEY_WEATHERING_TICK_TO).getAsInt());
             }
-            if (json.has(KEY_LIGHTNING_ROD_OXIDATION)) {
-                lightningRodOxidation = json.get(KEY_LIGHTNING_ROD_OXIDATION).getAsBoolean();
-            }
 
-            Constants.LOG.info("Loaded config: golemPressesButtons={}, buttonPressChance={}%, golemTransportStackSize={}, weatheringTickFrom={}, weatheringTickTo={}, lightningRodOxidation={}", 
-                golemPressesButtons, buttonPressChancePercent, golemTransportStackSize, weatheringTickFrom, weatheringTickTo, lightningRodOxidation);
+            Constants.LOG.info("Loaded config: golemBuildSpawning={}, golemPressesButtons={}, buttonPressChance={}%, golemTransportStackSize={}, weatheringTickFrom={}, weatheringTickTo={}", 
+                golemBuildSpawning, golemPressesButtons, buttonPressChancePercent, golemTransportStackSize, weatheringTickFrom, weatheringTickTo);
         } catch (IOException | IllegalStateException e) {
             Constants.LOG.error("Failed to load config, using defaults", e);
         }
@@ -199,12 +191,12 @@ public final class CommonConfig {
         }
 
         JsonObject json = new JsonObject();
+        json.addProperty(KEY_GOLEM_BUILD_SPAWNING, golemBuildSpawning);
         json.addProperty(KEY_GOLEM_PRESSES_BUTTONS, golemPressesButtons);
         json.addProperty(KEY_BUTTON_PRESS_CHANCE, buttonPressChancePercent);
         json.addProperty(KEY_GOLEM_TRANSPORT_STACK_SIZE, golemTransportStackSize);
         json.addProperty(KEY_WEATHERING_TICK_FROM, weatheringTickFrom);
         json.addProperty(KEY_WEATHERING_TICK_TO, weatheringTickTo);
-        json.addProperty(KEY_LIGHTNING_ROD_OXIDATION, lightningRodOxidation);
 
         try {
             Files.createDirectories(configPath.getParent());

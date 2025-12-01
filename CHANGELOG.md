@@ -16,6 +16,9 @@ All notable changes to this project will be documented in this file.
   - `copper_nugget_from_smelting.json` - All copper equipment in one recipe
   - `copper_nugget_from_blasting.json` - Faster blasting variant
 
+#### Config Options
+- **Build Spawning**: New config option to enable/disable Copper Golem spawning via copper block + carved pumpkin
+
 ### Fixed
 
 #### Block Mining Tags

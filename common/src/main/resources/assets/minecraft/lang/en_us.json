@@ -115,6 +115,8 @@
   "config.copperagebackport.page.golem": "Copper Golem",
   "config.copperagebackport.group.transport": "Transport",
   "config.copperagebackport.group.behavior": "Behavior",
+  "config.copperagebackport.golem_build_spawning": "Copper Golem Build Spawning",
+  "config.copperagebackport.golem_build_spawning.tooltip": "When enabled, Copper Golems can be spawned by placing a carved pumpkin on top of a copper block. Disable this to prevent golem spawning via building.",
   "config.copperagebackport.golem_presses_buttons": "Golem Presses Buttons",
   "config.copperagebackport.golem_presses_buttons.tooltip": "When enabled, Copper Golems will randomly press nearby copper buttons",
   "config.copperagebackport.button_press_chance": "Button Press Chance",
@@ -135,5 +137,5 @@
   "config.copperagebackport.page.compatibility": "Compatibility",
   "config.copperagebackport.group.lightning_rod": "Lightning Rod",
   "config.copperagebackport.lightning_rod_oxidation": "Lightning Rod Oxidation",
-  "config.copperagebackport.lightning_rod_oxidation.text": "This feature is always active.\n\nDue to how Minecraft mixins work, we cannot defer to other mods. Our blocks use the minecraft: namespace for compatibility with future vanilla versions.\n\nA conversion recipe exists to convert Friends & Foes lightning rods to Copper Age Backport variants (1:1 in crafting table)."
+  "config.copperagebackport.lightning_rod_oxidation.text": "This feature is always active and cannot be disabled.\n\nWhy? Mixins are applied when Minecraft loads classes, before any config files are read. This means we cannot check config options at mixin time - the code is already injected.\n\nIf Friends & Foes is installed, both mods will try to add oxidation to the Lightning Rod. Since mixins cannot coordinate at runtime, this causes conflicts where neither mod's oxidation works properly.\n\nSolution: Disable Lightning Rod oxidation in Friends & Foes config, then our oxidation will work correctly. Our blocks use the minecraft: namespace for future vanilla compatibility.\n\nA conversion recipe exists: F&F lightning rods can be converted to CAB variants (1:1 in crafting table)."
 }

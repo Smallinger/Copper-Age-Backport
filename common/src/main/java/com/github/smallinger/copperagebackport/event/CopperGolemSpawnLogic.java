@@ -1,5 +1,6 @@
 package com.github.smallinger.copperagebackport.event;
 
+import com.github.smallinger.copperagebackport.config.CommonConfig;
 import com.github.smallinger.copperagebackport.ModMemoryTypes;
 import com.github.smallinger.copperagebackport.ModTags;
 import com.github.smallinger.copperagebackport.block.CopperChestBlock;
@@ -30,6 +31,11 @@ public final class CopperGolemSpawnLogic {
      */
     public static void handleBlockPlaced(Level level, BlockPos pos, BlockState placedState, Direction playerDirection) {
         if (!(level instanceof ServerLevel serverLevel)) {
+            return;
+        }
+        
+        // Check if build spawning is enabled
+        if (!CommonConfig.golemBuildSpawning()) {
             return;
         }
 
