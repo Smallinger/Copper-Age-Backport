@@ -336,6 +336,20 @@ public class CopperGolemModel extends HierarchicalModel<CopperGolemEntity> imple
         }
     }
     
+    /**
+     * Applies the transformation needed to render an item on the Copper Golem's antenna.
+     * This is used by CopperGolemAntennaLayer to position flowers (like Poppy) on top of the head.
+     * Adjusted from vanilla 1.21.10 to fit our model's coordinate system.
+     */
+    public void applyBlockOnAntennaTransform(PoseStack poseStack) {
+        this.root.translateAndRotate(poseStack);
+        this.body.translateAndRotate(poseStack);
+        this.head.translateAndRotate(poseStack);
+        // Adjusted Y translation to position flower on top of antenna
+        // Original vanilla 1.21.10 value was -2.25, but our model uses different coordinates
+        poseStack.translate(0.0, -1.05, 0.0);
+    }
+    
     private void poseHeldItemArmsIfStill() {
         this.rightArm.xRot = Math.min(this.rightArm.xRot, -0.87266463F);
         this.leftArm.xRot = Math.min(this.leftArm.xRot, -0.87266463F);
