@@ -2,7 +2,7 @@
   "replace": false,
   "values": [
     {
-      "id": "vanillabackport:stripped_pale_oak_log",
+      "id": "minecraft:stripped_pale_oak_log",
       "required": false
     }
   ]
