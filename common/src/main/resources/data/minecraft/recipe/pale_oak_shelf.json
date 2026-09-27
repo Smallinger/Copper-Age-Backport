@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "pattern": [
+    "###",
+    "   ",
+    "###"
+  ],
+  "key": {
+    "#": { "tag": "minecraft:stripped_pale_oak_log" }
+  },
+  "result": {
+    "id": "minecraft:pale_oak_shelf",
+    "count": 6
+  }
+}
