@@ -13,6 +13,22 @@ All notable changes to this project will be documented in this file.
   - Useful for players with photosensitivity
   - Requires world rejoin to take effect
 
+#### Recipe Unlocking
+- **Recipe advancements**: Added an unlock advancement for every recipe this mod adds
+  - Crafting/smelting copper now unlocks the related copper recipes in the recipe book, matching vanilla behavior
+
+### Fixed
+
+#### Copper Armor Startup Crash
+- **Duplicate registry key**: Fixed a crash on affected NeoForge versions caused by the copper armor material being registered multiple times (once per armor piece) instead of once
+
+#### Fabric Multiplayer Disconnect Crash
+- **Registry sync crash**: Fixed a client crash when disconnecting from a multiplayer server on Fabric
+  - Our `minecraft:` namespace entries are now registered the same way as any other modded entry instead of being hidden from Fabric's registry sync, which left inconsistent bookkeeping and crashed on disconnect
+
+#### Dependencies
+- **Fabric Loader**: Raised the minimum required version to 0.16.12 to match other backport mods (Platform/VanillaBackport), avoiding dependency resolution failures in modpacks combining them
+
 ## [1.21.1] - 0.1.4 - 01.12.2025
 
 ### Added
