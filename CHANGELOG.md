@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file.
 
-## [1.20.1] - 0.1.5 - In Development
+## [1.20.1] - 0.1.5 - 27.09.2026
 
 ### Added
 
@@ -12,6 +12,15 @@ All notable changes to this project will be documented in this file.
   - Disables the flash texture, purple tint, and sound when turned off
   - Useful for players with photosensitivity
   - Requires world rejoin to take effect
+
+### Fixed
+
+#### Sophisticated Storage Compatibility (Forge)
+- **Crash on startup**: Forced load order after `sophisticatedcore`/`sophisticatedstorage`, fixing a startup crash caused by their network instance handling changes
+
+#### Pale Oak Shelf
+- **Uncraftable with VanillaBackport**: The Fabric and Forge recipes checked for mod id `vanillabackports` (typo, extra s; the Forge file even had `vanilliabackports`) instead of the real `vanillabackport`, so the recipe condition was always false
+- **Wrong tag namespace**: `stripped_pale_oak_log` tag pointed at `vanillabackport:stripped_pale_oak_log`, but VanillaBackport registers its backported content under `minecraft:`, so the tag never resolved to anything
 
 ## [1.20.1] - 0.1.4 - 01.12.2025
 
