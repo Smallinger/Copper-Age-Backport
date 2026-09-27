@@ -2,10 +2,7 @@
     "type": "minecraft:crafting_shaped",
     "category": "misc",
     "key": {
-        "C": [
-            { "tag": "c:nuggets/copper" },
-            { "tag": "c:copper_nuggets" }
-        ],
+        "C": { "tag": "c:nuggets/copper" },
         "X": [
             {
                 "item": "minecraft:coal"

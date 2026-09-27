@@ -10,10 +10,7 @@
     "#": {
       "item": "minecraft:copper_torch"
     },
-    "X": [
-      { "tag": "c:nuggets/copper" },
-      { "tag": "c:copper_nuggets" }
-    ]
+    "X": { "tag": "c:nuggets/copper" }
   },
   "result": {
     "id": "minecraft:copper_lantern",

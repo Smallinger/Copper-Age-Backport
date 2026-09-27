@@ -7,10 +7,7 @@
         "NNN"
     ],
     "key": {
-        "N": [
-            { "tag": "c:nuggets/copper" },
-            { "tag": "c:copper_nuggets" }
-        ]
+        "N": { "tag": "c:nuggets/copper" }
     },
     "result": {
         "id": "minecraft:copper_ingot",
