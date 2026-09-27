@@ -26,3 +26,6 @@ runs
 # Crowdin CLI (keep jar, ignore rest)
 .crowdin/*
 !.crowdin/crowdin-cli.jar
+
+# local MCP server config (contains secrets, machine-specific)
+.mcp.json
