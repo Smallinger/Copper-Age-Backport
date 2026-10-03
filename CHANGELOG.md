@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.20.1] - 0.1.5.1-pre - 03.10.2026
+
+### Fixed
+
+#### Oxidized Chiseled Copper and Copper Grates
+- **Oxidized Chiseled Copper**: Could not be waxed or scraped, because it was registered with the waxed block class. It now behaves like the other chiseled copper stages and oxidizes further
+- **Unwaxed Copper Grates**: Honeycomb can wax them and an axe scrapes oxidation off, previously only waxed grates could be dewaxed
+- **Particles**: Waxing and scraping chiseled copper and grates now shows the same particles as other copper blocks
+
 ## [1.20.1] - 0.1.5 - 27.09.2026
 
 ### Added
