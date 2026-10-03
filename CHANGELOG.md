@@ -4,7 +4,15 @@ All notable changes to this project will be documented in this file.
 
 ## [1.21.1] - 0.1.5.1-pre - 03.10.2026
 
+### Added
+
+#### Golem Destinations
+- **Golems Only Use Chests**: New config option (off by default) that limits Copper Golem deliveries to chests, ignoring barrels and modded containers
+
 ### Fixed
+
+#### Create Compatibility
+- **Funnels and chutes**: Copper chests can now receive items from Create funnels and chutes (NeoForge and Fabric)
 
 #### Pale Oak Shelf
 - **Drops**: The shelf now drops itself when mined without VanillaBackport installed (the loot table was wrongly gated behind it)
