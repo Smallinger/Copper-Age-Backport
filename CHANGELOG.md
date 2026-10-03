@@ -11,6 +11,18 @@ All notable changes to this project will be documented in this file.
 - **Unwaxed Copper Grates**: Honeycomb can wax them and an axe scrapes oxidation off, previously only waxed grates could be dewaxed
 - **Particles**: Waxing and scraping chiseled copper and grates now shows the same particles as other copper blocks
 
+#### Redstone
+- **Copper bulbs and copper grates** are no longer redstone conductors, so they no longer power adjacent blocks. This matches vanilla
+
+#### Tags
+- **Chests**: Copper chests are in `c:chests` and `forge:chests`
+- **Nuggets**: Copper nugget is in `c:nuggets` and `forge:nuggets`. The recipes no longer reference the old `c:copper_nuggets` tag
+- **Buttons**: Copper buttons are in `minecraft:buttons` (item and block) and are mineable with a pickaxe
+- **Horse Armor**: Copper horse armor is in `c:horse_armor`, so mods like Allurement can enchant it
+
+#### Lightning Rods
+- **Lightning strikes**: Unwaxed exposed, weathered and oxidized lightning rods are cleaned back to the normal lightning rod, like other copper blocks. Waxed rods are not affected
+
 ## [1.20.1] - 0.1.5 - 27.09.2026
 
 ### Added
