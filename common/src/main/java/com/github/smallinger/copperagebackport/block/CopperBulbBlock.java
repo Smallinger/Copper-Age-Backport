@@ -37,7 +37,7 @@ public class CopperBulbBlock extends Block {
     protected Supplier<WaxedCopperBulbBlock> waxedBulb;
 
     public CopperBulbBlock(WeatheringCopper.WeatherState weatherState, BlockBehaviour.Properties properties) {
-        super(properties);
+        super(properties.isRedstoneConductor((state, level, pos) -> false));
         this.weatherState = weatherState;
         this.registerDefaultState(this.defaultBlockState().setValue(LIT, false).setValue(POWERED, false));
     }
