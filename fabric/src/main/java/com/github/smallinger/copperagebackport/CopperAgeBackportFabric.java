@@ -8,6 +8,8 @@ import com.github.smallinger.copperagebackport.platform.FabricRegistryHelper;
 import com.github.smallinger.copperagebackport.registry.*;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.event.player.UseBlockCallback;
+import net.fabricmc.fabric.api.transfer.v1.item.InventoryStorage;
+import net.fabricmc.fabric.api.transfer.v1.item.ItemStorage;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
@@ -36,7 +38,8 @@ public class CopperAgeBackportFabric implements ModInitializer {
         
         // Initialize common mod content
         CommonClass.init();
-        
+        ItemStorage.SIDED.registerForBlockEntity((blockEntity, direction) -> InventoryStorage.of(blockEntity, direction), ModBlockEntities.COPPER_CHEST_BLOCK_ENTITY.get());
+
         // Register player join event for preview build message
         ServerPlayConnectionEvents.JOIN.register((handler, sender, server) ->
             PlayerJoinHandler.onPlayerJoin(handler.getPlayer())
