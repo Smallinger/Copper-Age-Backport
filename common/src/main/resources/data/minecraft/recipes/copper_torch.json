@@ -3,8 +3,7 @@
     "category": "misc",
     "key": {
         "C": [
-            { "tag": "forge:nuggets/copper" },
-            { "tag": "c:copper_nuggets" }
+            { "tag": "forge:nuggets/copper" }
         ],
         "X": [
             {

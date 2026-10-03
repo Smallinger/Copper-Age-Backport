@@ -8,8 +8,7 @@
     ],
     "key": {
         "N": [
-            { "tag": "forge:nuggets/copper" },
-            { "tag": "c:copper_nuggets" }
+            { "tag": "forge:nuggets/copper" }
         ]
     },
     "result": {
