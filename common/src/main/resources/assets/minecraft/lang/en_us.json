@@ -171,6 +171,8 @@
   "config.copperagebackport.golem_build_spawning.tooltip": "When enabled, Copper Golems can be spawned by placing a carved pumpkin on top of a copper block. Disable this to prevent golem spawning via building.",
   "config.copperagebackport.golem_presses_buttons": "Golem Presses Buttons",
   "config.copperagebackport.golem_presses_buttons.tooltip": "When enabled, Copper Golems will randomly press nearby copper buttons",
+  "config.copperagebackport.golem_only_chests": "Golems Only Use Chests",
+  "config.copperagebackport.golem_only_chests.tooltip": "When enabled, Copper Golems only deliver items to chests and ignore barrels and other containers",
   "config.copperagebackport.button_press_chance": "Button Press Chance",
   "config.copperagebackport.button_press_chance.tooltip": "Chance (0-100%) that a golem will press a button when near one",
   "config.copperagebackport.golem_transport_stack_size": "Golem Transport Stack Size",

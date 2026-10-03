@@ -28,6 +28,7 @@ public final class CommonConfig {
     private static final String KEY_WEATHERING_TICK_FROM = "weatheringTickFrom";
     private static final String KEY_WEATHERING_TICK_TO = "weatheringTickTo";
     private static final String KEY_END_FLASH_ENABLED = "endFlashEnabled";
+    private static final String KEY_GOLEM_ONLY_CHESTS = "golemOnlyChests";
     
     // Default values
     private static final boolean DEFAULT_GOLEM_BUILD_SPAWNING = true;
@@ -37,6 +38,7 @@ public final class CommonConfig {
     private static final int DEFAULT_WEATHERING_TICK_FROM = 504000; // ~7 minecraft days
     private static final int DEFAULT_WEATHERING_TICK_TO = 552000;   // ~7.7 minecraft days
     private static final boolean DEFAULT_END_FLASH_ENABLED = true;
+    private static final boolean DEFAULT_GOLEM_ONLY_CHESTS = false;
     
     // Runtime values
     private static boolean golemBuildSpawning = DEFAULT_GOLEM_BUILD_SPAWNING;
@@ -46,6 +48,7 @@ public final class CommonConfig {
     private static int weatheringTickFrom = DEFAULT_WEATHERING_TICK_FROM;
     private static int weatheringTickTo = DEFAULT_WEATHERING_TICK_TO;
     private static boolean endFlashEnabled = DEFAULT_END_FLASH_ENABLED;
+    private static boolean golemOnlyChests = DEFAULT_GOLEM_ONLY_CHESTS;
     
     // Config file path (set by platform)
     private static Path configPath;
@@ -151,6 +154,18 @@ public final class CommonConfig {
     }
 
     /**
+     * Should Copper Golems only use chests as destinations (ignore barrels and other containers)?
+     * Default: false
+     */
+    public static boolean golemOnlyChests() {
+        return golemOnlyChests;
+    }
+
+    public static void setGolemOnlyChests(boolean value) {
+        golemOnlyChests = value;
+    }
+
+    /**
      * Load config from disk. Creates default config if not present.
      */
     public static void load() {
@@ -191,6 +206,9 @@ public final class CommonConfig {
             if (json.has(KEY_END_FLASH_ENABLED)) {
                 endFlashEnabled = json.get(KEY_END_FLASH_ENABLED).getAsBoolean();
             }
+            if (json.has(KEY_GOLEM_ONLY_CHESTS)) {
+                golemOnlyChests = json.get(KEY_GOLEM_ONLY_CHESTS).getAsBoolean();
+            }
 
             Constants.LOG.info("Loaded config: golemBuildSpawning={}, golemPressesButtons={}, buttonPressChance={}%, golemTransportStackSize={}, weatheringTickFrom={}, weatheringTickTo={}, endFlashEnabled={}", 
                 golemBuildSpawning, golemPressesButtons, buttonPressChancePercent, golemTransportStackSize, weatheringTickFrom, weatheringTickTo, endFlashEnabled);
@@ -216,6 +234,7 @@ public final class CommonConfig {
         json.addProperty(KEY_WEATHERING_TICK_FROM, weatheringTickFrom);
         json.addProperty(KEY_WEATHERING_TICK_TO, weatheringTickTo);
         json.addProperty(KEY_END_FLASH_ENABLED, endFlashEnabled);
+        json.addProperty(KEY_GOLEM_ONLY_CHESTS, golemOnlyChests);
 
         try {
             Files.createDirectories(configPath.getParent());
