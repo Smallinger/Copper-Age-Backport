@@ -48,6 +48,14 @@
     "minecraft:waxed_lightning_rod",
     "minecraft:waxed_exposed_lightning_rod",
     "minecraft:waxed_weathered_lightning_rod",
-    "minecraft:waxed_oxidized_lightning_rod"
+    "minecraft:waxed_oxidized_lightning_rod",
+    "copperagebackport:copper_button",
+    "copperagebackport:exposed_copper_button",
+    "copperagebackport:weathered_copper_button",
+    "copperagebackport:oxidized_copper_button",
+    "copperagebackport:waxed_copper_button",
+    "copperagebackport:waxed_exposed_copper_button",
+    "copperagebackport:waxed_weathered_copper_button",
+    "copperagebackport:waxed_oxidized_copper_button"
   ]
 }
