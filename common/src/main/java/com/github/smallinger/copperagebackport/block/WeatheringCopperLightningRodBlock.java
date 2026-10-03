@@ -17,6 +17,7 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.LightningRodBlock;
 import net.minecraft.world.level.block.ChangeOverTimeBlock;
 import net.minecraft.world.level.block.WeatheringCopper;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -141,5 +142,12 @@ public class WeatheringCopperLightningRodBlock extends CopperLightningRodBlock i
         }
 
         return super.useItemOn(stack, state, level, pos, player, hand, hitResult);
+    }
+
+    @Override
+    public void onLightningStrike(BlockState state, Level level, BlockPos pos) {
+        BlockState cleaned = Blocks.LIGHTNING_ROD.defaultBlockState().setValue(LightningRodBlock.FACING, state.getValue(FACING));
+        level.setBlock(pos, cleaned, 3);
+        ((LightningRodBlock) Blocks.LIGHTNING_ROD).onLightningStrike(cleaned, level, pos);
     }
 }
