@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.21.1] - 0.1.5.1-pre - 03.10.2026
+
+### Fixed
+
+#### Pale Oak Shelf
+- **Drops**: The shelf now drops itself when mined without VanillaBackport installed (the loot table was wrongly gated behind it)
+- **Recipe**: Added the missing crafting recipe (uses the pale oak log tag provided by VanillaBackport)
+
+#### Copper Nugget Tag
+- Copper nugget is now tagged `c:nuggets`, so other mods' nugget handling picks it up
+
 ## [1.21.1] - 0.1.5 - 27.09.2026
 
 ### Added
