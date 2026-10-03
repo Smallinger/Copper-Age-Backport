@@ -13,6 +13,17 @@ All notable changes to this project will be documented in this file.
 #### Copper Nugget Tag
 - Copper nugget is now tagged `c:nuggets`, so other mods' nugget handling picks it up
 
+#### Tags
+- **Chests**: Copper chests are in `c:chests`
+- **Buttons**: Copper buttons are in `minecraft:buttons` (item and block) and are mineable with a pickaxe
+- **Horse Armor**: Copper horse armor is in `c:horse_armor`, so mods like Allurement can enchant it
+
+#### Lightning Rods
+- **Lightning strikes**: Unwaxed exposed, weathered and oxidized lightning rods are cleaned back to the normal lightning rod, like other copper blocks. Waxed rods are not affected
+
+#### NeoForge
+- **Startup warning**: Added the missing mixin refmap, which removes the "could not be read" message at startup
+
 ## [1.21.1] - 0.1.5 - 27.09.2026
 
 ### Added
