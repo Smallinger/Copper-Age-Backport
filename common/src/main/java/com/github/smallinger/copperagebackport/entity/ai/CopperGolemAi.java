@@ -312,6 +312,10 @@ public class CopperGolemAi {
             return false;
         }
         
+        if (CommonConfig.golemOnlyChests()) {
+            return state.getBlock() instanceof ChestBlock;
+        }
+
         // Check if block extends ChestBlock (covers Vanilla + Woodworks + Quark + other mods)
         if (state.getBlock() instanceof ChestBlock) {
             return true;

@@ -51,6 +51,18 @@ public class ConfigOptions {
             .defaultValue(true)
             .build();
 
+        // Golem destination option
+        Option<Boolean> golemOnlyChests = OptionImpl.<Boolean>builder(Boolean.class)
+            .name("config.copperagebackport.golem_only_chests")
+            .tooltip("config.copperagebackport.golem_only_chests.tooltip")
+            .control(TickBoxControl::new)
+            .binding(
+                CommonConfig::golemOnlyChests,
+                CommonConfig::setGolemOnlyChests
+            )
+            .defaultValue(false)
+            .build();
+
         // Button press chance option
         Option<Integer> buttonPressChance = OptionImpl.<Integer>builder(Integer.class)
             .name("config.copperagebackport.button_press_chance")
@@ -110,6 +122,7 @@ public class ConfigOptions {
             .name("config.copperagebackport.group.behavior")
             .add(golemBuildSpawning)
             .add(golemPressesButtons)
+            .add(golemOnlyChests)
             .add(buttonPressChance)
             .build();
 
