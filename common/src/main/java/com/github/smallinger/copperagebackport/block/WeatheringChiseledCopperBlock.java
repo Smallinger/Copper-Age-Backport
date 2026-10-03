@@ -104,6 +104,7 @@ public class WeatheringChiseledCopperBlock extends Block implements WeatheringCo
                 if (!level.isClientSide) {
                     level.setBlockAndUpdate(pos, waxedBlock.get().withPropertiesOf(state));
                     level.playSound(null, pos, SoundEvents.HONEYCOMB_WAX_ON, SoundSource.BLOCKS, 1.0F, 1.0F);
+                    level.levelEvent(player, 3003, pos, 0);
                     if (!player.getAbilities().instabuild) {
                         stack.shrink(1);
                     }
@@ -119,6 +120,7 @@ public class WeatheringChiseledCopperBlock extends Block implements WeatheringCo
                 if (!level.isClientSide) {
                     level.setBlockAndUpdate(pos, previousBlock.get().withPropertiesOf(state));
                     level.playSound(null, pos, SoundEvents.AXE_SCRAPE, SoundSource.BLOCKS, 1.0F, 1.0F);
+                    level.levelEvent(player, 3005, pos, 0);
                     stack.hurtAndBreak(1, player, p -> p.broadcastBreakEvent(hand));
                 }
                 return InteractionResult.sidedSuccess(level.isClientSide);

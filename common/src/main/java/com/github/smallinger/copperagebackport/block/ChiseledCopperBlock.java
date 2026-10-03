@@ -61,6 +61,7 @@ public class ChiseledCopperBlock extends Block {
                 if (!level.isClientSide) {
                     level.setBlockAndUpdate(pos, unwaxedBlock.get().withPropertiesOf(state));
                     level.playSound(null, pos, SoundEvents.AXE_WAX_OFF, SoundSource.BLOCKS, 1.0F, 1.0F);
+                    level.levelEvent(player, 3004, pos, 0);
                     stack.hurtAndBreak(1, player, p -> p.broadcastBreakEvent(hand));
                 }
                 return InteractionResult.sidedSuccess(level.isClientSide);

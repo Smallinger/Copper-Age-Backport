@@ -1024,12 +1024,13 @@ public class ModBlocks {
                     .randomTicks()));
         
         OXIDIZED_CHISELED_COPPER = helper.registerAuto(BLOCK, "oxidized_chiseled_copper",
-            () -> new ChiseledCopperBlock(
+            () -> new WeatheringChiseledCopperBlock(
                 WeatheringCopper.WeatherState.OXIDIZED,
                 BlockBehaviour.Properties.of()
                     .requiresCorrectToolForDrops()
                     .strength(3.0F, 6.0F)
-                    .sound(SoundType.COPPER)));
+                    .sound(SoundType.COPPER)
+                    .randomTicks()));
         
         // Register Waxed Chiseled Copper Blocks
         WAXED_CHISELED_COPPER = helper.registerAuto(BLOCK, "waxed_chiseled_copper",
