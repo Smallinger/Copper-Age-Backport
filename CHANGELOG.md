@@ -4,7 +4,15 @@ All notable changes to this project will be documented in this file.
 
 ## [1.20.1] - 0.1.5.1-pre - 03.10.2026
 
+### Added
+
+#### Golem Destinations
+- **Golems Only Use Chests**: New config option (off by default) that limits Copper Golem deliveries to chests, ignoring barrels and modded containers
+
 ### Fixed
+
+#### Create Compatibility
+- **Funnels and chutes**: Copper chests can now receive items from Create funnels and chutes (Fabric)
 
 #### Oxidized Chiseled Copper and Copper Grates
 - **Oxidized Chiseled Copper**: Could not be waxed or scraped, because it was registered with the waxed block class. It now behaves like the other chiseled copper stages and oxidizes further
