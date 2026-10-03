@@ -39,7 +39,7 @@ public class CopperGrateBlock extends Block implements SimpleWaterloggedBlock {
     private final WeatheringCopper.WeatherState weatheringState;
 
     public CopperGrateBlock(WeatheringCopper.WeatherState weatheringState, BlockBehaviour.Properties properties) {
-        super(properties);
+        super(properties.isRedstoneConductor((state, level, pos) -> false));
         this.weatheringState = weatheringState;
         this.registerDefaultState(this.defaultBlockState().setValue(WATERLOGGED, false));
     }
