@@ -5,11 +5,14 @@ import com.github.smallinger.copperagebackport.config.CommonConfig;
 import com.github.smallinger.copperagebackport.event.CopperGolemSpawnLogic;
 import com.github.smallinger.copperagebackport.event.PlayerJoinHandler;
 import com.github.smallinger.copperagebackport.fabric.platform.FabricRegistryHelper;
+import com.github.smallinger.copperagebackport.registry.ModBlockEntities;
 import com.github.smallinger.copperagebackport.registry.ModEntities;
 import com.github.smallinger.copperagebackport.registry.ModItems;
 import com.github.smallinger.copperagebackport.registry.RegistryHelper;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.event.player.UseBlockCallback;
+import net.fabricmc.fabric.api.transfer.v1.item.InventoryStorage;
+import net.fabricmc.fabric.api.transfer.v1.item.ItemStorage;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
@@ -38,6 +41,7 @@ public class CopperAgeBackportFabric implements ModInitializer {
         RegistryHelper.setInstance(new FabricRegistryHelper());
 
         CommonClass.init();
+        ItemStorage.SIDED.registerForBlockEntity((blockEntity, direction) -> InventoryStorage.of(blockEntity, direction), ModBlockEntities.COPPER_CHEST_BLOCK_ENTITY.get());
         registerEvents();
         registerCreativeTabs();
         registerEntityAttributes();

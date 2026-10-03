@@ -12,6 +12,7 @@ import com.github.smallinger.copperagebackport.event.CopperGolemSpawnLogic;
 import com.github.smallinger.copperagebackport.event.PlayerJoinHandler;
 import com.github.smallinger.copperagebackport.neoforge.platform.NeoForgeRegistryHelper;
 import com.github.smallinger.copperagebackport.registry.ModBlockEntities;
+import com.github.smallinger.copperagebackport.registry.ModBlocks;
 import com.github.smallinger.copperagebackport.registry.ModEntities;
 import com.github.smallinger.copperagebackport.registry.ModItems;
 import com.github.smallinger.copperagebackport.registry.RegistryHelper;
@@ -21,6 +22,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.level.block.ChestBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -29,8 +31,11 @@ import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.fml.loading.FMLPaths;
+import net.neoforged.neoforge.capabilities.Capabilities;
+import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.common.NeoForge;
+import net.neoforged.neoforge.items.wrapper.InvWrapper;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.event.entity.EntityAttributeCreationEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
@@ -53,6 +58,7 @@ public class CopperAgeBackportNeoForge {
         modEventBus.addListener(this::onBuildCreativeTabs);
         modEventBus.addListener(this::registerLayerDefinitions);
         modEventBus.addListener(this::registerRenderers);
+        modEventBus.addListener(this::registerCapabilities);
 
         NeoForge.EVENT_BUS.register(this);
         
@@ -204,6 +210,13 @@ public class CopperAgeBackportNeoForge {
         event.registerLayerDefinition(CopperGolemModel.STATUE_RUNNING, CopperGolemModel::createRunningPoseBodyLayer);
         event.registerLayerDefinition(CopperGolemModel.STATUE_SITTING, CopperGolemModel::createSittingPoseBodyLayer);
         event.registerLayerDefinition(CopperGolemModel.STATUE_STAR, CopperGolemModel::createStarPoseBodyLayer);
+    }
+
+    private void registerCapabilities(RegisterCapabilitiesEvent event) {
+        event.registerBlock(Capabilities.ItemHandler.BLOCK,
+            (level, pos, state, blockEntity, side) -> new InvWrapper(ChestBlock.getContainer((ChestBlock) state.getBlock(), state, level, pos, true)),
+            ModBlocks.COPPER_CHEST.get(), ModBlocks.EXPOSED_COPPER_CHEST.get(), ModBlocks.WEATHERED_COPPER_CHEST.get(), ModBlocks.OXIDIZED_COPPER_CHEST.get(),
+            ModBlocks.WAXED_COPPER_CHEST.get(), ModBlocks.WAXED_EXPOSED_COPPER_CHEST.get(), ModBlocks.WAXED_WEATHERED_COPPER_CHEST.get(), ModBlocks.WAXED_OXIDIZED_COPPER_CHEST.get());
     }
 
     private void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
